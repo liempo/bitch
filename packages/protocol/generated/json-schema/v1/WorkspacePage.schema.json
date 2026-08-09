@@ -1,0 +1,128 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/WorkspacePage.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "items": {
+      "items": {
+        "additionalProperties": true,
+        "properties": {
+          "activeConversationCount": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "activityAt": {
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+            "type": "string"
+          },
+          "createdAt": {
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+            "type": "string"
+          },
+          "directoryName": {
+            "pattern": "^[^/\\\\]+$",
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "gatewayId": {
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+            "type": "string"
+          },
+          "gitState": {
+            "anyOf": [
+              {
+                "const": "none",
+                "type": "string"
+              },
+              {
+                "const": "initialized",
+                "type": "string"
+              },
+              {
+                "const": "cloned",
+                "type": "string"
+              }
+            ]
+          },
+          "isDefault": {
+            "type": "boolean"
+          },
+          "state": {
+            "anyOf": [
+              {
+                "const": "active",
+                "type": "string"
+              },
+              {
+                "const": "trashed",
+                "type": "string"
+              },
+              {
+                "const": "missing",
+                "type": "string"
+              }
+            ]
+          },
+          "totalConversationCount": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "trashedAt": {
+            "anyOf": [
+              {
+                "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "workspaceId": {
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "workspaceId",
+          "gatewayId",
+          "directoryName",
+          "displayName",
+          "isDefault",
+          "gitState",
+          "createdAt",
+          "activityAt",
+          "trashedAt",
+          "state",
+          "activeConversationCount",
+          "totalConversationCount"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "nextCursor": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "revision": {
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "required": [
+    "items",
+    "nextCursor",
+    "revision"
+  ],
+  "title": "WorkspacePage",
+  "type": "object"
+}

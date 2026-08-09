@@ -1,0 +1,357 @@
+{
+  "operations": [
+    {
+      "method": "get",
+      "operationId": "healthLive",
+      "path": "/health/live",
+      "responseFixture": "health.live",
+      "responseSchema": "HealthResult",
+      "successStatus": 200
+    },
+    {
+      "method": "get",
+      "operationId": "healthReady",
+      "path": "/health/ready",
+      "responseFixture": "health.ready",
+      "responseSchema": "HealthResult",
+      "successStatus": 200
+    },
+    {
+      "method": "get",
+      "operationId": "status",
+      "path": "/v1/status",
+      "responseFixture": "status.gateway",
+      "responseSchema": "StatusResult",
+      "successStatus": 200
+    },
+    {
+      "method": "post",
+      "operationId": "createConversation",
+      "path": "/v1/conversations",
+      "requestFixture": "requests.createConversation",
+      "requestSchema": "CreateConversationRequest",
+      "responseFixture": "responses.createConversation",
+      "responseSchema": "CreateConversationResponse",
+      "successStatus": 201
+    },
+    {
+      "method": "get",
+      "operationId": "listConversations",
+      "path": "/v1/conversations",
+      "responseFixture": "responses.conversationPage",
+      "responseSchema": "ConversationPage",
+      "successStatus": 200
+    },
+    {
+      "method": "get",
+      "operationId": "getConversation",
+      "path": "/v1/conversations/{conversationId}",
+      "responseFixture": "responses.conversation",
+      "responseSchema": "Conversation",
+      "successStatus": 200
+    },
+    {
+      "method": "post",
+      "operationId": "markConversationViewed",
+      "path": "/v1/conversations/{conversationId}/viewed",
+      "requestFixture": "requests.emptyMutation",
+      "requestSchema": "EmptyRequest",
+      "responseFixture": "responses.conversation",
+      "responseSchema": "Conversation",
+      "successStatus": 200
+    },
+    {
+      "method": "post",
+      "operationId": "trashConversation",
+      "path": "/v1/conversations/{conversationId}/trash",
+      "requestFixture": "requests.emptyMutation",
+      "requestSchema": "EmptyRequest",
+      "responseFixture": "responses.conversation",
+      "responseSchema": "Conversation",
+      "successStatus": 200
+    },
+    {
+      "method": "post",
+      "operationId": "restoreConversation",
+      "path": "/v1/conversations/{conversationId}/restore",
+      "requestFixture": "requests.emptyMutation",
+      "requestSchema": "EmptyRequest",
+      "responseFixture": "responses.conversation",
+      "responseSchema": "Conversation",
+      "successStatus": 200
+    },
+    {
+      "method": "delete",
+      "operationId": "deleteConversation",
+      "path": "/v1/conversations/{conversationId}",
+      "successStatus": 204
+    },
+    {
+      "method": "get",
+      "operationId": "getConversationState",
+      "path": "/v1/conversations/{conversationId}/state",
+      "responseFixture": "responses.state",
+      "responseSchema": "ConversationState",
+      "successStatus": 200
+    },
+    {
+      "method": "get",
+      "operationId": "getConversationMessages",
+      "path": "/v1/conversations/{conversationId}/messages",
+      "responseFixture": "responses.messages",
+      "responseSchema": "MessagesResult",
+      "successStatus": 200
+    },
+    {
+      "method": "get",
+      "operationId": "getConversationStats",
+      "path": "/v1/conversations/{conversationId}/stats",
+      "responseFixture": "pi.sessionStats",
+      "responseSchema": "SessionStats",
+      "successStatus": 200
+    },
+    {
+      "method": "get",
+      "operationId": "getConversationEntries",
+      "path": "/v1/conversations/{conversationId}/entries",
+      "responseFixture": "responses.entries",
+      "responseSchema": "EntriesResult",
+      "successStatus": 200
+    },
+    {
+      "method": "get",
+      "operationId": "getConversationTree",
+      "path": "/v1/conversations/{conversationId}/tree",
+      "responseFixture": "responses.tree",
+      "responseSchema": "TreeResult",
+      "successStatus": 200
+    },
+    {
+      "method": "get",
+      "operationId": "getForkMessages",
+      "path": "/v1/conversations/{conversationId}/fork-messages",
+      "responseFixture": "responses.forkMessages",
+      "responseSchema": "ForkMessagesResult",
+      "successStatus": 200
+    },
+    {
+      "method": "get",
+      "operationId": "getLastAssistant",
+      "path": "/v1/conversations/{conversationId}/last-assistant",
+      "responseFixture": "responses.lastAssistant",
+      "responseSchema": "LastAssistantResult",
+      "successStatus": 200
+    },
+    {
+      "method": "get",
+      "operationId": "getConversationCommands",
+      "path": "/v1/conversations/{conversationId}/commands",
+      "responseFixture": "responses.commands",
+      "responseSchema": "CommandsResult",
+      "successStatus": 200
+    },
+    {
+      "method": "get",
+      "operationId": "getThinkingLevels",
+      "path": "/v1/conversations/{conversationId}/thinking-levels",
+      "responseFixture": "responses.thinkingLevels",
+      "responseSchema": "ThinkingLevelsResult",
+      "successStatus": 200
+    },
+    {
+      "method": "post",
+      "operationId": "submitConversationCommand",
+      "path": "/v1/conversations/{conversationId}/commands",
+      "requestFixture": "commands.prompt",
+      "requestSchema": "ConversationCommand",
+      "responseFixture": "receipts.accepted",
+      "responseSchema": "CommandReceipt",
+      "successStatus": 202
+    },
+    {
+      "method": "get",
+      "operationId": "getCommandReceipt",
+      "path": "/v1/conversations/{conversationId}/commands/{commandId}",
+      "responseFixture": "receipts.prompt",
+      "responseSchema": "CommandReceipt",
+      "successStatus": 200
+    },
+    {
+      "method": "get",
+      "operationId": "conversationEvents",
+      "path": "/v1/conversations/{conversationId}/events",
+      "responseFixture": "conversationEvents.conversation.snapshot",
+      "responseMediaType": "text/event-stream",
+      "responseSchema": "ConversationEvent",
+      "successStatus": 200
+    },
+    {
+      "method": "post",
+      "operationId": "respondToDialog",
+      "path": "/v1/conversations/{conversationId}/dialogs/{dialogId}/response",
+      "requestFixture": "dialogs.value",
+      "requestSchema": "DialogResponse",
+      "responseFixture": "receipts.running",
+      "responseSchema": "CommandReceipt",
+      "successStatus": 200
+    },
+    {
+      "method": "get",
+      "operationId": "listModels",
+      "path": "/v1/models",
+      "responseFixture": "responses.models",
+      "responseSchema": "ModelsResult",
+      "successStatus": 200
+    },
+    {
+      "method": "get",
+      "operationId": "listProviders",
+      "path": "/v1/providers",
+      "responseFixture": "responses.providers",
+      "responseSchema": "ProvidersResult",
+      "successStatus": 200
+    },
+    {
+      "method": "post",
+      "operationId": "providerLogin",
+      "path": "/v1/providers/{providerId}/login",
+      "requestFixture": "requests.providerLoginStart",
+      "requestSchema": "ProviderLoginRequest",
+      "responseFixture": "providerLoginResults.running",
+      "responseSchema": "ProviderLoginResult",
+      "successStatus": 202
+    },
+    {
+      "method": "post",
+      "operationId": "providerLogout",
+      "path": "/v1/providers/{providerId}/logout",
+      "requestFixture": "requests.emptyMutation",
+      "requestSchema": "EmptyRequest",
+      "responseFixture": "responses.providerSummary",
+      "responseSchema": "ProviderSummary",
+      "successStatus": 200
+    },
+    {
+      "method": "get",
+      "operationId": "gatewayEvents",
+      "path": "/v1/events",
+      "responseFixture": "gatewayEvents.gateway.snapshot",
+      "responseMediaType": "text/event-stream",
+      "responseSchema": "GatewayEvent",
+      "successStatus": 200
+    },
+    {
+      "method": "post",
+      "operationId": "createWorkspace",
+      "path": "/v1/workspaces",
+      "requestFixture": "requests.workspaceEmpty",
+      "requestSchema": "CreateWorkspaceRequest",
+      "responseFixture": "responses.workspace",
+      "responseSchema": "Workspace",
+      "successStatus": 201
+    },
+    {
+      "method": "get",
+      "operationId": "listWorkspaces",
+      "path": "/v1/workspaces",
+      "responseFixture": "responses.workspacePage",
+      "responseSchema": "WorkspacePage",
+      "successStatus": 200
+    },
+    {
+      "method": "get",
+      "operationId": "getWorkspace",
+      "path": "/v1/workspaces/{workspaceId}",
+      "responseFixture": "responses.workspace",
+      "responseSchema": "Workspace",
+      "successStatus": 200
+    },
+    {
+      "method": "patch",
+      "operationId": "updateWorkspace",
+      "path": "/v1/workspaces/{workspaceId}",
+      "requestFixture": "requests.workspaceUpdate",
+      "requestSchema": "UpdateWorkspaceRequest",
+      "responseFixture": "responses.workspace",
+      "responseSchema": "Workspace",
+      "successStatus": 200
+    },
+    {
+      "method": "post",
+      "operationId": "trashWorkspace",
+      "path": "/v1/workspaces/{workspaceId}/trash",
+      "requestFixture": "requests.emptyMutation",
+      "requestSchema": "EmptyRequest",
+      "responseFixture": "responses.workspace",
+      "responseSchema": "Workspace",
+      "successStatus": 200
+    },
+    {
+      "method": "post",
+      "operationId": "restoreWorkspace",
+      "path": "/v1/workspaces/{workspaceId}/restore",
+      "requestFixture": "requests.emptyMutation",
+      "requestSchema": "EmptyRequest",
+      "responseFixture": "responses.workspace",
+      "responseSchema": "Workspace",
+      "successStatus": 200
+    },
+    {
+      "method": "delete",
+      "operationId": "deleteWorkspace",
+      "path": "/v1/workspaces/{workspaceId}",
+      "successStatus": 204
+    },
+    {
+      "method": "get",
+      "operationId": "listTrashedConversations",
+      "path": "/v1/trash/conversations",
+      "responseFixture": "responses.conversationPage",
+      "responseSchema": "ConversationPage",
+      "successStatus": 200
+    },
+    {
+      "method": "get",
+      "operationId": "listTrashedWorkspaces",
+      "path": "/v1/trash/workspaces",
+      "responseFixture": "responses.workspacePage",
+      "responseSchema": "WorkspacePage",
+      "successStatus": 200
+    },
+    {
+      "method": "get",
+      "operationId": "getSoul",
+      "path": "/v1/config/soul",
+      "responseFixture": "binary.soul",
+      "responseMediaType": "application/octet-stream",
+      "responseSchema": "binary",
+      "successStatus": 200
+    },
+    {
+      "method": "put",
+      "operationId": "createSoul",
+      "path": "/v1/config/soul",
+      "requestFixture": "binary.soul",
+      "requestSchema": "binary",
+      "responseFixture": "responses.soul",
+      "responseSchema": "SoulDescriptor",
+      "successStatus": 201
+    },
+    {
+      "method": "get",
+      "operationId": "downloadArtifact",
+      "path": "/v1/artifacts/{artifactId}",
+      "responseFixture": "binary.artifact",
+      "responseMediaType": "dynamic",
+      "responseSchema": "binary",
+      "successStatus": 200
+    },
+    {
+      "method": "delete",
+      "operationId": "deleteArtifact",
+      "path": "/v1/artifacts/{artifactId}",
+      "successStatus": 204
+    }
+  ],
+  "version": 1
+}

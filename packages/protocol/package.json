@@ -1,0 +1,28 @@
+{
+  "name": "@bitch/protocol",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "fixtures",
+    "generated"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "check:generated": "tsx src/generate.ts --check",
+    "fixtures:validate": "tsx src/validate-fixtures.ts",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "typebox": "1.3.7"
+  },
+  "devDependencies": {
+    "tsx": "4.21.0",
+    "vitest": "4.0.18"
+  }
+}

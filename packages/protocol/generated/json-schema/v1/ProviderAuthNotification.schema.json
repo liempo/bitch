@@ -1,0 +1,131 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/ProviderAuthNotification.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "anyOf": [
+    {
+      "additionalProperties": true,
+      "properties": {
+        "links": {
+          "items": {
+            "additionalProperties": true,
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "url": {
+                "format": "uri",
+                "type": "string"
+              }
+            },
+            "required": [
+              "url"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "message": {
+          "type": "string"
+        },
+        "sequence": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "type": {
+          "const": "info",
+          "type": "string"
+        }
+      },
+      "required": [
+        "sequence",
+        "type",
+        "message"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": true,
+      "properties": {
+        "instructions": {
+          "type": "string"
+        },
+        "sequence": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "type": {
+          "const": "auth_url",
+          "type": "string"
+        },
+        "url": {
+          "format": "uri",
+          "type": "string"
+        }
+      },
+      "required": [
+        "sequence",
+        "type",
+        "url"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": true,
+      "properties": {
+        "expiresInSeconds": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "intervalSeconds": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "sequence": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "type": {
+          "const": "device_code",
+          "type": "string"
+        },
+        "userCode": {
+          "type": "string"
+        },
+        "verificationUri": {
+          "format": "uri",
+          "type": "string"
+        }
+      },
+      "required": [
+        "sequence",
+        "type",
+        "userCode",
+        "verificationUri"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": true,
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "sequence": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "type": {
+          "const": "progress",
+          "type": "string"
+        }
+      },
+      "required": [
+        "sequence",
+        "type",
+        "message"
+      ],
+      "type": "object"
+    }
+  ],
+  "title": "ProviderAuthNotification"
+}

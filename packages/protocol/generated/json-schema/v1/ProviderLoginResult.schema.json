@@ -1,0 +1,1107 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/ProviderLoginResult.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "anyOf": [
+    {
+      "additionalProperties": true,
+      "properties": {
+        "authType": {
+          "anyOf": [
+            {
+              "const": "api_key",
+              "type": "string"
+            },
+            {
+              "const": "oauth",
+              "type": "string"
+            }
+          ]
+        },
+        "notifications": {
+          "items": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "properties": {
+                  "links": {
+                    "items": {
+                      "additionalProperties": true,
+                      "properties": {
+                        "label": {
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "url"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "sequence": {
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "type": {
+                    "const": "info",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "sequence",
+                  "type",
+                  "message"
+                ],
+                "type": "object"
+              },
+              {
+                "additionalProperties": true,
+                "properties": {
+                  "instructions": {
+                    "type": "string"
+                  },
+                  "sequence": {
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "type": {
+                    "const": "auth_url",
+                    "type": "string"
+                  },
+                  "url": {
+                    "format": "uri",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "sequence",
+                  "type",
+                  "url"
+                ],
+                "type": "object"
+              },
+              {
+                "additionalProperties": true,
+                "properties": {
+                  "expiresInSeconds": {
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "intervalSeconds": {
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "sequence": {
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "type": {
+                    "const": "device_code",
+                    "type": "string"
+                  },
+                  "userCode": {
+                    "type": "string"
+                  },
+                  "verificationUri": {
+                    "format": "uri",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "sequence",
+                  "type",
+                  "userCode",
+                  "verificationUri"
+                ],
+                "type": "object"
+              },
+              {
+                "additionalProperties": true,
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  },
+                  "sequence": {
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "type": {
+                    "const": "progress",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "sequence",
+                  "type",
+                  "message"
+                ],
+                "type": "object"
+              }
+            ]
+          },
+          "type": "array"
+        },
+        "operationId": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "providerId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "sequence": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "state": {
+          "const": "running",
+          "type": "string"
+        }
+      },
+      "required": [
+        "operationId",
+        "providerId",
+        "authType",
+        "sequence",
+        "notifications",
+        "state"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": true,
+      "properties": {
+        "authType": {
+          "anyOf": [
+            {
+              "const": "api_key",
+              "type": "string"
+            },
+            {
+              "const": "oauth",
+              "type": "string"
+            }
+          ]
+        },
+        "notifications": {
+          "items": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "properties": {
+                  "links": {
+                    "items": {
+                      "additionalProperties": true,
+                      "properties": {
+                        "label": {
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "url"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "sequence": {
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "type": {
+                    "const": "info",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "sequence",
+                  "type",
+                  "message"
+                ],
+                "type": "object"
+              },
+              {
+                "additionalProperties": true,
+                "properties": {
+                  "instructions": {
+                    "type": "string"
+                  },
+                  "sequence": {
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "type": {
+                    "const": "auth_url",
+                    "type": "string"
+                  },
+                  "url": {
+                    "format": "uri",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "sequence",
+                  "type",
+                  "url"
+                ],
+                "type": "object"
+              },
+              {
+                "additionalProperties": true,
+                "properties": {
+                  "expiresInSeconds": {
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "intervalSeconds": {
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "sequence": {
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "type": {
+                    "const": "device_code",
+                    "type": "string"
+                  },
+                  "userCode": {
+                    "type": "string"
+                  },
+                  "verificationUri": {
+                    "format": "uri",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "sequence",
+                  "type",
+                  "userCode",
+                  "verificationUri"
+                ],
+                "type": "object"
+              },
+              {
+                "additionalProperties": true,
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  },
+                  "sequence": {
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "type": {
+                    "const": "progress",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "sequence",
+                  "type",
+                  "message"
+                ],
+                "type": "object"
+              }
+            ]
+          },
+          "type": "array"
+        },
+        "operationId": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "prompt": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "placeholder": {
+                  "type": "string"
+                },
+                "promptId": {
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                  "type": "string"
+                },
+                "type": {
+                  "anyOf": [
+                    {
+                      "const": "text",
+                      "type": "string"
+                    },
+                    {
+                      "const": "secret",
+                      "type": "string"
+                    },
+                    {
+                      "const": "manual_code",
+                      "type": "string"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "promptId",
+                "type",
+                "message"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": true,
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "options": {
+                  "items": {
+                    "additionalProperties": true,
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "label": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "label"
+                    ],
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "promptId": {
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                  "type": "string"
+                },
+                "type": {
+                  "const": "select",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "promptId",
+                "type",
+                "message",
+                "options"
+              ],
+              "type": "object"
+            }
+          ]
+        },
+        "providerId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "sequence": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "state": {
+          "const": "needsInput",
+          "type": "string"
+        }
+      },
+      "required": [
+        "operationId",
+        "providerId",
+        "authType",
+        "sequence",
+        "notifications",
+        "state",
+        "prompt"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": true,
+      "properties": {
+        "authType": {
+          "anyOf": [
+            {
+              "const": "api_key",
+              "type": "string"
+            },
+            {
+              "const": "oauth",
+              "type": "string"
+            }
+          ]
+        },
+        "notifications": {
+          "items": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "properties": {
+                  "links": {
+                    "items": {
+                      "additionalProperties": true,
+                      "properties": {
+                        "label": {
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "url"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "sequence": {
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "type": {
+                    "const": "info",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "sequence",
+                  "type",
+                  "message"
+                ],
+                "type": "object"
+              },
+              {
+                "additionalProperties": true,
+                "properties": {
+                  "instructions": {
+                    "type": "string"
+                  },
+                  "sequence": {
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "type": {
+                    "const": "auth_url",
+                    "type": "string"
+                  },
+                  "url": {
+                    "format": "uri",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "sequence",
+                  "type",
+                  "url"
+                ],
+                "type": "object"
+              },
+              {
+                "additionalProperties": true,
+                "properties": {
+                  "expiresInSeconds": {
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "intervalSeconds": {
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "sequence": {
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "type": {
+                    "const": "device_code",
+                    "type": "string"
+                  },
+                  "userCode": {
+                    "type": "string"
+                  },
+                  "verificationUri": {
+                    "format": "uri",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "sequence",
+                  "type",
+                  "userCode",
+                  "verificationUri"
+                ],
+                "type": "object"
+              },
+              {
+                "additionalProperties": true,
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  },
+                  "sequence": {
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "type": {
+                    "const": "progress",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "sequence",
+                  "type",
+                  "message"
+                ],
+                "type": "object"
+              }
+            ]
+          },
+          "type": "array"
+        },
+        "operationId": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "provider": {
+          "additionalProperties": true,
+          "properties": {
+            "authentication": {
+              "items": {
+                "anyOf": [
+                  {
+                    "const": "api_key",
+                    "type": "string"
+                  },
+                  {
+                    "const": "oauth",
+                    "type": "string"
+                  }
+                ]
+              },
+              "type": "array",
+              "uniqueItems": true
+            },
+            "name": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "providerId": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "status": {
+              "anyOf": [
+                {
+                  "const": "authenticated",
+                  "type": "string"
+                },
+                {
+                  "const": "unauthenticated",
+                  "type": "string"
+                },
+                {
+                  "const": "expired",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "required": [
+            "providerId",
+            "name",
+            "authentication",
+            "status"
+          ],
+          "type": "object"
+        },
+        "providerId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "sequence": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "state": {
+          "const": "completed",
+          "type": "string"
+        }
+      },
+      "required": [
+        "operationId",
+        "providerId",
+        "authType",
+        "sequence",
+        "notifications",
+        "state",
+        "provider"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": true,
+      "properties": {
+        "authType": {
+          "anyOf": [
+            {
+              "const": "api_key",
+              "type": "string"
+            },
+            {
+              "const": "oauth",
+              "type": "string"
+            }
+          ]
+        },
+        "notifications": {
+          "items": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "properties": {
+                  "links": {
+                    "items": {
+                      "additionalProperties": true,
+                      "properties": {
+                        "label": {
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "url"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "sequence": {
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "type": {
+                    "const": "info",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "sequence",
+                  "type",
+                  "message"
+                ],
+                "type": "object"
+              },
+              {
+                "additionalProperties": true,
+                "properties": {
+                  "instructions": {
+                    "type": "string"
+                  },
+                  "sequence": {
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "type": {
+                    "const": "auth_url",
+                    "type": "string"
+                  },
+                  "url": {
+                    "format": "uri",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "sequence",
+                  "type",
+                  "url"
+                ],
+                "type": "object"
+              },
+              {
+                "additionalProperties": true,
+                "properties": {
+                  "expiresInSeconds": {
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "intervalSeconds": {
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "sequence": {
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "type": {
+                    "const": "device_code",
+                    "type": "string"
+                  },
+                  "userCode": {
+                    "type": "string"
+                  },
+                  "verificationUri": {
+                    "format": "uri",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "sequence",
+                  "type",
+                  "userCode",
+                  "verificationUri"
+                ],
+                "type": "object"
+              },
+              {
+                "additionalProperties": true,
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  },
+                  "sequence": {
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "type": {
+                    "const": "progress",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "sequence",
+                  "type",
+                  "message"
+                ],
+                "type": "object"
+              }
+            ]
+          },
+          "type": "array"
+        },
+        "operationId": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "problem": {
+          "additionalProperties": true,
+          "properties": {
+            "artifactId": {
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+              "type": "string"
+            },
+            "code": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "commandId": {
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+              "type": "string"
+            },
+            "conversationId": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "detail": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "dialogId": {
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+              "type": "string"
+            },
+            "gatewayId": {
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+              "type": "string"
+            },
+            "instance": {
+              "type": "string"
+            },
+            "issues": {
+              "items": {
+                "additionalProperties": true,
+                "properties": {
+                  "code": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "path": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "path",
+                  "code",
+                  "message"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "requestId": {
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+              "type": "string"
+            },
+            "retryable": {
+              "type": "boolean"
+            },
+            "status": {
+              "maximum": 599,
+              "minimum": 400,
+              "type": "integer"
+            },
+            "title": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "type": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "workspaceId": {
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "title",
+            "status",
+            "detail",
+            "code",
+            "requestId",
+            "retryable"
+          ],
+          "type": "object"
+        },
+        "providerId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "sequence": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "state": {
+          "const": "failed",
+          "type": "string"
+        }
+      },
+      "required": [
+        "operationId",
+        "providerId",
+        "authType",
+        "sequence",
+        "notifications",
+        "state",
+        "problem"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": true,
+      "properties": {
+        "authType": {
+          "anyOf": [
+            {
+              "const": "api_key",
+              "type": "string"
+            },
+            {
+              "const": "oauth",
+              "type": "string"
+            }
+          ]
+        },
+        "notifications": {
+          "items": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "properties": {
+                  "links": {
+                    "items": {
+                      "additionalProperties": true,
+                      "properties": {
+                        "label": {
+                          "type": "string"
+                        },
+                        "url": {
+                          "format": "uri",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "url"
+                      ],
+                      "type": "object"
+                    },
+                    "type": "array"
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "sequence": {
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "type": {
+                    "const": "info",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "sequence",
+                  "type",
+                  "message"
+                ],
+                "type": "object"
+              },
+              {
+                "additionalProperties": true,
+                "properties": {
+                  "instructions": {
+                    "type": "string"
+                  },
+                  "sequence": {
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "type": {
+                    "const": "auth_url",
+                    "type": "string"
+                  },
+                  "url": {
+                    "format": "uri",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "sequence",
+                  "type",
+                  "url"
+                ],
+                "type": "object"
+              },
+              {
+                "additionalProperties": true,
+                "properties": {
+                  "expiresInSeconds": {
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "intervalSeconds": {
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "sequence": {
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "type": {
+                    "const": "device_code",
+                    "type": "string"
+                  },
+                  "userCode": {
+                    "type": "string"
+                  },
+                  "verificationUri": {
+                    "format": "uri",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "sequence",
+                  "type",
+                  "userCode",
+                  "verificationUri"
+                ],
+                "type": "object"
+              },
+              {
+                "additionalProperties": true,
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  },
+                  "sequence": {
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "type": {
+                    "const": "progress",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "sequence",
+                  "type",
+                  "message"
+                ],
+                "type": "object"
+              }
+            ]
+          },
+          "type": "array"
+        },
+        "operationId": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "providerId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "sequence": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "state": {
+          "const": "cancelled",
+          "type": "string"
+        }
+      },
+      "required": [
+        "operationId",
+        "providerId",
+        "authType",
+        "sequence",
+        "notifications",
+        "state"
+      ],
+      "type": "object"
+    }
+  ],
+  "title": "ProviderLoginResult"
+}

@@ -1,0 +1,26 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/SoulDescriptor.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "byteCount": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "etag": {
+      "pattern": "^\"sha256:[0-9a-f]{64}\"$",
+      "type": "string"
+    },
+    "sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "byteCount",
+    "sha256",
+    "etag"
+  ],
+  "title": "SoulDescriptor",
+  "type": "object"
+}

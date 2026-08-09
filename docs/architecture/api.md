@@ -6,7 +6,7 @@ Approved first-release `/v1` resource, schema, pagination, and event contract. I
 
 ## Common rules
 
-The canonical TypeBox schemas in `@bitch/protocol` implement this document. Generated JSON Schema and OpenAPI 3.1 files are committed build artifacts.
+The canonical TypeBox schemas in `packages/protocol/src/schemas.ts` implement this document and are exported by `@bitch/protocol`. `packages/protocol/src/http-contract.ts` binds each operation to its request, response, and fixture schemas. Generated JSON Schema under `packages/protocol/generated/json-schema/v1/` and `packages/protocol/generated/openapi-v1.json` are committed build artifacts. `npm run check:generated` fails when these artifacts do not match the canonical schemas.
 
 JSON field names use lower camel case. IDs use canonical lowercase UUID strings unless Pi defines the ID. Timestamps use UTC RFC 3339 with millisecond precision.
 
@@ -587,7 +587,7 @@ interface PendingDialog {
 
 The protocol package commits each expanded JSON Schema. DTOs contain data fields only. They exclude functions, class instances, signals, absolute session paths, provider credentials, and extension closures.
 
-`BashResultDto` omits Pi's temporary `fullOutputPath` and preserves the remaining result fields. The `BashExecutionMessage` projection applies the same omission.
+`BashResultDto` omits Pi's temporary `fullOutputPath` and preserves the remaining result fields. The `BashExecutionMessage` projection applies the same omission. An assistant diagnostic preserves `type`, `timestamp`, and the nested error `name`, `message`, and `code`. It omits the error stack and provider-specific `details` because these values can expose internal paths, credentials, or unspecified provider payloads.
 
 A Pi type change is a generated-schema and behavioral-compatibility change. It cannot enter the lockfile without updating the committed fixture and capability matrix.
 

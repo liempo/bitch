@@ -1,0 +1,117 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/SessionStats.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "assistantMessages": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "contextUsage": {
+      "additionalProperties": true,
+      "properties": {
+        "contextWindow": {
+          "minimum": 1,
+          "type": "number"
+        },
+        "percent": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "tokens": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "tokens",
+        "contextWindow",
+        "percent"
+      ],
+      "type": "object"
+    },
+    "cost": {
+      "minimum": 0,
+      "type": "number"
+    },
+    "sessionId": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "tokens": {
+      "additionalProperties": true,
+      "properties": {
+        "cacheRead": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "cacheWrite": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "input": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "output": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "total": {
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "input",
+        "output",
+        "cacheRead",
+        "cacheWrite",
+        "total"
+      ],
+      "type": "object"
+    },
+    "toolCalls": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "toolResults": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "totalMessages": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "userMessages": {
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "sessionId",
+    "userMessages",
+    "assistantMessages",
+    "toolCalls",
+    "toolResults",
+    "totalMessages",
+    "tokens",
+    "cost"
+  ],
+  "title": "SessionStats",
+  "type": "object"
+}

@@ -1,0 +1,66 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/StatusResult.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "capabilities": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "gatewayId": {
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "type": "string"
+    },
+    "mode": {
+      "anyOf": [
+        {
+          "const": "directory",
+          "type": "string"
+        },
+        {
+          "const": "gateway",
+          "type": "string"
+        }
+      ]
+    },
+    "piVersion": {
+      "const": "0.83.0",
+      "type": "string"
+    },
+    "protocolVersion": {
+      "additionalProperties": true,
+      "properties": {
+        "major": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "minor": {
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "major",
+        "minor"
+      ],
+      "type": "object"
+    },
+    "serverVersion": {
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "required": [
+    "serverVersion",
+    "protocolVersion",
+    "piVersion",
+    "mode",
+    "capabilities"
+  ],
+  "title": "StatusResult",
+  "type": "object"
+}

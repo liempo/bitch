@@ -50,6 +50,17 @@ TypeScript types are inferred from these schemas. The protocol build generates J
 
 The repository stores generated artifacts. CI regenerates them and fails when the committed output is stale. This check is a build check, not a behavioral test.
 
+The version 1 contract implementation is in `packages/protocol`:
+
+- `src/schemas.ts` contains the canonical TypeBox schemas.
+- `src/http-contract.ts` maps each HTTP operation to its request, response, and fixture schemas.
+- `src/fixture-data.ts` contains the authored fixture corpus for BITCH protocol values and the public projections of pinned Pi `0.83.0` values.
+- `src/validation.ts` validates fixtures and returns deterministic errors with fixture, path, code, and message fields.
+- `fixtures/v1/` contains the committed protocol and HTTP operation fixtures.
+- `generated/json-schema/v1/`, `generated/openapi-v1.json`, and `generated/manifest.json` contain deterministic generated artifacts.
+
+Run `npm run validate` from the repository root to type-check, lint, test, check generated files, and validate the complete fixture corpus. `npm run fixtures:validate` is the focused public fixture-validation command. It exits nonzero when a fixture has an invalid field, an unknown request field, an invalid discriminator, a credential-shaped field, or an internal server path. The validator sorts all errors to keep repeated failures byte-stable. `.github/workflows/ci.yml` runs validation, the package build, and the production dependency audit with the pinned Node.js version for each pull request and push to `main`.
+
 When Phase 7 starts, the macOS app will use Apple Swift OpenAPI Generator for HTTP payload models. A small Swift transport will decode SSE event models.
 
 Raw Pi SDK values and objects never cross the protocol boundary.

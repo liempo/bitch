@@ -1,0 +1,135 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/PiContentBlock.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "anyOf": [
+    {
+      "additionalProperties": true,
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "textSignature": {
+          "type": "string"
+        },
+        "type": {
+          "const": "text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "text"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": true,
+      "properties": {
+        "redacted": {
+          "type": "boolean"
+        },
+        "thinking": {
+          "type": "string"
+        },
+        "thinkingSignature": {
+          "type": "string"
+        },
+        "type": {
+          "const": "thinking",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "thinking"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": true,
+      "properties": {
+        "data": {
+          "type": "string"
+        },
+        "mimeType": {
+          "pattern": "^image/",
+          "type": "string"
+        },
+        "type": {
+          "const": "image",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "data",
+        "mimeType"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": true,
+      "properties": {
+        "arguments": {
+          "$defs": {
+            "JsonValue": {
+              "$id": "JsonValue",
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "items": {
+                    "$ref": "JsonValue"
+                  },
+                  "type": "array"
+                },
+                {
+                  "patternProperties": {
+                    "^.*$": {
+                      "$ref": "JsonValue"
+                    }
+                  },
+                  "type": "object"
+                }
+              ]
+            }
+          },
+          "$ref": "JsonValue"
+        },
+        "id": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "name": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "thoughtSignature": {
+          "type": "string"
+        },
+        "type": {
+          "const": "toolCall",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "id",
+        "name",
+        "arguments"
+      ],
+      "type": "object"
+    }
+  ],
+  "title": "PiContentBlock"
+}

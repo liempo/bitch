@@ -1,0 +1,44 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/ThinkingCycleResult.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "level": {
+      "anyOf": [
+        {
+          "const": "off",
+          "type": "string"
+        },
+        {
+          "const": "minimal",
+          "type": "string"
+        },
+        {
+          "const": "low",
+          "type": "string"
+        },
+        {
+          "const": "medium",
+          "type": "string"
+        },
+        {
+          "const": "high",
+          "type": "string"
+        },
+        {
+          "const": "xhigh",
+          "type": "string"
+        },
+        {
+          "const": "max",
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "level"
+  ],
+  "title": "ThinkingCycleResult",
+  "type": "object"
+}

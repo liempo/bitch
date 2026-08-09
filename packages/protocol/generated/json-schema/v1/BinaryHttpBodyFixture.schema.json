@@ -1,0 +1,30 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/BinaryHttpBodyFixture.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "bodyBase64": {
+      "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+      "type": "string"
+    },
+    "byteCount": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "mediaType": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "mediaType",
+    "bodyBase64",
+    "byteCount"
+  ],
+  "title": "BinaryHttpBodyFixture",
+  "type": "object"
+}

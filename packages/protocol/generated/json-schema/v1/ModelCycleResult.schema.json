@@ -1,0 +1,103 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/ModelCycleResult.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "isScoped": {
+      "type": "boolean"
+    },
+    "model": {
+      "additionalProperties": true,
+      "properties": {
+        "contextWindow": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "input": {
+          "items": {
+            "anyOf": [
+              {
+                "const": "text",
+                "type": "string"
+              },
+              {
+                "const": "image",
+                "type": "string"
+              }
+            ]
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "maxTokens": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "modelId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "name": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "provider": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "reasoning": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "provider",
+        "modelId",
+        "name",
+        "reasoning",
+        "input",
+        "contextWindow",
+        "maxTokens"
+      ],
+      "type": "object"
+    },
+    "thinkingLevel": {
+      "anyOf": [
+        {
+          "const": "off",
+          "type": "string"
+        },
+        {
+          "const": "minimal",
+          "type": "string"
+        },
+        {
+          "const": "low",
+          "type": "string"
+        },
+        {
+          "const": "medium",
+          "type": "string"
+        },
+        {
+          "const": "high",
+          "type": "string"
+        },
+        {
+          "const": "xhigh",
+          "type": "string"
+        },
+        {
+          "const": "max",
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "model",
+    "thinkingLevel",
+    "isScoped"
+  ],
+  "title": "ModelCycleResult",
+  "type": "object"
+}

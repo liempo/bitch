@@ -1,0 +1,90 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/ProviderAuthPrompt.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "anyOf": [
+    {
+      "additionalProperties": true,
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "placeholder": {
+          "type": "string"
+        },
+        "promptId": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "type": {
+          "anyOf": [
+            {
+              "const": "text",
+              "type": "string"
+            },
+            {
+              "const": "secret",
+              "type": "string"
+            },
+            {
+              "const": "manual_code",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "required": [
+        "promptId",
+        "type",
+        "message"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": true,
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "options": {
+          "items": {
+            "additionalProperties": true,
+            "properties": {
+              "description": {
+                "type": "string"
+              },
+              "id": {
+                "minLength": 1,
+                "type": "string"
+              },
+              "label": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "label"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "promptId": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "type": {
+          "const": "select",
+          "type": "string"
+        }
+      },
+      "required": [
+        "promptId",
+        "type",
+        "message",
+        "options"
+      ],
+      "type": "object"
+    }
+  ],
+  "title": "ProviderAuthPrompt"
+}

@@ -1,0 +1,4774 @@
+{
+  "fixtures": {
+    "assistantEvents": {
+      "done": {
+        "schema": "AssistantMessageEvent",
+        "value": {
+          "message": {
+            "api": "pi-messages",
+            "content": [
+              {
+                "text": "Hello from Pi",
+                "textSignature": "sig-text",
+                "type": "text"
+              },
+              {
+                "redacted": false,
+                "thinking": "Check the fixture",
+                "thinkingSignature": "sig-thinking",
+                "type": "thinking"
+              },
+              {
+                "arguments": {
+                  "path": "README.md"
+                },
+                "id": "call-1",
+                "name": "read",
+                "thoughtSignature": "sig-tool",
+                "type": "toolCall"
+              }
+            ],
+            "diagnostics": [
+              {
+                "error": {
+                  "code": "fixture_error",
+                  "message": "deterministic",
+                  "name": "FixtureError"
+                },
+                "timestamp": 1767225600000,
+                "type": "fixture"
+              }
+            ],
+            "model": "fixture-model",
+            "provider": "scripted",
+            "rawStopReason": "tool_use",
+            "responseId": "response-1",
+            "responseModel": "fixture-model-2026",
+            "role": "assistant",
+            "stopReason": "toolUse",
+            "timestamp": 1767225600001,
+            "usage": {
+              "cacheRead": 2,
+              "cacheWrite": 1,
+              "cacheWrite1h": 1,
+              "cost": {
+                "cacheRead": 0.0001,
+                "cacheWrite": 0.0002,
+                "input": 0.001,
+                "output": 0.002,
+                "total": 0.0033
+              },
+              "input": 10,
+              "output": 5,
+              "reasoning": 2,
+              "totalTokens": 18
+            }
+          },
+          "reason": "toolUse",
+          "type": "done"
+        }
+      },
+      "error": {
+        "schema": "AssistantMessageEvent",
+        "value": {
+          "error": {
+            "api": "pi-messages",
+            "content": [
+              {
+                "text": "Hello from Pi",
+                "textSignature": "sig-text",
+                "type": "text"
+              },
+              {
+                "redacted": false,
+                "thinking": "Check the fixture",
+                "thinkingSignature": "sig-thinking",
+                "type": "thinking"
+              },
+              {
+                "arguments": {
+                  "path": "README.md"
+                },
+                "id": "call-1",
+                "name": "read",
+                "thoughtSignature": "sig-tool",
+                "type": "toolCall"
+              }
+            ],
+            "diagnostics": [
+              {
+                "error": {
+                  "code": "fixture_error",
+                  "message": "deterministic",
+                  "name": "FixtureError"
+                },
+                "timestamp": 1767225600000,
+                "type": "fixture"
+              }
+            ],
+            "errorMessage": "Scripted failure",
+            "model": "fixture-model",
+            "provider": "scripted",
+            "rawStopReason": "tool_use",
+            "responseId": "response-1",
+            "responseModel": "fixture-model-2026",
+            "role": "assistant",
+            "stopReason": "error",
+            "timestamp": 1767225600001,
+            "usage": {
+              "cacheRead": 2,
+              "cacheWrite": 1,
+              "cacheWrite1h": 1,
+              "cost": {
+                "cacheRead": 0.0001,
+                "cacheWrite": 0.0002,
+                "input": 0.001,
+                "output": 0.002,
+                "total": 0.0033
+              },
+              "input": 10,
+              "output": 5,
+              "reasoning": 2,
+              "totalTokens": 18
+            }
+          },
+          "reason": "error",
+          "type": "error"
+        }
+      },
+      "start": {
+        "schema": "AssistantMessageEvent",
+        "value": {
+          "partial": {
+            "api": "pi-messages",
+            "content": [
+              {
+                "text": "Hello from Pi",
+                "textSignature": "sig-text",
+                "type": "text"
+              },
+              {
+                "redacted": false,
+                "thinking": "Check the fixture",
+                "thinkingSignature": "sig-thinking",
+                "type": "thinking"
+              },
+              {
+                "arguments": {
+                  "path": "README.md"
+                },
+                "id": "call-1",
+                "name": "read",
+                "thoughtSignature": "sig-tool",
+                "type": "toolCall"
+              }
+            ],
+            "diagnostics": [
+              {
+                "error": {
+                  "code": "fixture_error",
+                  "message": "deterministic",
+                  "name": "FixtureError"
+                },
+                "timestamp": 1767225600000,
+                "type": "fixture"
+              }
+            ],
+            "model": "fixture-model",
+            "provider": "scripted",
+            "rawStopReason": "tool_use",
+            "responseId": "response-1",
+            "responseModel": "fixture-model-2026",
+            "role": "assistant",
+            "stopReason": "pending",
+            "timestamp": 1767225600001,
+            "usage": {
+              "cacheRead": 2,
+              "cacheWrite": 1,
+              "cacheWrite1h": 1,
+              "cost": {
+                "cacheRead": 0.0001,
+                "cacheWrite": 0.0002,
+                "input": 0.001,
+                "output": 0.002,
+                "total": 0.0033
+              },
+              "input": 10,
+              "output": 5,
+              "reasoning": 2,
+              "totalTokens": 18
+            }
+          },
+          "type": "start"
+        }
+      },
+      "textDelta": {
+        "schema": "AssistantMessageEvent",
+        "value": {
+          "contentIndex": 0,
+          "delta": "Hello",
+          "partial": {
+            "api": "pi-messages",
+            "content": [
+              {
+                "text": "Hello from Pi",
+                "textSignature": "sig-text",
+                "type": "text"
+              },
+              {
+                "redacted": false,
+                "thinking": "Check the fixture",
+                "thinkingSignature": "sig-thinking",
+                "type": "thinking"
+              },
+              {
+                "arguments": {
+                  "path": "README.md"
+                },
+                "id": "call-1",
+                "name": "read",
+                "thoughtSignature": "sig-tool",
+                "type": "toolCall"
+              }
+            ],
+            "diagnostics": [
+              {
+                "error": {
+                  "code": "fixture_error",
+                  "message": "deterministic",
+                  "name": "FixtureError"
+                },
+                "timestamp": 1767225600000,
+                "type": "fixture"
+              }
+            ],
+            "model": "fixture-model",
+            "provider": "scripted",
+            "rawStopReason": "tool_use",
+            "responseId": "response-1",
+            "responseModel": "fixture-model-2026",
+            "role": "assistant",
+            "stopReason": "pending",
+            "timestamp": 1767225600001,
+            "usage": {
+              "cacheRead": 2,
+              "cacheWrite": 1,
+              "cacheWrite1h": 1,
+              "cost": {
+                "cacheRead": 0.0001,
+                "cacheWrite": 0.0002,
+                "input": 0.001,
+                "output": 0.002,
+                "total": 0.0033
+              },
+              "input": 10,
+              "output": 5,
+              "reasoning": 2,
+              "totalTokens": 18
+            }
+          },
+          "type": "text_delta"
+        }
+      },
+      "textEnd": {
+        "schema": "AssistantMessageEvent",
+        "value": {
+          "content": "Hello from Pi",
+          "contentIndex": 0,
+          "partial": {
+            "api": "pi-messages",
+            "content": [
+              {
+                "text": "Hello from Pi",
+                "textSignature": "sig-text",
+                "type": "text"
+              },
+              {
+                "redacted": false,
+                "thinking": "Check the fixture",
+                "thinkingSignature": "sig-thinking",
+                "type": "thinking"
+              },
+              {
+                "arguments": {
+                  "path": "README.md"
+                },
+                "id": "call-1",
+                "name": "read",
+                "thoughtSignature": "sig-tool",
+                "type": "toolCall"
+              }
+            ],
+            "diagnostics": [
+              {
+                "error": {
+                  "code": "fixture_error",
+                  "message": "deterministic",
+                  "name": "FixtureError"
+                },
+                "timestamp": 1767225600000,
+                "type": "fixture"
+              }
+            ],
+            "model": "fixture-model",
+            "provider": "scripted",
+            "rawStopReason": "tool_use",
+            "responseId": "response-1",
+            "responseModel": "fixture-model-2026",
+            "role": "assistant",
+            "stopReason": "pending",
+            "timestamp": 1767225600001,
+            "usage": {
+              "cacheRead": 2,
+              "cacheWrite": 1,
+              "cacheWrite1h": 1,
+              "cost": {
+                "cacheRead": 0.0001,
+                "cacheWrite": 0.0002,
+                "input": 0.001,
+                "output": 0.002,
+                "total": 0.0033
+              },
+              "input": 10,
+              "output": 5,
+              "reasoning": 2,
+              "totalTokens": 18
+            }
+          },
+          "type": "text_end"
+        }
+      },
+      "textStart": {
+        "schema": "AssistantMessageEvent",
+        "value": {
+          "contentIndex": 0,
+          "partial": {
+            "api": "pi-messages",
+            "content": [
+              {
+                "text": "Hello from Pi",
+                "textSignature": "sig-text",
+                "type": "text"
+              },
+              {
+                "redacted": false,
+                "thinking": "Check the fixture",
+                "thinkingSignature": "sig-thinking",
+                "type": "thinking"
+              },
+              {
+                "arguments": {
+                  "path": "README.md"
+                },
+                "id": "call-1",
+                "name": "read",
+                "thoughtSignature": "sig-tool",
+                "type": "toolCall"
+              }
+            ],
+            "diagnostics": [
+              {
+                "error": {
+                  "code": "fixture_error",
+                  "message": "deterministic",
+                  "name": "FixtureError"
+                },
+                "timestamp": 1767225600000,
+                "type": "fixture"
+              }
+            ],
+            "model": "fixture-model",
+            "provider": "scripted",
+            "rawStopReason": "tool_use",
+            "responseId": "response-1",
+            "responseModel": "fixture-model-2026",
+            "role": "assistant",
+            "stopReason": "pending",
+            "timestamp": 1767225600001,
+            "usage": {
+              "cacheRead": 2,
+              "cacheWrite": 1,
+              "cacheWrite1h": 1,
+              "cost": {
+                "cacheRead": 0.0001,
+                "cacheWrite": 0.0002,
+                "input": 0.001,
+                "output": 0.002,
+                "total": 0.0033
+              },
+              "input": 10,
+              "output": 5,
+              "reasoning": 2,
+              "totalTokens": 18
+            }
+          },
+          "type": "text_start"
+        }
+      },
+      "thinkingDelta": {
+        "schema": "AssistantMessageEvent",
+        "value": {
+          "contentIndex": 1,
+          "delta": "Check",
+          "partial": {
+            "api": "pi-messages",
+            "content": [
+              {
+                "text": "Hello from Pi",
+                "textSignature": "sig-text",
+                "type": "text"
+              },
+              {
+                "redacted": false,
+                "thinking": "Check the fixture",
+                "thinkingSignature": "sig-thinking",
+                "type": "thinking"
+              },
+              {
+                "arguments": {
+                  "path": "README.md"
+                },
+                "id": "call-1",
+                "name": "read",
+                "thoughtSignature": "sig-tool",
+                "type": "toolCall"
+              }
+            ],
+            "diagnostics": [
+              {
+                "error": {
+                  "code": "fixture_error",
+                  "message": "deterministic",
+                  "name": "FixtureError"
+                },
+                "timestamp": 1767225600000,
+                "type": "fixture"
+              }
+            ],
+            "model": "fixture-model",
+            "provider": "scripted",
+            "rawStopReason": "tool_use",
+            "responseId": "response-1",
+            "responseModel": "fixture-model-2026",
+            "role": "assistant",
+            "stopReason": "pending",
+            "timestamp": 1767225600001,
+            "usage": {
+              "cacheRead": 2,
+              "cacheWrite": 1,
+              "cacheWrite1h": 1,
+              "cost": {
+                "cacheRead": 0.0001,
+                "cacheWrite": 0.0002,
+                "input": 0.001,
+                "output": 0.002,
+                "total": 0.0033
+              },
+              "input": 10,
+              "output": 5,
+              "reasoning": 2,
+              "totalTokens": 18
+            }
+          },
+          "type": "thinking_delta"
+        }
+      },
+      "thinkingEnd": {
+        "schema": "AssistantMessageEvent",
+        "value": {
+          "content": "Check the fixture",
+          "contentIndex": 1,
+          "partial": {
+            "api": "pi-messages",
+            "content": [
+              {
+                "text": "Hello from Pi",
+                "textSignature": "sig-text",
+                "type": "text"
+              },
+              {
+                "redacted": false,
+                "thinking": "Check the fixture",
+                "thinkingSignature": "sig-thinking",
+                "type": "thinking"
+              },
+              {
+                "arguments": {
+                  "path": "README.md"
+                },
+                "id": "call-1",
+                "name": "read",
+                "thoughtSignature": "sig-tool",
+                "type": "toolCall"
+              }
+            ],
+            "diagnostics": [
+              {
+                "error": {
+                  "code": "fixture_error",
+                  "message": "deterministic",
+                  "name": "FixtureError"
+                },
+                "timestamp": 1767225600000,
+                "type": "fixture"
+              }
+            ],
+            "model": "fixture-model",
+            "provider": "scripted",
+            "rawStopReason": "tool_use",
+            "responseId": "response-1",
+            "responseModel": "fixture-model-2026",
+            "role": "assistant",
+            "stopReason": "pending",
+            "timestamp": 1767225600001,
+            "usage": {
+              "cacheRead": 2,
+              "cacheWrite": 1,
+              "cacheWrite1h": 1,
+              "cost": {
+                "cacheRead": 0.0001,
+                "cacheWrite": 0.0002,
+                "input": 0.001,
+                "output": 0.002,
+                "total": 0.0033
+              },
+              "input": 10,
+              "output": 5,
+              "reasoning": 2,
+              "totalTokens": 18
+            }
+          },
+          "type": "thinking_end"
+        }
+      },
+      "thinkingStart": {
+        "schema": "AssistantMessageEvent",
+        "value": {
+          "contentIndex": 1,
+          "partial": {
+            "api": "pi-messages",
+            "content": [
+              {
+                "text": "Hello from Pi",
+                "textSignature": "sig-text",
+                "type": "text"
+              },
+              {
+                "redacted": false,
+                "thinking": "Check the fixture",
+                "thinkingSignature": "sig-thinking",
+                "type": "thinking"
+              },
+              {
+                "arguments": {
+                  "path": "README.md"
+                },
+                "id": "call-1",
+                "name": "read",
+                "thoughtSignature": "sig-tool",
+                "type": "toolCall"
+              }
+            ],
+            "diagnostics": [
+              {
+                "error": {
+                  "code": "fixture_error",
+                  "message": "deterministic",
+                  "name": "FixtureError"
+                },
+                "timestamp": 1767225600000,
+                "type": "fixture"
+              }
+            ],
+            "model": "fixture-model",
+            "provider": "scripted",
+            "rawStopReason": "tool_use",
+            "responseId": "response-1",
+            "responseModel": "fixture-model-2026",
+            "role": "assistant",
+            "stopReason": "pending",
+            "timestamp": 1767225600001,
+            "usage": {
+              "cacheRead": 2,
+              "cacheWrite": 1,
+              "cacheWrite1h": 1,
+              "cost": {
+                "cacheRead": 0.0001,
+                "cacheWrite": 0.0002,
+                "input": 0.001,
+                "output": 0.002,
+                "total": 0.0033
+              },
+              "input": 10,
+              "output": 5,
+              "reasoning": 2,
+              "totalTokens": 18
+            }
+          },
+          "type": "thinking_start"
+        }
+      },
+      "toolcallDelta": {
+        "schema": "AssistantMessageEvent",
+        "value": {
+          "contentIndex": 2,
+          "delta": "{\"path\":",
+          "partial": {
+            "api": "pi-messages",
+            "content": [
+              {
+                "text": "Hello from Pi",
+                "textSignature": "sig-text",
+                "type": "text"
+              },
+              {
+                "redacted": false,
+                "thinking": "Check the fixture",
+                "thinkingSignature": "sig-thinking",
+                "type": "thinking"
+              },
+              {
+                "arguments": {
+                  "path": "README.md"
+                },
+                "id": "call-1",
+                "name": "read",
+                "thoughtSignature": "sig-tool",
+                "type": "toolCall"
+              }
+            ],
+            "diagnostics": [
+              {
+                "error": {
+                  "code": "fixture_error",
+                  "message": "deterministic",
+                  "name": "FixtureError"
+                },
+                "timestamp": 1767225600000,
+                "type": "fixture"
+              }
+            ],
+            "model": "fixture-model",
+            "provider": "scripted",
+            "rawStopReason": "tool_use",
+            "responseId": "response-1",
+            "responseModel": "fixture-model-2026",
+            "role": "assistant",
+            "stopReason": "pending",
+            "timestamp": 1767225600001,
+            "usage": {
+              "cacheRead": 2,
+              "cacheWrite": 1,
+              "cacheWrite1h": 1,
+              "cost": {
+                "cacheRead": 0.0001,
+                "cacheWrite": 0.0002,
+                "input": 0.001,
+                "output": 0.002,
+                "total": 0.0033
+              },
+              "input": 10,
+              "output": 5,
+              "reasoning": 2,
+              "totalTokens": 18
+            }
+          },
+          "type": "toolcall_delta"
+        }
+      },
+      "toolcallEnd": {
+        "schema": "AssistantMessageEvent",
+        "value": {
+          "contentIndex": 2,
+          "partial": {
+            "api": "pi-messages",
+            "content": [
+              {
+                "text": "Hello from Pi",
+                "textSignature": "sig-text",
+                "type": "text"
+              },
+              {
+                "redacted": false,
+                "thinking": "Check the fixture",
+                "thinkingSignature": "sig-thinking",
+                "type": "thinking"
+              },
+              {
+                "arguments": {
+                  "path": "README.md"
+                },
+                "id": "call-1",
+                "name": "read",
+                "thoughtSignature": "sig-tool",
+                "type": "toolCall"
+              }
+            ],
+            "diagnostics": [
+              {
+                "error": {
+                  "code": "fixture_error",
+                  "message": "deterministic",
+                  "name": "FixtureError"
+                },
+                "timestamp": 1767225600000,
+                "type": "fixture"
+              }
+            ],
+            "model": "fixture-model",
+            "provider": "scripted",
+            "rawStopReason": "tool_use",
+            "responseId": "response-1",
+            "responseModel": "fixture-model-2026",
+            "role": "assistant",
+            "stopReason": "pending",
+            "timestamp": 1767225600001,
+            "usage": {
+              "cacheRead": 2,
+              "cacheWrite": 1,
+              "cacheWrite1h": 1,
+              "cost": {
+                "cacheRead": 0.0001,
+                "cacheWrite": 0.0002,
+                "input": 0.001,
+                "output": 0.002,
+                "total": 0.0033
+              },
+              "input": 10,
+              "output": 5,
+              "reasoning": 2,
+              "totalTokens": 18
+            }
+          },
+          "toolCall": {
+            "arguments": {
+              "path": "README.md"
+            },
+            "id": "call-1",
+            "name": "read",
+            "thoughtSignature": "sig-tool",
+            "type": "toolCall"
+          },
+          "type": "toolcall_end"
+        }
+      },
+      "toolcallStart": {
+        "schema": "AssistantMessageEvent",
+        "value": {
+          "contentIndex": 2,
+          "partial": {
+            "api": "pi-messages",
+            "content": [
+              {
+                "text": "Hello from Pi",
+                "textSignature": "sig-text",
+                "type": "text"
+              },
+              {
+                "redacted": false,
+                "thinking": "Check the fixture",
+                "thinkingSignature": "sig-thinking",
+                "type": "thinking"
+              },
+              {
+                "arguments": {
+                  "path": "README.md"
+                },
+                "id": "call-1",
+                "name": "read",
+                "thoughtSignature": "sig-tool",
+                "type": "toolCall"
+              }
+            ],
+            "diagnostics": [
+              {
+                "error": {
+                  "code": "fixture_error",
+                  "message": "deterministic",
+                  "name": "FixtureError"
+                },
+                "timestamp": 1767225600000,
+                "type": "fixture"
+              }
+            ],
+            "model": "fixture-model",
+            "provider": "scripted",
+            "rawStopReason": "tool_use",
+            "responseId": "response-1",
+            "responseModel": "fixture-model-2026",
+            "role": "assistant",
+            "stopReason": "pending",
+            "timestamp": 1767225600001,
+            "usage": {
+              "cacheRead": 2,
+              "cacheWrite": 1,
+              "cacheWrite1h": 1,
+              "cost": {
+                "cacheRead": 0.0001,
+                "cacheWrite": 0.0002,
+                "input": 0.001,
+                "output": 0.002,
+                "total": 0.0033
+              },
+              "input": 10,
+              "output": 5,
+              "reasoning": 2,
+              "totalTokens": 18
+            }
+          },
+          "type": "toolcall_start"
+        }
+      }
+    },
+    "binary": {
+      "artifact": {
+        "schema": "BinaryHttpBodyFixture",
+        "value": {
+          "bodyBase64": "PGh0bWw+Zml4dHVyZTwvaHRtbD4K",
+          "byteCount": 21,
+          "mediaType": "text/html",
+          "sha256": "ea211a9ffa78def04a4860c64a0bb2e78da42aee5327a3a11c9c8978b18007b4"
+        }
+      },
+      "heartbeat": {
+        "schema": "SseHeartbeatFixture",
+        "value": {
+          "consumesSequence": false,
+          "wire": ": heartbeat\n\n"
+        }
+      },
+      "soul": {
+        "schema": "BinaryHttpBodyFixture",
+        "value": {
+          "bodyBase64": "Rml4dHVyZSBzb3VsCg==",
+          "byteCount": 13,
+          "mediaType": "application/octet-stream",
+          "sha256": "ce69c359092219c8d560804e8600676b1d34ca72b1e735f35981b1f9b1ea5fda"
+        }
+      }
+    },
+    "commands": {
+      "abort": {
+        "schema": "ConversationCommand",
+        "value": {
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "payload": {},
+          "type": "abort"
+        }
+      },
+      "abort_bash": {
+        "schema": "ConversationCommand",
+        "value": {
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "payload": {},
+          "type": "abort_bash"
+        }
+      },
+      "abort_retry": {
+        "schema": "ConversationCommand",
+        "value": {
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "payload": {},
+          "type": "abort_retry"
+        }
+      },
+      "bash": {
+        "schema": "ConversationCommand",
+        "value": {
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "payload": {
+            "command": "printf fixture",
+            "excludeFromContext": false
+          },
+          "type": "bash"
+        }
+      },
+      "clone": {
+        "schema": "ConversationCommand",
+        "value": {
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "payload": {},
+          "type": "clone"
+        }
+      },
+      "compact": {
+        "schema": "ConversationCommand",
+        "value": {
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "payload": {
+            "customInstructions": "Keep decisions"
+          },
+          "type": "compact"
+        }
+      },
+      "cycle_model": {
+        "schema": "ConversationCommand",
+        "value": {
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "payload": {},
+          "type": "cycle_model"
+        }
+      },
+      "cycle_thinking_level": {
+        "schema": "ConversationCommand",
+        "value": {
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "payload": {},
+          "type": "cycle_thinking_level"
+        }
+      },
+      "export_html": {
+        "schema": "ConversationCommand",
+        "value": {
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "payload": {},
+          "type": "export_html"
+        }
+      },
+      "follow_up": {
+        "schema": "ConversationCommand",
+        "value": {
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "payload": {
+            "images": [],
+            "message": "Follow up"
+          },
+          "type": "follow_up"
+        }
+      },
+      "fork": {
+        "schema": "ConversationCommand",
+        "value": {
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "payload": {
+            "entryId": "entry0001"
+          },
+          "type": "fork"
+        }
+      },
+      "new_session": {
+        "schema": "ConversationCommand",
+        "value": {
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "payload": {
+            "parentConversationId": "0195f6f4-7c5b-7000-8000-000000000001"
+          },
+          "type": "new_session"
+        }
+      },
+      "prompt": {
+        "schema": "ConversationCommand",
+        "value": {
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "payload": {
+            "images": [
+              {
+                "data": "iVBORw0KGgo=",
+                "fileName": "fixture.png",
+                "mimeType": "image/png",
+                "type": "image"
+              }
+            ],
+            "message": "Validate fixtures",
+            "streamingBehavior": "steer"
+          },
+          "type": "prompt"
+        }
+      },
+      "reload": {
+        "schema": "ConversationCommand",
+        "value": {
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "payload": {},
+          "type": "reload"
+        }
+      },
+      "set_auto_compaction": {
+        "schema": "ConversationCommand",
+        "value": {
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "payload": {
+            "enabled": true
+          },
+          "type": "set_auto_compaction"
+        }
+      },
+      "set_auto_retry": {
+        "schema": "ConversationCommand",
+        "value": {
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "payload": {
+            "enabled": true
+          },
+          "type": "set_auto_retry"
+        }
+      },
+      "set_follow_up_mode": {
+        "schema": "ConversationCommand",
+        "value": {
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "payload": {
+            "mode": "one-at-a-time"
+          },
+          "type": "set_follow_up_mode"
+        }
+      },
+      "set_model": {
+        "schema": "ConversationCommand",
+        "value": {
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "payload": {
+            "modelId": "fixture-model",
+            "provider": "scripted"
+          },
+          "type": "set_model"
+        }
+      },
+      "set_session_name": {
+        "schema": "ConversationCommand",
+        "value": {
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "payload": {
+            "name": "Fixture session"
+          },
+          "type": "set_session_name"
+        }
+      },
+      "set_steering_mode": {
+        "schema": "ConversationCommand",
+        "value": {
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "payload": {
+            "mode": "all"
+          },
+          "type": "set_steering_mode"
+        }
+      },
+      "set_thinking_level": {
+        "schema": "ConversationCommand",
+        "value": {
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "payload": {
+            "level": "high"
+          },
+          "type": "set_thinking_level"
+        }
+      },
+      "steer": {
+        "schema": "ConversationCommand",
+        "value": {
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "payload": {
+            "images": [],
+            "message": "Steer"
+          },
+          "type": "steer"
+        }
+      },
+      "switch_session": {
+        "schema": "ConversationCommand",
+        "value": {
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "payload": {
+            "targetConversationId": "0195f6f4-7c5b-7000-8000-000000000002"
+          },
+          "type": "switch_session"
+        }
+      }
+    },
+    "conversationEvents": {
+      "agent.end": {
+        "schema": "ConversationEvent",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "data": {
+            "messages": [
+              {
+                "api": "pi-messages",
+                "content": [
+                  {
+                    "text": "Hello from Pi",
+                    "textSignature": "sig-text",
+                    "type": "text"
+                  },
+                  {
+                    "redacted": false,
+                    "thinking": "Check the fixture",
+                    "thinkingSignature": "sig-thinking",
+                    "type": "thinking"
+                  },
+                  {
+                    "arguments": {
+                      "path": "README.md"
+                    },
+                    "id": "call-1",
+                    "name": "read",
+                    "thoughtSignature": "sig-tool",
+                    "type": "toolCall"
+                  }
+                ],
+                "diagnostics": [
+                  {
+                    "error": {
+                      "code": "fixture_error",
+                      "message": "deterministic",
+                      "name": "FixtureError"
+                    },
+                    "timestamp": 1767225600000,
+                    "type": "fixture"
+                  }
+                ],
+                "model": "fixture-model",
+                "provider": "scripted",
+                "rawStopReason": "tool_use",
+                "responseId": "response-1",
+                "responseModel": "fixture-model-2026",
+                "role": "assistant",
+                "stopReason": "toolUse",
+                "timestamp": 1767225600001,
+                "usage": {
+                  "cacheRead": 2,
+                  "cacheWrite": 1,
+                  "cacheWrite1h": 1,
+                  "cost": {
+                    "cacheRead": 0.0001,
+                    "cacheWrite": 0.0002,
+                    "input": 0.001,
+                    "output": 0.002,
+                    "total": 0.0033
+                  },
+                  "input": 10,
+                  "output": 5,
+                  "reasoning": 2,
+                  "totalTokens": 18
+                }
+              },
+              {
+                "addedToolNames": [
+                  "write"
+                ],
+                "content": [
+                  {
+                    "text": "Hello from Pi",
+                    "textSignature": "sig-text",
+                    "type": "text"
+                  }
+                ],
+                "details": {
+                  "lineCount": 1
+                },
+                "isError": false,
+                "role": "toolResult",
+                "timestamp": 1767225600002,
+                "toolCallId": "call-1",
+                "toolName": "read",
+                "usage": {
+                  "cacheRead": 2,
+                  "cacheWrite": 1,
+                  "cacheWrite1h": 1,
+                  "cost": {
+                    "cacheRead": 0.0001,
+                    "cacheWrite": 0.0002,
+                    "input": 0.001,
+                    "output": 0.002,
+                    "total": 0.0033
+                  },
+                  "input": 10,
+                  "output": 5,
+                  "reasoning": 2,
+                  "totalTokens": 18
+                }
+              }
+            ],
+            "willRetry": false
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 9,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "agent.end"
+        }
+      },
+      "agent.settled": {
+        "schema": "ConversationEvent",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "data": {},
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 10,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "agent.settled"
+        }
+      },
+      "agent.start": {
+        "schema": "ConversationEvent",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "data": {},
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 8,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "agent.start"
+        }
+      },
+      "bash.execution.update": {
+        "schema": "ConversationEvent",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "data": {
+            "commandId": "550e8400-e29b-41d4-a716-446655440001",
+            "delta": "fixture\n"
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 16,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "bash.execution.update"
+        }
+      },
+      "command.receipt.updated": {
+        "schema": "ConversationEvent",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "data": {
+            "acceptedAt": "2026-01-01T00:00:00.000Z",
+            "commandId": "550e8400-e29b-41d4-a716-446655440001",
+            "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+            "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+            "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "state": "running",
+            "type": "prompt",
+            "updatedAt": "2026-01-01T00:01:00.000Z"
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 4,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "command.receipt.updated"
+        }
+      },
+      "compaction.end": {
+        "schema": "ConversationEvent",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "data": {
+            "aborted": false,
+            "reason": "manual",
+            "result": {
+              "details": {
+                "modifiedFiles": [],
+                "readFiles": [
+                  "README.md"
+                ]
+              },
+              "estimatedTokensAfter": 250,
+              "firstKeptEntryId": "entry0002",
+              "summary": "Compacted fixture conversation",
+              "tokensBefore": 1000,
+              "usage": {
+                "cacheRead": 2,
+                "cacheWrite": 1,
+                "cacheWrite1h": 1,
+                "cost": {
+                  "cacheRead": 0.0001,
+                  "cacheWrite": 0.0002,
+                  "input": 0.001,
+                  "output": 0.002,
+                  "total": 0.0033
+                },
+                "input": 10,
+                "output": 5,
+                "reasoning": 2,
+                "totalTokens": 18
+              }
+            },
+            "willRetry": false
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 25,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "compaction.end"
+        }
+      },
+      "compaction.start": {
+        "schema": "ConversationEvent",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "data": {
+            "reason": "manual"
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 24,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "compaction.start"
+        }
+      },
+      "conversation.replaced": {
+        "schema": "ConversationEvent",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "data": {
+            "reason": "fork",
+            "target": {
+              "conversationId": "0195f6f4-7c5b-7000-8000-000000000002",
+              "gatewayId": "550e8400-e29b-41d4-a716-446655440000"
+            }
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 3,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "conversation.replaced"
+        }
+      },
+      "conversation.snapshot": {
+        "schema": "ConversationEvent",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "data": {
+            "activeReceipts": [
+              {
+                "acceptedAt": "2026-01-01T00:00:00.000Z",
+                "commandId": "550e8400-e29b-41d4-a716-446655440001",
+                "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+                "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+                "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "state": "accepted",
+                "type": "prompt",
+                "updatedAt": "2026-01-01T00:00:00.000Z"
+              }
+            ],
+            "activeResponse": {
+              "message": {
+                "api": "pi-messages",
+                "content": [
+                  {
+                    "text": "Hello from Pi",
+                    "textSignature": "sig-text",
+                    "type": "text"
+                  },
+                  {
+                    "redacted": false,
+                    "thinking": "Check the fixture",
+                    "thinkingSignature": "sig-thinking",
+                    "type": "thinking"
+                  },
+                  {
+                    "arguments": {
+                      "path": "README.md"
+                    },
+                    "id": "call-1",
+                    "name": "read",
+                    "thoughtSignature": "sig-tool",
+                    "type": "toolCall"
+                  }
+                ],
+                "diagnostics": [
+                  {
+                    "error": {
+                      "code": "fixture_error",
+                      "message": "deterministic",
+                      "name": "FixtureError"
+                    },
+                    "timestamp": 1767225600000,
+                    "type": "fixture"
+                  }
+                ],
+                "model": "fixture-model",
+                "provider": "scripted",
+                "rawStopReason": "tool_use",
+                "responseId": "response-1",
+                "responseModel": "fixture-model-2026",
+                "role": "assistant",
+                "stopReason": "toolUse",
+                "timestamp": 1767225600001,
+                "usage": {
+                  "cacheRead": 2,
+                  "cacheWrite": 1,
+                  "cacheWrite1h": 1,
+                  "cost": {
+                    "cacheRead": 0.0001,
+                    "cacheWrite": 0.0002,
+                    "input": 0.001,
+                    "output": 0.002,
+                    "total": 0.0033
+                  },
+                  "input": 10,
+                  "output": 5,
+                  "reasoning": 2,
+                  "totalTokens": 18
+                }
+              },
+              "tools": [
+                {
+                  "content": [
+                    {
+                      "text": "Hello from Pi",
+                      "textSignature": "sig-text",
+                      "type": "text"
+                    }
+                  ],
+                  "details": {
+                    "progress": 0.5
+                  },
+                  "input": {
+                    "path": "README.md"
+                  },
+                  "status": "running",
+                  "toolCallId": "call-1",
+                  "toolName": "read"
+                }
+              ]
+            },
+            "conversation": {
+              "activityAt": "2026-01-01T00:01:00.000Z",
+              "completedAt": null,
+              "completedSinceViewed": false,
+              "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+              "createdAt": "2026-01-01T00:00:00.000Z",
+              "cwd": "/data/workspaces/default",
+              "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+              "readOnly": false,
+              "status": "working",
+              "title": "Validate protocol fixtures",
+              "trashedAt": null,
+              "trashReason": null,
+              "viewedAt": null,
+              "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+            },
+            "extensionUiState": {
+              "statuses": {
+                "fixture": "running"
+              },
+              "title": "Fixture title",
+              "widgets": [
+                {
+                  "key": "fixture",
+                  "lines": [
+                    "line one"
+                  ],
+                  "placement": "aboveEditor"
+                }
+              ]
+            },
+            "followUpQueue": [
+              {
+                "images": [
+                  {
+                    "data": "iVBORw0KGgo=",
+                    "fileName": "fixture.png",
+                    "mimeType": "image/png",
+                    "type": "image"
+                  }
+                ],
+                "text": "Follow up"
+              }
+            ],
+            "messagesRevision": "messages-r1",
+            "pendingDialogs": [
+              {
+                "dialogId": "550e8400-e29b-41d4-a716-446655440002",
+                "method": "select",
+                "options": [
+                  "one",
+                  "two"
+                ],
+                "timeoutAt": "2026-01-01T00:01:00.000Z",
+                "title": "Select a fixture"
+              }
+            ],
+            "state": {
+              "activeCommandIds": [
+                "550e8400-e29b-41d4-a716-446655440001"
+              ],
+              "autoCompactionEnabled": true,
+              "autoRetryEnabled": true,
+              "conversation": {
+                "activityAt": "2026-01-01T00:01:00.000Z",
+                "completedAt": null,
+                "completedSinceViewed": false,
+                "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+                "createdAt": "2026-01-01T00:00:00.000Z",
+                "cwd": "/data/workspaces/default",
+                "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+                "readOnly": false,
+                "status": "working",
+                "title": "Validate protocol fixtures",
+                "trashedAt": null,
+                "trashReason": null,
+                "viewedAt": null,
+                "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+              },
+              "followUpMode": "one-at-a-time",
+              "messageCount": 3,
+              "model": {
+                "contextWindow": 128000,
+                "input": [
+                  "text",
+                  "image"
+                ],
+                "maxTokens": 4096,
+                "modelId": "fixture-model",
+                "name": "Fixture Model",
+                "provider": "scripted",
+                "reasoning": true
+              },
+              "pendingMessageCount": 0,
+              "steeringMode": "all",
+              "thinkingLevel": "high"
+            },
+            "steeringQueue": [
+              {
+                "images": [],
+                "text": "Steer next"
+              }
+            ]
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 0,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "conversation.snapshot"
+        }
+      },
+      "conversation.status.changed": {
+        "schema": "ConversationEvent",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "data": {
+            "previousStatus": "idle",
+            "status": "working"
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 1,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "conversation.status.changed"
+        }
+      },
+      "conversation.viewed.changed": {
+        "schema": "ConversationEvent",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "data": {
+            "completedAt": "2026-01-01T00:01:00.000Z",
+            "completedSinceViewed": false,
+            "viewedAt": "2026-01-01T00:01:00.000Z"
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 2,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "conversation.viewed.changed"
+        }
+      },
+      "entry.appended": {
+        "schema": "ConversationEvent",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "data": {
+            "entry": {
+              "id": "entry0001",
+              "message": {
+                "content": [
+                  {
+                    "text": "Hello from Pi",
+                    "textSignature": "sig-text",
+                    "type": "text"
+                  },
+                  {
+                    "data": "iVBORw0KGgo=",
+                    "mimeType": "image/png",
+                    "type": "image"
+                  }
+                ],
+                "role": "user",
+                "timestamp": 1767225600000
+              },
+              "parentId": null,
+              "timestamp": "2026-01-01T00:00:00.000Z",
+              "type": "message"
+            }
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 21,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "entry.appended"
+        }
+      },
+      "extension.error": {
+        "schema": "ConversationEvent",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "data": {
+            "event": "tool_call",
+            "message": "Fixture extension failed safely.",
+            "source": {
+              "origin": "top-level",
+              "scope": "project",
+              "source": "fixture-extension"
+            }
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 7,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "extension.error"
+        }
+      },
+      "extension.ui.event": {
+        "schema": "ConversationEvent",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "data": {
+            "message": "Fixture notification",
+            "method": "notify",
+            "severity": "info"
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 6,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "extension.ui.event"
+        }
+      },
+      "extension.ui.request": {
+        "schema": "ConversationEvent",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "data": {
+            "dialogId": "550e8400-e29b-41d4-a716-446655440002",
+            "method": "select",
+            "options": [
+              "one",
+              "two"
+            ],
+            "timeoutAt": "2026-01-01T00:01:00.000Z",
+            "title": "Select a fixture"
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 5,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "extension.ui.request"
+        }
+      },
+      "message.end": {
+        "schema": "ConversationEvent",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "data": {
+            "message": {
+              "api": "pi-messages",
+              "content": [
+                {
+                  "text": "Hello from Pi",
+                  "textSignature": "sig-text",
+                  "type": "text"
+                },
+                {
+                  "redacted": false,
+                  "thinking": "Check the fixture",
+                  "thinkingSignature": "sig-thinking",
+                  "type": "thinking"
+                },
+                {
+                  "arguments": {
+                    "path": "README.md"
+                  },
+                  "id": "call-1",
+                  "name": "read",
+                  "thoughtSignature": "sig-tool",
+                  "type": "toolCall"
+                }
+              ],
+              "diagnostics": [
+                {
+                  "error": {
+                    "code": "fixture_error",
+                    "message": "deterministic",
+                    "name": "FixtureError"
+                  },
+                  "timestamp": 1767225600000,
+                  "type": "fixture"
+                }
+              ],
+              "model": "fixture-model",
+              "provider": "scripted",
+              "rawStopReason": "tool_use",
+              "responseId": "response-1",
+              "responseModel": "fixture-model-2026",
+              "role": "assistant",
+              "stopReason": "toolUse",
+              "timestamp": 1767225600001,
+              "usage": {
+                "cacheRead": 2,
+                "cacheWrite": 1,
+                "cacheWrite1h": 1,
+                "cost": {
+                  "cacheRead": 0.0001,
+                  "cacheWrite": 0.0002,
+                  "input": 0.001,
+                  "output": 0.002,
+                  "total": 0.0033
+                },
+                "input": 10,
+                "output": 5,
+                "reasoning": 2,
+                "totalTokens": 18
+              }
+            }
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 15,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "message.end"
+        }
+      },
+      "message.start": {
+        "schema": "ConversationEvent",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "data": {
+            "message": {
+              "api": "pi-messages",
+              "content": [
+                {
+                  "text": "Hello from Pi",
+                  "textSignature": "sig-text",
+                  "type": "text"
+                },
+                {
+                  "redacted": false,
+                  "thinking": "Check the fixture",
+                  "thinkingSignature": "sig-thinking",
+                  "type": "thinking"
+                },
+                {
+                  "arguments": {
+                    "path": "README.md"
+                  },
+                  "id": "call-1",
+                  "name": "read",
+                  "thoughtSignature": "sig-tool",
+                  "type": "toolCall"
+                }
+              ],
+              "diagnostics": [
+                {
+                  "error": {
+                    "code": "fixture_error",
+                    "message": "deterministic",
+                    "name": "FixtureError"
+                  },
+                  "timestamp": 1767225600000,
+                  "type": "fixture"
+                }
+              ],
+              "model": "fixture-model",
+              "provider": "scripted",
+              "rawStopReason": "tool_use",
+              "responseId": "response-1",
+              "responseModel": "fixture-model-2026",
+              "role": "assistant",
+              "stopReason": "toolUse",
+              "timestamp": 1767225600001,
+              "usage": {
+                "cacheRead": 2,
+                "cacheWrite": 1,
+                "cacheWrite1h": 1,
+                "cost": {
+                  "cacheRead": 0.0001,
+                  "cacheWrite": 0.0002,
+                  "input": 0.001,
+                  "output": 0.002,
+                  "total": 0.0033
+                },
+                "input": 10,
+                "output": 5,
+                "reasoning": 2,
+                "totalTokens": 18
+              }
+            }
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 13,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "message.start"
+        }
+      },
+      "message.update": {
+        "schema": "ConversationEvent",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "data": {
+            "message": {
+              "api": "pi-messages",
+              "content": [
+                {
+                  "text": "Hello from Pi",
+                  "textSignature": "sig-text",
+                  "type": "text"
+                },
+                {
+                  "redacted": false,
+                  "thinking": "Check the fixture",
+                  "thinkingSignature": "sig-thinking",
+                  "type": "thinking"
+                },
+                {
+                  "arguments": {
+                    "path": "README.md"
+                  },
+                  "id": "call-1",
+                  "name": "read",
+                  "thoughtSignature": "sig-tool",
+                  "type": "toolCall"
+                }
+              ],
+              "diagnostics": [
+                {
+                  "error": {
+                    "code": "fixture_error",
+                    "message": "deterministic",
+                    "name": "FixtureError"
+                  },
+                  "timestamp": 1767225600000,
+                  "type": "fixture"
+                }
+              ],
+              "model": "fixture-model",
+              "provider": "scripted",
+              "rawStopReason": "tool_use",
+              "responseId": "response-1",
+              "responseModel": "fixture-model-2026",
+              "role": "assistant",
+              "stopReason": "pending",
+              "timestamp": 1767225600001,
+              "usage": {
+                "cacheRead": 2,
+                "cacheWrite": 1,
+                "cacheWrite1h": 1,
+                "cost": {
+                  "cacheRead": 0.0001,
+                  "cacheWrite": 0.0002,
+                  "input": 0.001,
+                  "output": 0.002,
+                  "total": 0.0033
+                },
+                "input": 10,
+                "output": 5,
+                "reasoning": 2,
+                "totalTokens": 18
+              }
+            },
+            "update": {
+              "contentIndex": 0,
+              "delta": "Hello",
+              "partial": {
+                "api": "pi-messages",
+                "content": [
+                  {
+                    "text": "Hello from Pi",
+                    "textSignature": "sig-text",
+                    "type": "text"
+                  },
+                  {
+                    "redacted": false,
+                    "thinking": "Check the fixture",
+                    "thinkingSignature": "sig-thinking",
+                    "type": "thinking"
+                  },
+                  {
+                    "arguments": {
+                      "path": "README.md"
+                    },
+                    "id": "call-1",
+                    "name": "read",
+                    "thoughtSignature": "sig-tool",
+                    "type": "toolCall"
+                  }
+                ],
+                "diagnostics": [
+                  {
+                    "error": {
+                      "code": "fixture_error",
+                      "message": "deterministic",
+                      "name": "FixtureError"
+                    },
+                    "timestamp": 1767225600000,
+                    "type": "fixture"
+                  }
+                ],
+                "model": "fixture-model",
+                "provider": "scripted",
+                "rawStopReason": "tool_use",
+                "responseId": "response-1",
+                "responseModel": "fixture-model-2026",
+                "role": "assistant",
+                "stopReason": "pending",
+                "timestamp": 1767225600001,
+                "usage": {
+                  "cacheRead": 2,
+                  "cacheWrite": 1,
+                  "cacheWrite1h": 1,
+                  "cost": {
+                    "cacheRead": 0.0001,
+                    "cacheWrite": 0.0002,
+                    "input": 0.001,
+                    "output": 0.002,
+                    "total": 0.0033
+                  },
+                  "input": 10,
+                  "output": 5,
+                  "reasoning": 2,
+                  "totalTokens": 18
+                }
+              },
+              "type": "text_delta"
+            }
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 14,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "message.update"
+        }
+      },
+      "queue.update": {
+        "schema": "ConversationEvent",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "data": {
+            "followUp": [
+              "Follow up"
+            ],
+            "steering": [
+              "Steer"
+            ]
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 20,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "queue.update"
+        }
+      },
+      "retry.end": {
+        "schema": "ConversationEvent",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "data": {
+            "attempt": 1,
+            "success": true
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 27,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "retry.end"
+        }
+      },
+      "retry.start": {
+        "schema": "ConversationEvent",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "data": {
+            "attempt": 1,
+            "delayMs": 100,
+            "errorMessage": "Transient scripted failure",
+            "maxAttempts": 3
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 26,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "retry.start"
+        }
+      },
+      "session.info.changed": {
+        "schema": "ConversationEvent",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "data": {
+            "name": "Fixture session"
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 22,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "session.info.changed"
+        }
+      },
+      "summarization.retry.attempt-start": {
+        "schema": "ConversationEvent",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "data": {
+            "reason": "manual",
+            "source": "compaction"
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 29,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "summarization.retry.attempt-start"
+        }
+      },
+      "summarization.retry.finished": {
+        "schema": "ConversationEvent",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "data": {},
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 30,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "summarization.retry.finished"
+        }
+      },
+      "summarization.retry.scheduled": {
+        "schema": "ConversationEvent",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "data": {
+            "attempt": 1,
+            "delayMs": 100,
+            "errorMessage": "Transient summary failure",
+            "maxAttempts": 3
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 28,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "summarization.retry.scheduled"
+        }
+      },
+      "thinking.level.changed": {
+        "schema": "ConversationEvent",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "data": {
+            "level": "high"
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 23,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "thinking.level.changed"
+        }
+      },
+      "tool.execution.end": {
+        "schema": "ConversationEvent",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "data": {
+            "isError": false,
+            "result": {
+              "addedToolNames": [
+                "write"
+              ],
+              "content": [
+                {
+                  "text": "Hello from Pi",
+                  "textSignature": "sig-text",
+                  "type": "text"
+                }
+              ],
+              "details": {
+                "progress": 1
+              },
+              "terminate": false,
+              "usage": {
+                "cacheRead": 2,
+                "cacheWrite": 1,
+                "cacheWrite1h": 1,
+                "cost": {
+                  "cacheRead": 0.0001,
+                  "cacheWrite": 0.0002,
+                  "input": 0.001,
+                  "output": 0.002,
+                  "total": 0.0033
+                },
+                "input": 10,
+                "output": 5,
+                "reasoning": 2,
+                "totalTokens": 18
+              }
+            },
+            "toolCallId": "call-1",
+            "toolName": "read"
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 19,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "tool.execution.end"
+        }
+      },
+      "tool.execution.start": {
+        "schema": "ConversationEvent",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "data": {
+            "args": {
+              "path": "README.md"
+            },
+            "toolCallId": "call-1",
+            "toolName": "read"
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 17,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "tool.execution.start"
+        }
+      },
+      "tool.execution.update": {
+        "schema": "ConversationEvent",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "data": {
+            "args": {
+              "path": "README.md"
+            },
+            "partialResult": {
+              "addedToolNames": [
+                "write"
+              ],
+              "content": [
+                {
+                  "text": "Hello from Pi",
+                  "textSignature": "sig-text",
+                  "type": "text"
+                }
+              ],
+              "details": {
+                "progress": 1
+              },
+              "terminate": false,
+              "usage": {
+                "cacheRead": 2,
+                "cacheWrite": 1,
+                "cacheWrite1h": 1,
+                "cost": {
+                  "cacheRead": 0.0001,
+                  "cacheWrite": 0.0002,
+                  "input": 0.001,
+                  "output": 0.002,
+                  "total": 0.0033
+                },
+                "input": 10,
+                "output": 5,
+                "reasoning": 2,
+                "totalTokens": 18
+              }
+            },
+            "toolCallId": "call-1",
+            "toolName": "read"
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 18,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "tool.execution.update"
+        }
+      },
+      "turn.end": {
+        "schema": "ConversationEvent",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "data": {
+            "message": {
+              "api": "pi-messages",
+              "content": [
+                {
+                  "text": "Hello from Pi",
+                  "textSignature": "sig-text",
+                  "type": "text"
+                },
+                {
+                  "redacted": false,
+                  "thinking": "Check the fixture",
+                  "thinkingSignature": "sig-thinking",
+                  "type": "thinking"
+                },
+                {
+                  "arguments": {
+                    "path": "README.md"
+                  },
+                  "id": "call-1",
+                  "name": "read",
+                  "thoughtSignature": "sig-tool",
+                  "type": "toolCall"
+                }
+              ],
+              "diagnostics": [
+                {
+                  "error": {
+                    "code": "fixture_error",
+                    "message": "deterministic",
+                    "name": "FixtureError"
+                  },
+                  "timestamp": 1767225600000,
+                  "type": "fixture"
+                }
+              ],
+              "model": "fixture-model",
+              "provider": "scripted",
+              "rawStopReason": "tool_use",
+              "responseId": "response-1",
+              "responseModel": "fixture-model-2026",
+              "role": "assistant",
+              "stopReason": "toolUse",
+              "timestamp": 1767225600001,
+              "usage": {
+                "cacheRead": 2,
+                "cacheWrite": 1,
+                "cacheWrite1h": 1,
+                "cost": {
+                  "cacheRead": 0.0001,
+                  "cacheWrite": 0.0002,
+                  "input": 0.001,
+                  "output": 0.002,
+                  "total": 0.0033
+                },
+                "input": 10,
+                "output": 5,
+                "reasoning": 2,
+                "totalTokens": 18
+              }
+            },
+            "toolResults": [
+              {
+                "addedToolNames": [
+                  "write"
+                ],
+                "content": [
+                  {
+                    "text": "Hello from Pi",
+                    "textSignature": "sig-text",
+                    "type": "text"
+                  }
+                ],
+                "details": {
+                  "lineCount": 1
+                },
+                "isError": false,
+                "role": "toolResult",
+                "timestamp": 1767225600002,
+                "toolCallId": "call-1",
+                "toolName": "read",
+                "usage": {
+                  "cacheRead": 2,
+                  "cacheWrite": 1,
+                  "cacheWrite1h": 1,
+                  "cost": {
+                    "cacheRead": 0.0001,
+                    "cacheWrite": 0.0002,
+                    "input": 0.001,
+                    "output": 0.002,
+                    "total": 0.0033
+                  },
+                  "input": 10,
+                  "output": 5,
+                  "reasoning": 2,
+                  "totalTokens": 18
+                }
+              }
+            ]
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 12,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "turn.end"
+        }
+      },
+      "turn.start": {
+        "schema": "ConversationEvent",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "data": {},
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 11,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "turn.start"
+        }
+      }
+    },
+    "dialogs": {
+      "cancelled": {
+        "schema": "DialogResponse",
+        "value": {
+          "type": "cancelled"
+        }
+      },
+      "confirmation": {
+        "schema": "DialogResponse",
+        "value": {
+          "confirmed": true,
+          "type": "confirmation"
+        }
+      },
+      "value": {
+        "schema": "DialogResponse",
+        "value": {
+          "type": "value",
+          "value": "one"
+        }
+      }
+    },
+    "gatewayEvents": {
+      "conversation.notification": {
+        "schema": "GatewayEvent",
+        "value": {
+          "data": {
+            "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+            "message": "Fixture notification",
+            "severity": "info"
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 5,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "conversation.notification"
+        }
+      },
+      "conversation.removed": {
+        "schema": "GatewayEvent",
+        "value": {
+          "data": {
+            "conversationId": "0195f6f4-7c5b-7000-8000-000000000001"
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 2,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "conversation.removed"
+        }
+      },
+      "conversation.summary.changed": {
+        "schema": "GatewayEvent",
+        "value": {
+          "data": {
+            "activityAt": "2026-01-01T00:01:00.000Z",
+            "completedAt": null,
+            "completedSinceViewed": false,
+            "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+            "createdAt": "2026-01-01T00:00:00.000Z",
+            "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+            "readOnly": false,
+            "status": "working",
+            "title": "Validate protocol fixtures",
+            "trashedAt": null,
+            "trashReason": null,
+            "viewedAt": null,
+            "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 1,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "conversation.summary.changed"
+        }
+      },
+      "gateway.snapshot": {
+        "schema": "GatewayEvent",
+        "value": {
+          "data": {
+            "conversations": [
+              {
+                "activityAt": "2026-01-01T00:01:00.000Z",
+                "completedAt": null,
+                "completedSinceViewed": false,
+                "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+                "createdAt": "2026-01-01T00:00:00.000Z",
+                "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+                "readOnly": false,
+                "status": "working",
+                "title": "Validate protocol fixtures",
+                "trashedAt": null,
+                "trashReason": null,
+                "viewedAt": null,
+                "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+              }
+            ],
+            "revision": "gateway-r1",
+            "workspaces": [
+              {
+                "activeConversationCount": 1,
+                "activityAt": "2026-01-01T00:01:00.000Z",
+                "createdAt": "2026-01-01T00:00:00.000Z",
+                "directoryName": "default",
+                "displayName": "Default",
+                "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+                "gitState": "none",
+                "isDefault": true,
+                "state": "active",
+                "totalConversationCount": 1,
+                "trashedAt": null,
+                "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+              }
+            ]
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 0,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "gateway.snapshot"
+        }
+      },
+      "workspace.removed": {
+        "schema": "GatewayEvent",
+        "value": {
+          "data": {
+            "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 4,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "workspace.removed"
+        }
+      },
+      "workspace.summary.changed": {
+        "schema": "GatewayEvent",
+        "value": {
+          "data": {
+            "activeConversationCount": 1,
+            "activityAt": "2026-01-01T00:01:00.000Z",
+            "createdAt": "2026-01-01T00:00:00.000Z",
+            "directoryName": "default",
+            "displayName": "Default",
+            "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+            "gitState": "none",
+            "isDefault": true,
+            "state": "active",
+            "totalConversationCount": 1,
+            "trashedAt": null,
+            "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 3,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "workspace.summary.changed"
+        }
+      }
+    },
+    "health": {
+      "live": {
+        "schema": "HealthResult",
+        "value": {
+          "status": "live"
+        }
+      },
+      "notReady": {
+        "schema": "HealthResult",
+        "value": {
+          "code": "catalog_recovery_required",
+          "status": "notReady"
+        }
+      },
+      "ready": {
+        "schema": "HealthResult",
+        "value": {
+          "status": "ready"
+        }
+      }
+    },
+    "pendingDialogs": {
+      "confirm": {
+        "schema": "PendingDialog",
+        "value": {
+          "dialogId": "550e8400-e29b-41d4-a716-446655440002",
+          "message": "Continue?",
+          "method": "confirm",
+          "timeoutAt": "2026-01-01T00:01:00.000Z",
+          "title": "Confirm fixture"
+        }
+      },
+      "editor": {
+        "schema": "PendingDialog",
+        "value": {
+          "dialogId": "550e8400-e29b-41d4-a716-446655440002",
+          "method": "editor",
+          "prefill": "initial",
+          "title": "Edit fixture"
+        }
+      },
+      "input": {
+        "schema": "PendingDialog",
+        "value": {
+          "dialogId": "550e8400-e29b-41d4-a716-446655440002",
+          "method": "input",
+          "placeholder": "value",
+          "timeoutAt": "2026-01-01T00:01:00.000Z",
+          "title": "Enter fixture"
+        }
+      },
+      "select": {
+        "schema": "PendingDialog",
+        "value": {
+          "dialogId": "550e8400-e29b-41d4-a716-446655440002",
+          "method": "select",
+          "options": [
+            "one",
+            "two"
+          ],
+          "timeoutAt": "2026-01-01T00:01:00.000Z",
+          "title": "Select a fixture"
+        }
+      }
+    },
+    "pi": {
+      "bashResult": {
+        "schema": "BashResultDto",
+        "value": {
+          "cancelled": false,
+          "exitCode": 0,
+          "output": "fixture\n",
+          "truncated": false
+        }
+      },
+      "command": {
+        "schema": "CommandSummary",
+        "value": {
+          "description": "Run fixture command",
+          "name": "fixture",
+          "source": "extension",
+          "sourceInfo": {
+            "origin": "top-level",
+            "scope": "project",
+            "source": "fixture-extension"
+          }
+        }
+      },
+      "compactionResult": {
+        "schema": "CompactionResultDto",
+        "value": {
+          "details": {
+            "modifiedFiles": [],
+            "readFiles": [
+              "README.md"
+            ]
+          },
+          "estimatedTokensAfter": 250,
+          "firstKeptEntryId": "entry0002",
+          "summary": "Compacted fixture conversation",
+          "tokensBefore": 1000,
+          "usage": {
+            "cacheRead": 2,
+            "cacheWrite": 1,
+            "cacheWrite1h": 1,
+            "cost": {
+              "cacheRead": 0.0001,
+              "cacheWrite": 0.0002,
+              "input": 0.001,
+              "output": 0.002,
+              "total": 0.0033
+            },
+            "input": 10,
+            "output": 5,
+            "reasoning": 2,
+            "totalTokens": 18
+          }
+        }
+      },
+      "sessionStats": {
+        "schema": "SessionStats",
+        "value": {
+          "assistantMessages": 1,
+          "contextUsage": {
+            "contextWindow": 128000,
+            "percent": 0.014,
+            "tokens": 18
+          },
+          "cost": 0.0033,
+          "sessionId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "tokens": {
+            "cacheRead": 2,
+            "cacheWrite": 1,
+            "input": 10,
+            "output": 5,
+            "total": 18
+          },
+          "toolCalls": 1,
+          "toolResults": 1,
+          "totalMessages": 3,
+          "userMessages": 1
+        }
+      },
+      "treeNode": {
+        "schema": "PiTreeNode",
+        "value": {
+          "children": [],
+          "entry": {
+            "id": "entry0001",
+            "message": {
+              "content": [
+                {
+                  "text": "Hello from Pi",
+                  "textSignature": "sig-text",
+                  "type": "text"
+                },
+                {
+                  "data": "iVBORw0KGgo=",
+                  "mimeType": "image/png",
+                  "type": "image"
+                }
+              ],
+              "role": "user",
+              "timestamp": 1767225600000
+            },
+            "parentId": null,
+            "timestamp": "2026-01-01T00:00:00.000Z",
+            "type": "message"
+          }
+        }
+      }
+    },
+    "piContent": {
+      "image": {
+        "schema": "PiContentBlock",
+        "value": {
+          "data": "iVBORw0KGgo=",
+          "mimeType": "image/png",
+          "type": "image"
+        }
+      },
+      "text": {
+        "schema": "PiContentBlock",
+        "value": {
+          "text": "Hello from Pi",
+          "textSignature": "sig-text",
+          "type": "text"
+        }
+      },
+      "thinking": {
+        "schema": "PiContentBlock",
+        "value": {
+          "redacted": false,
+          "thinking": "Check the fixture",
+          "thinkingSignature": "sig-thinking",
+          "type": "thinking"
+        }
+      },
+      "toolCall": {
+        "schema": "PiContentBlock",
+        "value": {
+          "arguments": {
+            "path": "README.md"
+          },
+          "id": "call-1",
+          "name": "read",
+          "thoughtSignature": "sig-tool",
+          "type": "toolCall"
+        }
+      }
+    },
+    "piEntries": {
+      "branchSummary": {
+        "schema": "PiEntry",
+        "value": {
+          "details": {
+            "stable": true
+          },
+          "fromHook": false,
+          "fromId": "entry0003",
+          "id": "entry0005",
+          "parentId": "entry0004",
+          "summary": "Branch",
+          "timestamp": "2026-01-01T00:00:00.000Z",
+          "type": "branch_summary",
+          "usage": {
+            "cacheRead": 2,
+            "cacheWrite": 1,
+            "cacheWrite1h": 1,
+            "cost": {
+              "cacheRead": 0.0001,
+              "cacheWrite": 0.0002,
+              "input": 0.001,
+              "output": 0.002,
+              "total": 0.0033
+            },
+            "input": 10,
+            "output": 5,
+            "reasoning": 2,
+            "totalTokens": 18
+          }
+        }
+      },
+      "compaction": {
+        "schema": "PiEntry",
+        "value": {
+          "details": {
+            "modifiedFiles": [],
+            "readFiles": [
+              "README.md"
+            ]
+          },
+          "firstKeptEntryId": "entry0002",
+          "fromHook": false,
+          "id": "entry0004",
+          "parentId": "entry0003",
+          "summary": "Summary",
+          "timestamp": "2026-01-01T00:00:00.000Z",
+          "tokensBefore": 1000,
+          "type": "compaction",
+          "usage": {
+            "cacheRead": 2,
+            "cacheWrite": 1,
+            "cacheWrite1h": 1,
+            "cost": {
+              "cacheRead": 0.0001,
+              "cacheWrite": 0.0002,
+              "input": 0.001,
+              "output": 0.002,
+              "total": 0.0033
+            },
+            "input": 10,
+            "output": 5,
+            "reasoning": 2,
+            "totalTokens": 18
+          }
+        }
+      },
+      "custom": {
+        "schema": "PiEntry",
+        "value": {
+          "customType": "fixture.state",
+          "data": {
+            "count": 1
+          },
+          "id": "entry0006",
+          "parentId": "entry0005",
+          "timestamp": "2026-01-01T00:00:00.000Z",
+          "type": "custom"
+        }
+      },
+      "customMessage": {
+        "schema": "PiEntry",
+        "value": {
+          "content": [
+            {
+              "text": "Hello from Pi",
+              "textSignature": "sig-text",
+              "type": "text"
+            },
+            {
+              "data": "iVBORw0KGgo=",
+              "mimeType": "image/png",
+              "type": "image"
+            }
+          ],
+          "customType": "fixture.message",
+          "details": {
+            "stable": true
+          },
+          "display": true,
+          "id": "entry0007",
+          "parentId": "entry0006",
+          "timestamp": "2026-01-01T00:00:00.000Z",
+          "type": "custom_message"
+        }
+      },
+      "label": {
+        "schema": "PiEntry",
+        "value": {
+          "id": "entry0008",
+          "label": "start",
+          "parentId": "entry0007",
+          "targetId": "entry0001",
+          "timestamp": "2026-01-01T00:00:00.000Z",
+          "type": "label"
+        }
+      },
+      "message": {
+        "schema": "PiEntry",
+        "value": {
+          "id": "entry0001",
+          "message": {
+            "content": [
+              {
+                "text": "Hello from Pi",
+                "textSignature": "sig-text",
+                "type": "text"
+              },
+              {
+                "data": "iVBORw0KGgo=",
+                "mimeType": "image/png",
+                "type": "image"
+              }
+            ],
+            "role": "user",
+            "timestamp": 1767225600000
+          },
+          "parentId": null,
+          "timestamp": "2026-01-01T00:00:00.000Z",
+          "type": "message"
+        }
+      },
+      "modelChange": {
+        "schema": "PiEntry",
+        "value": {
+          "id": "entry0003",
+          "modelId": "fixture-model",
+          "parentId": "entry0002",
+          "provider": "scripted",
+          "timestamp": "2026-01-01T00:00:00.000Z",
+          "type": "model_change"
+        }
+      },
+      "sessionInfo": {
+        "schema": "PiEntry",
+        "value": {
+          "id": "entry0009",
+          "name": "Fixture session",
+          "parentId": "entry0008",
+          "timestamp": "2026-01-01T00:00:00.000Z",
+          "type": "session_info"
+        }
+      },
+      "thinkingLevelChange": {
+        "schema": "PiEntry",
+        "value": {
+          "id": "entry0002",
+          "parentId": "entry0001",
+          "thinkingLevel": "high",
+          "timestamp": "2026-01-01T00:00:00.000Z",
+          "type": "thinking_level_change"
+        }
+      }
+    },
+    "piMessages": {
+      "assistant": {
+        "schema": "PiMessage",
+        "value": {
+          "api": "pi-messages",
+          "content": [
+            {
+              "text": "Hello from Pi",
+              "textSignature": "sig-text",
+              "type": "text"
+            },
+            {
+              "redacted": false,
+              "thinking": "Check the fixture",
+              "thinkingSignature": "sig-thinking",
+              "type": "thinking"
+            },
+            {
+              "arguments": {
+                "path": "README.md"
+              },
+              "id": "call-1",
+              "name": "read",
+              "thoughtSignature": "sig-tool",
+              "type": "toolCall"
+            }
+          ],
+          "diagnostics": [
+            {
+              "error": {
+                "code": "fixture_error",
+                "message": "deterministic",
+                "name": "FixtureError"
+              },
+              "timestamp": 1767225600000,
+              "type": "fixture"
+            }
+          ],
+          "model": "fixture-model",
+          "provider": "scripted",
+          "rawStopReason": "tool_use",
+          "responseId": "response-1",
+          "responseModel": "fixture-model-2026",
+          "role": "assistant",
+          "stopReason": "toolUse",
+          "timestamp": 1767225600001,
+          "usage": {
+            "cacheRead": 2,
+            "cacheWrite": 1,
+            "cacheWrite1h": 1,
+            "cost": {
+              "cacheRead": 0.0001,
+              "cacheWrite": 0.0002,
+              "input": 0.001,
+              "output": 0.002,
+              "total": 0.0033
+            },
+            "input": 10,
+            "output": 5,
+            "reasoning": 2,
+            "totalTokens": 18
+          }
+        }
+      },
+      "bashExecution": {
+        "schema": "PiMessage",
+        "value": {
+          "cancelled": false,
+          "command": "printf fixture",
+          "excludeFromContext": false,
+          "exitCode": 0,
+          "output": "fixture",
+          "role": "bashExecution",
+          "timestamp": 1767225600003,
+          "truncated": false
+        }
+      },
+      "branchSummary": {
+        "schema": "PiMessage",
+        "value": {
+          "fromId": "entry0001",
+          "role": "branchSummary",
+          "summary": "Branch summary",
+          "timestamp": 1767225600005
+        }
+      },
+      "compactionSummary": {
+        "schema": "PiMessage",
+        "value": {
+          "role": "compactionSummary",
+          "summary": "Compaction summary",
+          "timestamp": 1767225600006,
+          "tokensBefore": 1000
+        }
+      },
+      "custom": {
+        "schema": "PiMessage",
+        "value": {
+          "content": "Fixture notice",
+          "customType": "fixture.notice",
+          "details": {
+            "stable": true
+          },
+          "display": true,
+          "role": "custom",
+          "timestamp": 1767225600004
+        }
+      },
+      "toolResult": {
+        "schema": "PiMessage",
+        "value": {
+          "addedToolNames": [
+            "write"
+          ],
+          "content": [
+            {
+              "text": "Hello from Pi",
+              "textSignature": "sig-text",
+              "type": "text"
+            }
+          ],
+          "details": {
+            "lineCount": 1
+          },
+          "isError": false,
+          "role": "toolResult",
+          "timestamp": 1767225600002,
+          "toolCallId": "call-1",
+          "toolName": "read",
+          "usage": {
+            "cacheRead": 2,
+            "cacheWrite": 1,
+            "cacheWrite1h": 1,
+            "cost": {
+              "cacheRead": 0.0001,
+              "cacheWrite": 0.0002,
+              "input": 0.001,
+              "output": 0.002,
+              "total": 0.0033
+            },
+            "input": 10,
+            "output": 5,
+            "reasoning": 2,
+            "totalTokens": 18
+          }
+        }
+      },
+      "user": {
+        "schema": "PiMessage",
+        "value": {
+          "content": [
+            {
+              "text": "Hello from Pi",
+              "textSignature": "sig-text",
+              "type": "text"
+            },
+            {
+              "data": "iVBORw0KGgo=",
+              "mimeType": "image/png",
+              "type": "image"
+            }
+          ],
+          "role": "user",
+          "timestamp": 1767225600000
+        }
+      }
+    },
+    "providerLoginResults": {
+      "cancelled": {
+        "schema": "ProviderLoginResult",
+        "value": {
+          "authType": "oauth",
+          "notifications": [],
+          "operationId": "550e8400-e29b-41d4-a716-446655440003",
+          "providerId": "scripted",
+          "sequence": 3,
+          "state": "cancelled"
+        }
+      },
+      "completed": {
+        "schema": "ProviderLoginResult",
+        "value": {
+          "authType": "oauth",
+          "notifications": [],
+          "operationId": "550e8400-e29b-41d4-a716-446655440003",
+          "provider": {
+            "authentication": [
+              "api_key",
+              "oauth"
+            ],
+            "name": "Scripted Provider",
+            "providerId": "scripted",
+            "status": "authenticated"
+          },
+          "providerId": "scripted",
+          "sequence": 3,
+          "state": "completed"
+        }
+      },
+      "failed": {
+        "schema": "ProviderLoginResult",
+        "value": {
+          "authType": "oauth",
+          "notifications": [],
+          "operationId": "550e8400-e29b-41d4-a716-446655440003",
+          "problem": {
+            "artifactId": "550e8400-e29b-41d4-a716-446655440004",
+            "code": "validation_failed",
+            "commandId": "550e8400-e29b-41d4-a716-446655440001",
+            "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+            "detail": "Correct the listed fields and retry.",
+            "dialogId": "550e8400-e29b-41d4-a716-446655440002",
+            "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+            "instance": "/v1/conversations",
+            "issues": [
+              {
+                "code": "minLength",
+                "message": "Expected a nonempty string.",
+                "path": "/message"
+              }
+            ],
+            "requestId": "550e8400-e29b-41d4-a716-446655440006",
+            "retryable": false,
+            "status": 400,
+            "title": "Request validation failed",
+            "type": "https://bitch.invalid/problems/validation_failed",
+            "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+          },
+          "providerId": "scripted",
+          "sequence": 3,
+          "state": "failed"
+        }
+      },
+      "needsInput": {
+        "schema": "ProviderLoginResult",
+        "value": {
+          "authType": "oauth",
+          "notifications": [],
+          "operationId": "550e8400-e29b-41d4-a716-446655440003",
+          "prompt": {
+            "message": "Paste the returned code",
+            "promptId": "550e8400-e29b-41d4-a716-446655440002",
+            "type": "manual_code"
+          },
+          "providerId": "scripted",
+          "sequence": 2,
+          "state": "needsInput"
+        }
+      },
+      "running": {
+        "schema": "ProviderLoginResult",
+        "value": {
+          "authType": "oauth",
+          "notifications": [],
+          "operationId": "550e8400-e29b-41d4-a716-446655440003",
+          "providerId": "scripted",
+          "sequence": 1,
+          "state": "running"
+        }
+      }
+    },
+    "providerNotifications": {
+      "authUrl": {
+        "schema": "ProviderAuthNotification",
+        "value": {
+          "instructions": "Continue in the browser.",
+          "sequence": 2,
+          "type": "auth_url",
+          "url": "https://example.invalid/authorize"
+        }
+      },
+      "deviceCode": {
+        "schema": "ProviderAuthNotification",
+        "value": {
+          "expiresInSeconds": 600,
+          "intervalSeconds": 5,
+          "sequence": 3,
+          "type": "device_code",
+          "userCode": "ABCD-EFGH",
+          "verificationUri": "https://example.invalid/device"
+        }
+      },
+      "info": {
+        "schema": "ProviderAuthNotification",
+        "value": {
+          "links": [
+            {
+              "label": "Sign in",
+              "url": "https://example.invalid/sign-in"
+            }
+          ],
+          "message": "Open the sign-in page",
+          "sequence": 1,
+          "type": "info"
+        }
+      },
+      "progress": {
+        "schema": "ProviderAuthNotification",
+        "value": {
+          "message": "Waiting for authorization",
+          "sequence": 4,
+          "type": "progress"
+        }
+      }
+    },
+    "providerPrompts": {
+      "manualCode": {
+        "schema": "ProviderAuthPrompt",
+        "value": {
+          "message": "Paste the returned code",
+          "promptId": "550e8400-e29b-41d4-a716-446655440002",
+          "type": "manual_code"
+        }
+      },
+      "secret": {
+        "schema": "ProviderAuthPrompt",
+        "value": {
+          "message": "Enter value",
+          "promptId": "550e8400-e29b-41d4-a716-446655440002",
+          "type": "secret"
+        }
+      },
+      "select": {
+        "schema": "ProviderAuthPrompt",
+        "value": {
+          "message": "Select account",
+          "options": [
+            {
+              "description": "Fixture account",
+              "id": "one",
+              "label": "Account one"
+            }
+          ],
+          "promptId": "550e8400-e29b-41d4-a716-446655440002",
+          "type": "select"
+        }
+      },
+      "text": {
+        "schema": "ProviderAuthPrompt",
+        "value": {
+          "message": "Enter account name",
+          "placeholder": "name",
+          "promptId": "550e8400-e29b-41d4-a716-446655440002",
+          "type": "text"
+        }
+      }
+    },
+    "receipts": {
+      "abort": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "completed",
+          "type": "abort",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
+      "abort_bash": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "completed",
+          "type": "abort_bash",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
+      "abort_retry": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "completed",
+          "type": "abort_retry",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
+      "accepted": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "state": "accepted",
+          "type": "prompt",
+          "updatedAt": "2026-01-01T00:00:00.000Z"
+        }
+      },
+      "bash": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "result": {
+            "cancelled": false,
+            "exitCode": 0,
+            "output": "fixture\n",
+            "truncated": false
+          },
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "completed",
+          "type": "bash",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
+      "clone": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "result": {
+            "cancelled": true
+          },
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "completed",
+          "type": "clone",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
+      "compact": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "result": {
+            "details": {
+              "modifiedFiles": [],
+              "readFiles": [
+                "README.md"
+              ]
+            },
+            "estimatedTokensAfter": 250,
+            "firstKeptEntryId": "entry0002",
+            "summary": "Compacted fixture conversation",
+            "tokensBefore": 1000,
+            "usage": {
+              "cacheRead": 2,
+              "cacheWrite": 1,
+              "cacheWrite1h": 1,
+              "cost": {
+                "cacheRead": 0.0001,
+                "cacheWrite": 0.0002,
+                "input": 0.001,
+                "output": 0.002,
+                "total": 0.0033
+              },
+              "input": 10,
+              "output": 5,
+              "reasoning": 2,
+              "totalTokens": 18
+            }
+          },
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "completed",
+          "type": "compact",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
+      "cycle_model": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "result": {
+            "isScoped": true,
+            "model": {
+              "contextWindow": 128000,
+              "input": [
+                "text",
+                "image"
+              ],
+              "maxTokens": 4096,
+              "modelId": "fixture-model",
+              "name": "Fixture Model",
+              "provider": "scripted",
+              "reasoning": true
+            },
+            "thinkingLevel": "high"
+          },
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "completed",
+          "type": "cycle_model",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
+      "cycle_thinking_level": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "result": {
+            "level": "high"
+          },
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "completed",
+          "type": "cycle_thinking_level",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
+      "export_html": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "result": {
+            "artifactId": "550e8400-e29b-41d4-a716-446655440004",
+            "byteCount": 128,
+            "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+            "createdAt": "2026-01-01T00:01:00.000Z",
+            "downloadUrl": "/v1/artifacts/550e8400-e29b-41d4-a716-446655440004",
+            "fileName": "conversation.html",
+            "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+            "mediaType": "text/html"
+          },
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "completed",
+          "type": "export_html",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
+      "failed": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "problem": {
+            "artifactId": "550e8400-e29b-41d4-a716-446655440004",
+            "code": "validation_failed",
+            "commandId": "550e8400-e29b-41d4-a716-446655440001",
+            "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+            "detail": "Correct the listed fields and retry.",
+            "dialogId": "550e8400-e29b-41d4-a716-446655440002",
+            "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+            "instance": "/v1/conversations",
+            "issues": [
+              {
+                "code": "minLength",
+                "message": "Expected a nonempty string.",
+                "path": "/message"
+              }
+            ],
+            "requestId": "550e8400-e29b-41d4-a716-446655440006",
+            "retryable": false,
+            "status": 400,
+            "title": "Request validation failed",
+            "type": "https://bitch.invalid/problems/validation_failed",
+            "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+          },
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "failed",
+          "type": "prompt",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
+      "follow_up": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "completed",
+          "type": "follow_up",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
+      "fork": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "result": {
+            "cancelled": false,
+            "target": {
+              "conversationId": "0195f6f4-7c5b-7000-8000-000000000002",
+              "gatewayId": "550e8400-e29b-41d4-a716-446655440000"
+            },
+            "text": "Selected text"
+          },
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "completed",
+          "type": "fork",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
+      "interrupted": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "problem": {
+            "artifactId": "550e8400-e29b-41d4-a716-446655440004",
+            "code": "server_restarted",
+            "commandId": "550e8400-e29b-41d4-a716-446655440001",
+            "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+            "detail": "The Agent Server restarted. Send a new command to continue.",
+            "dialogId": "550e8400-e29b-41d4-a716-446655440002",
+            "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+            "instance": "/v1/conversations",
+            "issues": [
+              {
+                "code": "minLength",
+                "message": "Expected a nonempty string.",
+                "path": "/message"
+              }
+            ],
+            "requestId": "550e8400-e29b-41d4-a716-446655440006",
+            "retryable": false,
+            "status": 400,
+            "title": "Command interrupted",
+            "type": "https://bitch.invalid/problems/validation_failed",
+            "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+          },
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "interrupted",
+          "type": "prompt",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
+      "new_session": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "result": {
+            "cancelled": false,
+            "target": {
+              "conversationId": "0195f6f4-7c5b-7000-8000-000000000002",
+              "gatewayId": "550e8400-e29b-41d4-a716-446655440000"
+            }
+          },
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "completed",
+          "type": "new_session",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
+      "prompt": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "completed",
+          "type": "prompt",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
+      "reload": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "completed",
+          "type": "reload",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
+      "running": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "state": "running",
+          "type": "prompt",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
+      "set_auto_compaction": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "completed",
+          "type": "set_auto_compaction",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
+      "set_auto_retry": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "completed",
+          "type": "set_auto_retry",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
+      "set_follow_up_mode": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "completed",
+          "type": "set_follow_up_mode",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
+      "set_model": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "result": {
+            "contextWindow": 128000,
+            "input": [
+              "text",
+              "image"
+            ],
+            "maxTokens": 4096,
+            "modelId": "fixture-model",
+            "name": "Fixture Model",
+            "provider": "scripted",
+            "reasoning": true
+          },
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "completed",
+          "type": "set_model",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
+      "set_session_name": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "completed",
+          "type": "set_session_name",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
+      "set_steering_mode": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "completed",
+          "type": "set_steering_mode",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
+      "set_thinking_level": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "completed",
+          "type": "set_thinking_level",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
+      "steer": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "completed",
+          "type": "steer",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
+      "switch_session": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "result": {
+            "cancelled": false,
+            "target": {
+              "conversationId": "0195f6f4-7c5b-7000-8000-000000000002",
+              "gatewayId": "550e8400-e29b-41d4-a716-446655440000"
+            }
+          },
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "completed",
+          "type": "switch_session",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      }
+    },
+    "requests": {
+      "createConversation": {
+        "schema": "CreateConversationRequest",
+        "value": {
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "images": [
+            {
+              "data": "iVBORw0KGgo=",
+              "fileName": "fixture.png",
+              "mimeType": "image/png",
+              "type": "image"
+            }
+          ],
+          "message": "Validate fixtures",
+          "model": {
+            "modelId": "fixture-model",
+            "provider": "scripted"
+          },
+          "thinkingLevel": "high",
+          "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+        }
+      },
+      "emptyMutation": {
+        "schema": "EmptyRequest",
+        "value": {}
+      },
+      "providerLoginCancel": {
+        "schema": "ProviderLoginRequest",
+        "value": {
+          "operationId": "550e8400-e29b-41d4-a716-446655440003",
+          "type": "cancel"
+        }
+      },
+      "providerLoginPoll": {
+        "schema": "ProviderLoginRequest",
+        "value": {
+          "afterSequence": 0,
+          "operationId": "550e8400-e29b-41d4-a716-446655440003",
+          "type": "poll"
+        }
+      },
+      "providerLoginStart": {
+        "schema": "ProviderLoginRequest",
+        "value": {
+          "authType": "oauth",
+          "type": "start"
+        }
+      },
+      "providerLoginValue": {
+        "schema": "ProviderLoginRequest",
+        "value": {
+          "operationId": "550e8400-e29b-41d4-a716-446655440003",
+          "promptId": "550e8400-e29b-41d4-a716-446655440002",
+          "type": "value",
+          "value": "submitted-once"
+        }
+      },
+      "workspaceClone": {
+        "schema": "CreateWorkspaceRequest",
+        "value": {
+          "directoryName": "clone",
+          "displayName": "Clone",
+          "repositoryUrl": "ssh://git@example.invalid/repository.git",
+          "type": "clone"
+        }
+      },
+      "workspaceEmpty": {
+        "schema": "CreateWorkspaceRequest",
+        "value": {
+          "directoryName": "empty",
+          "displayName": "Empty",
+          "type": "empty"
+        }
+      },
+      "workspaceGit": {
+        "schema": "CreateWorkspaceRequest",
+        "value": {
+          "directoryName": "git-work",
+          "displayName": "Git work",
+          "type": "git"
+        }
+      },
+      "workspaceUpdate": {
+        "schema": "UpdateWorkspaceRequest",
+        "value": {
+          "displayName": "Renamed workspace"
+        }
+      }
+    },
+    "responses": {
+      "artifact": {
+        "schema": "ArtifactDescriptor",
+        "value": {
+          "artifactId": "550e8400-e29b-41d4-a716-446655440004",
+          "byteCount": 128,
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "createdAt": "2026-01-01T00:01:00.000Z",
+          "downloadUrl": "/v1/artifacts/550e8400-e29b-41d4-a716-446655440004",
+          "fileName": "conversation.html",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "mediaType": "text/html"
+        }
+      },
+      "commands": {
+        "schema": "CommandsResult",
+        "value": {
+          "commands": [
+            {
+              "description": "Run fixture command",
+              "name": "fixture",
+              "source": "extension",
+              "sourceInfo": {
+                "origin": "top-level",
+                "scope": "project",
+                "source": "fixture-extension"
+              }
+            }
+          ]
+        }
+      },
+      "conversation": {
+        "schema": "Conversation",
+        "value": {
+          "activityAt": "2026-01-01T00:01:00.000Z",
+          "completedAt": null,
+          "completedSinceViewed": false,
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "createdAt": "2026-01-01T00:00:00.000Z",
+          "cwd": "/data/workspaces/default",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "readOnly": false,
+          "status": "working",
+          "title": "Validate protocol fixtures",
+          "trashedAt": null,
+          "trashReason": null,
+          "viewedAt": null,
+          "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+        }
+      },
+      "conversationPage": {
+        "schema": "ConversationPage",
+        "value": {
+          "items": [
+            {
+              "activityAt": "2026-01-01T00:01:00.000Z",
+              "completedAt": null,
+              "completedSinceViewed": false,
+              "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+              "createdAt": "2026-01-01T00:00:00.000Z",
+              "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+              "readOnly": false,
+              "status": "working",
+              "title": "Validate protocol fixtures",
+              "trashedAt": null,
+              "trashReason": null,
+              "viewedAt": null,
+              "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+            }
+          ],
+          "nextCursor": null,
+          "revision": "conversations-r1"
+        }
+      },
+      "createConversation": {
+        "schema": "CreateConversationResponse",
+        "value": {
+          "conversation": {
+            "activityAt": "2026-01-01T00:01:00.000Z",
+            "completedAt": null,
+            "completedSinceViewed": false,
+            "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+            "createdAt": "2026-01-01T00:00:00.000Z",
+            "cwd": "/data/workspaces/default",
+            "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+            "readOnly": false,
+            "status": "working",
+            "title": "Validate protocol fixtures",
+            "trashedAt": null,
+            "trashReason": null,
+            "viewedAt": null,
+            "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+          },
+          "receipt": {
+            "acceptedAt": "2026-01-01T00:00:00.000Z",
+            "commandId": "550e8400-e29b-41d4-a716-446655440001",
+            "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+            "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+            "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "state": "accepted",
+            "type": "prompt",
+            "updatedAt": "2026-01-01T00:00:00.000Z"
+          }
+        }
+      },
+      "directoryConversation": {
+        "schema": "Conversation",
+        "value": {
+          "activityAt": "2026-01-01T00:01:00.000Z",
+          "completedAt": null,
+          "completedSinceViewed": false,
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "createdAt": "2026-01-01T00:00:00.000Z",
+          "cwd": "/work/project",
+          "readOnly": false,
+          "status": "idle",
+          "title": "Validate protocol fixtures",
+          "trashedAt": null,
+          "trashReason": null,
+          "viewedAt": null
+        }
+      },
+      "entries": {
+        "schema": "EntriesResult",
+        "value": {
+          "entries": [
+            {
+              "id": "entry0001",
+              "message": {
+                "content": [
+                  {
+                    "text": "Hello from Pi",
+                    "textSignature": "sig-text",
+                    "type": "text"
+                  },
+                  {
+                    "data": "iVBORw0KGgo=",
+                    "mimeType": "image/png",
+                    "type": "image"
+                  }
+                ],
+                "role": "user",
+                "timestamp": 1767225600000
+              },
+              "parentId": null,
+              "timestamp": "2026-01-01T00:00:00.000Z",
+              "type": "message"
+            },
+            {
+              "id": "entry0002",
+              "parentId": "entry0001",
+              "thinkingLevel": "high",
+              "timestamp": "2026-01-01T00:00:00.000Z",
+              "type": "thinking_level_change"
+            },
+            {
+              "id": "entry0003",
+              "modelId": "fixture-model",
+              "parentId": "entry0002",
+              "provider": "scripted",
+              "timestamp": "2026-01-01T00:00:00.000Z",
+              "type": "model_change"
+            },
+            {
+              "details": {
+                "modifiedFiles": [],
+                "readFiles": [
+                  "README.md"
+                ]
+              },
+              "firstKeptEntryId": "entry0002",
+              "fromHook": false,
+              "id": "entry0004",
+              "parentId": "entry0003",
+              "summary": "Summary",
+              "timestamp": "2026-01-01T00:00:00.000Z",
+              "tokensBefore": 1000,
+              "type": "compaction",
+              "usage": {
+                "cacheRead": 2,
+                "cacheWrite": 1,
+                "cacheWrite1h": 1,
+                "cost": {
+                  "cacheRead": 0.0001,
+                  "cacheWrite": 0.0002,
+                  "input": 0.001,
+                  "output": 0.002,
+                  "total": 0.0033
+                },
+                "input": 10,
+                "output": 5,
+                "reasoning": 2,
+                "totalTokens": 18
+              }
+            },
+            {
+              "details": {
+                "stable": true
+              },
+              "fromHook": false,
+              "fromId": "entry0003",
+              "id": "entry0005",
+              "parentId": "entry0004",
+              "summary": "Branch",
+              "timestamp": "2026-01-01T00:00:00.000Z",
+              "type": "branch_summary",
+              "usage": {
+                "cacheRead": 2,
+                "cacheWrite": 1,
+                "cacheWrite1h": 1,
+                "cost": {
+                  "cacheRead": 0.0001,
+                  "cacheWrite": 0.0002,
+                  "input": 0.001,
+                  "output": 0.002,
+                  "total": 0.0033
+                },
+                "input": 10,
+                "output": 5,
+                "reasoning": 2,
+                "totalTokens": 18
+              }
+            },
+            {
+              "customType": "fixture.state",
+              "data": {
+                "count": 1
+              },
+              "id": "entry0006",
+              "parentId": "entry0005",
+              "timestamp": "2026-01-01T00:00:00.000Z",
+              "type": "custom"
+            },
+            {
+              "content": [
+                {
+                  "text": "Hello from Pi",
+                  "textSignature": "sig-text",
+                  "type": "text"
+                },
+                {
+                  "data": "iVBORw0KGgo=",
+                  "mimeType": "image/png",
+                  "type": "image"
+                }
+              ],
+              "customType": "fixture.message",
+              "details": {
+                "stable": true
+              },
+              "display": true,
+              "id": "entry0007",
+              "parentId": "entry0006",
+              "timestamp": "2026-01-01T00:00:00.000Z",
+              "type": "custom_message"
+            },
+            {
+              "id": "entry0008",
+              "label": "start",
+              "parentId": "entry0007",
+              "targetId": "entry0001",
+              "timestamp": "2026-01-01T00:00:00.000Z",
+              "type": "label"
+            },
+            {
+              "id": "entry0009",
+              "name": "Fixture session",
+              "parentId": "entry0008",
+              "timestamp": "2026-01-01T00:00:00.000Z",
+              "type": "session_info"
+            }
+          ],
+          "leafId": "entry0009"
+        }
+      },
+      "forkMessages": {
+        "schema": "ForkMessagesResult",
+        "value": {
+          "messages": [
+            {
+              "entryId": "entry0001",
+              "text": "Validate fixtures"
+            }
+          ]
+        }
+      },
+      "lastAssistant": {
+        "schema": "LastAssistantResult",
+        "value": {
+          "text": "Hello from Pi"
+        }
+      },
+      "messages": {
+        "schema": "MessagesResult",
+        "value": {
+          "messages": [
+            {
+              "content": [
+                {
+                  "text": "Hello from Pi",
+                  "textSignature": "sig-text",
+                  "type": "text"
+                },
+                {
+                  "data": "iVBORw0KGgo=",
+                  "mimeType": "image/png",
+                  "type": "image"
+                }
+              ],
+              "role": "user",
+              "timestamp": 1767225600000
+            },
+            {
+              "api": "pi-messages",
+              "content": [
+                {
+                  "text": "Hello from Pi",
+                  "textSignature": "sig-text",
+                  "type": "text"
+                },
+                {
+                  "redacted": false,
+                  "thinking": "Check the fixture",
+                  "thinkingSignature": "sig-thinking",
+                  "type": "thinking"
+                },
+                {
+                  "arguments": {
+                    "path": "README.md"
+                  },
+                  "id": "call-1",
+                  "name": "read",
+                  "thoughtSignature": "sig-tool",
+                  "type": "toolCall"
+                }
+              ],
+              "diagnostics": [
+                {
+                  "error": {
+                    "code": "fixture_error",
+                    "message": "deterministic",
+                    "name": "FixtureError"
+                  },
+                  "timestamp": 1767225600000,
+                  "type": "fixture"
+                }
+              ],
+              "model": "fixture-model",
+              "provider": "scripted",
+              "rawStopReason": "tool_use",
+              "responseId": "response-1",
+              "responseModel": "fixture-model-2026",
+              "role": "assistant",
+              "stopReason": "toolUse",
+              "timestamp": 1767225600001,
+              "usage": {
+                "cacheRead": 2,
+                "cacheWrite": 1,
+                "cacheWrite1h": 1,
+                "cost": {
+                  "cacheRead": 0.0001,
+                  "cacheWrite": 0.0002,
+                  "input": 0.001,
+                  "output": 0.002,
+                  "total": 0.0033
+                },
+                "input": 10,
+                "output": 5,
+                "reasoning": 2,
+                "totalTokens": 18
+              }
+            },
+            {
+              "addedToolNames": [
+                "write"
+              ],
+              "content": [
+                {
+                  "text": "Hello from Pi",
+                  "textSignature": "sig-text",
+                  "type": "text"
+                }
+              ],
+              "details": {
+                "lineCount": 1
+              },
+              "isError": false,
+              "role": "toolResult",
+              "timestamp": 1767225600002,
+              "toolCallId": "call-1",
+              "toolName": "read",
+              "usage": {
+                "cacheRead": 2,
+                "cacheWrite": 1,
+                "cacheWrite1h": 1,
+                "cost": {
+                  "cacheRead": 0.0001,
+                  "cacheWrite": 0.0002,
+                  "input": 0.001,
+                  "output": 0.002,
+                  "total": 0.0033
+                },
+                "input": 10,
+                "output": 5,
+                "reasoning": 2,
+                "totalTokens": 18
+              }
+            }
+          ],
+          "revision": "messages-r1"
+        }
+      },
+      "models": {
+        "schema": "ModelsResult",
+        "value": {
+          "models": [
+            {
+              "contextWindow": 128000,
+              "input": [
+                "text",
+                "image"
+              ],
+              "maxTokens": 4096,
+              "modelId": "fixture-model",
+              "name": "Fixture Model",
+              "provider": "scripted",
+              "reasoning": true
+            }
+          ]
+        }
+      },
+      "problem": {
+        "schema": "ProblemDetails",
+        "value": {
+          "artifactId": "550e8400-e29b-41d4-a716-446655440004",
+          "code": "validation_failed",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "detail": "Correct the listed fields and retry.",
+          "dialogId": "550e8400-e29b-41d4-a716-446655440002",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "instance": "/v1/conversations",
+          "issues": [
+            {
+              "code": "minLength",
+              "message": "Expected a nonempty string.",
+              "path": "/message"
+            }
+          ],
+          "requestId": "550e8400-e29b-41d4-a716-446655440006",
+          "retryable": false,
+          "status": 400,
+          "title": "Request validation failed",
+          "type": "https://bitch.invalid/problems/validation_failed",
+          "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+        }
+      },
+      "providers": {
+        "schema": "ProvidersResult",
+        "value": {
+          "providers": [
+            {
+              "authentication": [
+                "api_key",
+                "oauth"
+              ],
+              "name": "Scripted Provider",
+              "providerId": "scripted",
+              "status": "authenticated"
+            }
+          ]
+        }
+      },
+      "providerSummary": {
+        "schema": "ProviderSummary",
+        "value": {
+          "authentication": [
+            "api_key",
+            "oauth"
+          ],
+          "name": "Scripted Provider",
+          "providerId": "scripted",
+          "status": "authenticated"
+        }
+      },
+      "soul": {
+        "schema": "SoulDescriptor",
+        "value": {
+          "byteCount": 13,
+          "etag": "\"sha256:ce69c359092219c8d560804e8600676b1d34ca72b1e735f35981b1f9b1ea5fda\"",
+          "sha256": "ce69c359092219c8d560804e8600676b1d34ca72b1e735f35981b1f9b1ea5fda"
+        }
+      },
+      "state": {
+        "schema": "ConversationState",
+        "value": {
+          "activeCommandIds": [
+            "550e8400-e29b-41d4-a716-446655440001"
+          ],
+          "autoCompactionEnabled": true,
+          "autoRetryEnabled": true,
+          "conversation": {
+            "activityAt": "2026-01-01T00:01:00.000Z",
+            "completedAt": null,
+            "completedSinceViewed": false,
+            "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+            "createdAt": "2026-01-01T00:00:00.000Z",
+            "cwd": "/data/workspaces/default",
+            "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+            "readOnly": false,
+            "status": "working",
+            "title": "Validate protocol fixtures",
+            "trashedAt": null,
+            "trashReason": null,
+            "viewedAt": null,
+            "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+          },
+          "followUpMode": "one-at-a-time",
+          "messageCount": 3,
+          "model": {
+            "contextWindow": 128000,
+            "input": [
+              "text",
+              "image"
+            ],
+            "maxTokens": 4096,
+            "modelId": "fixture-model",
+            "name": "Fixture Model",
+            "provider": "scripted",
+            "reasoning": true
+          },
+          "pendingMessageCount": 0,
+          "steeringMode": "all",
+          "thinkingLevel": "high"
+        }
+      },
+      "thinkingLevels": {
+        "schema": "ThinkingLevelsResult",
+        "value": {
+          "levels": [
+            "off",
+            "low",
+            "high"
+          ]
+        }
+      },
+      "tree": {
+        "schema": "TreeResult",
+        "value": {
+          "leafId": "entry0002",
+          "tree": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "entry": {
+                    "id": "entry0002",
+                    "parentId": "entry0001",
+                    "thinkingLevel": "high",
+                    "timestamp": "2026-01-01T00:00:00.000Z",
+                    "type": "thinking_level_change"
+                  },
+                  "label": "level",
+                  "labelTimestamp": "2026-01-01T00:00:00.000Z"
+                }
+              ],
+              "entry": {
+                "id": "entry0001",
+                "message": {
+                  "content": [
+                    {
+                      "text": "Hello from Pi",
+                      "textSignature": "sig-text",
+                      "type": "text"
+                    },
+                    {
+                      "data": "iVBORw0KGgo=",
+                      "mimeType": "image/png",
+                      "type": "image"
+                    }
+                  ],
+                  "role": "user",
+                  "timestamp": 1767225600000
+                },
+                "parentId": null,
+                "timestamp": "2026-01-01T00:00:00.000Z",
+                "type": "message"
+              }
+            }
+          ]
+        }
+      },
+      "workspace": {
+        "schema": "Workspace",
+        "value": {
+          "activeConversationCount": 1,
+          "activityAt": "2026-01-01T00:01:00.000Z",
+          "createdAt": "2026-01-01T00:00:00.000Z",
+          "directoryName": "default",
+          "displayName": "Default",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "gitState": "none",
+          "isDefault": true,
+          "state": "active",
+          "totalConversationCount": 1,
+          "trashedAt": null,
+          "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+        }
+      },
+      "workspacePage": {
+        "schema": "WorkspacePage",
+        "value": {
+          "items": [
+            {
+              "activeConversationCount": 1,
+              "activityAt": "2026-01-01T00:01:00.000Z",
+              "createdAt": "2026-01-01T00:00:00.000Z",
+              "directoryName": "default",
+              "displayName": "Default",
+              "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+              "gitState": "none",
+              "isDefault": true,
+              "state": "active",
+              "totalConversationCount": 1,
+              "trashedAt": null,
+              "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+            }
+          ],
+          "nextCursor": null,
+          "revision": "workspaces-r1"
+        }
+      }
+    },
+    "snapshots": {
+      "active": {
+        "schema": "ConversationSnapshot",
+        "value": {
+          "activeReceipts": [
+            {
+              "acceptedAt": "2026-01-01T00:00:00.000Z",
+              "commandId": "550e8400-e29b-41d4-a716-446655440001",
+              "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+              "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+              "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+              "state": "accepted",
+              "type": "prompt",
+              "updatedAt": "2026-01-01T00:00:00.000Z"
+            }
+          ],
+          "activeResponse": {
+            "message": {
+              "api": "pi-messages",
+              "content": [
+                {
+                  "text": "Hello from Pi",
+                  "textSignature": "sig-text",
+                  "type": "text"
+                },
+                {
+                  "redacted": false,
+                  "thinking": "Check the fixture",
+                  "thinkingSignature": "sig-thinking",
+                  "type": "thinking"
+                },
+                {
+                  "arguments": {
+                    "path": "README.md"
+                  },
+                  "id": "call-1",
+                  "name": "read",
+                  "thoughtSignature": "sig-tool",
+                  "type": "toolCall"
+                }
+              ],
+              "diagnostics": [
+                {
+                  "error": {
+                    "code": "fixture_error",
+                    "message": "deterministic",
+                    "name": "FixtureError"
+                  },
+                  "timestamp": 1767225600000,
+                  "type": "fixture"
+                }
+              ],
+              "model": "fixture-model",
+              "provider": "scripted",
+              "rawStopReason": "tool_use",
+              "responseId": "response-1",
+              "responseModel": "fixture-model-2026",
+              "role": "assistant",
+              "stopReason": "toolUse",
+              "timestamp": 1767225600001,
+              "usage": {
+                "cacheRead": 2,
+                "cacheWrite": 1,
+                "cacheWrite1h": 1,
+                "cost": {
+                  "cacheRead": 0.0001,
+                  "cacheWrite": 0.0002,
+                  "input": 0.001,
+                  "output": 0.002,
+                  "total": 0.0033
+                },
+                "input": 10,
+                "output": 5,
+                "reasoning": 2,
+                "totalTokens": 18
+              }
+            },
+            "tools": [
+              {
+                "content": [
+                  {
+                    "text": "Hello from Pi",
+                    "textSignature": "sig-text",
+                    "type": "text"
+                  }
+                ],
+                "details": {
+                  "progress": 0.5
+                },
+                "input": {
+                  "path": "README.md"
+                },
+                "status": "running",
+                "toolCallId": "call-1",
+                "toolName": "read"
+              }
+            ]
+          },
+          "conversation": {
+            "activityAt": "2026-01-01T00:01:00.000Z",
+            "completedAt": null,
+            "completedSinceViewed": false,
+            "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+            "createdAt": "2026-01-01T00:00:00.000Z",
+            "cwd": "/data/workspaces/default",
+            "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+            "readOnly": false,
+            "status": "working",
+            "title": "Validate protocol fixtures",
+            "trashedAt": null,
+            "trashReason": null,
+            "viewedAt": null,
+            "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+          },
+          "extensionUiState": {
+            "statuses": {
+              "fixture": "running"
+            },
+            "title": "Fixture title",
+            "widgets": [
+              {
+                "key": "fixture",
+                "lines": [
+                  "line one"
+                ],
+                "placement": "aboveEditor"
+              }
+            ]
+          },
+          "followUpQueue": [
+            {
+              "images": [
+                {
+                  "data": "iVBORw0KGgo=",
+                  "fileName": "fixture.png",
+                  "mimeType": "image/png",
+                  "type": "image"
+                }
+              ],
+              "text": "Follow up"
+            }
+          ],
+          "messagesRevision": "messages-r1",
+          "pendingDialogs": [
+            {
+              "dialogId": "550e8400-e29b-41d4-a716-446655440002",
+              "method": "select",
+              "options": [
+                "one",
+                "two"
+              ],
+              "timeoutAt": "2026-01-01T00:01:00.000Z",
+              "title": "Select a fixture"
+            }
+          ],
+          "state": {
+            "activeCommandIds": [
+              "550e8400-e29b-41d4-a716-446655440001"
+            ],
+            "autoCompactionEnabled": true,
+            "autoRetryEnabled": true,
+            "conversation": {
+              "activityAt": "2026-01-01T00:01:00.000Z",
+              "completedAt": null,
+              "completedSinceViewed": false,
+              "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+              "createdAt": "2026-01-01T00:00:00.000Z",
+              "cwd": "/data/workspaces/default",
+              "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+              "readOnly": false,
+              "status": "working",
+              "title": "Validate protocol fixtures",
+              "trashedAt": null,
+              "trashReason": null,
+              "viewedAt": null,
+              "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+            },
+            "followUpMode": "one-at-a-time",
+            "messageCount": 3,
+            "model": {
+              "contextWindow": 128000,
+              "input": [
+                "text",
+                "image"
+              ],
+              "maxTokens": 4096,
+              "modelId": "fixture-model",
+              "name": "Fixture Model",
+              "provider": "scripted",
+              "reasoning": true
+            },
+            "pendingMessageCount": 0,
+            "steeringMode": "all",
+            "thinkingLevel": "high"
+          },
+          "steeringQueue": [
+            {
+              "images": [],
+              "text": "Steer next"
+            }
+          ]
+        }
+      },
+      "idle": {
+        "schema": "ConversationSnapshot",
+        "value": {
+          "activeReceipts": [],
+          "activeResponse": null,
+          "conversation": {
+            "activityAt": "2026-01-01T00:01:00.000Z",
+            "completedAt": null,
+            "completedSinceViewed": false,
+            "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+            "createdAt": "2026-01-01T00:00:00.000Z",
+            "cwd": "/data/workspaces/default",
+            "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+            "readOnly": false,
+            "status": "idle",
+            "title": "Validate protocol fixtures",
+            "trashedAt": null,
+            "trashReason": null,
+            "viewedAt": null,
+            "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+          },
+          "extensionUiState": {
+            "statuses": {
+              "fixture": "running"
+            },
+            "title": "Fixture title",
+            "widgets": [
+              {
+                "key": "fixture",
+                "lines": [
+                  "line one"
+                ],
+                "placement": "aboveEditor"
+              }
+            ]
+          },
+          "followUpQueue": [],
+          "messagesRevision": "messages-r1",
+          "pendingDialogs": [],
+          "state": {
+            "activeCommandIds": [],
+            "autoCompactionEnabled": true,
+            "autoRetryEnabled": true,
+            "conversation": {
+              "activityAt": "2026-01-01T00:01:00.000Z",
+              "completedAt": null,
+              "completedSinceViewed": false,
+              "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+              "createdAt": "2026-01-01T00:00:00.000Z",
+              "cwd": "/data/workspaces/default",
+              "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+              "readOnly": false,
+              "status": "idle",
+              "title": "Validate protocol fixtures",
+              "trashedAt": null,
+              "trashReason": null,
+              "viewedAt": null,
+              "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+            },
+            "followUpMode": "one-at-a-time",
+            "messageCount": 3,
+            "model": {
+              "contextWindow": 128000,
+              "input": [
+                "text",
+                "image"
+              ],
+              "maxTokens": 4096,
+              "modelId": "fixture-model",
+              "name": "Fixture Model",
+              "provider": "scripted",
+              "reasoning": true
+            },
+            "pendingMessageCount": 0,
+            "steeringMode": "all",
+            "thinkingLevel": "high"
+          },
+          "steeringQueue": []
+        }
+      }
+    },
+    "status": {
+      "directory": {
+        "schema": "StatusResult",
+        "value": {
+          "capabilities": [
+            "attachment.image.v1",
+            "conversation.commands.v1",
+            "conversation.events.v1",
+            "directory.fixed-cwd.v1",
+            "pi.rpc.v1"
+          ],
+          "mode": "directory",
+          "piVersion": "0.83.0",
+          "protocolVersion": {
+            "major": 1,
+            "minor": 0
+          },
+          "serverVersion": "0.1.0"
+        }
+      },
+      "gateway": {
+        "schema": "StatusResult",
+        "value": {
+          "capabilities": [
+            "attachment.image.v1",
+            "conversation.commands.v1",
+            "conversation.events.v1",
+            "gateway.identity.v1",
+            "pi.rpc.v1"
+          ],
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "mode": "gateway",
+          "piVersion": "0.83.0",
+          "protocolVersion": {
+            "major": 1,
+            "minor": 0
+          },
+          "serverVersion": "0.1.0"
+        }
+      }
+    }
+  },
+  "piVersion": "0.83.0",
+  "version": 1
+}

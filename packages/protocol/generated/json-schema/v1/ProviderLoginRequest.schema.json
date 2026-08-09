@@ -1,0 +1,101 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/ProviderLoginRequest.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "anyOf": [
+    {
+      "additionalProperties": false,
+      "properties": {
+        "authType": {
+          "anyOf": [
+            {
+              "const": "api_key",
+              "type": "string"
+            },
+            {
+              "const": "oauth",
+              "type": "string"
+            }
+          ]
+        },
+        "type": {
+          "const": "start",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "authType"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "properties": {
+        "afterSequence": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "operationId": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "type": {
+          "const": "poll",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "operationId",
+        "afterSequence"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "properties": {
+        "operationId": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "promptId": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "type": {
+          "const": "value",
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "operationId",
+        "promptId",
+        "value"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "properties": {
+        "operationId": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "type": {
+          "const": "cancel",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "operationId"
+      ],
+      "type": "object"
+    }
+  ],
+  "title": "ProviderLoginRequest"
+}

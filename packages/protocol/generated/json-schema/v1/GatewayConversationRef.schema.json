@@ -1,0 +1,21 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/GatewayConversationRef.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "conversationId": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "gatewayId": {
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "gatewayId",
+    "conversationId"
+  ],
+  "title": "GatewayConversationRef",
+  "type": "object"
+}

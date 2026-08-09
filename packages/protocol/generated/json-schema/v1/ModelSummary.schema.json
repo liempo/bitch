@@ -1,0 +1,57 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/ModelSummary.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "contextWindow": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "input": {
+      "items": {
+        "anyOf": [
+          {
+            "const": "text",
+            "type": "string"
+          },
+          {
+            "const": "image",
+            "type": "string"
+          }
+        ]
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "maxTokens": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "modelId": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "name": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "provider": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "reasoning": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "provider",
+    "modelId",
+    "name",
+    "reasoning",
+    "input",
+    "contextWindow",
+    "maxTokens"
+  ],
+  "title": "ModelSummary",
+  "type": "object"
+}

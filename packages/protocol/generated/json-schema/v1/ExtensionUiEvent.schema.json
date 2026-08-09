@@ -1,0 +1,147 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/ExtensionUiEvent.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "anyOf": [
+    {
+      "additionalProperties": true,
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "method": {
+          "const": "notify",
+          "type": "string"
+        },
+        "severity": {
+          "anyOf": [
+            {
+              "const": "info",
+              "type": "string"
+            },
+            {
+              "const": "warning",
+              "type": "string"
+            },
+            {
+              "const": "error",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "required": [
+        "method",
+        "message",
+        "severity"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": true,
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "method": {
+          "const": "setStatus",
+          "type": "string"
+        },
+        "text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "method",
+        "key",
+        "text"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": true,
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "lines": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "method": {
+          "const": "setWidget",
+          "type": "string"
+        },
+        "placement": {
+          "anyOf": [
+            {
+              "const": "aboveEditor",
+              "type": "string"
+            },
+            {
+              "const": "belowEditor",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "required": [
+        "method",
+        "key",
+        "lines",
+        "placement"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": true,
+      "properties": {
+        "method": {
+          "const": "setTitle",
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "method",
+        "title"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": true,
+      "properties": {
+        "method": {
+          "const": "set_editor_text",
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "method",
+        "text"
+      ],
+      "type": "object"
+    }
+  ],
+  "title": "ExtensionUiEvent"
+}

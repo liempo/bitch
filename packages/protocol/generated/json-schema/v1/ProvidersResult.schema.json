@@ -1,0 +1,67 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/ProvidersResult.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "providers": {
+      "items": {
+        "additionalProperties": true,
+        "properties": {
+          "authentication": {
+            "items": {
+              "anyOf": [
+                {
+                  "const": "api_key",
+                  "type": "string"
+                },
+                {
+                  "const": "oauth",
+                  "type": "string"
+                }
+              ]
+            },
+            "type": "array",
+            "uniqueItems": true
+          },
+          "name": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "providerId": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "const": "authenticated",
+                "type": "string"
+              },
+              {
+                "const": "unauthenticated",
+                "type": "string"
+              },
+              {
+                "const": "expired",
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "required": [
+          "providerId",
+          "name",
+          "authentication",
+          "status"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "providers"
+  ],
+  "title": "ProvidersResult",
+  "type": "object"
+}

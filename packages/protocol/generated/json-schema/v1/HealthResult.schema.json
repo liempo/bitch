@@ -1,0 +1,31 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/HealthResult.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "code": {
+      "type": "string"
+    },
+    "status": {
+      "anyOf": [
+        {
+          "const": "live",
+          "type": "string"
+        },
+        {
+          "const": "ready",
+          "type": "string"
+        },
+        {
+          "const": "notReady",
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "required": [
+    "status"
+  ],
+  "title": "HealthResult",
+  "type": "object"
+}

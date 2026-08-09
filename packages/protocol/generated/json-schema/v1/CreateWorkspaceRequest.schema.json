@@ -1,0 +1,75 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/CreateWorkspaceRequest.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "anyOf": [
+    {
+      "additionalProperties": false,
+      "properties": {
+        "directoryName": {
+          "pattern": "^[^/\\\\]+$",
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "type": {
+          "const": "empty",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "directoryName"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "properties": {
+        "directoryName": {
+          "pattern": "^[^/\\\\]+$",
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "type": {
+          "const": "git",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "directoryName"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": false,
+      "properties": {
+        "directoryName": {
+          "pattern": "^[^/\\\\]+$",
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "repositoryUrl": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "type": {
+          "const": "clone",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "directoryName",
+        "repositoryUrl"
+      ],
+      "type": "object"
+    }
+  ],
+  "title": "CreateWorkspaceRequest"
+}

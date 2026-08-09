@@ -1,0 +1,32 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/ForkMessagesResult.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "messages": {
+      "items": {
+        "additionalProperties": true,
+        "properties": {
+          "entryId": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "entryId",
+          "text"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "messages"
+  ],
+  "title": "ForkMessagesResult",
+  "type": "object"
+}

@@ -2,7 +2,7 @@
 
 ## Status
 
-Approved first-release technical specification and deferred client-control boundaries. Implementation is pending.
+Approved first-release technical specification and deferred client-control boundaries. The canonical protocol package and its version 1 fixture corpus are implemented. The Agent Server and clients are pending.
 
 ## System boundary
 

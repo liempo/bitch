@@ -1,0 +1,135 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/CompactionResultDto.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "details": {
+      "$defs": {
+        "JsonValue": {
+          "$id": "JsonValue",
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "$ref": "JsonValue"
+              },
+              "type": "array"
+            },
+            {
+              "patternProperties": {
+                "^.*$": {
+                  "$ref": "JsonValue"
+                }
+              },
+              "type": "object"
+            }
+          ]
+        }
+      },
+      "$ref": "JsonValue"
+    },
+    "estimatedTokensAfter": {
+      "minimum": 0,
+      "type": "number"
+    },
+    "firstKeptEntryId": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "tokensBefore": {
+      "minimum": 0,
+      "type": "number"
+    },
+    "usage": {
+      "additionalProperties": true,
+      "properties": {
+        "cacheRead": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "cacheWrite": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "cacheWrite1h": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "cost": {
+          "additionalProperties": true,
+          "properties": {
+            "cacheRead": {
+              "type": "number"
+            },
+            "cacheWrite": {
+              "type": "number"
+            },
+            "input": {
+              "type": "number"
+            },
+            "output": {
+              "type": "number"
+            },
+            "total": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "input",
+            "output",
+            "cacheRead",
+            "cacheWrite",
+            "total"
+          ],
+          "type": "object"
+        },
+        "input": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "output": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "reasoning": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "totalTokens": {
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "input",
+        "output",
+        "cacheRead",
+        "cacheWrite",
+        "totalTokens",
+        "cost"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "summary",
+    "firstKeptEntryId",
+    "tokensBefore"
+  ],
+  "title": "CompactionResultDto",
+  "type": "object"
+}

@@ -1,0 +1,16 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/DirectoryConversationRef.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "conversationId": {
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "required": [
+    "conversationId"
+  ],
+  "title": "DirectoryConversationRef",
+  "type": "object"
+}

@@ -1,0 +1,26 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/BashResultDto.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "cancelled": {
+      "type": "boolean"
+    },
+    "exitCode": {
+      "type": "integer"
+    },
+    "output": {
+      "type": "string"
+    },
+    "truncated": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "output",
+    "cancelled",
+    "truncated"
+  ],
+  "title": "BashResultDto",
+  "type": "object"
+}

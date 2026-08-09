@@ -1,0 +1,755 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/GatewayEvent.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "anyOf": [
+    {
+      "additionalProperties": true,
+      "properties": {
+        "data": {
+          "additionalProperties": true,
+          "properties": {
+            "conversations": {
+              "items": {
+                "additionalProperties": true,
+                "properties": {
+                  "activityAt": {
+                    "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+                    "type": "string"
+                  },
+                  "completedAt": {
+                    "anyOf": [
+                      {
+                        "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "completedSinceViewed": {
+                    "type": "boolean"
+                  },
+                  "conversationId": {
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "createdAt": {
+                    "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+                    "type": "string"
+                  },
+                  "gatewayId": {
+                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                    "type": "string"
+                  },
+                  "readOnly": {
+                    "type": "boolean"
+                  },
+                  "status": {
+                    "anyOf": [
+                      {
+                        "const": "idle",
+                        "type": "string"
+                      },
+                      {
+                        "const": "working",
+                        "type": "string"
+                      },
+                      {
+                        "const": "needsInput",
+                        "type": "string"
+                      },
+                      {
+                        "const": "failed",
+                        "type": "string"
+                      },
+                      {
+                        "const": "stopped",
+                        "type": "string"
+                      }
+                    ]
+                  },
+                  "title": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "trashedAt": {
+                    "anyOf": [
+                      {
+                        "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "trashReason": {
+                    "anyOf": [
+                      {
+                        "anyOf": [
+                          {
+                            "const": "individual",
+                            "type": "string"
+                          },
+                          {
+                            "const": "workspace",
+                            "type": "string"
+                          },
+                          {
+                            "const": "workspaceMissing",
+                            "type": "string"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "viewedAt": {
+                    "anyOf": [
+                      {
+                        "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "workspaceId": {
+                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "conversationId",
+                  "title",
+                  "createdAt",
+                  "activityAt",
+                  "viewedAt",
+                  "completedAt",
+                  "status",
+                  "completedSinceViewed",
+                  "trashedAt",
+                  "trashReason",
+                  "readOnly"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "revision": {
+              "type": "string"
+            },
+            "workspaces": {
+              "items": {
+                "additionalProperties": true,
+                "properties": {
+                  "activeConversationCount": {
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "activityAt": {
+                    "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+                    "type": "string"
+                  },
+                  "createdAt": {
+                    "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+                    "type": "string"
+                  },
+                  "directoryName": {
+                    "pattern": "^[^/\\\\]+$",
+                    "type": "string"
+                  },
+                  "displayName": {
+                    "type": "string"
+                  },
+                  "gatewayId": {
+                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                    "type": "string"
+                  },
+                  "gitState": {
+                    "anyOf": [
+                      {
+                        "const": "none",
+                        "type": "string"
+                      },
+                      {
+                        "const": "initialized",
+                        "type": "string"
+                      },
+                      {
+                        "const": "cloned",
+                        "type": "string"
+                      }
+                    ]
+                  },
+                  "isDefault": {
+                    "type": "boolean"
+                  },
+                  "state": {
+                    "anyOf": [
+                      {
+                        "const": "active",
+                        "type": "string"
+                      },
+                      {
+                        "const": "trashed",
+                        "type": "string"
+                      },
+                      {
+                        "const": "missing",
+                        "type": "string"
+                      }
+                    ]
+                  },
+                  "totalConversationCount": {
+                    "minimum": 0,
+                    "type": "integer"
+                  },
+                  "trashedAt": {
+                    "anyOf": [
+                      {
+                        "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "workspaceId": {
+                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "workspaceId",
+                  "gatewayId",
+                  "directoryName",
+                  "displayName",
+                  "isDefault",
+                  "gitState",
+                  "createdAt",
+                  "activityAt",
+                  "trashedAt",
+                  "state",
+                  "activeConversationCount",
+                  "totalConversationCount"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "revision",
+            "conversations",
+            "workspaces"
+          ],
+          "type": "object"
+        },
+        "emittedAt": {
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+          "type": "string"
+        },
+        "gatewayId": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "sequence": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "streamId": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "type": {
+          "const": "gateway.snapshot",
+          "type": "string"
+        }
+      },
+      "required": [
+        "streamId",
+        "sequence",
+        "gatewayId",
+        "emittedAt",
+        "type",
+        "data"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": true,
+      "properties": {
+        "data": {
+          "additionalProperties": true,
+          "properties": {
+            "activityAt": {
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+              "type": "string"
+            },
+            "completedAt": {
+              "anyOf": [
+                {
+                  "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "completedSinceViewed": {
+              "type": "boolean"
+            },
+            "conversationId": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "createdAt": {
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+              "type": "string"
+            },
+            "gatewayId": {
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+              "type": "string"
+            },
+            "readOnly": {
+              "type": "boolean"
+            },
+            "status": {
+              "anyOf": [
+                {
+                  "const": "idle",
+                  "type": "string"
+                },
+                {
+                  "const": "working",
+                  "type": "string"
+                },
+                {
+                  "const": "needsInput",
+                  "type": "string"
+                },
+                {
+                  "const": "failed",
+                  "type": "string"
+                },
+                {
+                  "const": "stopped",
+                  "type": "string"
+                }
+              ]
+            },
+            "title": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "trashedAt": {
+              "anyOf": [
+                {
+                  "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "trashReason": {
+              "anyOf": [
+                {
+                  "anyOf": [
+                    {
+                      "const": "individual",
+                      "type": "string"
+                    },
+                    {
+                      "const": "workspace",
+                      "type": "string"
+                    },
+                    {
+                      "const": "workspaceMissing",
+                      "type": "string"
+                    }
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "viewedAt": {
+              "anyOf": [
+                {
+                  "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "workspaceId": {
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "conversationId",
+            "title",
+            "createdAt",
+            "activityAt",
+            "viewedAt",
+            "completedAt",
+            "status",
+            "completedSinceViewed",
+            "trashedAt",
+            "trashReason",
+            "readOnly"
+          ],
+          "type": "object"
+        },
+        "emittedAt": {
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+          "type": "string"
+        },
+        "gatewayId": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "sequence": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "streamId": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "type": {
+          "const": "conversation.summary.changed",
+          "type": "string"
+        }
+      },
+      "required": [
+        "streamId",
+        "sequence",
+        "gatewayId",
+        "emittedAt",
+        "type",
+        "data"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": true,
+      "properties": {
+        "data": {
+          "additionalProperties": true,
+          "properties": {
+            "conversationId": {
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "conversationId"
+          ],
+          "type": "object"
+        },
+        "emittedAt": {
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+          "type": "string"
+        },
+        "gatewayId": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "sequence": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "streamId": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "type": {
+          "const": "conversation.removed",
+          "type": "string"
+        }
+      },
+      "required": [
+        "streamId",
+        "sequence",
+        "gatewayId",
+        "emittedAt",
+        "type",
+        "data"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": true,
+      "properties": {
+        "data": {
+          "additionalProperties": true,
+          "properties": {
+            "activeConversationCount": {
+              "minimum": 0,
+              "type": "integer"
+            },
+            "activityAt": {
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+              "type": "string"
+            },
+            "createdAt": {
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+              "type": "string"
+            },
+            "directoryName": {
+              "pattern": "^[^/\\\\]+$",
+              "type": "string"
+            },
+            "displayName": {
+              "type": "string"
+            },
+            "gatewayId": {
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+              "type": "string"
+            },
+            "gitState": {
+              "anyOf": [
+                {
+                  "const": "none",
+                  "type": "string"
+                },
+                {
+                  "const": "initialized",
+                  "type": "string"
+                },
+                {
+                  "const": "cloned",
+                  "type": "string"
+                }
+              ]
+            },
+            "isDefault": {
+              "type": "boolean"
+            },
+            "state": {
+              "anyOf": [
+                {
+                  "const": "active",
+                  "type": "string"
+                },
+                {
+                  "const": "trashed",
+                  "type": "string"
+                },
+                {
+                  "const": "missing",
+                  "type": "string"
+                }
+              ]
+            },
+            "totalConversationCount": {
+              "minimum": 0,
+              "type": "integer"
+            },
+            "trashedAt": {
+              "anyOf": [
+                {
+                  "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "workspaceId": {
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "workspaceId",
+            "gatewayId",
+            "directoryName",
+            "displayName",
+            "isDefault",
+            "gitState",
+            "createdAt",
+            "activityAt",
+            "trashedAt",
+            "state",
+            "activeConversationCount",
+            "totalConversationCount"
+          ],
+          "type": "object"
+        },
+        "emittedAt": {
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+          "type": "string"
+        },
+        "gatewayId": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "sequence": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "streamId": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "type": {
+          "const": "workspace.summary.changed",
+          "type": "string"
+        }
+      },
+      "required": [
+        "streamId",
+        "sequence",
+        "gatewayId",
+        "emittedAt",
+        "type",
+        "data"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": true,
+      "properties": {
+        "data": {
+          "additionalProperties": true,
+          "properties": {
+            "workspaceId": {
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "workspaceId"
+          ],
+          "type": "object"
+        },
+        "emittedAt": {
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+          "type": "string"
+        },
+        "gatewayId": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "sequence": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "streamId": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "type": {
+          "const": "workspace.removed",
+          "type": "string"
+        }
+      },
+      "required": [
+        "streamId",
+        "sequence",
+        "gatewayId",
+        "emittedAt",
+        "type",
+        "data"
+      ],
+      "type": "object"
+    },
+    {
+      "additionalProperties": true,
+      "properties": {
+        "data": {
+          "additionalProperties": true,
+          "properties": {
+            "conversationId": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            },
+            "severity": {
+              "anyOf": [
+                {
+                  "const": "info",
+                  "type": "string"
+                },
+                {
+                  "const": "warning",
+                  "type": "string"
+                },
+                {
+                  "const": "error",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "required": [
+            "conversationId",
+            "severity",
+            "message"
+          ],
+          "type": "object"
+        },
+        "emittedAt": {
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+          "type": "string"
+        },
+        "gatewayId": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "sequence": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "streamId": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "type": {
+          "const": "conversation.notification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "streamId",
+        "sequence",
+        "gatewayId",
+        "emittedAt",
+        "type",
+        "data"
+      ],
+      "type": "object"
+    }
+  ],
+  "title": "GatewayEvent"
+}

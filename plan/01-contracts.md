@@ -10,7 +10,6 @@ Use the pinned Pi version and the approved documents under [`../docs/`](../docs/
 
 ## Pending work
 
-- [ ] Materialize every first-release request, response, command-result, snapshot, event, and Pi-derived transport DTO as an exact versioned JSON fixture without an unspecified object shape.
 - [ ] Materialize the new-conversation creation-receipt, preflight, retry, and crash-recovery transaction.
 - [ ] Define and fixture HTTP body, image input, SSE event, heartbeat, reconnect, Directory ownership-lease, and artifact-streaming limits.
 - [ ] Materialize the process-scoped Directory project-trust preflight and interaction contract from pinned Pi behavior.

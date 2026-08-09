@@ -1,0 +1,16 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/UpdateWorkspaceRequest.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "displayName": {
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "required": [
+    "displayName"
+  ],
+  "title": "UpdateWorkspaceRequest",
+  "type": "object"
+}
