@@ -54,6 +54,22 @@ See [`docs/operations.md`](docs/operations.md) for the complete supported platfo
 - Implement each Agent Server capability in the CLI before later clients.
 - Keep gateways independent. Do not synchronize, delegate, or redirect work automatically.
 
+## Development
+
+Use Node.js 24.19.0 and npm. Install the development dependencies:
+
+```bash
+npm install
+```
+
+The `prepare` script installs a Husky `commit-msg` hook. The hook requires commit messages that follow Conventional Commits and include a scope:
+
+```text
+docs(readme): explain local setup
+```
+
+Allowed types are `fix`, `feat`, `chore`, `docs`, and `ci`. See [`commitlint.config.cjs`](commitlint.config.cjs) for the complete rules.
+
 ## Documentation
 
 Start with [`docs/README.md`](docs/README.md).
