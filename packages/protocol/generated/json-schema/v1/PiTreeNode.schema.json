@@ -153,40 +153,45 @@
                                 "additionalProperties": true,
                                 "properties": {
                                   "arguments": {
-                                    "$defs": {
-                                      "JsonValue": {
-                                        "$id": "JsonValue",
-                                        "anyOf": [
-                                          {
-                                            "type": "null"
-                                          },
-                                          {
-                                            "type": "boolean"
-                                          },
-                                          {
-                                            "type": "number"
-                                          },
-                                          {
-                                            "type": "string"
-                                          },
-                                          {
-                                            "items": {
-                                              "$ref": "JsonValue"
-                                            },
-                                            "type": "array"
-                                          },
-                                          {
-                                            "patternProperties": {
-                                              "^.*$": {
-                                                "$ref": "JsonValue"
+                                    "patternProperties": {
+                                      "^.*$": {
+                                        "$defs": {
+                                          "JsonValue": {
+                                            "$id": "JsonValue",
+                                            "anyOf": [
+                                              {
+                                                "type": "null"
+                                              },
+                                              {
+                                                "type": "boolean"
+                                              },
+                                              {
+                                                "type": "number"
+                                              },
+                                              {
+                                                "type": "string"
+                                              },
+                                              {
+                                                "items": {
+                                                  "$ref": "JsonValue"
+                                                },
+                                                "type": "array"
+                                              },
+                                              {
+                                                "patternProperties": {
+                                                  "^.*$": {
+                                                    "$ref": "JsonValue"
+                                                  }
+                                                },
+                                                "type": "object"
                                               }
-                                            },
-                                            "type": "object"
+                                            ]
                                           }
-                                        ]
+                                        },
+                                        "$ref": "JsonValue"
                                       }
                                     },
-                                    "$ref": "JsonValue"
+                                    "type": "object"
                                   },
                                   "id": {
                                     "minLength": 1,
@@ -286,31 +291,13 @@
                           "type": "string"
                         },
                         "stopReason": {
-                          "anyOf": [
-                            {
-                              "const": "pending",
-                              "type": "string"
-                            },
-                            {
-                              "const": "stop",
-                              "type": "string"
-                            },
-                            {
-                              "const": "length",
-                              "type": "string"
-                            },
-                            {
-                              "const": "toolUse",
-                              "type": "string"
-                            },
-                            {
-                              "const": "error",
-                              "type": "string"
-                            },
-                            {
-                              "const": "aborted",
-                              "type": "string"
-                            }
+                          "enum": [
+                            "pending",
+                            "stop",
+                            "length",
+                            "toolUse",
+                            "error",
+                            "aborted"
                           ]
                         },
                         "timestamp": {
@@ -819,6 +806,7 @@
                   ]
                 },
                 "timestamp": {
+                  "format": "date-time",
                   "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
                   "type": "string"
                 },
@@ -858,6 +846,7 @@
                   "type": "string"
                 },
                 "timestamp": {
+                  "format": "date-time",
                   "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
                   "type": "string"
                 },
@@ -900,6 +889,7 @@
                   "type": "string"
                 },
                 "timestamp": {
+                  "format": "date-time",
                   "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
                   "type": "string"
                 },
@@ -983,6 +973,7 @@
                   "type": "string"
                 },
                 "timestamp": {
+                  "format": "date-time",
                   "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
                   "type": "string"
                 },
@@ -1141,6 +1132,7 @@
                   "type": "string"
                 },
                 "timestamp": {
+                  "format": "date-time",
                   "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
                   "type": "string"
                 },
@@ -1287,6 +1279,7 @@
                   ]
                 },
                 "timestamp": {
+                  "format": "date-time",
                   "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
                   "type": "string"
                 },
@@ -1421,6 +1414,7 @@
                   ]
                 },
                 "timestamp": {
+                  "format": "date-time",
                   "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
                   "type": "string"
                 },
@@ -1466,6 +1460,7 @@
                   "type": "string"
                 },
                 "timestamp": {
+                  "format": "date-time",
                   "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
                   "type": "string"
                 },
@@ -1505,6 +1500,7 @@
                   ]
                 },
                 "timestamp": {
+                  "format": "date-time",
                   "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
                   "type": "string"
                 },
@@ -1527,6 +1523,7 @@
           "type": "string"
         },
         "labelTimestamp": {
+          "format": "date-time",
           "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
           "type": "string"
         }

@@ -2,6 +2,15 @@
   "$id": "https://bitch.invalid/schema/v1/DirectoryConversationRef.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": true,
+  "not": {
+    "anyOf": [
+      {
+        "required": [
+          "gatewayId"
+        ]
+      }
+    ]
+  },
   "properties": {
     "conversationId": {
       "minLength": 1,

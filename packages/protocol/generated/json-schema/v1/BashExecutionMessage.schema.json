@@ -1,0 +1,43 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/BashExecutionMessage.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "cancelled": {
+      "type": "boolean"
+    },
+    "command": {
+      "type": "string"
+    },
+    "excludeFromContext": {
+      "type": "boolean"
+    },
+    "exitCode": {
+      "type": "integer"
+    },
+    "output": {
+      "type": "string"
+    },
+    "role": {
+      "const": "bashExecution",
+      "type": "string"
+    },
+    "timestamp": {
+      "minimum": 0,
+      "type": "number"
+    },
+    "truncated": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "role",
+    "command",
+    "output",
+    "cancelled",
+    "truncated",
+    "timestamp"
+  ],
+  "title": "BashExecutionMessage",
+  "type": "object"
+}

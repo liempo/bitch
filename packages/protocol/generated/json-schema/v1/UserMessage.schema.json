@@ -1,0 +1,78 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/UserMessage.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "content": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "items": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  },
+                  "textSignature": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "const": "text",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "type",
+                  "text"
+                ],
+                "type": "object"
+              },
+              {
+                "additionalProperties": true,
+                "properties": {
+                  "data": {
+                    "type": "string"
+                  },
+                  "mimeType": {
+                    "pattern": "^image/",
+                    "type": "string"
+                  },
+                  "type": {
+                    "const": "image",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "type",
+                  "data",
+                  "mimeType"
+                ],
+                "type": "object"
+              }
+            ]
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "role": {
+      "const": "user",
+      "type": "string"
+    },
+    "timestamp": {
+      "minimum": 0,
+      "type": "number"
+    }
+  },
+  "required": [
+    "role",
+    "content",
+    "timestamp"
+  ],
+  "title": "UserMessage",
+  "type": "object"
+}

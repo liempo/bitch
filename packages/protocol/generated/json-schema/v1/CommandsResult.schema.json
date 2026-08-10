@@ -15,50 +15,26 @@
             "type": "string"
           },
           "source": {
-            "anyOf": [
-              {
-                "const": "extension",
-                "type": "string"
-              },
-              {
-                "const": "prompt",
-                "type": "string"
-              },
-              {
-                "const": "skill",
-                "type": "string"
-              }
+            "enum": [
+              "extension",
+              "prompt",
+              "skill"
             ]
           },
           "sourceInfo": {
             "additionalProperties": true,
             "properties": {
               "origin": {
-                "anyOf": [
-                  {
-                    "const": "package",
-                    "type": "string"
-                  },
-                  {
-                    "const": "top-level",
-                    "type": "string"
-                  }
+                "enum": [
+                  "package",
+                  "top-level"
                 ]
               },
               "scope": {
-                "anyOf": [
-                  {
-                    "const": "user",
-                    "type": "string"
-                  },
-                  {
-                    "const": "project",
-                    "type": "string"
-                  },
-                  {
-                    "const": "temporary",
-                    "type": "string"
-                  }
+                "enum": [
+                  "user",
+                  "project",
+                  "temporary"
                 ]
               },
               "source": {

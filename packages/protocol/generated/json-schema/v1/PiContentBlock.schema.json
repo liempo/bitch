@@ -71,40 +71,45 @@
       "additionalProperties": true,
       "properties": {
         "arguments": {
-          "$defs": {
-            "JsonValue": {
-              "$id": "JsonValue",
-              "anyOf": [
-                {
-                  "type": "null"
-                },
-                {
-                  "type": "boolean"
-                },
-                {
-                  "type": "number"
-                },
-                {
-                  "type": "string"
-                },
-                {
-                  "items": {
-                    "$ref": "JsonValue"
-                  },
-                  "type": "array"
-                },
-                {
-                  "patternProperties": {
-                    "^.*$": {
-                      "$ref": "JsonValue"
+          "patternProperties": {
+            "^.*$": {
+              "$defs": {
+                "JsonValue": {
+                  "$id": "JsonValue",
+                  "anyOf": [
+                    {
+                      "type": "null"
+                    },
+                    {
+                      "type": "boolean"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "items": {
+                        "$ref": "JsonValue"
+                      },
+                      "type": "array"
+                    },
+                    {
+                      "patternProperties": {
+                        "^.*$": {
+                          "$ref": "JsonValue"
+                        }
+                      },
+                      "type": "object"
                     }
-                  },
-                  "type": "object"
+                  ]
                 }
-              ]
+              },
+              "$ref": "JsonValue"
             }
           },
-          "$ref": "JsonValue"
+          "type": "object"
         },
         "id": {
           "minLength": 1,

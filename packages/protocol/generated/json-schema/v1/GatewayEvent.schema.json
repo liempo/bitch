@@ -10,143 +10,255 @@
           "properties": {
             "conversations": {
               "items": {
-                "additionalProperties": true,
-                "properties": {
-                  "activityAt": {
-                    "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
-                    "type": "string"
-                  },
-                  "completedAt": {
-                    "anyOf": [
-                      {
+                "anyOf": [
+                  {
+                    "additionalProperties": true,
+                    "properties": {
+                      "activityAt": {
+                        "format": "date-time",
                         "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
                         "type": "string"
                       },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "completedSinceViewed": {
-                    "type": "boolean"
-                  },
-                  "conversationId": {
-                    "minLength": 1,
-                    "type": "string"
-                  },
-                  "createdAt": {
-                    "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
-                    "type": "string"
-                  },
-                  "gatewayId": {
-                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
-                    "type": "string"
-                  },
-                  "readOnly": {
-                    "type": "boolean"
-                  },
-                  "status": {
-                    "anyOf": [
-                      {
-                        "const": "idle",
-                        "type": "string"
-                      },
-                      {
-                        "const": "working",
-                        "type": "string"
-                      },
-                      {
-                        "const": "needsInput",
-                        "type": "string"
-                      },
-                      {
-                        "const": "failed",
-                        "type": "string"
-                      },
-                      {
-                        "const": "stopped",
-                        "type": "string"
-                      }
-                    ]
-                  },
-                  "title": {
-                    "anyOf": [
-                      {
-                        "type": "string"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "trashedAt": {
-                    "anyOf": [
-                      {
-                        "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
-                        "type": "string"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "trashReason": {
-                    "anyOf": [
-                      {
+                      "completedAt": {
                         "anyOf": [
                           {
-                            "const": "individual",
+                            "format": "date-time",
+                            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
                             "type": "string"
                           },
                           {
-                            "const": "workspace",
-                            "type": "string"
-                          },
-                          {
-                            "const": "workspaceMissing",
-                            "type": "string"
+                            "type": "null"
                           }
                         ]
                       },
-                      {
-                        "type": "null"
-                      }
-                    ]
-                  },
-                  "viewedAt": {
-                    "anyOf": [
-                      {
+                      "completedSinceViewed": {
+                        "type": "boolean"
+                      },
+                      "conversationId": {
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "createdAt": {
+                        "format": "date-time",
                         "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
                         "type": "string"
                       },
-                      {
-                        "type": "null"
+                      "gatewayId": {
+                        "format": "uuid",
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                        "type": "string"
+                      },
+                      "readOnly": {
+                        "type": "boolean"
+                      },
+                      "status": {
+                        "enum": [
+                          "idle",
+                          "working",
+                          "needsInput",
+                          "failed",
+                          "stopped"
+                        ]
+                      },
+                      "title": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "trashReason": {
+                        "anyOf": [
+                          {
+                            "enum": [
+                              "individual",
+                              "workspace",
+                              "workspaceMissing"
+                            ]
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "trashedAt": {
+                        "anyOf": [
+                          {
+                            "format": "date-time",
+                            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "viewedAt": {
+                        "anyOf": [
+                          {
+                            "format": "date-time",
+                            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "workspaceId": {
+                        "format": "uuid",
+                        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                        "type": "string"
                       }
-                    ]
+                    },
+                    "required": [
+                      "conversationId",
+                      "title",
+                      "createdAt",
+                      "activityAt",
+                      "viewedAt",
+                      "completedAt",
+                      "status",
+                      "completedSinceViewed",
+                      "trashedAt",
+                      "trashReason",
+                      "readOnly",
+                      "gatewayId",
+                      "workspaceId"
+                    ],
+                    "type": "object"
                   },
-                  "workspaceId": {
-                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
-                    "type": "string"
+                  {
+                    "additionalProperties": true,
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "gatewayId"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "workspaceId"
+                          ]
+                        }
+                      ]
+                    },
+                    "properties": {
+                      "activityAt": {
+                        "format": "date-time",
+                        "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+                        "type": "string"
+                      },
+                      "completedAt": {
+                        "anyOf": [
+                          {
+                            "format": "date-time",
+                            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "completedSinceViewed": {
+                        "type": "boolean"
+                      },
+                      "conversationId": {
+                        "minLength": 1,
+                        "type": "string"
+                      },
+                      "createdAt": {
+                        "format": "date-time",
+                        "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+                        "type": "string"
+                      },
+                      "readOnly": {
+                        "type": "boolean"
+                      },
+                      "status": {
+                        "enum": [
+                          "idle",
+                          "working",
+                          "needsInput",
+                          "failed",
+                          "stopped"
+                        ]
+                      },
+                      "title": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "trashReason": {
+                        "anyOf": [
+                          {
+                            "enum": [
+                              "individual",
+                              "workspace",
+                              "workspaceMissing"
+                            ]
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "trashedAt": {
+                        "anyOf": [
+                          {
+                            "format": "date-time",
+                            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "viewedAt": {
+                        "anyOf": [
+                          {
+                            "format": "date-time",
+                            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "conversationId",
+                      "title",
+                      "createdAt",
+                      "activityAt",
+                      "viewedAt",
+                      "completedAt",
+                      "status",
+                      "completedSinceViewed",
+                      "trashedAt",
+                      "trashReason",
+                      "readOnly"
+                    ],
+                    "type": "object"
                   }
-                },
-                "required": [
-                  "conversationId",
-                  "title",
-                  "createdAt",
-                  "activityAt",
-                  "viewedAt",
-                  "completedAt",
-                  "status",
-                  "completedSinceViewed",
-                  "trashedAt",
-                  "trashReason",
-                  "readOnly"
-                ],
-                "type": "object"
+                ]
               },
               "type": "array"
             },
             "revision": {
+              "minLength": 1,
               "type": "string"
             },
             "workspaces": {
@@ -158,57 +270,43 @@
                     "type": "integer"
                   },
                   "activityAt": {
+                    "format": "date-time",
                     "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
                     "type": "string"
                   },
                   "createdAt": {
+                    "format": "date-time",
                     "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
                     "type": "string"
                   },
                   "directoryName": {
-                    "pattern": "^[^/\\\\]+$",
+                    "minLength": 1,
+                    "pattern": "^(?!\\.\\.?$)[^/\\\\\\u0000]+$",
                     "type": "string"
                   },
                   "displayName": {
                     "type": "string"
                   },
                   "gatewayId": {
+                    "format": "uuid",
                     "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
                     "type": "string"
                   },
                   "gitState": {
-                    "anyOf": [
-                      {
-                        "const": "none",
-                        "type": "string"
-                      },
-                      {
-                        "const": "initialized",
-                        "type": "string"
-                      },
-                      {
-                        "const": "cloned",
-                        "type": "string"
-                      }
+                    "enum": [
+                      "none",
+                      "initialized",
+                      "cloned"
                     ]
                   },
                   "isDefault": {
                     "type": "boolean"
                   },
                   "state": {
-                    "anyOf": [
-                      {
-                        "const": "active",
-                        "type": "string"
-                      },
-                      {
-                        "const": "trashed",
-                        "type": "string"
-                      },
-                      {
-                        "const": "missing",
-                        "type": "string"
-                      }
+                    "enum": [
+                      "active",
+                      "trashed",
+                      "missing"
                     ]
                   },
                   "totalConversationCount": {
@@ -218,6 +316,7 @@
                   "trashedAt": {
                     "anyOf": [
                       {
+                        "format": "date-time",
                         "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
                         "type": "string"
                       },
@@ -227,6 +326,7 @@
                     ]
                   },
                   "workspaceId": {
+                    "format": "uuid",
                     "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
                     "type": "string"
                   }
@@ -258,10 +358,12 @@
           "type": "object"
         },
         "emittedAt": {
+          "format": "date-time",
           "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
           "type": "string"
         },
         "gatewayId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -270,6 +372,7 @@
           "type": "integer"
         },
         "streamId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -292,145 +395,258 @@
       "additionalProperties": true,
       "properties": {
         "data": {
-          "additionalProperties": true,
-          "properties": {
-            "activityAt": {
-              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
-              "type": "string"
-            },
-            "completedAt": {
-              "anyOf": [
-                {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "properties": {
+                "activityAt": {
+                  "format": "date-time",
                   "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
                   "type": "string"
                 },
-                {
-                  "type": "null"
-                }
-              ]
-            },
-            "completedSinceViewed": {
-              "type": "boolean"
-            },
-            "conversationId": {
-              "minLength": 1,
-              "type": "string"
-            },
-            "createdAt": {
-              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
-              "type": "string"
-            },
-            "gatewayId": {
-              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
-              "type": "string"
-            },
-            "readOnly": {
-              "type": "boolean"
-            },
-            "status": {
-              "anyOf": [
-                {
-                  "const": "idle",
-                  "type": "string"
-                },
-                {
-                  "const": "working",
-                  "type": "string"
-                },
-                {
-                  "const": "needsInput",
-                  "type": "string"
-                },
-                {
-                  "const": "failed",
-                  "type": "string"
-                },
-                {
-                  "const": "stopped",
-                  "type": "string"
-                }
-              ]
-            },
-            "title": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ]
-            },
-            "trashedAt": {
-              "anyOf": [
-                {
-                  "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ]
-            },
-            "trashReason": {
-              "anyOf": [
-                {
+                "completedAt": {
                   "anyOf": [
                     {
-                      "const": "individual",
+                      "format": "date-time",
+                      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
                       "type": "string"
                     },
                     {
-                      "const": "workspace",
-                      "type": "string"
-                    },
-                    {
-                      "const": "workspaceMissing",
-                      "type": "string"
+                      "type": "null"
                     }
                   ]
                 },
-                {
-                  "type": "null"
-                }
-              ]
-            },
-            "viewedAt": {
-              "anyOf": [
-                {
+                "completedSinceViewed": {
+                  "type": "boolean"
+                },
+                "conversationId": {
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "createdAt": {
+                  "format": "date-time",
                   "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
                   "type": "string"
                 },
-                {
-                  "type": "null"
+                "gatewayId": {
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                  "type": "string"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "status": {
+                  "enum": [
+                    "idle",
+                    "working",
+                    "needsInput",
+                    "failed",
+                    "stopped"
+                  ]
+                },
+                "title": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "trashReason": {
+                  "anyOf": [
+                    {
+                      "enum": [
+                        "individual",
+                        "workspace",
+                        "workspaceMissing"
+                      ]
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "trashedAt": {
+                  "anyOf": [
+                    {
+                      "format": "date-time",
+                      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "viewedAt": {
+                  "anyOf": [
+                    {
+                      "format": "date-time",
+                      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "workspaceId": {
+                  "format": "uuid",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                  "type": "string"
                 }
-              ]
+              },
+              "required": [
+                "conversationId",
+                "title",
+                "createdAt",
+                "activityAt",
+                "viewedAt",
+                "completedAt",
+                "status",
+                "completedSinceViewed",
+                "trashedAt",
+                "trashReason",
+                "readOnly",
+                "gatewayId",
+                "workspaceId"
+              ],
+              "type": "object"
             },
-            "workspaceId": {
-              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
-              "type": "string"
+            {
+              "additionalProperties": true,
+              "not": {
+                "anyOf": [
+                  {
+                    "required": [
+                      "gatewayId"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "workspaceId"
+                    ]
+                  }
+                ]
+              },
+              "properties": {
+                "activityAt": {
+                  "format": "date-time",
+                  "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+                  "type": "string"
+                },
+                "completedAt": {
+                  "anyOf": [
+                    {
+                      "format": "date-time",
+                      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "completedSinceViewed": {
+                  "type": "boolean"
+                },
+                "conversationId": {
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "createdAt": {
+                  "format": "date-time",
+                  "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+                  "type": "string"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "status": {
+                  "enum": [
+                    "idle",
+                    "working",
+                    "needsInput",
+                    "failed",
+                    "stopped"
+                  ]
+                },
+                "title": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "trashReason": {
+                  "anyOf": [
+                    {
+                      "enum": [
+                        "individual",
+                        "workspace",
+                        "workspaceMissing"
+                      ]
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "trashedAt": {
+                  "anyOf": [
+                    {
+                      "format": "date-time",
+                      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "viewedAt": {
+                  "anyOf": [
+                    {
+                      "format": "date-time",
+                      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "conversationId",
+                "title",
+                "createdAt",
+                "activityAt",
+                "viewedAt",
+                "completedAt",
+                "status",
+                "completedSinceViewed",
+                "trashedAt",
+                "trashReason",
+                "readOnly"
+              ],
+              "type": "object"
             }
-          },
-          "required": [
-            "conversationId",
-            "title",
-            "createdAt",
-            "activityAt",
-            "viewedAt",
-            "completedAt",
-            "status",
-            "completedSinceViewed",
-            "trashedAt",
-            "trashReason",
-            "readOnly"
-          ],
-          "type": "object"
+          ]
         },
         "emittedAt": {
+          "format": "date-time",
           "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
           "type": "string"
         },
         "gatewayId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -439,6 +655,7 @@
           "type": "integer"
         },
         "streamId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -474,10 +691,12 @@
           "type": "object"
         },
         "emittedAt": {
+          "format": "date-time",
           "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
           "type": "string"
         },
         "gatewayId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -486,6 +705,7 @@
           "type": "integer"
         },
         "streamId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -515,57 +735,43 @@
               "type": "integer"
             },
             "activityAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             },
             "createdAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             },
             "directoryName": {
-              "pattern": "^[^/\\\\]+$",
+              "minLength": 1,
+              "pattern": "^(?!\\.\\.?$)[^/\\\\\\u0000]+$",
               "type": "string"
             },
             "displayName": {
               "type": "string"
             },
             "gatewayId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             },
             "gitState": {
-              "anyOf": [
-                {
-                  "const": "none",
-                  "type": "string"
-                },
-                {
-                  "const": "initialized",
-                  "type": "string"
-                },
-                {
-                  "const": "cloned",
-                  "type": "string"
-                }
+              "enum": [
+                "none",
+                "initialized",
+                "cloned"
               ]
             },
             "isDefault": {
               "type": "boolean"
             },
             "state": {
-              "anyOf": [
-                {
-                  "const": "active",
-                  "type": "string"
-                },
-                {
-                  "const": "trashed",
-                  "type": "string"
-                },
-                {
-                  "const": "missing",
-                  "type": "string"
-                }
+              "enum": [
+                "active",
+                "trashed",
+                "missing"
               ]
             },
             "totalConversationCount": {
@@ -575,6 +781,7 @@
             "trashedAt": {
               "anyOf": [
                 {
+                  "format": "date-time",
                   "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
                   "type": "string"
                 },
@@ -584,6 +791,7 @@
               ]
             },
             "workspaceId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             }
@@ -605,10 +813,12 @@
           "type": "object"
         },
         "emittedAt": {
+          "format": "date-time",
           "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
           "type": "string"
         },
         "gatewayId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -617,6 +827,7 @@
           "type": "integer"
         },
         "streamId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -642,6 +853,7 @@
           "additionalProperties": true,
           "properties": {
             "workspaceId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             }
@@ -652,10 +864,12 @@
           "type": "object"
         },
         "emittedAt": {
+          "format": "date-time",
           "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
           "type": "string"
         },
         "gatewayId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -664,6 +878,7 @@
           "type": "integer"
         },
         "streamId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -696,19 +911,10 @@
               "type": "string"
             },
             "severity": {
-              "anyOf": [
-                {
-                  "const": "info",
-                  "type": "string"
-                },
-                {
-                  "const": "warning",
-                  "type": "string"
-                },
-                {
-                  "const": "error",
-                  "type": "string"
-                }
+              "enum": [
+                "info",
+                "warning",
+                "error"
               ]
             }
           },
@@ -720,10 +926,12 @@
           "type": "object"
         },
         "emittedAt": {
+          "format": "date-time",
           "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
           "type": "string"
         },
         "gatewayId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -732,6 +940,7 @@
           "type": "integer"
         },
         "streamId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },

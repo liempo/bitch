@@ -7,19 +7,10 @@
       "type": "string"
     },
     "status": {
-      "anyOf": [
-        {
-          "const": "live",
-          "type": "string"
-        },
-        {
-          "const": "ready",
-          "type": "string"
-        },
-        {
-          "const": "notReady",
-          "type": "string"
-        }
+      "enum": [
+        "live",
+        "ready",
+        "notReady"
       ]
     }
   },

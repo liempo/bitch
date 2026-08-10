@@ -4,6 +4,40 @@
   "anyOf": [
     {
       "additionalProperties": true,
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "url"
+            ]
+          },
+          {
+            "required": [
+              "instructions"
+            ]
+          },
+          {
+            "required": [
+              "userCode"
+            ]
+          },
+          {
+            "required": [
+              "verificationUri"
+            ]
+          },
+          {
+            "required": [
+              "intervalSeconds"
+            ]
+          },
+          {
+            "required": [
+              "expiresInSeconds"
+            ]
+          }
+        ]
+      },
       "properties": {
         "links": {
           "items": {
@@ -45,6 +79,40 @@
     },
     {
       "additionalProperties": true,
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "message"
+            ]
+          },
+          {
+            "required": [
+              "links"
+            ]
+          },
+          {
+            "required": [
+              "userCode"
+            ]
+          },
+          {
+            "required": [
+              "verificationUri"
+            ]
+          },
+          {
+            "required": [
+              "intervalSeconds"
+            ]
+          },
+          {
+            "required": [
+              "expiresInSeconds"
+            ]
+          }
+        ]
+      },
       "properties": {
         "instructions": {
           "type": "string"
@@ -71,6 +139,30 @@
     },
     {
       "additionalProperties": true,
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "message"
+            ]
+          },
+          {
+            "required": [
+              "links"
+            ]
+          },
+          {
+            "required": [
+              "url"
+            ]
+          },
+          {
+            "required": [
+              "instructions"
+            ]
+          }
+        ]
+      },
       "properties": {
         "expiresInSeconds": {
           "minimum": 1,
@@ -106,6 +198,45 @@
     },
     {
       "additionalProperties": true,
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "links"
+            ]
+          },
+          {
+            "required": [
+              "url"
+            ]
+          },
+          {
+            "required": [
+              "instructions"
+            ]
+          },
+          {
+            "required": [
+              "userCode"
+            ]
+          },
+          {
+            "required": [
+              "verificationUri"
+            ]
+          },
+          {
+            "required": [
+              "intervalSeconds"
+            ]
+          },
+          {
+            "required": [
+              "expiresInSeconds"
+            ]
+          }
+        ]
+      },
       "properties": {
         "message": {
           "type": "string"

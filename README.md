@@ -6,9 +6,9 @@ BITCH is a planned self-hosted interface between command-line or terminal client
 
 ## Status
 
-The repository is in planning and pre-alpha status. It has no product code or installable package.
+The repository is in planning and pre-alpha status. The `@bitch/protocol` contract package and its version 1 fixtures are implemented. The Agent Server, CLI, TUI, and installable product package are pending.
 
-The commands below show the approved interface contract. They do not work yet.
+The product commands below show the approved interface contract. They do not work yet.
 
 ## Planned first release
 
@@ -53,6 +53,19 @@ See [`docs/operations.md`](docs/operations.md) for the complete supported platfo
 - Route Directory mode and Gateway mode through an Agent Server.
 - Implement each Agent Server capability in the CLI before later clients.
 - Keep gateways independent. Do not synchronize, delegate, or redirect work automatically.
+
+## Protocol development
+
+Use Node.js `24.19.0`.
+
+```bash
+npm ci
+npm run validate
+npm run build
+npm audit
+```
+
+Run `npm run fixtures:generate` after a canonical schema, fixture, or HTTP operation changes. Commit the generated artifacts with the source change.
 
 ## Documentation
 

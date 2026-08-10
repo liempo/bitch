@@ -4,17 +4,30 @@
   "anyOf": [
     {
       "additionalProperties": true,
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "prompt"
+            ]
+          },
+          {
+            "required": [
+              "provider"
+            ]
+          },
+          {
+            "required": [
+              "problem"
+            ]
+          }
+        ]
+      },
       "properties": {
         "authType": {
-          "anyOf": [
-            {
-              "const": "api_key",
-              "type": "string"
-            },
-            {
-              "const": "oauth",
-              "type": "string"
-            }
+          "enum": [
+            "api_key",
+            "oauth"
           ]
         },
         "notifications": {
@@ -22,6 +35,40 @@
             "anyOf": [
               {
                 "additionalProperties": true,
+                "not": {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "url"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "instructions"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "userCode"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "verificationUri"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "intervalSeconds"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "expiresInSeconds"
+                      ]
+                    }
+                  ]
+                },
                 "properties": {
                   "links": {
                     "items": {
@@ -63,6 +110,40 @@
               },
               {
                 "additionalProperties": true,
+                "not": {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "message"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "links"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "userCode"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "verificationUri"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "intervalSeconds"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "expiresInSeconds"
+                      ]
+                    }
+                  ]
+                },
                 "properties": {
                   "instructions": {
                     "type": "string"
@@ -89,6 +170,30 @@
               },
               {
                 "additionalProperties": true,
+                "not": {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "message"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "links"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "url"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "instructions"
+                      ]
+                    }
+                  ]
+                },
                 "properties": {
                   "expiresInSeconds": {
                     "minimum": 1,
@@ -124,6 +229,45 @@
               },
               {
                 "additionalProperties": true,
+                "not": {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "links"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "url"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "instructions"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "userCode"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "verificationUri"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "intervalSeconds"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "expiresInSeconds"
+                      ]
+                    }
+                  ]
+                },
                 "properties": {
                   "message": {
                     "type": "string"
@@ -149,6 +293,7 @@
           "type": "array"
         },
         "operationId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -177,17 +322,25 @@
     },
     {
       "additionalProperties": true,
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "provider"
+            ]
+          },
+          {
+            "required": [
+              "problem"
+            ]
+          }
+        ]
+      },
       "properties": {
         "authType": {
-          "anyOf": [
-            {
-              "const": "api_key",
-              "type": "string"
-            },
-            {
-              "const": "oauth",
-              "type": "string"
-            }
+          "enum": [
+            "api_key",
+            "oauth"
           ]
         },
         "notifications": {
@@ -195,6 +348,40 @@
             "anyOf": [
               {
                 "additionalProperties": true,
+                "not": {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "url"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "instructions"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "userCode"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "verificationUri"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "intervalSeconds"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "expiresInSeconds"
+                      ]
+                    }
+                  ]
+                },
                 "properties": {
                   "links": {
                     "items": {
@@ -236,6 +423,40 @@
               },
               {
                 "additionalProperties": true,
+                "not": {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "message"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "links"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "userCode"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "verificationUri"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "intervalSeconds"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "expiresInSeconds"
+                      ]
+                    }
+                  ]
+                },
                 "properties": {
                   "instructions": {
                     "type": "string"
@@ -262,6 +483,30 @@
               },
               {
                 "additionalProperties": true,
+                "not": {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "message"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "links"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "url"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "instructions"
+                      ]
+                    }
+                  ]
+                },
                 "properties": {
                   "expiresInSeconds": {
                     "minimum": 1,
@@ -297,6 +542,45 @@
               },
               {
                 "additionalProperties": true,
+                "not": {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "links"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "url"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "instructions"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "userCode"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "verificationUri"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "intervalSeconds"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "expiresInSeconds"
+                      ]
+                    }
+                  ]
+                },
                 "properties": {
                   "message": {
                     "type": "string"
@@ -322,6 +606,7 @@
           "type": "array"
         },
         "operationId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -329,6 +614,15 @@
           "anyOf": [
             {
               "additionalProperties": true,
+              "not": {
+                "anyOf": [
+                  {
+                    "required": [
+                      "options"
+                    ]
+                  }
+                ]
+              },
               "properties": {
                 "message": {
                   "type": "string"
@@ -337,23 +631,15 @@
                   "type": "string"
                 },
                 "promptId": {
+                  "format": "uuid",
                   "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
                   "type": "string"
                 },
                 "type": {
-                  "anyOf": [
-                    {
-                      "const": "text",
-                      "type": "string"
-                    },
-                    {
-                      "const": "secret",
-                      "type": "string"
-                    },
-                    {
-                      "const": "manual_code",
-                      "type": "string"
-                    }
+                  "enum": [
+                    "text",
+                    "secret",
+                    "manual_code"
                   ]
                 }
               },
@@ -366,6 +652,15 @@
             },
             {
               "additionalProperties": true,
+              "not": {
+                "anyOf": [
+                  {
+                    "required": [
+                      "placeholder"
+                    ]
+                  }
+                ]
+              },
               "properties": {
                 "message": {
                   "type": "string"
@@ -394,6 +689,7 @@
                   "type": "array"
                 },
                 "promptId": {
+                  "format": "uuid",
                   "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
                   "type": "string"
                 },
@@ -438,17 +734,25 @@
     },
     {
       "additionalProperties": true,
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "prompt"
+            ]
+          },
+          {
+            "required": [
+              "problem"
+            ]
+          }
+        ]
+      },
       "properties": {
         "authType": {
-          "anyOf": [
-            {
-              "const": "api_key",
-              "type": "string"
-            },
-            {
-              "const": "oauth",
-              "type": "string"
-            }
+          "enum": [
+            "api_key",
+            "oauth"
           ]
         },
         "notifications": {
@@ -456,6 +760,40 @@
             "anyOf": [
               {
                 "additionalProperties": true,
+                "not": {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "url"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "instructions"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "userCode"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "verificationUri"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "intervalSeconds"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "expiresInSeconds"
+                      ]
+                    }
+                  ]
+                },
                 "properties": {
                   "links": {
                     "items": {
@@ -497,6 +835,40 @@
               },
               {
                 "additionalProperties": true,
+                "not": {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "message"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "links"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "userCode"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "verificationUri"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "intervalSeconds"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "expiresInSeconds"
+                      ]
+                    }
+                  ]
+                },
                 "properties": {
                   "instructions": {
                     "type": "string"
@@ -523,6 +895,30 @@
               },
               {
                 "additionalProperties": true,
+                "not": {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "message"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "links"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "url"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "instructions"
+                      ]
+                    }
+                  ]
+                },
                 "properties": {
                   "expiresInSeconds": {
                     "minimum": 1,
@@ -558,6 +954,45 @@
               },
               {
                 "additionalProperties": true,
+                "not": {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "links"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "url"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "instructions"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "userCode"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "verificationUri"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "intervalSeconds"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "expiresInSeconds"
+                      ]
+                    }
+                  ]
+                },
                 "properties": {
                   "message": {
                     "type": "string"
@@ -583,6 +1018,7 @@
           "type": "array"
         },
         "operationId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -591,15 +1027,9 @@
           "properties": {
             "authentication": {
               "items": {
-                "anyOf": [
-                  {
-                    "const": "api_key",
-                    "type": "string"
-                  },
-                  {
-                    "const": "oauth",
-                    "type": "string"
-                  }
+                "enum": [
+                  "api_key",
+                  "oauth"
                 ]
               },
               "type": "array",
@@ -614,19 +1044,10 @@
               "type": "string"
             },
             "status": {
-              "anyOf": [
-                {
-                  "const": "authenticated",
-                  "type": "string"
-                },
-                {
-                  "const": "unauthenticated",
-                  "type": "string"
-                },
-                {
-                  "const": "expired",
-                  "type": "string"
-                }
+              "enum": [
+                "authenticated",
+                "unauthenticated",
+                "expired"
               ]
             }
           },
@@ -664,17 +1085,25 @@
     },
     {
       "additionalProperties": true,
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "prompt"
+            ]
+          },
+          {
+            "required": [
+              "provider"
+            ]
+          }
+        ]
+      },
       "properties": {
         "authType": {
-          "anyOf": [
-            {
-              "const": "api_key",
-              "type": "string"
-            },
-            {
-              "const": "oauth",
-              "type": "string"
-            }
+          "enum": [
+            "api_key",
+            "oauth"
           ]
         },
         "notifications": {
@@ -682,6 +1111,40 @@
             "anyOf": [
               {
                 "additionalProperties": true,
+                "not": {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "url"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "instructions"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "userCode"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "verificationUri"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "intervalSeconds"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "expiresInSeconds"
+                      ]
+                    }
+                  ]
+                },
                 "properties": {
                   "links": {
                     "items": {
@@ -723,6 +1186,40 @@
               },
               {
                 "additionalProperties": true,
+                "not": {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "message"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "links"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "userCode"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "verificationUri"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "intervalSeconds"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "expiresInSeconds"
+                      ]
+                    }
+                  ]
+                },
                 "properties": {
                   "instructions": {
                     "type": "string"
@@ -749,6 +1246,30 @@
               },
               {
                 "additionalProperties": true,
+                "not": {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "message"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "links"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "url"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "instructions"
+                      ]
+                    }
+                  ]
+                },
                 "properties": {
                   "expiresInSeconds": {
                     "minimum": 1,
@@ -784,6 +1305,45 @@
               },
               {
                 "additionalProperties": true,
+                "not": {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "links"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "url"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "instructions"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "userCode"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "verificationUri"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "intervalSeconds"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "expiresInSeconds"
+                      ]
+                    }
+                  ]
+                },
                 "properties": {
                   "message": {
                     "type": "string"
@@ -809,6 +1369,7 @@
           "type": "array"
         },
         "operationId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -816,6 +1377,7 @@
           "additionalProperties": true,
           "properties": {
             "artifactId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             },
@@ -824,6 +1386,7 @@
               "type": "string"
             },
             "commandId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             },
@@ -836,14 +1399,17 @@
               "type": "string"
             },
             "dialogId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             },
             "gatewayId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             },
             "instance": {
+              "format": "uri-reference",
               "type": "string"
             },
             "issues": {
@@ -870,6 +1436,7 @@
               "type": "array"
             },
             "requestId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             },
@@ -886,10 +1453,12 @@
               "type": "string"
             },
             "type": {
+              "format": "uri",
               "minLength": 1,
               "type": "string"
             },
             "workspaceId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             }
@@ -931,17 +1500,30 @@
     },
     {
       "additionalProperties": true,
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "prompt"
+            ]
+          },
+          {
+            "required": [
+              "provider"
+            ]
+          },
+          {
+            "required": [
+              "problem"
+            ]
+          }
+        ]
+      },
       "properties": {
         "authType": {
-          "anyOf": [
-            {
-              "const": "api_key",
-              "type": "string"
-            },
-            {
-              "const": "oauth",
-              "type": "string"
-            }
+          "enum": [
+            "api_key",
+            "oauth"
           ]
         },
         "notifications": {
@@ -949,6 +1531,40 @@
             "anyOf": [
               {
                 "additionalProperties": true,
+                "not": {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "url"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "instructions"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "userCode"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "verificationUri"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "intervalSeconds"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "expiresInSeconds"
+                      ]
+                    }
+                  ]
+                },
                 "properties": {
                   "links": {
                     "items": {
@@ -990,6 +1606,40 @@
               },
               {
                 "additionalProperties": true,
+                "not": {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "message"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "links"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "userCode"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "verificationUri"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "intervalSeconds"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "expiresInSeconds"
+                      ]
+                    }
+                  ]
+                },
                 "properties": {
                   "instructions": {
                     "type": "string"
@@ -1016,6 +1666,30 @@
               },
               {
                 "additionalProperties": true,
+                "not": {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "message"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "links"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "url"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "instructions"
+                      ]
+                    }
+                  ]
+                },
                 "properties": {
                   "expiresInSeconds": {
                     "minimum": 1,
@@ -1051,6 +1725,45 @@
               },
               {
                 "additionalProperties": true,
+                "not": {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "links"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "url"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "instructions"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "userCode"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "verificationUri"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "intervalSeconds"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "expiresInSeconds"
+                      ]
+                    }
+                  ]
+                },
                 "properties": {
                   "message": {
                     "type": "string"
@@ -1076,6 +1789,7 @@
           "type": "array"
         },
         "operationId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },

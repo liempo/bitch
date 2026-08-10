@@ -1,0 +1,28 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/DiagnosticErrorInfo.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "code": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        }
+      ]
+    },
+    "message": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "message"
+  ],
+  "title": "DiagnosticErrorInfo",
+  "type": "object"
+}

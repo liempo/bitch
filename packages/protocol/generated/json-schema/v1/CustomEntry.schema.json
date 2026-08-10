@@ -1,0 +1,79 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/CustomEntry.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "customType": {
+      "type": "string"
+    },
+    "data": {
+      "$defs": {
+        "JsonValue": {
+          "$id": "JsonValue",
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "$ref": "JsonValue"
+              },
+              "type": "array"
+            },
+            {
+              "patternProperties": {
+                "^.*$": {
+                  "$ref": "JsonValue"
+                }
+              },
+              "type": "object"
+            }
+          ]
+        }
+      },
+      "$ref": "JsonValue"
+    },
+    "id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "parentId": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "timestamp": {
+      "format": "date-time",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+      "type": "string"
+    },
+    "type": {
+      "const": "custom",
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "parentId",
+    "timestamp",
+    "type",
+    "customType"
+  ],
+  "title": "CustomEntry",
+  "type": "object"
+}

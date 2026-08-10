@@ -1,0 +1,21 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/ProtocolVersion.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "major": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "minor": {
+      "minimum": 0,
+      "type": "integer"
+    }
+  },
+  "required": [
+    "major",
+    "minor"
+  ],
+  "title": "ProtocolVersion",
+  "type": "object"
+}

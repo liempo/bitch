@@ -2,15 +2,15 @@
 
 ## Status
 
-Approved first-release `/v1` resource, schema, pagination, and event contract. Implementation is pending.
+Approved first-release `/v1` resource, schema, pagination, and event contract. The canonical schemas, HTTP operation map, and version 1 fixtures are implemented. The Agent Server is pending.
 
 ## Common rules
 
-The canonical TypeBox schemas in `packages/protocol/src/schemas.ts` implement this document and are exported by `@bitch/protocol`. `packages/protocol/src/http-contract.ts` binds each operation to its request, response, and fixture schemas. Generated JSON Schema under `packages/protocol/generated/json-schema/v1/` and `packages/protocol/generated/openapi-v1.json` are committed build artifacts. `npm run check:generated` fails when these artifacts do not match the canonical schemas.
+The canonical TypeBox schemas in `packages/protocol/src/schemas/` implement this document and are exported by `@bitch/protocol`. `packages/protocol/src/http/operations.ts` binds each operation to its parameters, request variants, response statuses, and fixture variants. Generated JSON Schema under `packages/protocol/generated/json-schema/v1/` and `packages/protocol/generated/openapi-v1.json` are committed build artifacts. `npm run check:generated` fails when an expected artifact is missing or changed. It also fails when an unexpected artifact remains in a generated directory.
 
 JSON field names use lower camel case. IDs use canonical lowercase UUID strings unless Pi defines the ID. Timestamps use UTC RFC 3339 with millisecond precision.
 
-Request bodies reject unknown fields. Response readers accept unknown additive fields within `/v1`.
+Request bodies reject unknown fields. Response readers accept unknown additive fields within `/v1`. A response schema still rejects a version 1 field that conflicts with its discriminated state. For example, an accepted receipt cannot contain `result`, `problem`, or `settledAt`.
 
 ## Access boundary
 

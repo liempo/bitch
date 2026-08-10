@@ -1,0 +1,14 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/ThinkingLevel.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "enum": [
+    "off",
+    "minimal",
+    "low",
+    "medium",
+    "high",
+    "xhigh",
+    "max"
+  ],
+  "title": "ThinkingLevel"
+}

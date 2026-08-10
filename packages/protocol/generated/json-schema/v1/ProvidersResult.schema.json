@@ -9,15 +9,9 @@
         "properties": {
           "authentication": {
             "items": {
-              "anyOf": [
-                {
-                  "const": "api_key",
-                  "type": "string"
-                },
-                {
-                  "const": "oauth",
-                  "type": "string"
-                }
+              "enum": [
+                "api_key",
+                "oauth"
               ]
             },
             "type": "array",
@@ -32,19 +26,10 @@
             "type": "string"
           },
           "status": {
-            "anyOf": [
-              {
-                "const": "authenticated",
-                "type": "string"
-              },
-              {
-                "const": "unauthenticated",
-                "type": "string"
-              },
-              {
-                "const": "expired",
-                "type": "string"
-              }
+            "enum": [
+              "authenticated",
+              "unauthenticated",
+              "expired"
             ]
           }
         },

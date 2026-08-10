@@ -6,5 +6,5 @@
     "types": ["node"]
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["src/generate.ts", "src/validate-fixtures.ts"]
+  "exclude": ["src/generation/**/*.ts", "src/validation/cli.ts"]
 }

@@ -1,50 +1,114 @@
 {
   "$id": "https://bitch.invalid/schema/v1/ArtifactDescriptor.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "additionalProperties": true,
-  "properties": {
-    "artifactId": {
-      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
-      "type": "string"
+  "anyOf": [
+    {
+      "additionalProperties": true,
+      "properties": {
+        "artifactId": {
+          "format": "uuid",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "byteCount": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "conversationId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "createdAt": {
+          "format": "date-time",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+          "type": "string"
+        },
+        "downloadUrl": {
+          "pattern": "^/v1/artifacts/[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "fileName": {
+          "minLength": 1,
+          "pattern": "^(?!\\.\\.?$)[^/\\\\\\u0000]+$",
+          "type": "string"
+        },
+        "gatewayId": {
+          "format": "uuid",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "mediaType": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "artifactId",
+        "conversationId",
+        "fileName",
+        "mediaType",
+        "byteCount",
+        "createdAt",
+        "downloadUrl",
+        "gatewayId"
+      ],
+      "type": "object"
     },
-    "byteCount": {
-      "minimum": 0,
-      "type": "integer"
-    },
-    "conversationId": {
-      "minLength": 1,
-      "type": "string"
-    },
-    "createdAt": {
-      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
-      "type": "string"
-    },
-    "downloadUrl": {
-      "pattern": "^/v1/artifacts/[0-9a-f-]+$",
-      "type": "string"
-    },
-    "fileName": {
-      "pattern": "^[^/\\\\]+$",
-      "type": "string"
-    },
-    "gatewayId": {
-      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
-      "type": "string"
-    },
-    "mediaType": {
-      "minLength": 1,
-      "type": "string"
+    {
+      "additionalProperties": true,
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "gatewayId"
+            ]
+          }
+        ]
+      },
+      "properties": {
+        "artifactId": {
+          "format": "uuid",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "byteCount": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "conversationId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "createdAt": {
+          "format": "date-time",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+          "type": "string"
+        },
+        "downloadUrl": {
+          "pattern": "^/v1/artifacts/[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "fileName": {
+          "minLength": 1,
+          "pattern": "^(?!\\.\\.?$)[^/\\\\\\u0000]+$",
+          "type": "string"
+        },
+        "mediaType": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "artifactId",
+        "conversationId",
+        "fileName",
+        "mediaType",
+        "byteCount",
+        "createdAt",
+        "downloadUrl"
+      ],
+      "type": "object"
     }
-  },
-  "required": [
-    "artifactId",
-    "conversationId",
-    "fileName",
-    "mediaType",
-    "byteCount",
-    "createdAt",
-    "downloadUrl"
   ],
-  "title": "ArtifactDescriptor",
-  "type": "object"
+  "title": "ArtifactDescriptor"
 }

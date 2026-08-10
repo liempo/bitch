@@ -1,3 +1,14 @@
-export * from "./schemas.js";
-export { fixtureCorpus, validateFixtureCorpus, type FixtureValidationError } from "./validation.js";
-export type { Fixture, FixtureCorpus } from "./fixture-data.js";
+export * from "./schemas/index.js";
+export { fixtureCorpus, fixture, type Fixture, type FixtureCorpus } from "./fixtures/index.js";
+export { httpOperations } from "./http/index.js";
+export type {
+  HttpBodyContract,
+  HttpMediaType,
+  HttpMethod,
+  HttpOperation,
+  HttpParameter,
+  HttpResponseContract,
+  HttpSchemaReference,
+} from "./http/index.js";
+export { canonicalPayloadHash } from "./receipts/payload-hash.js";
+export { validateFixtureCorpus, type FixtureValidationError } from "./validation/index.js";

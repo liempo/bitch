@@ -2,7 +2,7 @@
 
 ## Status
 
-Approved minimal first-release testing strategy. Implementation is pending.
+Approved minimal first-release testing strategy. Protocol fixture, validation, type-inference, HTTP contract, and generated-artifact checks are implemented. Agent Server, CLI, container, and TUI tests are pending.
 
 ## Principle
 

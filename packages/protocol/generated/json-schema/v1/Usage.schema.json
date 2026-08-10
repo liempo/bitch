@@ -1,0 +1,73 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/Usage.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "cacheRead": {
+      "minimum": 0,
+      "type": "number"
+    },
+    "cacheWrite": {
+      "minimum": 0,
+      "type": "number"
+    },
+    "cacheWrite1h": {
+      "minimum": 0,
+      "type": "number"
+    },
+    "cost": {
+      "additionalProperties": true,
+      "properties": {
+        "cacheRead": {
+          "type": "number"
+        },
+        "cacheWrite": {
+          "type": "number"
+        },
+        "input": {
+          "type": "number"
+        },
+        "output": {
+          "type": "number"
+        },
+        "total": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "input",
+        "output",
+        "cacheRead",
+        "cacheWrite",
+        "total"
+      ],
+      "type": "object"
+    },
+    "input": {
+      "minimum": 0,
+      "type": "number"
+    },
+    "output": {
+      "minimum": 0,
+      "type": "number"
+    },
+    "reasoning": {
+      "minimum": 0,
+      "type": "number"
+    },
+    "totalTokens": {
+      "minimum": 0,
+      "type": "number"
+    }
+  },
+  "required": [
+    "input",
+    "output",
+    "cacheRead",
+    "cacheWrite",
+    "totalTokens",
+    "cost"
+  ],
+  "title": "Usage",
+  "type": "object"
+}

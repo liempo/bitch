@@ -1,0 +1,23 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/TextContent.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "text": {
+      "type": "string"
+    },
+    "textSignature": {
+      "type": "string"
+    },
+    "type": {
+      "const": "text",
+      "type": "string"
+    }
+  },
+  "required": [
+    "type",
+    "text"
+  ],
+  "title": "TextContent",
+  "type": "object"
+}

@@ -6,7 +6,8 @@
       "additionalProperties": false,
       "properties": {
         "directoryName": {
-          "pattern": "^[^/\\\\]+$",
+          "minLength": 1,
+          "pattern": "^(?!\\.\\.?$)[^/\\\\\\u0000]+$",
           "type": "string"
         },
         "displayName": {
@@ -27,7 +28,8 @@
       "additionalProperties": false,
       "properties": {
         "directoryName": {
-          "pattern": "^[^/\\\\]+$",
+          "minLength": 1,
+          "pattern": "^(?!\\.\\.?$)[^/\\\\\\u0000]+$",
           "type": "string"
         },
         "displayName": {
@@ -48,7 +50,8 @@
       "additionalProperties": false,
       "properties": {
         "directoryName": {
-          "pattern": "^[^/\\\\]+$",
+          "minLength": 1,
+          "pattern": "^(?!\\.\\.?$)[^/\\\\\\u0000]+$",
           "type": "string"
         },
         "displayName": {
@@ -56,6 +59,7 @@
         },
         "repositoryUrl": {
           "minLength": 1,
+          "pattern": "^(?:https://(?:\\[[0-9A-Fa-f:]+\\]|[^/@:?#\\s]+)(?::[0-9]+)?(?:/[^\\s?#]*)?|ssh://(?:[A-Za-z0-9._-]+@)?(?:\\[[0-9A-Fa-f:]+\\]|[^/@:?#\\s]+)(?::[0-9]+)?/[^\\s?#]+|(?!(?:https?|ssh)://)(?:[A-Za-z0-9._-]+@)?[^/:@?#\\s]+:[^/\\s?#][^\\s?#]*)$",
           "type": "string"
         },
         "type": {

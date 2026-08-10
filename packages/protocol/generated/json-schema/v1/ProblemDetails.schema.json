@@ -4,6 +4,7 @@
   "additionalProperties": true,
   "properties": {
     "artifactId": {
+      "format": "uuid",
       "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
       "type": "string"
     },
@@ -12,6 +13,7 @@
       "type": "string"
     },
     "commandId": {
+      "format": "uuid",
       "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
       "type": "string"
     },
@@ -24,14 +26,17 @@
       "type": "string"
     },
     "dialogId": {
+      "format": "uuid",
       "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
       "type": "string"
     },
     "gatewayId": {
+      "format": "uuid",
       "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
       "type": "string"
     },
     "instance": {
+      "format": "uri-reference",
       "type": "string"
     },
     "issues": {
@@ -58,6 +63,7 @@
       "type": "array"
     },
     "requestId": {
+      "format": "uuid",
       "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
       "type": "string"
     },
@@ -74,10 +80,12 @@
       "type": "string"
     },
     "type": {
+      "format": "uri",
       "minLength": 1,
       "type": "string"
     },
     "workspaceId": {
+      "format": "uuid",
       "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
       "type": "string"
     }

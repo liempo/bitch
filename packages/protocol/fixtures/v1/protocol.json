@@ -1,7 +1,7 @@
 {
   "fixtures": {
     "assistantEvents": {
-      "done": {
+      "doneLength": {
         "schema": "AssistantMessageEvent",
         "value": {
           "message": {
@@ -32,7 +32,7 @@
               {
                 "error": {
                   "code": "fixture_error",
-                  "message": "deterministic",
+                  "message": "Deterministic fixture failure",
                   "name": "FixtureError"
                 },
                 "timestamp": 1767225600000,
@@ -41,7 +41,141 @@
             ],
             "model": "fixture-model",
             "provider": "scripted",
-            "rawStopReason": "tool_use",
+            "rawStopReason": "length",
+            "responseId": "response-1",
+            "responseModel": "fixture-model-2026",
+            "role": "assistant",
+            "stopReason": "length",
+            "timestamp": 1767225600001,
+            "usage": {
+              "cacheRead": 2,
+              "cacheWrite": 1,
+              "cacheWrite1h": 1,
+              "cost": {
+                "cacheRead": 0.0001,
+                "cacheWrite": 0.0002,
+                "input": 0.001,
+                "output": 0.002,
+                "total": 0.0033
+              },
+              "input": 10,
+              "output": 5,
+              "reasoning": 2,
+              "totalTokens": 18
+            }
+          },
+          "reason": "length",
+          "type": "done"
+        }
+      },
+      "doneStop": {
+        "schema": "AssistantMessageEvent",
+        "value": {
+          "message": {
+            "api": "pi-messages",
+            "content": [
+              {
+                "text": "Hello from Pi",
+                "textSignature": "sig-text",
+                "type": "text"
+              },
+              {
+                "redacted": false,
+                "thinking": "Check the fixture",
+                "thinkingSignature": "sig-thinking",
+                "type": "thinking"
+              },
+              {
+                "arguments": {
+                  "path": "README.md"
+                },
+                "id": "call-1",
+                "name": "read",
+                "thoughtSignature": "sig-tool",
+                "type": "toolCall"
+              }
+            ],
+            "diagnostics": [
+              {
+                "error": {
+                  "code": "fixture_error",
+                  "message": "Deterministic fixture failure",
+                  "name": "FixtureError"
+                },
+                "timestamp": 1767225600000,
+                "type": "fixture"
+              }
+            ],
+            "model": "fixture-model",
+            "provider": "scripted",
+            "rawStopReason": "stop",
+            "responseId": "response-1",
+            "responseModel": "fixture-model-2026",
+            "role": "assistant",
+            "stopReason": "stop",
+            "timestamp": 1767225600001,
+            "usage": {
+              "cacheRead": 2,
+              "cacheWrite": 1,
+              "cacheWrite1h": 1,
+              "cost": {
+                "cacheRead": 0.0001,
+                "cacheWrite": 0.0002,
+                "input": 0.001,
+                "output": 0.002,
+                "total": 0.0033
+              },
+              "input": 10,
+              "output": 5,
+              "reasoning": 2,
+              "totalTokens": 18
+            }
+          },
+          "reason": "stop",
+          "type": "done"
+        }
+      },
+      "doneToolUse": {
+        "schema": "AssistantMessageEvent",
+        "value": {
+          "message": {
+            "api": "pi-messages",
+            "content": [
+              {
+                "text": "Hello from Pi",
+                "textSignature": "sig-text",
+                "type": "text"
+              },
+              {
+                "redacted": false,
+                "thinking": "Check the fixture",
+                "thinkingSignature": "sig-thinking",
+                "type": "thinking"
+              },
+              {
+                "arguments": {
+                  "path": "README.md"
+                },
+                "id": "call-1",
+                "name": "read",
+                "thoughtSignature": "sig-tool",
+                "type": "toolCall"
+              }
+            ],
+            "diagnostics": [
+              {
+                "error": {
+                  "code": "fixture_error",
+                  "message": "Deterministic fixture failure",
+                  "name": "FixtureError"
+                },
+                "timestamp": 1767225600000,
+                "type": "fixture"
+              }
+            ],
+            "model": "fixture-model",
+            "provider": "scripted",
+            "rawStopReason": "toolUse",
             "responseId": "response-1",
             "responseModel": "fixture-model-2026",
             "role": "assistant",
@@ -99,7 +233,7 @@
               {
                 "error": {
                   "code": "fixture_error",
-                  "message": "deterministic",
+                  "message": "Deterministic fixture failure",
                   "name": "FixtureError"
                 },
                 "timestamp": 1767225600000,
@@ -109,7 +243,7 @@
             "errorMessage": "Scripted failure",
             "model": "fixture-model",
             "provider": "scripted",
-            "rawStopReason": "tool_use",
+            "rawStopReason": "error",
             "responseId": "response-1",
             "responseModel": "fixture-model-2026",
             "role": "assistant",
@@ -133,6 +267,74 @@
             }
           },
           "reason": "error",
+          "type": "error"
+        }
+      },
+      "errorAborted": {
+        "schema": "AssistantMessageEvent",
+        "value": {
+          "error": {
+            "api": "pi-messages",
+            "content": [
+              {
+                "text": "Hello from Pi",
+                "textSignature": "sig-text",
+                "type": "text"
+              },
+              {
+                "redacted": false,
+                "thinking": "Check the fixture",
+                "thinkingSignature": "sig-thinking",
+                "type": "thinking"
+              },
+              {
+                "arguments": {
+                  "path": "README.md"
+                },
+                "id": "call-1",
+                "name": "read",
+                "thoughtSignature": "sig-tool",
+                "type": "toolCall"
+              }
+            ],
+            "diagnostics": [
+              {
+                "error": {
+                  "code": "fixture_error",
+                  "message": "Deterministic fixture failure",
+                  "name": "FixtureError"
+                },
+                "timestamp": 1767225600000,
+                "type": "fixture"
+              }
+            ],
+            "errorMessage": "Scripted request aborted",
+            "model": "fixture-model",
+            "provider": "scripted",
+            "rawStopReason": "aborted",
+            "responseId": "response-1",
+            "responseModel": "fixture-model-2026",
+            "role": "assistant",
+            "stopReason": "aborted",
+            "timestamp": 1767225600001,
+            "usage": {
+              "cacheRead": 2,
+              "cacheWrite": 1,
+              "cacheWrite1h": 1,
+              "cost": {
+                "cacheRead": 0.0001,
+                "cacheWrite": 0.0002,
+                "input": 0.001,
+                "output": 0.002,
+                "total": 0.0033
+              },
+              "input": 10,
+              "output": 5,
+              "reasoning": 2,
+              "totalTokens": 18
+            }
+          },
+          "reason": "aborted",
           "type": "error"
         }
       },
@@ -167,7 +369,7 @@
               {
                 "error": {
                   "code": "fixture_error",
-                  "message": "deterministic",
+                  "message": "Deterministic fixture failure",
                   "name": "FixtureError"
                 },
                 "timestamp": 1767225600000,
@@ -176,7 +378,7 @@
             ],
             "model": "fixture-model",
             "provider": "scripted",
-            "rawStopReason": "tool_use",
+            "rawStopReason": "pending",
             "responseId": "response-1",
             "responseModel": "fixture-model-2026",
             "role": "assistant",
@@ -235,7 +437,7 @@
               {
                 "error": {
                   "code": "fixture_error",
-                  "message": "deterministic",
+                  "message": "Deterministic fixture failure",
                   "name": "FixtureError"
                 },
                 "timestamp": 1767225600000,
@@ -244,7 +446,7 @@
             ],
             "model": "fixture-model",
             "provider": "scripted",
-            "rawStopReason": "tool_use",
+            "rawStopReason": "pending",
             "responseId": "response-1",
             "responseModel": "fixture-model-2026",
             "role": "assistant",
@@ -303,7 +505,7 @@
               {
                 "error": {
                   "code": "fixture_error",
-                  "message": "deterministic",
+                  "message": "Deterministic fixture failure",
                   "name": "FixtureError"
                 },
                 "timestamp": 1767225600000,
@@ -312,7 +514,7 @@
             ],
             "model": "fixture-model",
             "provider": "scripted",
-            "rawStopReason": "tool_use",
+            "rawStopReason": "pending",
             "responseId": "response-1",
             "responseModel": "fixture-model-2026",
             "role": "assistant",
@@ -370,7 +572,7 @@
               {
                 "error": {
                   "code": "fixture_error",
-                  "message": "deterministic",
+                  "message": "Deterministic fixture failure",
                   "name": "FixtureError"
                 },
                 "timestamp": 1767225600000,
@@ -379,7 +581,7 @@
             ],
             "model": "fixture-model",
             "provider": "scripted",
-            "rawStopReason": "tool_use",
+            "rawStopReason": "pending",
             "responseId": "response-1",
             "responseModel": "fixture-model-2026",
             "role": "assistant",
@@ -438,7 +640,7 @@
               {
                 "error": {
                   "code": "fixture_error",
-                  "message": "deterministic",
+                  "message": "Deterministic fixture failure",
                   "name": "FixtureError"
                 },
                 "timestamp": 1767225600000,
@@ -447,7 +649,7 @@
             ],
             "model": "fixture-model",
             "provider": "scripted",
-            "rawStopReason": "tool_use",
+            "rawStopReason": "pending",
             "responseId": "response-1",
             "responseModel": "fixture-model-2026",
             "role": "assistant",
@@ -506,7 +708,7 @@
               {
                 "error": {
                   "code": "fixture_error",
-                  "message": "deterministic",
+                  "message": "Deterministic fixture failure",
                   "name": "FixtureError"
                 },
                 "timestamp": 1767225600000,
@@ -515,7 +717,7 @@
             ],
             "model": "fixture-model",
             "provider": "scripted",
-            "rawStopReason": "tool_use",
+            "rawStopReason": "pending",
             "responseId": "response-1",
             "responseModel": "fixture-model-2026",
             "role": "assistant",
@@ -573,7 +775,7 @@
               {
                 "error": {
                   "code": "fixture_error",
-                  "message": "deterministic",
+                  "message": "Deterministic fixture failure",
                   "name": "FixtureError"
                 },
                 "timestamp": 1767225600000,
@@ -582,7 +784,7 @@
             ],
             "model": "fixture-model",
             "provider": "scripted",
-            "rawStopReason": "tool_use",
+            "rawStopReason": "pending",
             "responseId": "response-1",
             "responseModel": "fixture-model-2026",
             "role": "assistant",
@@ -641,7 +843,7 @@
               {
                 "error": {
                   "code": "fixture_error",
-                  "message": "deterministic",
+                  "message": "Deterministic fixture failure",
                   "name": "FixtureError"
                 },
                 "timestamp": 1767225600000,
@@ -650,7 +852,7 @@
             ],
             "model": "fixture-model",
             "provider": "scripted",
-            "rawStopReason": "tool_use",
+            "rawStopReason": "pending",
             "responseId": "response-1",
             "responseModel": "fixture-model-2026",
             "role": "assistant",
@@ -708,7 +910,7 @@
               {
                 "error": {
                   "code": "fixture_error",
-                  "message": "deterministic",
+                  "message": "Deterministic fixture failure",
                   "name": "FixtureError"
                 },
                 "timestamp": 1767225600000,
@@ -717,7 +919,7 @@
             ],
             "model": "fixture-model",
             "provider": "scripted",
-            "rawStopReason": "tool_use",
+            "rawStopReason": "pending",
             "responseId": "response-1",
             "responseModel": "fixture-model-2026",
             "role": "assistant",
@@ -784,7 +986,7 @@
               {
                 "error": {
                   "code": "fixture_error",
-                  "message": "deterministic",
+                  "message": "Deterministic fixture failure",
                   "name": "FixtureError"
                 },
                 "timestamp": 1767225600000,
@@ -793,7 +995,7 @@
             ],
             "model": "fixture-model",
             "provider": "scripted",
-            "rawStopReason": "tool_use",
+            "rawStopReason": "pending",
             "responseId": "response-1",
             "responseModel": "fixture-model-2026",
             "role": "assistant",
@@ -817,6 +1019,17 @@
             }
           },
           "type": "toolcall_start"
+        }
+      }
+    },
+    "attachments": {
+      "image": {
+        "schema": "ImageInput",
+        "value": {
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
+          "fileName": "fixture.png",
+          "mimeType": "image/png",
+          "type": "image"
         }
       }
     },
@@ -844,6 +1057,126 @@
           "byteCount": 13,
           "mediaType": "application/octet-stream",
           "sha256": "ce69c359092219c8d560804e8600676b1d34ca72b1e735f35981b1f9b1ea5fda"
+        }
+      }
+    },
+    "commandResults": {
+      "artifact": {
+        "schema": "CommandResult",
+        "value": {
+          "artifactId": "550e8400-e29b-41d4-a716-446655440004",
+          "byteCount": 21,
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "createdAt": "2026-01-01T00:01:00.000Z",
+          "downloadUrl": "/v1/artifacts/550e8400-e29b-41d4-a716-446655440004",
+          "fileName": "conversation.html",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "mediaType": "text/html"
+        }
+      },
+      "bash": {
+        "schema": "CommandResult",
+        "value": {
+          "cancelled": false,
+          "exitCode": 0,
+          "output": "fixture\n",
+          "truncated": false
+        }
+      },
+      "compaction": {
+        "schema": "CommandResult",
+        "value": {
+          "details": {
+            "modifiedFiles": [],
+            "readFiles": [
+              "README.md"
+            ]
+          },
+          "estimatedTokensAfter": 250,
+          "firstKeptEntryId": "entry0002",
+          "summary": "Compacted fixture conversation",
+          "tokensBefore": 1000,
+          "usage": {
+            "cacheRead": 2,
+            "cacheWrite": 1,
+            "cacheWrite1h": 1,
+            "cost": {
+              "cacheRead": 0.0001,
+              "cacheWrite": 0.0002,
+              "input": 0.001,
+              "output": 0.002,
+              "total": 0.0033
+            },
+            "input": 10,
+            "output": 5,
+            "reasoning": 2,
+            "totalTokens": 18
+          }
+        }
+      },
+      "empty": {
+        "schema": "CommandResult",
+        "value": null
+      },
+      "fork": {
+        "schema": "CommandResult",
+        "value": {
+          "cancelled": false,
+          "target": {
+            "conversationId": "0195f6f4-7c5b-7000-8000-000000000002",
+            "gatewayId": "550e8400-e29b-41d4-a716-446655440000"
+          },
+          "text": "Selected text"
+        }
+      },
+      "model": {
+        "schema": "CommandResult",
+        "value": {
+          "contextWindow": 128000,
+          "input": [
+            "text",
+            "image"
+          ],
+          "maxTokens": 4096,
+          "modelId": "fixture-model",
+          "name": "Fixture Model",
+          "provider": "scripted",
+          "reasoning": true
+        }
+      },
+      "modelCycle": {
+        "schema": "CommandResult",
+        "value": {
+          "isScoped": true,
+          "model": {
+            "contextWindow": 128000,
+            "input": [
+              "text",
+              "image"
+            ],
+            "maxTokens": 4096,
+            "modelId": "fixture-model",
+            "name": "Fixture Model",
+            "provider": "scripted",
+            "reasoning": true
+          },
+          "thinkingLevel": "high"
+        }
+      },
+      "sessionChange": {
+        "schema": "CommandResult",
+        "value": {
+          "cancelled": false,
+          "target": {
+            "conversationId": "0195f6f4-7c5b-7000-8000-000000000002",
+            "gatewayId": "550e8400-e29b-41d4-a716-446655440000"
+          }
+        }
+      },
+      "thinkingCycle": {
+        "schema": "CommandResult",
+        "value": {
+          "level": "high"
         }
       }
     },
@@ -963,7 +1296,7 @@
           "payload": {
             "images": [
               {
-                "data": "iVBORw0KGgo=",
+                "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
                 "fileName": "fixture.png",
                 "mimeType": "image/png",
                 "type": "image"
@@ -1111,7 +1444,7 @@
                   {
                     "error": {
                       "code": "fixture_error",
-                      "message": "deterministic",
+                      "message": "Deterministic fixture failure",
                       "name": "FixtureError"
                     },
                     "timestamp": 1767225600000,
@@ -1120,7 +1453,7 @@
                 ],
                 "model": "fixture-model",
                 "provider": "scripted",
-                "rawStopReason": "tool_use",
+                "rawStopReason": "toolUse",
                 "responseId": "response-1",
                 "responseModel": "fixture-model-2026",
                 "role": "assistant",
@@ -1237,7 +1570,7 @@
             "commandId": "550e8400-e29b-41d4-a716-446655440001",
             "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
             "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
-            "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "payloadHash": "61e25a2f5bb00d0768942147604afcc8685c507957de5e4fa588e4207ec945a6",
             "state": "running",
             "type": "prompt",
             "updatedAt": "2026-01-01T00:01:00.000Z"
@@ -1258,31 +1591,12 @@
             "reason": "manual",
             "result": {
               "details": {
-                "modifiedFiles": [],
-                "readFiles": [
-                  "README.md"
-                ]
+                "stable": true
               },
               "estimatedTokensAfter": 250,
               "firstKeptEntryId": "entry0002",
               "summary": "Compacted fixture conversation",
-              "tokensBefore": 1000,
-              "usage": {
-                "cacheRead": 2,
-                "cacheWrite": 1,
-                "cacheWrite1h": 1,
-                "cost": {
-                  "cacheRead": 0.0001,
-                  "cacheWrite": 0.0002,
-                  "input": 0.001,
-                  "output": 0.002,
-                  "total": 0.0033
-                },
-                "input": 10,
-                "output": 5,
-                "reasoning": 2,
-                "totalTokens": 18
-              }
+              "tokensBefore": 1000
             },
             "willRetry": false
           },
@@ -1325,6 +1639,22 @@
           "type": "conversation.replaced"
         }
       },
+      "conversation.replaced.directory": {
+        "schema": "ConversationEvent",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "data": {
+            "reason": "switch",
+            "target": {
+              "conversationId": "0195f6f4-7c5b-7000-8000-000000000002"
+            }
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "sequence": 3,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "conversation.replaced"
+        }
+      },
       "conversation.snapshot": {
         "schema": "ConversationEvent",
         "value": {
@@ -1336,7 +1666,7 @@
                 "commandId": "550e8400-e29b-41d4-a716-446655440001",
                 "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
                 "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
-                "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+                "payloadHash": "61e25a2f5bb00d0768942147604afcc8685c507957de5e4fa588e4207ec945a6",
                 "state": "accepted",
                 "type": "prompt",
                 "updatedAt": "2026-01-01T00:00:00.000Z"
@@ -1371,7 +1701,7 @@
                   {
                     "error": {
                       "code": "fixture_error",
-                      "message": "deterministic",
+                      "message": "Deterministic fixture failure",
                       "name": "FixtureError"
                     },
                     "timestamp": 1767225600000,
@@ -1380,7 +1710,7 @@
                 ],
                 "model": "fixture-model",
                 "provider": "scripted",
-                "rawStopReason": "tool_use",
+                "rawStopReason": "toolUse",
                 "responseId": "response-1",
                 "responseModel": "fixture-model-2026",
                 "role": "assistant",
@@ -1435,8 +1765,8 @@
               "readOnly": false,
               "status": "working",
               "title": "Validate protocol fixtures",
-              "trashedAt": null,
               "trashReason": null,
+              "trashedAt": null,
               "viewedAt": null,
               "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
             },
@@ -1459,7 +1789,7 @@
               {
                 "images": [
                   {
-                    "data": "iVBORw0KGgo=",
+                    "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
                     "fileName": "fixture.png",
                     "mimeType": "image/png",
                     "type": "image"
@@ -1498,8 +1828,8 @@
                 "readOnly": false,
                 "status": "working",
                 "title": "Validate protocol fixtures",
-                "trashedAt": null,
                 "trashReason": null,
+                "trashedAt": null,
                 "viewedAt": null,
                 "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
               },
@@ -1530,6 +1860,210 @@
           },
           "emittedAt": "2026-01-01T00:00:00.000Z",
           "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 0,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "conversation.snapshot"
+        }
+      },
+      "conversation.snapshot.directory": {
+        "schema": "ConversationEvent",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "data": {
+            "activeReceipts": [
+              {
+                "acceptedAt": "2026-01-01T00:00:00.000Z",
+                "commandId": "550e8400-e29b-41d4-a716-446655440001",
+                "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+                "payloadHash": "61e25a2f5bb00d0768942147604afcc8685c507957de5e4fa588e4207ec945a6",
+                "state": "accepted",
+                "type": "prompt",
+                "updatedAt": "2026-01-01T00:00:00.000Z"
+              }
+            ],
+            "activeResponse": {
+              "message": {
+                "api": "pi-messages",
+                "content": [
+                  {
+                    "text": "Hello from Pi",
+                    "textSignature": "sig-text",
+                    "type": "text"
+                  },
+                  {
+                    "redacted": false,
+                    "thinking": "Check the fixture",
+                    "thinkingSignature": "sig-thinking",
+                    "type": "thinking"
+                  },
+                  {
+                    "arguments": {
+                      "path": "README.md"
+                    },
+                    "id": "call-1",
+                    "name": "read",
+                    "thoughtSignature": "sig-tool",
+                    "type": "toolCall"
+                  }
+                ],
+                "diagnostics": [
+                  {
+                    "error": {
+                      "code": "fixture_error",
+                      "message": "Deterministic fixture failure",
+                      "name": "FixtureError"
+                    },
+                    "timestamp": 1767225600000,
+                    "type": "fixture"
+                  }
+                ],
+                "model": "fixture-model",
+                "provider": "scripted",
+                "rawStopReason": "toolUse",
+                "responseId": "response-1",
+                "responseModel": "fixture-model-2026",
+                "role": "assistant",
+                "stopReason": "toolUse",
+                "timestamp": 1767225600001,
+                "usage": {
+                  "cacheRead": 2,
+                  "cacheWrite": 1,
+                  "cacheWrite1h": 1,
+                  "cost": {
+                    "cacheRead": 0.0001,
+                    "cacheWrite": 0.0002,
+                    "input": 0.001,
+                    "output": 0.002,
+                    "total": 0.0033
+                  },
+                  "input": 10,
+                  "output": 5,
+                  "reasoning": 2,
+                  "totalTokens": 18
+                }
+              },
+              "tools": [
+                {
+                  "content": [
+                    {
+                      "text": "Hello from Pi",
+                      "textSignature": "sig-text",
+                      "type": "text"
+                    }
+                  ],
+                  "details": {
+                    "progress": 0.5
+                  },
+                  "input": {
+                    "path": "README.md"
+                  },
+                  "status": "running",
+                  "toolCallId": "call-1",
+                  "toolName": "read"
+                }
+              ]
+            },
+            "conversation": {
+              "activityAt": "2026-01-01T00:01:00.000Z",
+              "completedAt": null,
+              "completedSinceViewed": false,
+              "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+              "createdAt": "2026-01-01T00:00:00.000Z",
+              "cwd": "/work/project",
+              "readOnly": false,
+              "status": "idle",
+              "title": "Validate protocol fixtures",
+              "trashReason": null,
+              "trashedAt": null,
+              "viewedAt": null
+            },
+            "extensionUiState": {
+              "statuses": {
+                "fixture": "running"
+              },
+              "title": "Fixture title",
+              "widgets": [
+                {
+                  "key": "fixture",
+                  "lines": [
+                    "line one"
+                  ],
+                  "placement": "aboveEditor"
+                }
+              ]
+            },
+            "followUpQueue": [
+              {
+                "images": [
+                  {
+                    "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
+                    "fileName": "fixture.png",
+                    "mimeType": "image/png",
+                    "type": "image"
+                  }
+                ],
+                "text": "Follow up"
+              }
+            ],
+            "messagesRevision": "messages-r1",
+            "pendingDialogs": [
+              {
+                "dialogId": "550e8400-e29b-41d4-a716-446655440002",
+                "method": "select",
+                "options": [
+                  "one",
+                  "two"
+                ],
+                "timeoutAt": "2026-01-01T00:01:00.000Z",
+                "title": "Select a fixture"
+              }
+            ],
+            "state": {
+              "activeCommandIds": [
+                "550e8400-e29b-41d4-a716-446655440001"
+              ],
+              "autoCompactionEnabled": true,
+              "autoRetryEnabled": true,
+              "conversation": {
+                "activityAt": "2026-01-01T00:01:00.000Z",
+                "completedAt": null,
+                "completedSinceViewed": false,
+                "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+                "createdAt": "2026-01-01T00:00:00.000Z",
+                "cwd": "/work/project",
+                "readOnly": false,
+                "status": "idle",
+                "title": "Validate protocol fixtures",
+                "trashReason": null,
+                "trashedAt": null,
+                "viewedAt": null
+              },
+              "followUpMode": "one-at-a-time",
+              "messageCount": 3,
+              "model": {
+                "contextWindow": 128000,
+                "input": [
+                  "text",
+                  "image"
+                ],
+                "maxTokens": 4096,
+                "modelId": "fixture-model",
+                "name": "Fixture Model",
+                "provider": "scripted",
+                "reasoning": true
+              },
+              "pendingMessageCount": 0,
+              "steeringMode": "all",
+              "thinkingLevel": "high"
+            },
+            "steeringQueue": [
+              {
+                "images": [],
+                "text": "Steer next"
+              }
+            ]
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
           "sequence": 0,
           "streamId": "550e8400-e29b-41d4-a716-446655440005",
           "type": "conversation.snapshot"
@@ -1581,7 +2115,7 @@
                     "type": "text"
                   },
                   {
-                    "data": "iVBORw0KGgo=",
+                    "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
                     "mimeType": "image/png",
                     "type": "image"
                   }
@@ -1691,7 +2225,7 @@
                 {
                   "error": {
                     "code": "fixture_error",
-                    "message": "deterministic",
+                    "message": "Deterministic fixture failure",
                     "name": "FixtureError"
                   },
                   "timestamp": 1767225600000,
@@ -1700,7 +2234,7 @@
               ],
               "model": "fixture-model",
               "provider": "scripted",
-              "rawStopReason": "tool_use",
+              "rawStopReason": "toolUse",
               "responseId": "response-1",
               "responseModel": "fixture-model-2026",
               "role": "assistant",
@@ -1764,7 +2298,7 @@
                 {
                   "error": {
                     "code": "fixture_error",
-                    "message": "deterministic",
+                    "message": "Deterministic fixture failure",
                     "name": "FixtureError"
                   },
                   "timestamp": 1767225600000,
@@ -1773,7 +2307,7 @@
               ],
               "model": "fixture-model",
               "provider": "scripted",
-              "rawStopReason": "tool_use",
+              "rawStopReason": "toolUse",
               "responseId": "response-1",
               "responseModel": "fixture-model-2026",
               "role": "assistant",
@@ -1837,7 +2371,7 @@
                 {
                   "error": {
                     "code": "fixture_error",
-                    "message": "deterministic",
+                    "message": "Deterministic fixture failure",
                     "name": "FixtureError"
                   },
                   "timestamp": 1767225600000,
@@ -1846,7 +2380,7 @@
               ],
               "model": "fixture-model",
               "provider": "scripted",
-              "rawStopReason": "tool_use",
+              "rawStopReason": "pending",
               "responseId": "response-1",
               "responseModel": "fixture-model-2026",
               "role": "assistant",
@@ -1900,7 +2434,7 @@
                   {
                     "error": {
                       "code": "fixture_error",
-                      "message": "deterministic",
+                      "message": "Deterministic fixture failure",
                       "name": "FixtureError"
                     },
                     "timestamp": 1767225600000,
@@ -1909,7 +2443,7 @@
                 ],
                 "model": "fixture-model",
                 "provider": "scripted",
-                "rawStopReason": "tool_use",
+                "rawStopReason": "pending",
                 "responseId": "response-1",
                 "responseModel": "fixture-model-2026",
                 "role": "assistant",
@@ -2018,6 +2552,20 @@
           "emittedAt": "2026-01-01T00:00:00.000Z",
           "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
           "sequence": 29,
+          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "type": "summarization.retry.attempt-start"
+        }
+      },
+      "summarization.retry.attempt-start.branchSummary": {
+        "schema": "ConversationEvent",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "data": {
+            "source": "branchSummary"
+          },
+          "emittedAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "sequence": 30,
           "streamId": "550e8400-e29b-41d4-a716-446655440005",
           "type": "summarization.retry.attempt-start"
         }
@@ -2214,7 +2762,7 @@
                 {
                   "error": {
                     "code": "fixture_error",
-                    "message": "deterministic",
+                    "message": "Deterministic fixture failure",
                     "name": "FixtureError"
                   },
                   "timestamp": 1767225600000,
@@ -2223,7 +2771,7 @@
               ],
               "model": "fixture-model",
               "provider": "scripted",
-              "rawStopReason": "tool_use",
+              "rawStopReason": "toolUse",
               "responseId": "response-1",
               "responseModel": "fixture-model-2026",
               "role": "assistant",
@@ -2305,6 +2853,33 @@
         }
       }
     },
+    "cycleResults": {
+      "model": {
+        "schema": "ModelCycleResult",
+        "value": {
+          "isScoped": true,
+          "model": {
+            "contextWindow": 128000,
+            "input": [
+              "text",
+              "image"
+            ],
+            "maxTokens": 4096,
+            "modelId": "fixture-model",
+            "name": "Fixture Model",
+            "provider": "scripted",
+            "reasoning": true
+          },
+          "thinkingLevel": "high"
+        }
+      },
+      "thinking": {
+        "schema": "ThinkingCycleResult",
+        "value": {
+          "level": "high"
+        }
+      }
+    },
     "dialogs": {
       "cancelled": {
         "schema": "DialogResponse",
@@ -2327,6 +2902,78 @@
         }
       }
     },
+    "extensionUiEvents": {
+      "notify": {
+        "schema": "ExtensionUiEvent",
+        "value": {
+          "message": "Fixture notification",
+          "method": "notify",
+          "severity": "info"
+        }
+      },
+      "setEditorText": {
+        "schema": "ExtensionUiEvent",
+        "value": {
+          "method": "set_editor_text",
+          "text": "Fixture editor text"
+        }
+      },
+      "setStatus": {
+        "schema": "ExtensionUiEvent",
+        "value": {
+          "key": "fixture",
+          "method": "setStatus",
+          "text": "running"
+        }
+      },
+      "setTitle": {
+        "schema": "ExtensionUiEvent",
+        "value": {
+          "method": "setTitle",
+          "title": "Fixture title"
+        }
+      },
+      "setWidget": {
+        "schema": "ExtensionUiEvent",
+        "value": {
+          "key": "fixture",
+          "lines": [
+            "line one"
+          ],
+          "method": "setWidget",
+          "placement": "aboveEditor"
+        }
+      }
+    },
+    "forkResults": {
+      "cancelled": {
+        "schema": "ForkResult",
+        "value": {
+          "cancelled": true,
+          "text": "Selected text"
+        }
+      },
+      "directory": {
+        "schema": "ForkResult",
+        "value": {
+          "cancelled": false,
+          "target": {
+            "conversationId": "0195f6f4-7c5b-7000-8000-000000000002"
+          }
+        }
+      },
+      "gateway": {
+        "schema": "ForkResult",
+        "value": {
+          "cancelled": false,
+          "target": {
+            "conversationId": "0195f6f4-7c5b-7000-8000-000000000002",
+            "gatewayId": "550e8400-e29b-41d4-a716-446655440000"
+          },
+          "text": "Selected text"
+        }
+      }
+    },
     "gatewayEvents": {
       "conversation.notification": {
         "schema": "GatewayEvent",
@@ -2339,7 +2986,7 @@
           "emittedAt": "2026-01-01T00:00:00.000Z",
           "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
           "sequence": 5,
-          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "streamId": "550e8400-e29b-41d4-a716-446655440007",
           "type": "conversation.notification"
         }
       },
@@ -2352,7 +2999,7 @@
           "emittedAt": "2026-01-01T00:00:00.000Z",
           "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
           "sequence": 2,
-          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "streamId": "550e8400-e29b-41d4-a716-446655440007",
           "type": "conversation.removed"
         }
       },
@@ -2369,15 +3016,15 @@
             "readOnly": false,
             "status": "working",
             "title": "Validate protocol fixtures",
-            "trashedAt": null,
             "trashReason": null,
+            "trashedAt": null,
             "viewedAt": null,
             "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
           },
           "emittedAt": "2026-01-01T00:00:00.000Z",
           "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
           "sequence": 1,
-          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "streamId": "550e8400-e29b-41d4-a716-446655440007",
           "type": "conversation.summary.changed"
         }
       },
@@ -2396,8 +3043,8 @@
                 "readOnly": false,
                 "status": "working",
                 "title": "Validate protocol fixtures",
-                "trashedAt": null,
                 "trashReason": null,
+                "trashedAt": null,
                 "viewedAt": null,
                 "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
               }
@@ -2423,7 +3070,7 @@
           "emittedAt": "2026-01-01T00:00:00.000Z",
           "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
           "sequence": 0,
-          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "streamId": "550e8400-e29b-41d4-a716-446655440007",
           "type": "gateway.snapshot"
         }
       },
@@ -2436,7 +3083,7 @@
           "emittedAt": "2026-01-01T00:00:00.000Z",
           "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
           "sequence": 4,
-          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "streamId": "550e8400-e29b-41d4-a716-446655440007",
           "type": "workspace.removed"
         }
       },
@@ -2460,7 +3107,7 @@
           "emittedAt": "2026-01-01T00:00:00.000Z",
           "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
           "sequence": 3,
-          "streamId": "550e8400-e29b-41d4-a716-446655440005",
+          "streamId": "550e8400-e29b-41d4-a716-446655440007",
           "type": "workspace.summary.changed"
         }
       }
@@ -2486,6 +3133,157 @@
         }
       }
     },
+    "liveState": {
+      "activeResponse": {
+        "schema": "ActiveResponse",
+        "value": {
+          "message": {
+            "api": "pi-messages",
+            "content": [
+              {
+                "text": "Hello from Pi",
+                "textSignature": "sig-text",
+                "type": "text"
+              },
+              {
+                "redacted": false,
+                "thinking": "Check the fixture",
+                "thinkingSignature": "sig-thinking",
+                "type": "thinking"
+              },
+              {
+                "arguments": {
+                  "path": "README.md"
+                },
+                "id": "call-1",
+                "name": "read",
+                "thoughtSignature": "sig-tool",
+                "type": "toolCall"
+              }
+            ],
+            "diagnostics": [
+              {
+                "error": {
+                  "code": "fixture_error",
+                  "message": "Deterministic fixture failure",
+                  "name": "FixtureError"
+                },
+                "timestamp": 1767225600000,
+                "type": "fixture"
+              }
+            ],
+            "model": "fixture-model",
+            "provider": "scripted",
+            "rawStopReason": "toolUse",
+            "responseId": "response-1",
+            "responseModel": "fixture-model-2026",
+            "role": "assistant",
+            "stopReason": "toolUse",
+            "timestamp": 1767225600001,
+            "usage": {
+              "cacheRead": 2,
+              "cacheWrite": 1,
+              "cacheWrite1h": 1,
+              "cost": {
+                "cacheRead": 0.0001,
+                "cacheWrite": 0.0002,
+                "input": 0.001,
+                "output": 0.002,
+                "total": 0.0033
+              },
+              "input": 10,
+              "output": 5,
+              "reasoning": 2,
+              "totalTokens": 18
+            }
+          },
+          "tools": [
+            {
+              "content": [
+                {
+                  "text": "Hello from Pi",
+                  "textSignature": "sig-text",
+                  "type": "text"
+                }
+              ],
+              "details": {
+                "progress": 0.5
+              },
+              "input": {
+                "path": "README.md"
+              },
+              "status": "running",
+              "toolCallId": "call-1",
+              "toolName": "read"
+            }
+          ]
+        }
+      },
+      "activeTool": {
+        "schema": "ActiveToolExecution",
+        "value": {
+          "content": [
+            {
+              "text": "Hello from Pi",
+              "textSignature": "sig-text",
+              "type": "text"
+            }
+          ],
+          "details": {
+            "progress": 0.5
+          },
+          "input": {
+            "path": "README.md"
+          },
+          "status": "running",
+          "toolCallId": "call-1",
+          "toolName": "read"
+        }
+      },
+      "safeExtensionSource": {
+        "schema": "SafeExtensionSource",
+        "value": {
+          "origin": "top-level",
+          "scope": "project",
+          "source": "fixture-extension"
+        }
+      },
+      "toolResult": {
+        "schema": "ToolResultData",
+        "value": {
+          "addedToolNames": [
+            "write"
+          ],
+          "content": [
+            {
+              "text": "Hello from Pi",
+              "textSignature": "sig-text",
+              "type": "text"
+            }
+          ],
+          "details": {
+            "progress": 1
+          },
+          "terminate": false,
+          "usage": {
+            "cacheRead": 2,
+            "cacheWrite": 1,
+            "cacheWrite1h": 1,
+            "cost": {
+              "cacheRead": 0.0001,
+              "cacheWrite": 0.0002,
+              "input": 0.001,
+              "output": 0.002,
+              "total": 0.0033
+            },
+            "input": 10,
+            "output": 5,
+            "reasoning": 2,
+            "totalTokens": 18
+          }
+        }
+      }
+    },
     "pendingDialogs": {
       "confirm": {
         "schema": "PendingDialog",
@@ -2503,6 +3301,7 @@
           "dialogId": "550e8400-e29b-41d4-a716-446655440002",
           "method": "editor",
           "prefill": "initial",
+          "timeoutAt": "2026-01-01T00:01:00.000Z",
           "title": "Edit fixture"
         }
       },
@@ -2590,7 +3389,7 @@
           "assistantMessages": 1,
           "contextUsage": {
             "contextWindow": 128000,
-            "percent": 0.014,
+            "percent": 0.0140625,
             "tokens": 18
           },
           "cost": 0.0033,
@@ -2622,7 +3421,7 @@
                   "type": "text"
                 },
                 {
-                  "data": "iVBORw0KGgo=",
+                  "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
                   "mimeType": "image/png",
                   "type": "image"
                 }
@@ -2641,7 +3440,7 @@
       "image": {
         "schema": "PiContentBlock",
         "value": {
-          "data": "iVBORw0KGgo=",
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
           "mimeType": "image/png",
           "type": "image"
         }
@@ -2673,6 +3472,437 @@
           "name": "read",
           "thoughtSignature": "sig-tool",
           "type": "toolCall"
+        }
+      }
+    },
+    "piDtos": {
+      "assistantDiagnostic": {
+        "schema": "AssistantMessageDiagnostic",
+        "value": {
+          "error": {
+            "code": "fixture_error",
+            "message": "Deterministic fixture failure",
+            "name": "FixtureError"
+          },
+          "timestamp": 1767225600000,
+          "type": "fixture"
+        }
+      },
+      "assistantMessage": {
+        "schema": "AssistantMessage",
+        "value": {
+          "api": "pi-messages",
+          "content": [
+            {
+              "text": "Hello from Pi",
+              "textSignature": "sig-text",
+              "type": "text"
+            },
+            {
+              "redacted": false,
+              "thinking": "Check the fixture",
+              "thinkingSignature": "sig-thinking",
+              "type": "thinking"
+            },
+            {
+              "arguments": {
+                "path": "README.md"
+              },
+              "id": "call-1",
+              "name": "read",
+              "thoughtSignature": "sig-tool",
+              "type": "toolCall"
+            }
+          ],
+          "diagnostics": [
+            {
+              "error": {
+                "code": "fixture_error",
+                "message": "Deterministic fixture failure",
+                "name": "FixtureError"
+              },
+              "timestamp": 1767225600000,
+              "type": "fixture"
+            }
+          ],
+          "model": "fixture-model",
+          "provider": "scripted",
+          "rawStopReason": "toolUse",
+          "responseId": "response-1",
+          "responseModel": "fixture-model-2026",
+          "role": "assistant",
+          "stopReason": "toolUse",
+          "timestamp": 1767225600001,
+          "usage": {
+            "cacheRead": 2,
+            "cacheWrite": 1,
+            "cacheWrite1h": 1,
+            "cost": {
+              "cacheRead": 0.0001,
+              "cacheWrite": 0.0002,
+              "input": 0.001,
+              "output": 0.002,
+              "total": 0.0033
+            },
+            "input": 10,
+            "output": 5,
+            "reasoning": 2,
+            "totalTokens": 18
+          }
+        }
+      },
+      "bashExecutionMessage": {
+        "schema": "BashExecutionMessage",
+        "value": {
+          "cancelled": false,
+          "command": "printf fixture",
+          "excludeFromContext": false,
+          "exitCode": 0,
+          "output": "fixture",
+          "role": "bashExecution",
+          "timestamp": 1767225600003,
+          "truncated": false
+        }
+      },
+      "branchSummaryEntry": {
+        "schema": "BranchSummaryEntry",
+        "value": {
+          "details": {
+            "stable": true
+          },
+          "fromHook": false,
+          "fromId": "entry0003",
+          "id": "entry0005",
+          "parentId": "entry0004",
+          "summary": "Branch",
+          "timestamp": "2026-01-01T00:00:00.000Z",
+          "type": "branch_summary",
+          "usage": {
+            "cacheRead": 2,
+            "cacheWrite": 1,
+            "cacheWrite1h": 1,
+            "cost": {
+              "cacheRead": 0.0001,
+              "cacheWrite": 0.0002,
+              "input": 0.001,
+              "output": 0.002,
+              "total": 0.0033
+            },
+            "input": 10,
+            "output": 5,
+            "reasoning": 2,
+            "totalTokens": 18
+          }
+        }
+      },
+      "branchSummaryMessage": {
+        "schema": "BranchSummaryMessage",
+        "value": {
+          "fromId": "entry0001",
+          "role": "branchSummary",
+          "summary": "Branch summary",
+          "timestamp": 1767225600005
+        }
+      },
+      "commandSource": {
+        "schema": "CommandSourceRef",
+        "value": {
+          "origin": "top-level",
+          "scope": "project",
+          "source": "fixture-extension"
+        }
+      },
+      "compactionEntry": {
+        "schema": "CompactionEntry",
+        "value": {
+          "details": {
+            "modifiedFiles": [],
+            "readFiles": [
+              "README.md"
+            ]
+          },
+          "firstKeptEntryId": "entry0002",
+          "fromHook": false,
+          "id": "entry0004",
+          "parentId": "entry0003",
+          "summary": "Summary",
+          "timestamp": "2026-01-01T00:00:00.000Z",
+          "tokensBefore": 1000,
+          "type": "compaction",
+          "usage": {
+            "cacheRead": 2,
+            "cacheWrite": 1,
+            "cacheWrite1h": 1,
+            "cost": {
+              "cacheRead": 0.0001,
+              "cacheWrite": 0.0002,
+              "input": 0.001,
+              "output": 0.002,
+              "total": 0.0033
+            },
+            "input": 10,
+            "output": 5,
+            "reasoning": 2,
+            "totalTokens": 18
+          }
+        }
+      },
+      "compactionSummaryMessage": {
+        "schema": "CompactionSummaryMessage",
+        "value": {
+          "role": "compactionSummary",
+          "summary": "Compaction summary",
+          "timestamp": 1767225600006,
+          "tokensBefore": 1000
+        }
+      },
+      "contextUsage": {
+        "schema": "ContextUsage",
+        "value": {
+          "contextWindow": 128000,
+          "percent": 0.0140625,
+          "tokens": 18
+        }
+      },
+      "customEntry": {
+        "schema": "CustomEntry",
+        "value": {
+          "customType": "fixture.state",
+          "data": {
+            "count": 1
+          },
+          "id": "entry0006",
+          "parentId": "entry0005",
+          "timestamp": "2026-01-01T00:00:00.000Z",
+          "type": "custom"
+        }
+      },
+      "customMessage": {
+        "schema": "CustomMessage",
+        "value": {
+          "content": "Fixture notice",
+          "customType": "fixture.notice",
+          "details": {
+            "stable": true
+          },
+          "display": true,
+          "role": "custom",
+          "timestamp": 1767225600004
+        }
+      },
+      "customMessageEntry": {
+        "schema": "CustomMessageEntry",
+        "value": {
+          "content": [
+            {
+              "text": "Hello from Pi",
+              "textSignature": "sig-text",
+              "type": "text"
+            },
+            {
+              "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
+              "mimeType": "image/png",
+              "type": "image"
+            }
+          ],
+          "customType": "fixture.message",
+          "details": {
+            "stable": true
+          },
+          "display": true,
+          "id": "entry0007",
+          "parentId": "entry0006",
+          "timestamp": "2026-01-01T00:00:00.000Z",
+          "type": "custom_message"
+        }
+      },
+      "diagnosticError": {
+        "schema": "DiagnosticErrorInfo",
+        "value": {
+          "code": "fixture_error",
+          "message": "Deterministic fixture failure",
+          "name": "FixtureError"
+        }
+      },
+      "imageContent": {
+        "schema": "ImageContent",
+        "value": {
+          "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
+          "mimeType": "image/png",
+          "type": "image"
+        }
+      },
+      "labelEntry": {
+        "schema": "LabelEntry",
+        "value": {
+          "id": "entry0008",
+          "label": "start",
+          "parentId": "entry0007",
+          "targetId": "entry0001",
+          "timestamp": "2026-01-01T00:00:00.000Z",
+          "type": "label"
+        }
+      },
+      "modelChangeEntry": {
+        "schema": "ModelChangeEntry",
+        "value": {
+          "id": "entry0003",
+          "modelId": "fixture-model",
+          "parentId": "entry0002",
+          "provider": "scripted",
+          "timestamp": "2026-01-01T00:00:00.000Z",
+          "type": "model_change"
+        }
+      },
+      "sessionInfoEntry": {
+        "schema": "SessionInfoEntry",
+        "value": {
+          "id": "entry0009",
+          "name": "Fixture session",
+          "parentId": "entry0008",
+          "timestamp": "2026-01-01T00:00:00.000Z",
+          "type": "session_info"
+        }
+      },
+      "sessionMessageEntry": {
+        "schema": "SessionMessageEntry",
+        "value": {
+          "id": "entry0001",
+          "message": {
+            "content": [
+              {
+                "text": "Hello from Pi",
+                "textSignature": "sig-text",
+                "type": "text"
+              },
+              {
+                "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
+                "mimeType": "image/png",
+                "type": "image"
+              }
+            ],
+            "role": "user",
+            "timestamp": 1767225600000
+          },
+          "parentId": null,
+          "timestamp": "2026-01-01T00:00:00.000Z",
+          "type": "message"
+        }
+      },
+      "textContent": {
+        "schema": "TextContent",
+        "value": {
+          "text": "Hello from Pi",
+          "textSignature": "sig-text",
+          "type": "text"
+        }
+      },
+      "thinkingContent": {
+        "schema": "ThinkingContent",
+        "value": {
+          "redacted": false,
+          "thinking": "Check the fixture",
+          "thinkingSignature": "sig-thinking",
+          "type": "thinking"
+        }
+      },
+      "thinkingLevelChangeEntry": {
+        "schema": "ThinkingLevelChangeEntry",
+        "value": {
+          "id": "entry0002",
+          "parentId": "entry0001",
+          "thinkingLevel": "high",
+          "timestamp": "2026-01-01T00:00:00.000Z",
+          "type": "thinking_level_change"
+        }
+      },
+      "toolCall": {
+        "schema": "ToolCall",
+        "value": {
+          "arguments": {
+            "path": "README.md"
+          },
+          "id": "call-1",
+          "name": "read",
+          "thoughtSignature": "sig-tool",
+          "type": "toolCall"
+        }
+      },
+      "toolResultMessage": {
+        "schema": "ToolResultMessage",
+        "value": {
+          "addedToolNames": [
+            "write"
+          ],
+          "content": [
+            {
+              "text": "Hello from Pi",
+              "textSignature": "sig-text",
+              "type": "text"
+            }
+          ],
+          "details": {
+            "lineCount": 1
+          },
+          "isError": false,
+          "role": "toolResult",
+          "timestamp": 1767225600002,
+          "toolCallId": "call-1",
+          "toolName": "read",
+          "usage": {
+            "cacheRead": 2,
+            "cacheWrite": 1,
+            "cacheWrite1h": 1,
+            "cost": {
+              "cacheRead": 0.0001,
+              "cacheWrite": 0.0002,
+              "input": 0.001,
+              "output": 0.002,
+              "total": 0.0033
+            },
+            "input": 10,
+            "output": 5,
+            "reasoning": 2,
+            "totalTokens": 18
+          }
+        }
+      },
+      "usage": {
+        "schema": "Usage",
+        "value": {
+          "cacheRead": 2,
+          "cacheWrite": 1,
+          "cacheWrite1h": 1,
+          "cost": {
+            "cacheRead": 0.0001,
+            "cacheWrite": 0.0002,
+            "input": 0.001,
+            "output": 0.002,
+            "total": 0.0033
+          },
+          "input": 10,
+          "output": 5,
+          "reasoning": 2,
+          "totalTokens": 18
+        }
+      },
+      "userMessage": {
+        "schema": "UserMessage",
+        "value": {
+          "content": [
+            {
+              "text": "Hello from Pi",
+              "textSignature": "sig-text",
+              "type": "text"
+            },
+            {
+              "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
+              "mimeType": "image/png",
+              "type": "image"
+            }
+          ],
+          "role": "user",
+          "timestamp": 1767225600000
         }
       }
     },
@@ -2766,7 +3996,7 @@
               "type": "text"
             },
             {
-              "data": "iVBORw0KGgo=",
+              "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
               "mimeType": "image/png",
               "type": "image"
             }
@@ -2805,7 +4035,7 @@
                 "type": "text"
               },
               {
-                "data": "iVBORw0KGgo=",
+                "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
                 "mimeType": "image/png",
                 "type": "image"
               }
@@ -2881,7 +4111,7 @@
             {
               "error": {
                 "code": "fixture_error",
-                "message": "deterministic",
+                "message": "Deterministic fixture failure",
                 "name": "FixtureError"
               },
               "timestamp": 1767225600000,
@@ -2890,7 +4120,7 @@
           ],
           "model": "fixture-model",
           "provider": "scripted",
-          "rawStopReason": "tool_use",
+          "rawStopReason": "toolUse",
           "responseId": "response-1",
           "responseModel": "fixture-model-2026",
           "role": "assistant",
@@ -3007,13 +4237,82 @@
               "type": "text"
             },
             {
-              "data": "iVBORw0KGgo=",
+              "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
               "mimeType": "image/png",
               "type": "image"
             }
           ],
           "role": "user",
           "timestamp": 1767225600000
+        }
+      },
+      "userText": {
+        "schema": "PiMessage",
+        "value": {
+          "content": "Validate protocol fixtures",
+          "role": "user",
+          "timestamp": 1767225600000
+        }
+      }
+    },
+    "protocolValues": {
+      "jsonArray": {
+        "schema": "JsonValue",
+        "value": [
+          1,
+          "two",
+          false
+        ]
+      },
+      "jsonBoolean": {
+        "schema": "JsonValue",
+        "value": true
+      },
+      "jsonNull": {
+        "schema": "JsonValue",
+        "value": null
+      },
+      "jsonNumber": {
+        "schema": "JsonValue",
+        "value": 1
+      },
+      "jsonObject": {
+        "schema": "JsonObject",
+        "value": {
+          "stable": true
+        }
+      },
+      "jsonObjectValue": {
+        "schema": "JsonValue",
+        "value": {
+          "stable": true
+        }
+      },
+      "jsonString": {
+        "schema": "JsonValue",
+        "value": "value"
+      },
+      "protocolVersion": {
+        "schema": "ProtocolVersion",
+        "value": {
+          "major": 1,
+          "minor": 0
+        }
+      },
+      "providerAuthType": {
+        "schema": "ProviderAuthType",
+        "value": "oauth"
+      },
+      "thinkingLevel": {
+        "schema": "ThinkingLevel",
+        "value": "high"
+      },
+      "validationIssue": {
+        "schema": "ValidationIssue",
+        "value": {
+          "code": "minLength",
+          "message": "Expected a nonempty string.",
+          "path": "/message"
         }
       }
     },
@@ -3056,13 +4355,8 @@
           "notifications": [],
           "operationId": "550e8400-e29b-41d4-a716-446655440003",
           "problem": {
-            "artifactId": "550e8400-e29b-41d4-a716-446655440004",
             "code": "validation_failed",
-            "commandId": "550e8400-e29b-41d4-a716-446655440001",
-            "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
             "detail": "Correct the listed fields and retry.",
-            "dialogId": "550e8400-e29b-41d4-a716-446655440002",
-            "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
             "instance": "/v1/conversations",
             "issues": [
               {
@@ -3075,8 +4369,7 @@
             "retryable": false,
             "status": 400,
             "title": "Request validation failed",
-            "type": "https://bitch.invalid/problems/validation_failed",
-            "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+            "type": "https://bitch.invalid/problems/validation_failed"
           },
           "providerId": "scripted",
           "sequence": 3,
@@ -3167,7 +4460,7 @@
       "secret": {
         "schema": "ProviderAuthPrompt",
         "value": {
-          "message": "Enter value",
+          "message": "Enter credential value",
           "promptId": "550e8400-e29b-41d4-a716-446655440002",
           "type": "secret"
         }
@@ -3247,7 +4540,19 @@
           "commandId": "550e8400-e29b-41d4-a716-446655440001",
           "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
           "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
-          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "payloadHash": "61e25a2f5bb00d0768942147604afcc8685c507957de5e4fa588e4207ec945a6",
+          "state": "accepted",
+          "type": "prompt",
+          "updatedAt": "2026-01-01T00:00:00.000Z"
+        }
+      },
+      "accepted.directory": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "payloadHash": "61e25a2f5bb00d0768942147604afcc8685c507957de5e4fa588e4207ec945a6",
           "state": "accepted",
           "type": "prompt",
           "updatedAt": "2026-01-01T00:00:00.000Z"
@@ -3260,7 +4565,7 @@
           "commandId": "550e8400-e29b-41d4-a716-446655440001",
           "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
           "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
-          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "payloadHash": "288e5319273f8412a10803711471094e48dd632dfda1af80aee12b7641be8bbd",
           "result": {
             "cancelled": false,
             "exitCode": 0,
@@ -3282,7 +4587,47 @@
           "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
           "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
           "result": {
+            "cancelled": false,
+            "target": {
+              "conversationId": "0195f6f4-7c5b-7000-8000-000000000002",
+              "gatewayId": "550e8400-e29b-41d4-a716-446655440000"
+            }
+          },
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "completed",
+          "type": "clone",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
+      "clone.cancelled": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "result": {
             "cancelled": true
+          },
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "completed",
+          "type": "clone",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
+      "clone.directory": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "result": {
+            "cancelled": false,
+            "target": {
+              "conversationId": "0195f6f4-7c5b-7000-8000-000000000002"
+            }
           },
           "settledAt": "2026-01-01T00:01:00.000Z",
           "state": "completed",
@@ -3297,7 +4642,7 @@
           "commandId": "550e8400-e29b-41d4-a716-446655440001",
           "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
           "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
-          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "payloadHash": "edf2c49ecb5f4dd662d9ea2fd0de2784bdf48f9ce7c1de0d267a86a490d75d55",
           "result": {
             "details": {
               "modifiedFiles": [],
@@ -3362,6 +4707,21 @@
           "updatedAt": "2026-01-01T00:01:00.000Z"
         }
       },
+      "cycle_model.null": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "result": null,
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "completed",
+          "type": "cycle_model",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
       "cycle_thinking_level": {
         "schema": "CommandReceipt",
         "value": {
@@ -3379,6 +4739,21 @@
           "updatedAt": "2026-01-01T00:01:00.000Z"
         }
       },
+      "cycle_thinking_level.null": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "result": null,
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "completed",
+          "type": "cycle_thinking_level",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
       "export_html": {
         "schema": "CommandReceipt",
         "value": {
@@ -3389,12 +4764,34 @@
           "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
           "result": {
             "artifactId": "550e8400-e29b-41d4-a716-446655440004",
-            "byteCount": 128,
+            "byteCount": 21,
             "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
             "createdAt": "2026-01-01T00:01:00.000Z",
             "downloadUrl": "/v1/artifacts/550e8400-e29b-41d4-a716-446655440004",
             "fileName": "conversation.html",
             "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+            "mediaType": "text/html"
+          },
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "completed",
+          "type": "export_html",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
+      "export_html.directory": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "result": {
+            "artifactId": "550e8400-e29b-41d4-a716-446655440004",
+            "byteCount": 21,
+            "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+            "createdAt": "2026-01-01T00:01:00.000Z",
+            "downloadUrl": "/v1/artifacts/550e8400-e29b-41d4-a716-446655440004",
+            "fileName": "conversation.html",
             "mediaType": "text/html"
           },
           "settledAt": "2026-01-01T00:01:00.000Z",
@@ -3410,29 +4807,19 @@
           "commandId": "550e8400-e29b-41d4-a716-446655440001",
           "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
           "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
-          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "payloadHash": "61e25a2f5bb00d0768942147604afcc8685c507957de5e4fa588e4207ec945a6",
           "problem": {
-            "artifactId": "550e8400-e29b-41d4-a716-446655440004",
-            "code": "validation_failed",
+            "code": "model_request_failed",
             "commandId": "550e8400-e29b-41d4-a716-446655440001",
             "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
-            "detail": "Correct the listed fields and retry.",
-            "dialogId": "550e8400-e29b-41d4-a716-446655440002",
+            "detail": "The model request failed. Send a new command to retry.",
             "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
-            "instance": "/v1/conversations",
-            "issues": [
-              {
-                "code": "minLength",
-                "message": "Expected a nonempty string.",
-                "path": "/message"
-              }
-            ],
+            "instance": "/v1/conversations/0195f6f4-7c5b-7000-8000-000000000001/commands/550e8400-e29b-41d4-a716-446655440001",
             "requestId": "550e8400-e29b-41d4-a716-446655440006",
-            "retryable": false,
-            "status": 400,
-            "title": "Request validation failed",
-            "type": "https://bitch.invalid/problems/validation_failed",
-            "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+            "retryable": true,
+            "status": 502,
+            "title": "Model request failed",
+            "type": "https://bitch.invalid/problems/model_request_failed"
           },
           "settledAt": "2026-01-01T00:01:00.000Z",
           "state": "failed",
@@ -3447,7 +4834,7 @@
           "commandId": "550e8400-e29b-41d4-a716-446655440001",
           "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
           "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
-          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "payloadHash": "190ba961136ac659100e5004d2e4eabace4e9e333b56eed664295e3698bf0d15",
           "settledAt": "2026-01-01T00:01:00.000Z",
           "state": "completed",
           "type": "follow_up",
@@ -3461,7 +4848,7 @@
           "commandId": "550e8400-e29b-41d4-a716-446655440001",
           "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
           "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
-          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "payloadHash": "e7c18eee2c02a3b16c2d21d64e831a7ba4effeadd34caa23766e3b9f232ec5fc",
           "result": {
             "cancelled": false,
             "target": {
@@ -3476,6 +4863,43 @@
           "updatedAt": "2026-01-01T00:01:00.000Z"
         }
       },
+      "fork.cancelled": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "payloadHash": "e7c18eee2c02a3b16c2d21d64e831a7ba4effeadd34caa23766e3b9f232ec5fc",
+          "result": {
+            "cancelled": true,
+            "text": "Selected text"
+          },
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "completed",
+          "type": "fork",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
+      "fork.directory": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "payloadHash": "e7c18eee2c02a3b16c2d21d64e831a7ba4effeadd34caa23766e3b9f232ec5fc",
+          "result": {
+            "cancelled": false,
+            "target": {
+              "conversationId": "0195f6f4-7c5b-7000-8000-000000000002"
+            }
+          },
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "completed",
+          "type": "fork",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
       "interrupted": {
         "schema": "CommandReceipt",
         "value": {
@@ -3483,29 +4907,19 @@
           "commandId": "550e8400-e29b-41d4-a716-446655440001",
           "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
           "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
-          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "payloadHash": "61e25a2f5bb00d0768942147604afcc8685c507957de5e4fa588e4207ec945a6",
           "problem": {
-            "artifactId": "550e8400-e29b-41d4-a716-446655440004",
             "code": "server_restarted",
             "commandId": "550e8400-e29b-41d4-a716-446655440001",
             "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
             "detail": "The Agent Server restarted. Send a new command to continue.",
-            "dialogId": "550e8400-e29b-41d4-a716-446655440002",
             "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
-            "instance": "/v1/conversations",
-            "issues": [
-              {
-                "code": "minLength",
-                "message": "Expected a nonempty string.",
-                "path": "/message"
-              }
-            ],
+            "instance": "/v1/conversations/0195f6f4-7c5b-7000-8000-000000000001/commands/550e8400-e29b-41d4-a716-446655440001",
             "requestId": "550e8400-e29b-41d4-a716-446655440006",
             "retryable": false,
-            "status": 400,
+            "status": 502,
             "title": "Command interrupted",
-            "type": "https://bitch.invalid/problems/validation_failed",
-            "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+            "type": "https://bitch.invalid/problems/model_request_failed"
           },
           "settledAt": "2026-01-01T00:01:00.000Z",
           "state": "interrupted",
@@ -3520,12 +4934,48 @@
           "commandId": "550e8400-e29b-41d4-a716-446655440001",
           "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
           "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
-          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "payloadHash": "1002503a2b391addc8dbc302d9cb121f958e65900425db1a005d917a1c071845",
           "result": {
             "cancelled": false,
             "target": {
               "conversationId": "0195f6f4-7c5b-7000-8000-000000000002",
               "gatewayId": "550e8400-e29b-41d4-a716-446655440000"
+            }
+          },
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "completed",
+          "type": "new_session",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
+      "new_session.cancelled": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "payloadHash": "1002503a2b391addc8dbc302d9cb121f958e65900425db1a005d917a1c071845",
+          "result": {
+            "cancelled": true
+          },
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "completed",
+          "type": "new_session",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
+      "new_session.directory": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "payloadHash": "1002503a2b391addc8dbc302d9cb121f958e65900425db1a005d917a1c071845",
+          "result": {
+            "cancelled": false,
+            "target": {
+              "conversationId": "0195f6f4-7c5b-7000-8000-000000000002"
             }
           },
           "settledAt": "2026-01-01T00:01:00.000Z",
@@ -3541,7 +4991,7 @@
           "commandId": "550e8400-e29b-41d4-a716-446655440001",
           "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
           "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
-          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "payloadHash": "61e25a2f5bb00d0768942147604afcc8685c507957de5e4fa588e4207ec945a6",
           "settledAt": "2026-01-01T00:01:00.000Z",
           "state": "completed",
           "type": "prompt",
@@ -3569,7 +5019,7 @@
           "commandId": "550e8400-e29b-41d4-a716-446655440001",
           "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
           "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
-          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "payloadHash": "61e25a2f5bb00d0768942147604afcc8685c507957de5e4fa588e4207ec945a6",
           "state": "running",
           "type": "prompt",
           "updatedAt": "2026-01-01T00:01:00.000Z"
@@ -3582,7 +5032,7 @@
           "commandId": "550e8400-e29b-41d4-a716-446655440001",
           "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
           "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
-          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "payloadHash": "26b3426b2593763c96d0890b4a77a0bbf66d13fc512b0c6b138a23c290f30a2a",
           "settledAt": "2026-01-01T00:01:00.000Z",
           "state": "completed",
           "type": "set_auto_compaction",
@@ -3596,7 +5046,7 @@
           "commandId": "550e8400-e29b-41d4-a716-446655440001",
           "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
           "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
-          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "payloadHash": "26b3426b2593763c96d0890b4a77a0bbf66d13fc512b0c6b138a23c290f30a2a",
           "settledAt": "2026-01-01T00:01:00.000Z",
           "state": "completed",
           "type": "set_auto_retry",
@@ -3610,7 +5060,7 @@
           "commandId": "550e8400-e29b-41d4-a716-446655440001",
           "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
           "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
-          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "payloadHash": "fcc935e4dbc2d30f3e76b166945c94e45e3b8a2ae90a5cf5135d26d8acbec5d6",
           "settledAt": "2026-01-01T00:01:00.000Z",
           "state": "completed",
           "type": "set_follow_up_mode",
@@ -3624,7 +5074,7 @@
           "commandId": "550e8400-e29b-41d4-a716-446655440001",
           "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
           "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
-          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "payloadHash": "c62e555fc02fd1dfbedb6bfff3a51d42552defef6ce28473e04d9d7057395124",
           "result": {
             "contextWindow": 128000,
             "input": [
@@ -3650,7 +5100,7 @@
           "commandId": "550e8400-e29b-41d4-a716-446655440001",
           "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
           "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
-          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "payloadHash": "e060030a03c773a9b13d4c6d57705d6fcf68a4730707785452698788372d2fe6",
           "settledAt": "2026-01-01T00:01:00.000Z",
           "state": "completed",
           "type": "set_session_name",
@@ -3664,7 +5114,7 @@
           "commandId": "550e8400-e29b-41d4-a716-446655440001",
           "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
           "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
-          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "payloadHash": "2885692ece9ea50d7158a91914d0e89d4465c0e5af00a1c98d893a02d86bdbd3",
           "settledAt": "2026-01-01T00:01:00.000Z",
           "state": "completed",
           "type": "set_steering_mode",
@@ -3678,7 +5128,7 @@
           "commandId": "550e8400-e29b-41d4-a716-446655440001",
           "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
           "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
-          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "payloadHash": "78a33b98bbd1f0a2bcc133f9dffb77b4a85ee128476d05142d4cd8baff0624c5",
           "settledAt": "2026-01-01T00:01:00.000Z",
           "state": "completed",
           "type": "set_thinking_level",
@@ -3692,7 +5142,7 @@
           "commandId": "550e8400-e29b-41d4-a716-446655440001",
           "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
           "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
-          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "payloadHash": "26f641fd79166647ead0b257dd34b3569ebc82565a76ccce2175031ff28fd35b",
           "settledAt": "2026-01-01T00:01:00.000Z",
           "state": "completed",
           "type": "steer",
@@ -3706,7 +5156,7 @@
           "commandId": "550e8400-e29b-41d4-a716-446655440001",
           "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
           "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
-          "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "payloadHash": "054c3b0bee0bf39f638a8cae779d3eaf04f1577ba934830466a686d29a84608d",
           "result": {
             "cancelled": false,
             "target": {
@@ -3719,6 +5169,77 @@
           "type": "switch_session",
           "updatedAt": "2026-01-01T00:01:00.000Z"
         }
+      },
+      "switch_session.cancelled": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "payloadHash": "054c3b0bee0bf39f638a8cae779d3eaf04f1577ba934830466a686d29a84608d",
+          "result": {
+            "cancelled": true
+          },
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "completed",
+          "type": "switch_session",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      },
+      "switch_session.directory": {
+        "schema": "CommandReceipt",
+        "value": {
+          "acceptedAt": "2026-01-01T00:00:00.000Z",
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "payloadHash": "054c3b0bee0bf39f638a8cae779d3eaf04f1577ba934830466a686d29a84608d",
+          "result": {
+            "cancelled": false,
+            "target": {
+              "conversationId": "0195f6f4-7c5b-7000-8000-000000000002"
+            }
+          },
+          "settledAt": "2026-01-01T00:01:00.000Z",
+          "state": "completed",
+          "type": "switch_session",
+          "updatedAt": "2026-01-01T00:01:00.000Z"
+        }
+      }
+    },
+    "references": {
+      "conversationDirectory": {
+        "schema": "ConversationRef",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000002"
+        }
+      },
+      "conversationGateway": {
+        "schema": "ConversationRef",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000002",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000"
+        }
+      },
+      "directoryConversation": {
+        "schema": "DirectoryConversationRef",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000002"
+        }
+      },
+      "gatewayConversation": {
+        "schema": "GatewayConversationRef",
+        "value": {
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000002",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000"
+        }
+      },
+      "gatewayWorkspace": {
+        "schema": "GatewayWorkspaceRef",
+        "value": {
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+        }
       }
     },
     "requests": {
@@ -3728,7 +5249,7 @@
           "commandId": "550e8400-e29b-41d4-a716-446655440001",
           "images": [
             {
-              "data": "iVBORw0KGgo=",
+              "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
               "fileName": "fixture.png",
               "mimeType": "image/png",
               "type": "image"
@@ -3741,6 +5262,13 @@
           },
           "thinkingLevel": "high",
           "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+        }
+      },
+      "createDirectoryConversation": {
+        "schema": "CreateConversationRequest",
+        "value": {
+          "commandId": "550e8400-e29b-41d4-a716-446655440001",
+          "message": "Validate Directory-mode fixtures"
         }
       },
       "emptyMutation": {
@@ -3778,11 +5306,29 @@
           "value": "submitted-once"
         }
       },
-      "workspaceClone": {
+      "workspaceCloneHttps": {
         "schema": "CreateWorkspaceRequest",
         "value": {
-          "directoryName": "clone",
-          "displayName": "Clone",
+          "directoryName": "clone-https",
+          "displayName": "HTTPS clone",
+          "repositoryUrl": "https://example.invalid/repository.git",
+          "type": "clone"
+        }
+      },
+      "workspaceCloneScp": {
+        "schema": "CreateWorkspaceRequest",
+        "value": {
+          "directoryName": "clone-scp",
+          "displayName": "SCP clone",
+          "repositoryUrl": "git@example.invalid:repository.git",
+          "type": "clone"
+        }
+      },
+      "workspaceCloneSsh": {
+        "schema": "CreateWorkspaceRequest",
+        "value": {
+          "directoryName": "clone-ssh",
+          "displayName": "SSH clone",
           "repositoryUrl": "ssh://git@example.invalid/repository.git",
           "type": "clone"
         }
@@ -3815,13 +5361,28 @@
         "schema": "ArtifactDescriptor",
         "value": {
           "artifactId": "550e8400-e29b-41d4-a716-446655440004",
-          "byteCount": 128,
+          "byteCount": 21,
           "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
           "createdAt": "2026-01-01T00:01:00.000Z",
           "downloadUrl": "/v1/artifacts/550e8400-e29b-41d4-a716-446655440004",
           "fileName": "conversation.html",
           "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
           "mediaType": "text/html"
+        }
+      },
+      "artifactProblem": {
+        "schema": "ProblemDetails",
+        "value": {
+          "artifactId": "550e8400-e29b-41d4-a716-446655440004",
+          "code": "resource_not_found",
+          "detail": "Create a new export and retry the download.",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "instance": "/v1/artifacts/550e8400-e29b-41d4-a716-446655440004",
+          "requestId": "550e8400-e29b-41d4-a716-446655440006",
+          "retryable": false,
+          "status": 404,
+          "title": "Artifact not found",
+          "type": "https://bitch.invalid/problems/resource_not_found"
         }
       },
       "commands": {
@@ -3854,8 +5415,8 @@
           "readOnly": false,
           "status": "working",
           "title": "Validate protocol fixtures",
-          "trashedAt": null,
           "trashReason": null,
+          "trashedAt": null,
           "viewedAt": null,
           "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
         }
@@ -3874,14 +5435,56 @@
               "readOnly": false,
               "status": "working",
               "title": "Validate protocol fixtures",
-              "trashedAt": null,
               "trashReason": null,
+              "trashedAt": null,
               "viewedAt": null,
               "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
             }
           ],
           "nextCursor": null,
           "revision": "conversations-r1"
+        }
+      },
+      "conversationPageWithCursor": {
+        "schema": "ConversationPage",
+        "value": {
+          "items": [
+            {
+              "activityAt": "2026-01-01T00:01:00.000Z",
+              "completedAt": null,
+              "completedSinceViewed": false,
+              "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+              "createdAt": "2026-01-01T00:00:00.000Z",
+              "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+              "readOnly": false,
+              "status": "working",
+              "title": "Validate protocol fixtures",
+              "trashReason": null,
+              "trashedAt": null,
+              "viewedAt": null,
+              "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+            }
+          ],
+          "nextCursor": "eyJyZXZpc2lvbiI6MX0",
+          "revision": "conversations-r1"
+        }
+      },
+      "conversationSummary": {
+        "schema": "ConversationSummary",
+        "value": {
+          "activityAt": "2026-01-01T00:01:00.000Z",
+          "completedAt": null,
+          "completedSinceViewed": false,
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "createdAt": "2026-01-01T00:00:00.000Z",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "readOnly": false,
+          "status": "working",
+          "title": "Validate protocol fixtures",
+          "trashReason": null,
+          "trashedAt": null,
+          "viewedAt": null,
+          "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
         }
       },
       "createConversation": {
@@ -3898,8 +5501,8 @@
             "readOnly": false,
             "status": "working",
             "title": "Validate protocol fixtures",
-            "trashedAt": null,
             "trashReason": null,
+            "trashedAt": null,
             "viewedAt": null,
             "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
           },
@@ -3908,11 +5511,147 @@
             "commandId": "550e8400-e29b-41d4-a716-446655440001",
             "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
             "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
-            "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+            "payloadHash": "61e25a2f5bb00d0768942147604afcc8685c507957de5e4fa588e4207ec945a6",
             "state": "accepted",
             "type": "prompt",
             "updatedAt": "2026-01-01T00:00:00.000Z"
           }
+        }
+      },
+      "createConversationCompletedRetry": {
+        "schema": "CreateConversationResponse",
+        "value": {
+          "conversation": {
+            "activityAt": "2026-01-01T00:01:00.000Z",
+            "completedAt": null,
+            "completedSinceViewed": false,
+            "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+            "createdAt": "2026-01-01T00:00:00.000Z",
+            "cwd": "/data/workspaces/default",
+            "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+            "readOnly": false,
+            "status": "working",
+            "title": "Validate protocol fixtures",
+            "trashReason": null,
+            "trashedAt": null,
+            "viewedAt": null,
+            "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+          },
+          "receipt": {
+            "acceptedAt": "2026-01-01T00:00:00.000Z",
+            "commandId": "550e8400-e29b-41d4-a716-446655440001",
+            "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+            "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+            "payloadHash": "61e25a2f5bb00d0768942147604afcc8685c507957de5e4fa588e4207ec945a6",
+            "settledAt": "2026-01-01T00:01:00.000Z",
+            "state": "completed",
+            "type": "prompt",
+            "updatedAt": "2026-01-01T00:01:00.000Z"
+          }
+        }
+      },
+      "createConversationInFlightRetry": {
+        "schema": "CreateConversationResponse",
+        "value": {
+          "conversation": {
+            "activityAt": "2026-01-01T00:01:00.000Z",
+            "completedAt": null,
+            "completedSinceViewed": false,
+            "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+            "createdAt": "2026-01-01T00:00:00.000Z",
+            "cwd": "/data/workspaces/default",
+            "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+            "readOnly": false,
+            "status": "working",
+            "title": "Validate protocol fixtures",
+            "trashReason": null,
+            "trashedAt": null,
+            "viewedAt": null,
+            "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+          },
+          "receipt": {
+            "acceptedAt": "2026-01-01T00:00:00.000Z",
+            "commandId": "550e8400-e29b-41d4-a716-446655440001",
+            "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+            "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+            "payloadHash": "61e25a2f5bb00d0768942147604afcc8685c507957de5e4fa588e4207ec945a6",
+            "state": "running",
+            "type": "prompt",
+            "updatedAt": "2026-01-01T00:01:00.000Z"
+          }
+        }
+      },
+      "createDirectoryConversation": {
+        "schema": "CreateConversationResponse",
+        "value": {
+          "conversation": {
+            "activityAt": "2026-01-01T00:01:00.000Z",
+            "completedAt": null,
+            "completedSinceViewed": false,
+            "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+            "createdAt": "2026-01-01T00:00:00.000Z",
+            "cwd": "/work/project",
+            "readOnly": false,
+            "status": "idle",
+            "title": "Validate protocol fixtures",
+            "trashReason": null,
+            "trashedAt": null,
+            "viewedAt": null
+          },
+          "receipt": {
+            "acceptedAt": "2026-01-01T00:00:00.000Z",
+            "commandId": "550e8400-e29b-41d4-a716-446655440001",
+            "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+            "payloadHash": "61e25a2f5bb00d0768942147604afcc8685c507957de5e4fa588e4207ec945a6",
+            "state": "accepted",
+            "type": "prompt",
+            "updatedAt": "2026-01-01T00:00:00.000Z"
+          }
+        }
+      },
+      "createdWorkspace": {
+        "schema": "Workspace",
+        "value": {
+          "activeConversationCount": 0,
+          "activityAt": "2026-01-01T00:01:00.000Z",
+          "createdAt": "2026-01-01T00:00:00.000Z",
+          "directoryName": "empty",
+          "displayName": "Empty",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "gitState": "none",
+          "isDefault": false,
+          "state": "active",
+          "totalConversationCount": 0,
+          "trashedAt": null,
+          "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+        }
+      },
+      "dialogProblem": {
+        "schema": "ProblemDetails",
+        "value": {
+          "code": "dialog_already_resolved",
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "detail": "Reload the conversation state before responding again.",
+          "dialogId": "550e8400-e29b-41d4-a716-446655440002",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "instance": "/v1/conversations/0195f6f4-7c5b-7000-8000-000000000001/dialogs/550e8400-e29b-41d4-a716-446655440002/response",
+          "requestId": "550e8400-e29b-41d4-a716-446655440006",
+          "retryable": false,
+          "status": 409,
+          "title": "Dialog already resolved",
+          "type": "https://bitch.invalid/problems/dialog_already_resolved"
+        }
+      },
+      "directoryArtifact": {
+        "schema": "ArtifactDescriptor",
+        "value": {
+          "artifactId": "550e8400-e29b-41d4-a716-446655440004",
+          "byteCount": 21,
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "createdAt": "2026-01-01T00:01:00.000Z",
+          "downloadUrl": "/v1/artifacts/550e8400-e29b-41d4-a716-446655440004",
+          "fileName": "conversation.html",
+          "mediaType": "text/html"
         }
       },
       "directoryConversation": {
@@ -3927,9 +5666,66 @@
           "readOnly": false,
           "status": "idle",
           "title": "Validate protocol fixtures",
-          "trashedAt": null,
           "trashReason": null,
+          "trashedAt": null,
           "viewedAt": null
+        }
+      },
+      "directoryConversationSummary": {
+        "schema": "ConversationSummary",
+        "value": {
+          "activityAt": "2026-01-01T00:01:00.000Z",
+          "completedAt": null,
+          "completedSinceViewed": false,
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "createdAt": "2026-01-01T00:00:00.000Z",
+          "readOnly": false,
+          "status": "idle",
+          "title": "Validate protocol fixtures",
+          "trashReason": null,
+          "trashedAt": null,
+          "viewedAt": null
+        }
+      },
+      "directoryState": {
+        "schema": "ConversationState",
+        "value": {
+          "activeCommandIds": [
+            "550e8400-e29b-41d4-a716-446655440001"
+          ],
+          "autoCompactionEnabled": true,
+          "autoRetryEnabled": true,
+          "conversation": {
+            "activityAt": "2026-01-01T00:01:00.000Z",
+            "completedAt": null,
+            "completedSinceViewed": false,
+            "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+            "createdAt": "2026-01-01T00:00:00.000Z",
+            "cwd": "/work/project",
+            "readOnly": false,
+            "status": "idle",
+            "title": "Validate protocol fixtures",
+            "trashReason": null,
+            "trashedAt": null,
+            "viewedAt": null
+          },
+          "followUpMode": "one-at-a-time",
+          "messageCount": 3,
+          "model": {
+            "contextWindow": 128000,
+            "input": [
+              "text",
+              "image"
+            ],
+            "maxTokens": 4096,
+            "modelId": "fixture-model",
+            "name": "Fixture Model",
+            "provider": "scripted",
+            "reasoning": true
+          },
+          "pendingMessageCount": 0,
+          "steeringMode": "all",
+          "thinkingLevel": "high"
         }
       },
       "entries": {
@@ -3946,7 +5742,7 @@
                     "type": "text"
                   },
                   {
-                    "data": "iVBORw0KGgo=",
+                    "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
                     "mimeType": "image/png",
                     "type": "image"
                   }
@@ -4051,7 +5847,7 @@
                   "type": "text"
                 },
                 {
-                  "data": "iVBORw0KGgo=",
+                  "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
                   "mimeType": "image/png",
                   "type": "image"
                 }
@@ -4085,6 +5881,13 @@
           "leafId": "entry0009"
         }
       },
+      "entriesWithoutLeaf": {
+        "schema": "EntriesResult",
+        "value": {
+          "entries": [],
+          "leafId": null
+        }
+      },
       "forkMessages": {
         "schema": "ForkMessagesResult",
         "value": {
@@ -4102,6 +5905,12 @@
           "text": "Hello from Pi"
         }
       },
+      "lastAssistantEmpty": {
+        "schema": "LastAssistantResult",
+        "value": {
+          "text": null
+        }
+      },
       "messages": {
         "schema": "MessagesResult",
         "value": {
@@ -4114,11 +5923,16 @@
                   "type": "text"
                 },
                 {
-                  "data": "iVBORw0KGgo=",
+                  "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
                   "mimeType": "image/png",
                   "type": "image"
                 }
               ],
+              "role": "user",
+              "timestamp": 1767225600000
+            },
+            {
+              "content": "Validate protocol fixtures",
               "role": "user",
               "timestamp": 1767225600000
             },
@@ -4150,7 +5964,7 @@
                 {
                   "error": {
                     "code": "fixture_error",
-                    "message": "deterministic",
+                    "message": "Deterministic fixture failure",
                     "name": "FixtureError"
                   },
                   "timestamp": 1767225600000,
@@ -4159,7 +5973,7 @@
               ],
               "model": "fixture-model",
               "provider": "scripted",
-              "rawStopReason": "tool_use",
+              "rawStopReason": "toolUse",
               "responseId": "response-1",
               "responseModel": "fixture-model-2026",
               "role": "assistant",
@@ -4217,9 +6031,56 @@
                 "reasoning": 2,
                 "totalTokens": 18
               }
+            },
+            {
+              "cancelled": false,
+              "command": "printf fixture",
+              "excludeFromContext": false,
+              "exitCode": 0,
+              "output": "fixture",
+              "role": "bashExecution",
+              "timestamp": 1767225600003,
+              "truncated": false
+            },
+            {
+              "content": "Fixture notice",
+              "customType": "fixture.notice",
+              "details": {
+                "stable": true
+              },
+              "display": true,
+              "role": "custom",
+              "timestamp": 1767225600004
+            },
+            {
+              "fromId": "entry0001",
+              "role": "branchSummary",
+              "summary": "Branch summary",
+              "timestamp": 1767225600005
+            },
+            {
+              "role": "compactionSummary",
+              "summary": "Compaction summary",
+              "timestamp": 1767225600006,
+              "tokensBefore": 1000
             }
           ],
           "revision": "messages-r1"
+        }
+      },
+      "modelSummary": {
+        "schema": "ModelSummary",
+        "value": {
+          "contextWindow": 128000,
+          "input": [
+            "text",
+            "image"
+          ],
+          "maxTokens": 4096,
+          "modelId": "fixture-model",
+          "name": "Fixture Model",
+          "provider": "scripted",
+          "reasoning": true
         }
       },
       "models": {
@@ -4244,13 +6105,8 @@
       "problem": {
         "schema": "ProblemDetails",
         "value": {
-          "artifactId": "550e8400-e29b-41d4-a716-446655440004",
           "code": "validation_failed",
-          "commandId": "550e8400-e29b-41d4-a716-446655440001",
-          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
           "detail": "Correct the listed fields and retry.",
-          "dialogId": "550e8400-e29b-41d4-a716-446655440002",
-          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
           "instance": "/v1/conversations",
           "issues": [
             {
@@ -4263,8 +6119,31 @@
           "retryable": false,
           "status": 400,
           "title": "Request validation failed",
-          "type": "https://bitch.invalid/problems/validation_failed",
-          "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+          "type": "https://bitch.invalid/problems/validation_failed"
+        }
+      },
+      "providerLoggedOut": {
+        "schema": "ProviderSummary",
+        "value": {
+          "authentication": [
+            "api_key",
+            "oauth"
+          ],
+          "name": "Scripted Provider",
+          "providerId": "scripted",
+          "status": "unauthenticated"
+        }
+      },
+      "providerSummary": {
+        "schema": "ProviderSummary",
+        "value": {
+          "authentication": [
+            "api_key",
+            "oauth"
+          ],
+          "name": "Scripted Provider",
+          "providerId": "scripted",
+          "status": "authenticated"
         }
       },
       "providers": {
@@ -4283,16 +6162,40 @@
           ]
         }
       },
-      "providerSummary": {
-        "schema": "ProviderSummary",
+      "restoredConversation": {
+        "schema": "Conversation",
         "value": {
-          "authentication": [
-            "api_key",
-            "oauth"
-          ],
-          "name": "Scripted Provider",
-          "providerId": "scripted",
-          "status": "authenticated"
+          "activityAt": "2026-01-01T00:01:00.000Z",
+          "completedAt": null,
+          "completedSinceViewed": false,
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "createdAt": "2026-01-01T00:00:00.000Z",
+          "cwd": "/data/workspaces/default",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "readOnly": false,
+          "status": "idle",
+          "title": "Validate protocol fixtures",
+          "trashReason": null,
+          "trashedAt": null,
+          "viewedAt": null,
+          "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+        }
+      },
+      "restoredWorkspace": {
+        "schema": "Workspace",
+        "value": {
+          "activeConversationCount": 1,
+          "activityAt": "2026-01-01T00:01:00.000Z",
+          "createdAt": "2026-01-01T00:00:00.000Z",
+          "directoryName": "default",
+          "displayName": "Default",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "gitState": "none",
+          "isDefault": false,
+          "state": "active",
+          "totalConversationCount": 1,
+          "trashedAt": null,
+          "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
         }
       },
       "soul": {
@@ -4322,8 +6225,8 @@
             "readOnly": false,
             "status": "working",
             "title": "Validate protocol fixtures",
-            "trashedAt": null,
             "trashReason": null,
+            "trashedAt": null,
             "viewedAt": null,
             "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
           },
@@ -4346,14 +6249,133 @@
           "thinkingLevel": "high"
         }
       },
+      "stateWithoutModel": {
+        "schema": "ConversationState",
+        "value": {
+          "activeCommandIds": [
+            "550e8400-e29b-41d4-a716-446655440001"
+          ],
+          "autoCompactionEnabled": true,
+          "autoRetryEnabled": true,
+          "conversation": {
+            "activityAt": "2026-01-01T00:01:00.000Z",
+            "completedAt": null,
+            "completedSinceViewed": false,
+            "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+            "createdAt": "2026-01-01T00:00:00.000Z",
+            "cwd": "/data/workspaces/default",
+            "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+            "readOnly": false,
+            "status": "working",
+            "title": "Validate protocol fixtures",
+            "trashReason": null,
+            "trashedAt": null,
+            "viewedAt": null,
+            "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+          },
+          "followUpMode": "one-at-a-time",
+          "messageCount": 3,
+          "model": null,
+          "pendingMessageCount": 0,
+          "steeringMode": "all",
+          "thinkingLevel": "high"
+        }
+      },
       "thinkingLevels": {
         "schema": "ThinkingLevelsResult",
         "value": {
           "levels": [
             "off",
+            "minimal",
             "low",
-            "high"
+            "medium",
+            "high",
+            "xhigh",
+            "max"
           ]
+        }
+      },
+      "trashedConversation": {
+        "schema": "Conversation",
+        "value": {
+          "activityAt": "2026-01-01T00:01:00.000Z",
+          "completedAt": null,
+          "completedSinceViewed": false,
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "createdAt": "2026-01-01T00:00:00.000Z",
+          "cwd": "/data/workspaces/default",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "readOnly": false,
+          "status": "idle",
+          "title": "Validate protocol fixtures",
+          "trashReason": "individual",
+          "trashedAt": "2026-01-01T00:01:00.000Z",
+          "viewedAt": null,
+          "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+        }
+      },
+      "trashedConversationPage": {
+        "schema": "ConversationPage",
+        "value": {
+          "items": [
+            {
+              "activityAt": "2026-01-01T00:01:00.000Z",
+              "completedAt": null,
+              "completedSinceViewed": false,
+              "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+              "createdAt": "2026-01-01T00:00:00.000Z",
+              "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+              "readOnly": false,
+              "status": "idle",
+              "title": "Validate protocol fixtures",
+              "trashReason": "individual",
+              "trashedAt": "2026-01-01T00:01:00.000Z",
+              "viewedAt": null,
+              "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+            }
+          ],
+          "nextCursor": null,
+          "revision": "trash-conversations-r1"
+        }
+      },
+      "trashedWorkspace": {
+        "schema": "Workspace",
+        "value": {
+          "activeConversationCount": 0,
+          "activityAt": "2026-01-01T00:01:00.000Z",
+          "createdAt": "2026-01-01T00:00:00.000Z",
+          "directoryName": "default",
+          "displayName": "Default",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "gitState": "none",
+          "isDefault": false,
+          "state": "trashed",
+          "totalConversationCount": 1,
+          "trashedAt": "2026-01-01T00:01:00.000Z",
+          "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+        }
+      },
+      "trashedWorkspacePage": {
+        "schema": "WorkspacePage",
+        "value": {
+          "items": [
+            {
+              "activeConversationCount": 0,
+              "activityAt": "2026-01-01T00:01:00.000Z",
+              "createdAt": "2026-01-01T00:00:00.000Z",
+              "directoryName": "default",
+              "displayName": "Default",
+              "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+              "gitState": "none",
+              "isDefault": false,
+              "state": "trashed",
+              "totalConversationCount": 1,
+              "trashedAt": "2026-01-01T00:01:00.000Z",
+              "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+            }
+          ],
+          "nextCursor": null,
+          "revision": "trash-workspaces-r1"
         }
       },
       "tree": {
@@ -4386,7 +6408,7 @@
                       "type": "text"
                     },
                     {
-                      "data": "iVBORw0KGgo=",
+                      "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
                       "mimeType": "image/png",
                       "type": "image"
                     }
@@ -4400,6 +6422,49 @@
               }
             }
           ]
+        }
+      },
+      "treeWithoutLeaf": {
+        "schema": "TreeResult",
+        "value": {
+          "leafId": null,
+          "tree": []
+        }
+      },
+      "updatedWorkspace": {
+        "schema": "Workspace",
+        "value": {
+          "activeConversationCount": 1,
+          "activityAt": "2026-01-01T00:01:00.000Z",
+          "createdAt": "2026-01-01T00:00:00.000Z",
+          "directoryName": "default",
+          "displayName": "Renamed workspace",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "gitState": "none",
+          "isDefault": true,
+          "state": "active",
+          "totalConversationCount": 1,
+          "trashedAt": null,
+          "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+        }
+      },
+      "viewedConversation": {
+        "schema": "Conversation",
+        "value": {
+          "activityAt": "2026-01-01T00:01:00.000Z",
+          "completedAt": "2026-01-01T00:01:00.000Z",
+          "completedSinceViewed": false,
+          "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+          "createdAt": "2026-01-01T00:00:00.000Z",
+          "cwd": "/data/workspaces/default",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "readOnly": false,
+          "status": "idle",
+          "title": "Validate protocol fixtures",
+          "trashReason": null,
+          "trashedAt": null,
+          "viewedAt": "2026-01-01T00:01:00.000Z",
+          "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
         }
       },
       "workspace": {
@@ -4441,6 +6506,71 @@
           "nextCursor": null,
           "revision": "workspaces-r1"
         }
+      },
+      "workspacePageWithCursor": {
+        "schema": "WorkspacePage",
+        "value": {
+          "items": [
+            {
+              "activeConversationCount": 1,
+              "activityAt": "2026-01-01T00:01:00.000Z",
+              "createdAt": "2026-01-01T00:00:00.000Z",
+              "directoryName": "default",
+              "displayName": "Default",
+              "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+              "gitState": "none",
+              "isDefault": true,
+              "state": "active",
+              "totalConversationCount": 1,
+              "trashedAt": null,
+              "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+            }
+          ],
+          "nextCursor": "eyJyZXZpc2lvbiI6MX0",
+          "revision": "workspaces-r1"
+        }
+      },
+      "workspaceProblem": {
+        "schema": "ProblemDetails",
+        "value": {
+          "code": "resource_not_found",
+          "detail": "Select an available workspace and retry.",
+          "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+          "instance": "/v1/workspaces/550e8400-e29b-41d4-a716-446655440010",
+          "requestId": "550e8400-e29b-41d4-a716-446655440006",
+          "retryable": false,
+          "status": 404,
+          "title": "Workspace not found",
+          "type": "https://bitch.invalid/problems/resource_not_found",
+          "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+        }
+      }
+    },
+    "sessionChangeResults": {
+      "cancelled": {
+        "schema": "SessionChangeResult",
+        "value": {
+          "cancelled": true
+        }
+      },
+      "directory": {
+        "schema": "SessionChangeResult",
+        "value": {
+          "cancelled": false,
+          "target": {
+            "conversationId": "0195f6f4-7c5b-7000-8000-000000000002"
+          }
+        }
+      },
+      "gateway": {
+        "schema": "SessionChangeResult",
+        "value": {
+          "cancelled": false,
+          "target": {
+            "conversationId": "0195f6f4-7c5b-7000-8000-000000000002",
+            "gatewayId": "550e8400-e29b-41d4-a716-446655440000"
+          }
+        }
       }
     },
     "snapshots": {
@@ -4453,7 +6583,7 @@
               "commandId": "550e8400-e29b-41d4-a716-446655440001",
               "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
               "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
-              "payloadHash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+              "payloadHash": "61e25a2f5bb00d0768942147604afcc8685c507957de5e4fa588e4207ec945a6",
               "state": "accepted",
               "type": "prompt",
               "updatedAt": "2026-01-01T00:00:00.000Z"
@@ -4488,7 +6618,7 @@
                 {
                   "error": {
                     "code": "fixture_error",
-                    "message": "deterministic",
+                    "message": "Deterministic fixture failure",
                     "name": "FixtureError"
                   },
                   "timestamp": 1767225600000,
@@ -4497,7 +6627,7 @@
               ],
               "model": "fixture-model",
               "provider": "scripted",
-              "rawStopReason": "tool_use",
+              "rawStopReason": "toolUse",
               "responseId": "response-1",
               "responseModel": "fixture-model-2026",
               "role": "assistant",
@@ -4552,8 +6682,8 @@
             "readOnly": false,
             "status": "working",
             "title": "Validate protocol fixtures",
-            "trashedAt": null,
             "trashReason": null,
+            "trashedAt": null,
             "viewedAt": null,
             "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
           },
@@ -4576,7 +6706,7 @@
             {
               "images": [
                 {
-                  "data": "iVBORw0KGgo=",
+                  "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
                   "fileName": "fixture.png",
                   "mimeType": "image/png",
                   "type": "image"
@@ -4615,8 +6745,8 @@
               "readOnly": false,
               "status": "working",
               "title": "Validate protocol fixtures",
-              "trashedAt": null,
               "trashReason": null,
+              "trashedAt": null,
               "viewedAt": null,
               "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
             },
@@ -4646,6 +6776,242 @@
           ]
         }
       },
+      "directory": {
+        "schema": "ConversationSnapshot",
+        "value": {
+          "activeReceipts": [
+            {
+              "acceptedAt": "2026-01-01T00:00:00.000Z",
+              "commandId": "550e8400-e29b-41d4-a716-446655440001",
+              "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+              "payloadHash": "61e25a2f5bb00d0768942147604afcc8685c507957de5e4fa588e4207ec945a6",
+              "state": "accepted",
+              "type": "prompt",
+              "updatedAt": "2026-01-01T00:00:00.000Z"
+            }
+          ],
+          "activeResponse": {
+            "message": {
+              "api": "pi-messages",
+              "content": [
+                {
+                  "text": "Hello from Pi",
+                  "textSignature": "sig-text",
+                  "type": "text"
+                },
+                {
+                  "redacted": false,
+                  "thinking": "Check the fixture",
+                  "thinkingSignature": "sig-thinking",
+                  "type": "thinking"
+                },
+                {
+                  "arguments": {
+                    "path": "README.md"
+                  },
+                  "id": "call-1",
+                  "name": "read",
+                  "thoughtSignature": "sig-tool",
+                  "type": "toolCall"
+                }
+              ],
+              "diagnostics": [
+                {
+                  "error": {
+                    "code": "fixture_error",
+                    "message": "Deterministic fixture failure",
+                    "name": "FixtureError"
+                  },
+                  "timestamp": 1767225600000,
+                  "type": "fixture"
+                }
+              ],
+              "model": "fixture-model",
+              "provider": "scripted",
+              "rawStopReason": "toolUse",
+              "responseId": "response-1",
+              "responseModel": "fixture-model-2026",
+              "role": "assistant",
+              "stopReason": "toolUse",
+              "timestamp": 1767225600001,
+              "usage": {
+                "cacheRead": 2,
+                "cacheWrite": 1,
+                "cacheWrite1h": 1,
+                "cost": {
+                  "cacheRead": 0.0001,
+                  "cacheWrite": 0.0002,
+                  "input": 0.001,
+                  "output": 0.002,
+                  "total": 0.0033
+                },
+                "input": 10,
+                "output": 5,
+                "reasoning": 2,
+                "totalTokens": 18
+              }
+            },
+            "tools": [
+              {
+                "content": [
+                  {
+                    "text": "Hello from Pi",
+                    "textSignature": "sig-text",
+                    "type": "text"
+                  }
+                ],
+                "details": {
+                  "progress": 0.5
+                },
+                "input": {
+                  "path": "README.md"
+                },
+                "status": "running",
+                "toolCallId": "call-1",
+                "toolName": "read"
+              }
+            ]
+          },
+          "conversation": {
+            "activityAt": "2026-01-01T00:01:00.000Z",
+            "completedAt": null,
+            "completedSinceViewed": false,
+            "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+            "createdAt": "2026-01-01T00:00:00.000Z",
+            "cwd": "/work/project",
+            "readOnly": false,
+            "status": "idle",
+            "title": "Validate protocol fixtures",
+            "trashReason": null,
+            "trashedAt": null,
+            "viewedAt": null
+          },
+          "extensionUiState": {
+            "statuses": {
+              "fixture": "running"
+            },
+            "title": "Fixture title",
+            "widgets": [
+              {
+                "key": "fixture",
+                "lines": [
+                  "line one"
+                ],
+                "placement": "aboveEditor"
+              }
+            ]
+          },
+          "followUpQueue": [
+            {
+              "images": [
+                {
+                  "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=",
+                  "fileName": "fixture.png",
+                  "mimeType": "image/png",
+                  "type": "image"
+                }
+              ],
+              "text": "Follow up"
+            }
+          ],
+          "messagesRevision": "messages-r1",
+          "pendingDialogs": [
+            {
+              "dialogId": "550e8400-e29b-41d4-a716-446655440002",
+              "method": "select",
+              "options": [
+                "one",
+                "two"
+              ],
+              "timeoutAt": "2026-01-01T00:01:00.000Z",
+              "title": "Select a fixture"
+            }
+          ],
+          "state": {
+            "activeCommandIds": [
+              "550e8400-e29b-41d4-a716-446655440001"
+            ],
+            "autoCompactionEnabled": true,
+            "autoRetryEnabled": true,
+            "conversation": {
+              "activityAt": "2026-01-01T00:01:00.000Z",
+              "completedAt": null,
+              "completedSinceViewed": false,
+              "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+              "createdAt": "2026-01-01T00:00:00.000Z",
+              "cwd": "/work/project",
+              "readOnly": false,
+              "status": "idle",
+              "title": "Validate protocol fixtures",
+              "trashReason": null,
+              "trashedAt": null,
+              "viewedAt": null
+            },
+            "followUpMode": "one-at-a-time",
+            "messageCount": 3,
+            "model": {
+              "contextWindow": 128000,
+              "input": [
+                "text",
+                "image"
+              ],
+              "maxTokens": 4096,
+              "modelId": "fixture-model",
+              "name": "Fixture Model",
+              "provider": "scripted",
+              "reasoning": true
+            },
+            "pendingMessageCount": 0,
+            "steeringMode": "all",
+            "thinkingLevel": "high"
+          },
+          "steeringQueue": [
+            {
+              "images": [],
+              "text": "Steer next"
+            }
+          ]
+        }
+      },
+      "gateway": {
+        "schema": "GatewaySnapshot",
+        "value": {
+          "conversations": [
+            {
+              "activityAt": "2026-01-01T00:01:00.000Z",
+              "completedAt": null,
+              "completedSinceViewed": false,
+              "conversationId": "0195f6f4-7c5b-7000-8000-000000000001",
+              "createdAt": "2026-01-01T00:00:00.000Z",
+              "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+              "readOnly": false,
+              "status": "working",
+              "title": "Validate protocol fixtures",
+              "trashReason": null,
+              "trashedAt": null,
+              "viewedAt": null,
+              "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+            }
+          ],
+          "revision": "gateway-r1",
+          "workspaces": [
+            {
+              "activeConversationCount": 1,
+              "activityAt": "2026-01-01T00:01:00.000Z",
+              "createdAt": "2026-01-01T00:00:00.000Z",
+              "directoryName": "default",
+              "displayName": "Default",
+              "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
+              "gitState": "none",
+              "isDefault": true,
+              "state": "active",
+              "totalConversationCount": 1,
+              "trashedAt": null,
+              "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
+            }
+          ]
+        }
+      },
       "idle": {
         "schema": "ConversationSnapshot",
         "value": {
@@ -4662,8 +7028,8 @@
             "readOnly": false,
             "status": "idle",
             "title": "Validate protocol fixtures",
-            "trashedAt": null,
             "trashReason": null,
+            "trashedAt": null,
             "viewedAt": null,
             "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
           },
@@ -4700,8 +7066,8 @@
               "readOnly": false,
               "status": "idle",
               "title": "Validate protocol fixtures",
-              "trashedAt": null,
               "trashReason": null,
+              "trashedAt": null,
               "viewedAt": null,
               "workspaceId": "550e8400-e29b-41d4-a716-446655440010"
             },
@@ -4735,8 +7101,18 @@
             "attachment.image.v1",
             "conversation.commands.v1",
             "conversation.events.v1",
+            "conversation.multi-client.v1",
+            "conversation.reconciliation.v1",
+            "conversation.reload.v1",
             "directory.fixed-cwd.v1",
-            "pi.rpc.v1"
+            "directory.project-trust.v1",
+            "extension.rpc-ui.v1",
+            "pi.rpc.v1",
+            "provider.auth.v1",
+            "session.branching.v1",
+            "session.export-html.v1",
+            "settings.v1",
+            "shell.rpc.v1"
           ],
           "mode": "directory",
           "piVersion": "0.83.0",
@@ -4744,7 +7120,7 @@
             "major": 1,
             "minor": 0
           },
-          "serverVersion": "0.1.0"
+          "serverVersion": "0.0.0"
         }
       },
       "gateway": {
@@ -4752,10 +7128,24 @@
         "value": {
           "capabilities": [
             "attachment.image.v1",
+            "config.soul.v1",
             "conversation.commands.v1",
             "conversation.events.v1",
+            "conversation.multi-client.v1",
+            "conversation.reconciliation.v1",
+            "conversation.reload.v1",
+            "extension.rpc-ui.v1",
+            "gateway.events.v1",
+            "gateway.global-view-state.v1",
             "gateway.identity.v1",
-            "pi.rpc.v1"
+            "gateway.trash.v1",
+            "gateway.workspaces.v1",
+            "pi.rpc.v1",
+            "provider.auth.v1",
+            "session.branching.v1",
+            "session.export-html.v1",
+            "settings.v1",
+            "shell.rpc.v1"
           ],
           "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
           "mode": "gateway",
@@ -4764,7 +7154,7 @@
             "major": 1,
             "minor": 0
           },
-          "serverVersion": "0.1.0"
+          "serverVersion": "0.0.0"
         }
       }
     }

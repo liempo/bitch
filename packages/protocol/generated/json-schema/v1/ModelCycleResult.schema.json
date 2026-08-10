@@ -15,15 +15,9 @@
         },
         "input": {
           "items": {
-            "anyOf": [
-              {
-                "const": "text",
-                "type": "string"
-              },
-              {
-                "const": "image",
-                "type": "string"
-              }
+            "enum": [
+              "text",
+              "image"
             ]
           },
           "type": "array",
@@ -61,35 +55,14 @@
       "type": "object"
     },
     "thinkingLevel": {
-      "anyOf": [
-        {
-          "const": "off",
-          "type": "string"
-        },
-        {
-          "const": "minimal",
-          "type": "string"
-        },
-        {
-          "const": "low",
-          "type": "string"
-        },
-        {
-          "const": "medium",
-          "type": "string"
-        },
-        {
-          "const": "high",
-          "type": "string"
-        },
-        {
-          "const": "xhigh",
-          "type": "string"
-        },
-        {
-          "const": "max",
-          "type": "string"
-        }
+      "enum": [
+        "off",
+        "minimal",
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
       ]
     }
   },

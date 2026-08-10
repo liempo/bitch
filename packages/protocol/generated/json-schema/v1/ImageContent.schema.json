@@ -1,0 +1,25 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/ImageContent.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "data": {
+      "type": "string"
+    },
+    "mimeType": {
+      "pattern": "^image/",
+      "type": "string"
+    },
+    "type": {
+      "const": "image",
+      "type": "string"
+    }
+  },
+  "required": [
+    "type",
+    "data",
+    "mimeType"
+  ],
+  "title": "ImageContent",
+  "type": "object"
+}

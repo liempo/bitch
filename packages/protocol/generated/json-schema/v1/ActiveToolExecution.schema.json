@@ -1,0 +1,239 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/ActiveToolExecution.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "content": {
+      "items": {
+        "anyOf": [
+          {
+            "additionalProperties": true,
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "textSignature": {
+                "type": "string"
+              },
+              "type": {
+                "const": "text",
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "text"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": true,
+            "properties": {
+              "redacted": {
+                "type": "boolean"
+              },
+              "thinking": {
+                "type": "string"
+              },
+              "thinkingSignature": {
+                "type": "string"
+              },
+              "type": {
+                "const": "thinking",
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "thinking"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": true,
+            "properties": {
+              "data": {
+                "type": "string"
+              },
+              "mimeType": {
+                "pattern": "^image/",
+                "type": "string"
+              },
+              "type": {
+                "const": "image",
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "data",
+              "mimeType"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": true,
+            "properties": {
+              "arguments": {
+                "patternProperties": {
+                  "^.*$": {
+                    "$defs": {
+                      "JsonValue": {
+                        "$id": "JsonValue",
+                        "anyOf": [
+                          {
+                            "type": "null"
+                          },
+                          {
+                            "type": "boolean"
+                          },
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "items": {
+                              "$ref": "JsonValue"
+                            },
+                            "type": "array"
+                          },
+                          {
+                            "patternProperties": {
+                              "^.*$": {
+                                "$ref": "JsonValue"
+                              }
+                            },
+                            "type": "object"
+                          }
+                        ]
+                      }
+                    },
+                    "$ref": "JsonValue"
+                  }
+                },
+                "type": "object"
+              },
+              "id": {
+                "minLength": 1,
+                "type": "string"
+              },
+              "name": {
+                "minLength": 1,
+                "type": "string"
+              },
+              "thoughtSignature": {
+                "type": "string"
+              },
+              "type": {
+                "const": "toolCall",
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "id",
+              "name",
+              "arguments"
+            ],
+            "type": "object"
+          }
+        ]
+      },
+      "type": "array"
+    },
+    "details": {
+      "$defs": {
+        "JsonValue": {
+          "$id": "JsonValue",
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "$ref": "JsonValue"
+              },
+              "type": "array"
+            },
+            {
+              "patternProperties": {
+                "^.*$": {
+                  "$ref": "JsonValue"
+                }
+              },
+              "type": "object"
+            }
+          ]
+        }
+      },
+      "$ref": "JsonValue"
+    },
+    "input": {
+      "$defs": {
+        "JsonValue": {
+          "$id": "JsonValue",
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "$ref": "JsonValue"
+              },
+              "type": "array"
+            },
+            {
+              "patternProperties": {
+                "^.*$": {
+                  "$ref": "JsonValue"
+                }
+              },
+              "type": "object"
+            }
+          ]
+        }
+      },
+      "$ref": "JsonValue"
+    },
+    "status": {
+      "enum": [
+        "running",
+        "completed",
+        "failed"
+      ]
+    },
+    "toolCallId": {
+      "type": "string"
+    },
+    "toolName": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "toolCallId",
+    "toolName",
+    "status"
+  ],
+  "title": "ActiveToolExecution",
+  "type": "object"
+}

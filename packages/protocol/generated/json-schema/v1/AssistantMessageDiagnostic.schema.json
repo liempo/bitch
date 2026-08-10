@@ -1,0 +1,45 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/AssistantMessageDiagnostic.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "error": {
+      "additionalProperties": true,
+      "properties": {
+        "code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "message": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "message"
+      ],
+      "type": "object"
+    },
+    "timestamp": {
+      "minimum": 0,
+      "type": "number"
+    },
+    "type": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "type",
+    "timestamp"
+  ],
+  "title": "AssistantMessageDiagnostic",
+  "type": "object"
+}

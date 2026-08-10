@@ -4,6 +4,35 @@
   "anyOf": [
     {
       "additionalProperties": true,
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "key"
+            ]
+          },
+          {
+            "required": [
+              "text"
+            ]
+          },
+          {
+            "required": [
+              "lines"
+            ]
+          },
+          {
+            "required": [
+              "placement"
+            ]
+          },
+          {
+            "required": [
+              "title"
+            ]
+          }
+        ]
+      },
       "properties": {
         "message": {
           "type": "string"
@@ -13,19 +42,10 @@
           "type": "string"
         },
         "severity": {
-          "anyOf": [
-            {
-              "const": "info",
-              "type": "string"
-            },
-            {
-              "const": "warning",
-              "type": "string"
-            },
-            {
-              "const": "error",
-              "type": "string"
-            }
+          "enum": [
+            "info",
+            "warning",
+            "error"
           ]
         }
       },
@@ -38,6 +58,35 @@
     },
     {
       "additionalProperties": true,
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "message"
+            ]
+          },
+          {
+            "required": [
+              "severity"
+            ]
+          },
+          {
+            "required": [
+              "lines"
+            ]
+          },
+          {
+            "required": [
+              "placement"
+            ]
+          },
+          {
+            "required": [
+              "title"
+            ]
+          }
+        ]
+      },
       "properties": {
         "key": {
           "type": "string"
@@ -66,6 +115,30 @@
     },
     {
       "additionalProperties": true,
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "message"
+            ]
+          },
+          {
+            "required": [
+              "severity"
+            ]
+          },
+          {
+            "required": [
+              "text"
+            ]
+          },
+          {
+            "required": [
+              "title"
+            ]
+          }
+        ]
+      },
       "properties": {
         "key": {
           "type": "string"
@@ -88,15 +161,9 @@
           "type": "string"
         },
         "placement": {
-          "anyOf": [
-            {
-              "const": "aboveEditor",
-              "type": "string"
-            },
-            {
-              "const": "belowEditor",
-              "type": "string"
-            }
+          "enum": [
+            "aboveEditor",
+            "belowEditor"
           ]
         }
       },
@@ -110,6 +177,40 @@
     },
     {
       "additionalProperties": true,
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "message"
+            ]
+          },
+          {
+            "required": [
+              "severity"
+            ]
+          },
+          {
+            "required": [
+              "key"
+            ]
+          },
+          {
+            "required": [
+              "text"
+            ]
+          },
+          {
+            "required": [
+              "lines"
+            ]
+          },
+          {
+            "required": [
+              "placement"
+            ]
+          }
+        ]
+      },
       "properties": {
         "method": {
           "const": "setTitle",
@@ -127,6 +228,40 @@
     },
     {
       "additionalProperties": true,
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "message"
+            ]
+          },
+          {
+            "required": [
+              "severity"
+            ]
+          },
+          {
+            "required": [
+              "key"
+            ]
+          },
+          {
+            "required": [
+              "lines"
+            ]
+          },
+          {
+            "required": [
+              "placement"
+            ]
+          },
+          {
+            "required": [
+              "title"
+            ]
+          }
+        ]
+      },
       "properties": {
         "method": {
           "const": "set_editor_text",

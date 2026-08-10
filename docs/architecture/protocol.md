@@ -2,7 +2,7 @@
 
 ## Status
 
-Approved first-release protocol architecture. [`api.md`](api.md) defines the exact resources, schemas, pagination, events, and ordering.
+Approved first-release protocol architecture. The version 1 schema and fixture package is implemented. The Agent Server transport is pending. [`api.md`](api.md) defines the exact resources, schemas, pagination, events, and ordering.
 
 ## Transport
 
@@ -52,14 +52,31 @@ The repository stores generated artifacts. CI regenerates them and fails when th
 
 The version 1 contract implementation is in `packages/protocol`:
 
-- `src/schemas.ts` contains the canonical TypeBox schemas.
-- `src/http-contract.ts` maps each HTTP operation to its request, response, and fixture schemas.
-- `src/fixture-data.ts` contains the authored fixture corpus for BITCH protocol values and the public projections of pinned Pi `0.83.0` values.
-- `src/validation.ts` validates fixtures and returns deterministic errors with fixture, path, code, and message fields.
+- `src/schemas/` contains canonical TypeBox schemas grouped by protocol domain.
+- `src/fixtures/` contains authored fixture values, coverage requirements, and the version 1 corpus.
+- `src/http/` binds each HTTP operation to its parameters, bodies, statuses, and fixture variants.
+- `src/receipts/` contains the RFC 8785 command-payload hash function.
+- `src/validation/` contains schema, coverage, semantic, and transport-safety validation.
+- `src/generation/` creates JSON Schema, OpenAPI, fixture, and manifest artifacts.
 - `fixtures/v1/` contains the committed protocol and HTTP operation fixtures.
 - `generated/json-schema/v1/`, `generated/openapi-v1.json`, and `generated/manifest.json` contain deterministic generated artifacts.
 
-Run `npm run validate` from the repository root to type-check, lint, test, check generated files, and validate the complete fixture corpus. `npm run fixtures:validate` is the focused public fixture-validation command. It exits nonzero when a fixture has an invalid field, an unknown request field, an invalid discriminator, a credential-shaped field, or an internal server path. The validator sorts all errors to keep repeated failures byte-stable. `.github/workflows/ci.yml` runs validation, the package build, and the production dependency audit with the pinned Node.js version for each pull request and push to `main`.
+The package root exports each schema and `SchemaType<Name>`. A consumer can infer a DTO without importing TypeBox implementation files.
+
+The package root also exports `canonicalPayloadHash(payload)`. This function returns the lowercase SHA-256 digest of the RFC 8785 canonical JSON payload. It throws `TypeError` when the value is not valid JSON.
+
+Run `npm run fixtures:generate` to replace the committed generated set. The command also removes an artifact that is no longer canonical. `npm run check:generated` fails for missing, changed, or unexpected generated files.
+
+Run `npm run validate` from the repository root to type-check, lint, test, check generated files, and validate the complete fixture corpus. `npm run fixtures:validate` is the focused fixture-validation command. It exits nonzero for these conditions:
+
+- A fixture does not match its schema.
+- A request contains an unknown field.
+- A known response field conflicts with its discriminated state.
+- A documented schema or union variant has no direct fixture.
+- A receipt payload hash, capability list, binary digest, byte count, or descriptor is inconsistent.
+- A transport value contains a credential-shaped field or an internal server path.
+
+The validator returns and prints deterministic errors with fixture, path, code, and message fields. `.github/workflows/ci.yml` uses the pinned Node.js version. It runs validation, the package build, and a full dependency audit.
 
 When Phase 7 starts, the macOS app will use Apple Swift OpenAPI Generator for HTTP payload models. A small Swift transport will decode SSE event models.
 

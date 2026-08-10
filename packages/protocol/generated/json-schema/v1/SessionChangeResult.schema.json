@@ -4,6 +4,15 @@
   "anyOf": [
     {
       "additionalProperties": true,
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "target"
+            ]
+          }
+        ]
+      },
       "properties": {
         "cancelled": {
           "const": true,
@@ -32,6 +41,7 @@
                   "type": "string"
                 },
                 "gatewayId": {
+                  "format": "uuid",
                   "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
                   "type": "string"
                 }
@@ -44,6 +54,15 @@
             },
             {
               "additionalProperties": true,
+              "not": {
+                "anyOf": [
+                  {
+                    "required": [
+                      "gatewayId"
+                    ]
+                  }
+                ]
+              },
               "properties": {
                 "conversationId": {
                   "minLength": 1,

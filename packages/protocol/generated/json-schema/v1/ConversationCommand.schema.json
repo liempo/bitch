@@ -6,6 +6,7 @@
       "additionalProperties": false,
       "properties": {
         "commandId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -17,31 +18,21 @@
                 "additionalProperties": false,
                 "properties": {
                   "data": {
+                    "minLength": 4,
                     "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
                     "type": "string"
                   },
                   "fileName": {
-                    "pattern": "^[^/\\\\]+$",
+                    "minLength": 1,
+                    "pattern": "^(?!\\.\\.?$)[^/\\\\\\u0000]+$",
                     "type": "string"
                   },
                   "mimeType": {
-                    "anyOf": [
-                      {
-                        "const": "image/png",
-                        "type": "string"
-                      },
-                      {
-                        "const": "image/jpeg",
-                        "type": "string"
-                      },
-                      {
-                        "const": "image/webp",
-                        "type": "string"
-                      },
-                      {
-                        "const": "image/gif",
-                        "type": "string"
-                      }
+                    "enum": [
+                      "image/png",
+                      "image/jpeg",
+                      "image/webp",
+                      "image/gif"
                     ]
                   },
                   "type": {
@@ -62,15 +53,9 @@
               "type": "string"
             },
             "streamingBehavior": {
-              "anyOf": [
-                {
-                  "const": "steer",
-                  "type": "string"
-                },
-                {
-                  "const": "followUp",
-                  "type": "string"
-                }
+              "enum": [
+                "steer",
+                "followUp"
               ]
             }
           },
@@ -95,6 +80,7 @@
       "additionalProperties": false,
       "properties": {
         "commandId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -106,31 +92,21 @@
                 "additionalProperties": false,
                 "properties": {
                   "data": {
+                    "minLength": 4,
                     "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
                     "type": "string"
                   },
                   "fileName": {
-                    "pattern": "^[^/\\\\]+$",
+                    "minLength": 1,
+                    "pattern": "^(?!\\.\\.?$)[^/\\\\\\u0000]+$",
                     "type": "string"
                   },
                   "mimeType": {
-                    "anyOf": [
-                      {
-                        "const": "image/png",
-                        "type": "string"
-                      },
-                      {
-                        "const": "image/jpeg",
-                        "type": "string"
-                      },
-                      {
-                        "const": "image/webp",
-                        "type": "string"
-                      },
-                      {
-                        "const": "image/gif",
-                        "type": "string"
-                      }
+                    "enum": [
+                      "image/png",
+                      "image/jpeg",
+                      "image/webp",
+                      "image/gif"
                     ]
                   },
                   "type": {
@@ -172,6 +148,7 @@
       "additionalProperties": false,
       "properties": {
         "commandId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -183,31 +160,21 @@
                 "additionalProperties": false,
                 "properties": {
                   "data": {
+                    "minLength": 4,
                     "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
                     "type": "string"
                   },
                   "fileName": {
-                    "pattern": "^[^/\\\\]+$",
+                    "minLength": 1,
+                    "pattern": "^(?!\\.\\.?$)[^/\\\\\\u0000]+$",
                     "type": "string"
                   },
                   "mimeType": {
-                    "anyOf": [
-                      {
-                        "const": "image/png",
-                        "type": "string"
-                      },
-                      {
-                        "const": "image/jpeg",
-                        "type": "string"
-                      },
-                      {
-                        "const": "image/webp",
-                        "type": "string"
-                      },
-                      {
-                        "const": "image/gif",
-                        "type": "string"
-                      }
+                    "enum": [
+                      "image/png",
+                      "image/jpeg",
+                      "image/webp",
+                      "image/gif"
                     ]
                   },
                   "type": {
@@ -249,6 +216,7 @@
       "additionalProperties": false,
       "properties": {
         "commandId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -273,6 +241,7 @@
       "additionalProperties": false,
       "properties": {
         "commandId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -302,6 +271,7 @@
       "additionalProperties": false,
       "properties": {
         "commandId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -337,6 +307,7 @@
       "additionalProperties": false,
       "properties": {
         "commandId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -361,6 +332,7 @@
       "additionalProperties": false,
       "properties": {
         "commandId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -368,35 +340,14 @@
           "additionalProperties": false,
           "properties": {
             "level": {
-              "anyOf": [
-                {
-                  "const": "off",
-                  "type": "string"
-                },
-                {
-                  "const": "minimal",
-                  "type": "string"
-                },
-                {
-                  "const": "low",
-                  "type": "string"
-                },
-                {
-                  "const": "medium",
-                  "type": "string"
-                },
-                {
-                  "const": "high",
-                  "type": "string"
-                },
-                {
-                  "const": "xhigh",
-                  "type": "string"
-                },
-                {
-                  "const": "max",
-                  "type": "string"
-                }
+              "enum": [
+                "off",
+                "minimal",
+                "low",
+                "medium",
+                "high",
+                "xhigh",
+                "max"
               ]
             }
           },
@@ -421,6 +372,7 @@
       "additionalProperties": false,
       "properties": {
         "commandId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -445,6 +397,7 @@
       "additionalProperties": false,
       "properties": {
         "commandId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -452,15 +405,9 @@
           "additionalProperties": false,
           "properties": {
             "mode": {
-              "anyOf": [
-                {
-                  "const": "all",
-                  "type": "string"
-                },
-                {
-                  "const": "one-at-a-time",
-                  "type": "string"
-                }
+              "enum": [
+                "all",
+                "one-at-a-time"
               ]
             }
           },
@@ -485,6 +432,7 @@
       "additionalProperties": false,
       "properties": {
         "commandId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -492,15 +440,9 @@
           "additionalProperties": false,
           "properties": {
             "mode": {
-              "anyOf": [
-                {
-                  "const": "all",
-                  "type": "string"
-                },
-                {
-                  "const": "one-at-a-time",
-                  "type": "string"
-                }
+              "enum": [
+                "all",
+                "one-at-a-time"
               ]
             }
           },
@@ -525,6 +467,7 @@
       "additionalProperties": false,
       "properties": {
         "commandId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -553,6 +496,7 @@
       "additionalProperties": false,
       "properties": {
         "commandId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -584,6 +528,7 @@
       "additionalProperties": false,
       "properties": {
         "commandId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -615,6 +560,7 @@
       "additionalProperties": false,
       "properties": {
         "commandId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -639,6 +585,7 @@
       "additionalProperties": false,
       "properties": {
         "commandId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -673,6 +620,7 @@
       "additionalProperties": false,
       "properties": {
         "commandId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -697,6 +645,7 @@
       "additionalProperties": false,
       "properties": {
         "commandId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -721,6 +670,7 @@
       "additionalProperties": false,
       "properties": {
         "commandId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -753,6 +703,7 @@
       "additionalProperties": false,
       "properties": {
         "commandId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -785,6 +736,7 @@
       "additionalProperties": false,
       "properties": {
         "commandId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -809,6 +761,7 @@
       "additionalProperties": false,
       "properties": {
         "commandId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -840,6 +793,7 @@
       "additionalProperties": false,
       "properties": {
         "commandId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },

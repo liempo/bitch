@@ -1,0 +1,177 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/ToolResultData.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "addedToolNames": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "content": {
+      "items": {
+        "anyOf": [
+          {
+            "additionalProperties": true,
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "textSignature": {
+                "type": "string"
+              },
+              "type": {
+                "const": "text",
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "text"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": true,
+            "properties": {
+              "data": {
+                "type": "string"
+              },
+              "mimeType": {
+                "pattern": "^image/",
+                "type": "string"
+              },
+              "type": {
+                "const": "image",
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "data",
+              "mimeType"
+            ],
+            "type": "object"
+          }
+        ]
+      },
+      "type": "array"
+    },
+    "details": {
+      "$defs": {
+        "JsonValue": {
+          "$id": "JsonValue",
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "$ref": "JsonValue"
+              },
+              "type": "array"
+            },
+            {
+              "patternProperties": {
+                "^.*$": {
+                  "$ref": "JsonValue"
+                }
+              },
+              "type": "object"
+            }
+          ]
+        }
+      },
+      "$ref": "JsonValue"
+    },
+    "terminate": {
+      "type": "boolean"
+    },
+    "usage": {
+      "additionalProperties": true,
+      "properties": {
+        "cacheRead": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "cacheWrite": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "cacheWrite1h": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "cost": {
+          "additionalProperties": true,
+          "properties": {
+            "cacheRead": {
+              "type": "number"
+            },
+            "cacheWrite": {
+              "type": "number"
+            },
+            "input": {
+              "type": "number"
+            },
+            "output": {
+              "type": "number"
+            },
+            "total": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "input",
+            "output",
+            "cacheRead",
+            "cacheWrite",
+            "total"
+          ],
+          "type": "object"
+        },
+        "input": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "output": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "reasoning": {
+          "minimum": 0,
+          "type": "number"
+        },
+        "totalTokens": {
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "input",
+        "output",
+        "cacheRead",
+        "cacheWrite",
+        "totalTokens",
+        "cost"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "content",
+    "details"
+  ],
+  "title": "ToolResultData",
+  "type": "object"
+}

@@ -1,0 +1,122 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/CustomMessage.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "content": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "items": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  },
+                  "textSignature": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "const": "text",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "type",
+                  "text"
+                ],
+                "type": "object"
+              },
+              {
+                "additionalProperties": true,
+                "properties": {
+                  "data": {
+                    "type": "string"
+                  },
+                  "mimeType": {
+                    "pattern": "^image/",
+                    "type": "string"
+                  },
+                  "type": {
+                    "const": "image",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "type",
+                  "data",
+                  "mimeType"
+                ],
+                "type": "object"
+              }
+            ]
+          },
+          "type": "array"
+        }
+      ]
+    },
+    "customType": {
+      "type": "string"
+    },
+    "details": {
+      "$defs": {
+        "JsonValue": {
+          "$id": "JsonValue",
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "$ref": "JsonValue"
+              },
+              "type": "array"
+            },
+            {
+              "patternProperties": {
+                "^.*$": {
+                  "$ref": "JsonValue"
+                }
+              },
+              "type": "object"
+            }
+          ]
+        }
+      },
+      "$ref": "JsonValue"
+    },
+    "display": {
+      "type": "boolean"
+    },
+    "role": {
+      "const": "custom",
+      "type": "string"
+    },
+    "timestamp": {
+      "minimum": 0,
+      "type": "number"
+    }
+  },
+  "required": [
+    "role",
+    "customType",
+    "content",
+    "display",
+    "timestamp"
+  ],
+  "title": "CustomMessage",
+  "type": "object"
+}

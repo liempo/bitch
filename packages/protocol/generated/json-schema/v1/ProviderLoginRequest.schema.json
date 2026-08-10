@@ -6,15 +6,9 @@
       "additionalProperties": false,
       "properties": {
         "authType": {
-          "anyOf": [
-            {
-              "const": "api_key",
-              "type": "string"
-            },
-            {
-              "const": "oauth",
-              "type": "string"
-            }
+          "enum": [
+            "api_key",
+            "oauth"
           ]
         },
         "type": {
@@ -36,6 +30,7 @@
           "type": "integer"
         },
         "operationId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -55,10 +50,12 @@
       "additionalProperties": false,
       "properties": {
         "operationId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
         "promptId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },
@@ -82,6 +79,7 @@
       "additionalProperties": false,
       "properties": {
         "operationId": {
+          "format": "uuid",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
           "type": "string"
         },

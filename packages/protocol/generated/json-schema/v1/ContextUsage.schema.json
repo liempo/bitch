@@ -1,0 +1,40 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/ContextUsage.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "contextWindow": {
+      "minimum": 1,
+      "type": "number"
+    },
+    "percent": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "tokens": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "tokens",
+    "contextWindow",
+    "percent"
+  ],
+  "title": "ContextUsage",
+  "type": "object"
+}

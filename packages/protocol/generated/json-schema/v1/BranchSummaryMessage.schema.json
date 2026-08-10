@@ -1,0 +1,30 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/BranchSummaryMessage.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "fromId": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "role": {
+      "const": "branchSummary",
+      "type": "string"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "timestamp": {
+      "minimum": 0,
+      "type": "number"
+    }
+  },
+  "required": [
+    "role",
+    "summary",
+    "fromId",
+    "timestamp"
+  ],
+  "title": "BranchSummaryMessage",
+  "type": "object"
+}

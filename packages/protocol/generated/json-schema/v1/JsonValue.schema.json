@@ -1,0 +1,39 @@
+{
+  "$defs": {
+    "JsonValue": {
+      "$id": "JsonValue",
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "items": {
+            "$ref": "JsonValue"
+          },
+          "type": "array"
+        },
+        {
+          "patternProperties": {
+            "^.*$": {
+              "$ref": "JsonValue"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    }
+  },
+  "$id": "https://bitch.invalid/schema/v1/JsonValue.json",
+  "$ref": "JsonValue",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "JsonValue"
+}

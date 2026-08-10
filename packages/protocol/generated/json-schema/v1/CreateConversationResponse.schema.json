@@ -4,155 +4,292 @@
   "additionalProperties": true,
   "properties": {
     "conversation": {
-      "additionalProperties": true,
-      "properties": {
-        "activityAt": {
-          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
-          "type": "string"
-        },
-        "completedAt": {
-          "anyOf": [
-            {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "properties": {
+            "activityAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "completedSinceViewed": {
-          "type": "boolean"
-        },
-        "conversationId": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "createdAt": {
-          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
-          "type": "string"
-        },
-        "cwd": {
-          "pattern": "^/",
-          "type": "string"
-        },
-        "gatewayId": {
-          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
-          "type": "string"
-        },
-        "readOnly": {
-          "type": "boolean"
-        },
-        "status": {
-          "anyOf": [
-            {
-              "const": "idle",
-              "type": "string"
-            },
-            {
-              "const": "working",
-              "type": "string"
-            },
-            {
-              "const": "needsInput",
-              "type": "string"
-            },
-            {
-              "const": "failed",
-              "type": "string"
-            },
-            {
-              "const": "stopped",
-              "type": "string"
-            }
-          ]
-        },
-        "title": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "trashedAt": {
-          "anyOf": [
-            {
-              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "trashReason": {
-          "anyOf": [
-            {
+            "completedAt": {
               "anyOf": [
                 {
-                  "const": "individual",
+                  "format": "date-time",
+                  "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
                   "type": "string"
                 },
                 {
-                  "const": "workspace",
-                  "type": "string"
-                },
-                {
-                  "const": "workspaceMissing",
-                  "type": "string"
+                  "type": "null"
                 }
               ]
             },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "viewedAt": {
-          "anyOf": [
-            {
+            "completedSinceViewed": {
+              "type": "boolean"
+            },
+            "conversationId": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "createdAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             },
-            {
-              "type": "null"
+            "cwd": {
+              "pattern": "^/",
+              "type": "string"
+            },
+            "gatewayId": {
+              "format": "uuid",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+              "type": "string"
+            },
+            "readOnly": {
+              "type": "boolean"
+            },
+            "status": {
+              "enum": [
+                "idle",
+                "working",
+                "needsInput",
+                "failed",
+                "stopped"
+              ]
+            },
+            "title": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "trashReason": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "individual",
+                    "workspace",
+                    "workspaceMissing"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "trashedAt": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "viewedAt": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "workspaceId": {
+              "format": "uuid",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+              "type": "string"
             }
-          ]
+          },
+          "required": [
+            "conversationId",
+            "title",
+            "createdAt",
+            "activityAt",
+            "viewedAt",
+            "completedAt",
+            "status",
+            "completedSinceViewed",
+            "trashedAt",
+            "trashReason",
+            "readOnly",
+            "cwd",
+            "gatewayId",
+            "workspaceId"
+          ],
+          "type": "object"
         },
-        "workspaceId": {
-          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
-          "type": "string"
+        {
+          "additionalProperties": true,
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "gatewayId"
+                ]
+              },
+              {
+                "required": [
+                  "workspaceId"
+                ]
+              }
+            ]
+          },
+          "properties": {
+            "activityAt": {
+              "format": "date-time",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+              "type": "string"
+            },
+            "completedAt": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "completedSinceViewed": {
+              "type": "boolean"
+            },
+            "conversationId": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "createdAt": {
+              "format": "date-time",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+              "type": "string"
+            },
+            "cwd": {
+              "pattern": "^/",
+              "type": "string"
+            },
+            "readOnly": {
+              "type": "boolean"
+            },
+            "status": {
+              "enum": [
+                "idle",
+                "working",
+                "needsInput",
+                "failed",
+                "stopped"
+              ]
+            },
+            "title": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "trashReason": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "individual",
+                    "workspace",
+                    "workspaceMissing"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "trashedAt": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "viewedAt": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "conversationId",
+            "title",
+            "createdAt",
+            "activityAt",
+            "viewedAt",
+            "completedAt",
+            "status",
+            "completedSinceViewed",
+            "trashedAt",
+            "trashReason",
+            "readOnly",
+            "cwd"
+          ],
+          "type": "object"
         }
-      },
-      "required": [
-        "conversationId",
-        "title",
-        "cwd",
-        "createdAt",
-        "activityAt",
-        "viewedAt",
-        "completedAt",
-        "status",
-        "completedSinceViewed",
-        "trashedAt",
-        "trashReason",
-        "readOnly"
-      ],
-      "type": "object"
+      ]
     },
     "receipt": {
       "anyOf": [
         {
           "additionalProperties": true,
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "settledAt"
+                ]
+              },
+              {
+                "required": [
+                  "result"
+                ]
+              },
+              {
+                "required": [
+                  "problem"
+                ]
+              }
+            ]
+          },
           "properties": {
             "acceptedAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             },
             "commandId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             },
@@ -161,6 +298,7 @@
               "type": "string"
             },
             "gatewayId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             },
@@ -169,114 +307,40 @@
               "type": "string"
             },
             "state": {
-              "anyOf": [
-                {
-                  "const": "accepted",
-                  "type": "string"
-                },
-                {
-                  "const": "running",
-                  "type": "string"
-                }
+              "enum": [
+                "accepted",
+                "running"
               ]
             },
             "type": {
-              "anyOf": [
-                {
-                  "const": "prompt",
-                  "type": "string"
-                },
-                {
-                  "const": "steer",
-                  "type": "string"
-                },
-                {
-                  "const": "follow_up",
-                  "type": "string"
-                },
-                {
-                  "const": "abort",
-                  "type": "string"
-                },
-                {
-                  "const": "new_session",
-                  "type": "string"
-                },
-                {
-                  "const": "set_model",
-                  "type": "string"
-                },
-                {
-                  "const": "cycle_model",
-                  "type": "string"
-                },
-                {
-                  "const": "set_thinking_level",
-                  "type": "string"
-                },
-                {
-                  "const": "cycle_thinking_level",
-                  "type": "string"
-                },
-                {
-                  "const": "set_steering_mode",
-                  "type": "string"
-                },
-                {
-                  "const": "set_follow_up_mode",
-                  "type": "string"
-                },
-                {
-                  "const": "compact",
-                  "type": "string"
-                },
-                {
-                  "const": "set_auto_compaction",
-                  "type": "string"
-                },
-                {
-                  "const": "set_auto_retry",
-                  "type": "string"
-                },
-                {
-                  "const": "abort_retry",
-                  "type": "string"
-                },
-                {
-                  "const": "bash",
-                  "type": "string"
-                },
-                {
-                  "const": "abort_bash",
-                  "type": "string"
-                },
-                {
-                  "const": "export_html",
-                  "type": "string"
-                },
-                {
-                  "const": "switch_session",
-                  "type": "string"
-                },
-                {
-                  "const": "fork",
-                  "type": "string"
-                },
-                {
-                  "const": "clone",
-                  "type": "string"
-                },
-                {
-                  "const": "set_session_name",
-                  "type": "string"
-                },
-                {
-                  "const": "reload",
-                  "type": "string"
-                }
+              "enum": [
+                "prompt",
+                "steer",
+                "follow_up",
+                "abort",
+                "new_session",
+                "set_model",
+                "cycle_model",
+                "set_thinking_level",
+                "cycle_thinking_level",
+                "set_steering_mode",
+                "set_follow_up_mode",
+                "compact",
+                "set_auto_compaction",
+                "set_auto_retry",
+                "abort_retry",
+                "bash",
+                "abort_bash",
+                "export_html",
+                "switch_session",
+                "fork",
+                "clone",
+                "set_session_name",
+                "reload"
               ]
             },
             "updatedAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             }
@@ -294,12 +358,23 @@
         },
         {
           "additionalProperties": true,
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "result"
+                ]
+              }
+            ]
+          },
           "properties": {
             "acceptedAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             },
             "commandId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             },
@@ -308,6 +383,7 @@
               "type": "string"
             },
             "gatewayId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             },
@@ -319,6 +395,7 @@
               "additionalProperties": true,
               "properties": {
                 "artifactId": {
+                  "format": "uuid",
                   "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
                   "type": "string"
                 },
@@ -327,6 +404,7 @@
                   "type": "string"
                 },
                 "commandId": {
+                  "format": "uuid",
                   "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
                   "type": "string"
                 },
@@ -339,14 +417,17 @@
                   "type": "string"
                 },
                 "dialogId": {
+                  "format": "uuid",
                   "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
                   "type": "string"
                 },
                 "gatewayId": {
+                  "format": "uuid",
                   "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
                   "type": "string"
                 },
                 "instance": {
+                  "format": "uri-reference",
                   "type": "string"
                 },
                 "issues": {
@@ -373,6 +454,7 @@
                   "type": "array"
                 },
                 "requestId": {
+                  "format": "uuid",
                   "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
                   "type": "string"
                 },
@@ -389,10 +471,12 @@
                   "type": "string"
                 },
                 "type": {
+                  "format": "uri",
                   "minLength": 1,
                   "type": "string"
                 },
                 "workspaceId": {
+                  "format": "uuid",
                   "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
                   "type": "string"
                 }
@@ -409,118 +493,45 @@
               "type": "object"
             },
             "settledAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             },
             "state": {
-              "anyOf": [
-                {
-                  "const": "failed",
-                  "type": "string"
-                },
-                {
-                  "const": "interrupted",
-                  "type": "string"
-                }
+              "enum": [
+                "failed",
+                "interrupted"
               ]
             },
             "type": {
-              "anyOf": [
-                {
-                  "const": "prompt",
-                  "type": "string"
-                },
-                {
-                  "const": "steer",
-                  "type": "string"
-                },
-                {
-                  "const": "follow_up",
-                  "type": "string"
-                },
-                {
-                  "const": "abort",
-                  "type": "string"
-                },
-                {
-                  "const": "new_session",
-                  "type": "string"
-                },
-                {
-                  "const": "set_model",
-                  "type": "string"
-                },
-                {
-                  "const": "cycle_model",
-                  "type": "string"
-                },
-                {
-                  "const": "set_thinking_level",
-                  "type": "string"
-                },
-                {
-                  "const": "cycle_thinking_level",
-                  "type": "string"
-                },
-                {
-                  "const": "set_steering_mode",
-                  "type": "string"
-                },
-                {
-                  "const": "set_follow_up_mode",
-                  "type": "string"
-                },
-                {
-                  "const": "compact",
-                  "type": "string"
-                },
-                {
-                  "const": "set_auto_compaction",
-                  "type": "string"
-                },
-                {
-                  "const": "set_auto_retry",
-                  "type": "string"
-                },
-                {
-                  "const": "abort_retry",
-                  "type": "string"
-                },
-                {
-                  "const": "bash",
-                  "type": "string"
-                },
-                {
-                  "const": "abort_bash",
-                  "type": "string"
-                },
-                {
-                  "const": "export_html",
-                  "type": "string"
-                },
-                {
-                  "const": "switch_session",
-                  "type": "string"
-                },
-                {
-                  "const": "fork",
-                  "type": "string"
-                },
-                {
-                  "const": "clone",
-                  "type": "string"
-                },
-                {
-                  "const": "set_session_name",
-                  "type": "string"
-                },
-                {
-                  "const": "reload",
-                  "type": "string"
-                }
+              "enum": [
+                "prompt",
+                "steer",
+                "follow_up",
+                "abort",
+                "new_session",
+                "set_model",
+                "cycle_model",
+                "set_thinking_level",
+                "cycle_thinking_level",
+                "set_steering_mode",
+                "set_follow_up_mode",
+                "compact",
+                "set_auto_compaction",
+                "set_auto_retry",
+                "abort_retry",
+                "bash",
+                "abort_bash",
+                "export_html",
+                "switch_session",
+                "fork",
+                "clone",
+                "set_session_name",
+                "reload"
               ]
             },
             "updatedAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             }
@@ -540,12 +551,28 @@
         },
         {
           "additionalProperties": true,
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "result"
+                ]
+              },
+              {
+                "required": [
+                  "problem"
+                ]
+              }
+            ]
+          },
           "properties": {
             "acceptedAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             },
             "commandId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             },
@@ -554,6 +581,7 @@
               "type": "string"
             },
             "gatewayId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             },
@@ -562,6 +590,7 @@
               "type": "string"
             },
             "settledAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             },
@@ -570,62 +599,24 @@
               "type": "string"
             },
             "type": {
-              "anyOf": [
-                {
-                  "const": "prompt",
-                  "type": "string"
-                },
-                {
-                  "const": "steer",
-                  "type": "string"
-                },
-                {
-                  "const": "follow_up",
-                  "type": "string"
-                },
-                {
-                  "const": "abort",
-                  "type": "string"
-                },
-                {
-                  "const": "set_thinking_level",
-                  "type": "string"
-                },
-                {
-                  "const": "set_steering_mode",
-                  "type": "string"
-                },
-                {
-                  "const": "set_follow_up_mode",
-                  "type": "string"
-                },
-                {
-                  "const": "set_auto_compaction",
-                  "type": "string"
-                },
-                {
-                  "const": "set_auto_retry",
-                  "type": "string"
-                },
-                {
-                  "const": "abort_retry",
-                  "type": "string"
-                },
-                {
-                  "const": "abort_bash",
-                  "type": "string"
-                },
-                {
-                  "const": "set_session_name",
-                  "type": "string"
-                },
-                {
-                  "const": "reload",
-                  "type": "string"
-                }
+              "enum": [
+                "prompt",
+                "steer",
+                "follow_up",
+                "abort",
+                "set_thinking_level",
+                "set_steering_mode",
+                "set_follow_up_mode",
+                "set_auto_compaction",
+                "set_auto_retry",
+                "abort_retry",
+                "abort_bash",
+                "set_session_name",
+                "reload"
               ]
             },
             "updatedAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             }
@@ -644,12 +635,23 @@
         },
         {
           "additionalProperties": true,
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "problem"
+                ]
+              }
+            ]
+          },
           "properties": {
             "acceptedAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             },
             "commandId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             },
@@ -658,6 +660,7 @@
               "type": "string"
             },
             "gatewayId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             },
@@ -669,6 +672,15 @@
               "anyOf": [
                 {
                   "additionalProperties": true,
+                  "not": {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "target"
+                        ]
+                      }
+                    ]
+                  },
                   "properties": {
                     "cancelled": {
                       "const": true,
@@ -697,6 +709,7 @@
                               "type": "string"
                             },
                             "gatewayId": {
+                              "format": "uuid",
                               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
                               "type": "string"
                             }
@@ -709,6 +722,15 @@
                         },
                         {
                           "additionalProperties": true,
+                          "not": {
+                            "anyOf": [
+                              {
+                                "required": [
+                                  "gatewayId"
+                                ]
+                              }
+                            ]
+                          },
                           "properties": {
                             "conversationId": {
                               "minLength": 1,
@@ -732,6 +754,7 @@
               ]
             },
             "settledAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             },
@@ -744,6 +767,7 @@
               "type": "string"
             },
             "updatedAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             }
@@ -763,12 +787,23 @@
         },
         {
           "additionalProperties": true,
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "problem"
+                ]
+              }
+            ]
+          },
           "properties": {
             "acceptedAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             },
             "commandId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             },
@@ -777,6 +812,7 @@
               "type": "string"
             },
             "gatewayId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             },
@@ -793,15 +829,9 @@
                 },
                 "input": {
                   "items": {
-                    "anyOf": [
-                      {
-                        "const": "text",
-                        "type": "string"
-                      },
-                      {
-                        "const": "image",
-                        "type": "string"
-                      }
+                    "enum": [
+                      "text",
+                      "image"
                     ]
                   },
                   "type": "array",
@@ -839,6 +869,7 @@
               "type": "object"
             },
             "settledAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             },
@@ -851,6 +882,7 @@
               "type": "string"
             },
             "updatedAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             }
@@ -870,12 +902,23 @@
         },
         {
           "additionalProperties": true,
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "problem"
+                ]
+              }
+            ]
+          },
           "properties": {
             "acceptedAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             },
             "commandId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             },
@@ -884,6 +927,7 @@
               "type": "string"
             },
             "gatewayId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             },
@@ -908,15 +952,9 @@
                         },
                         "input": {
                           "items": {
-                            "anyOf": [
-                              {
-                                "const": "text",
-                                "type": "string"
-                              },
-                              {
-                                "const": "image",
-                                "type": "string"
-                              }
+                            "enum": [
+                              "text",
+                              "image"
                             ]
                           },
                           "type": "array",
@@ -954,35 +992,14 @@
                       "type": "object"
                     },
                     "thinkingLevel": {
-                      "anyOf": [
-                        {
-                          "const": "off",
-                          "type": "string"
-                        },
-                        {
-                          "const": "minimal",
-                          "type": "string"
-                        },
-                        {
-                          "const": "low",
-                          "type": "string"
-                        },
-                        {
-                          "const": "medium",
-                          "type": "string"
-                        },
-                        {
-                          "const": "high",
-                          "type": "string"
-                        },
-                        {
-                          "const": "xhigh",
-                          "type": "string"
-                        },
-                        {
-                          "const": "max",
-                          "type": "string"
-                        }
+                      "enum": [
+                        "off",
+                        "minimal",
+                        "low",
+                        "medium",
+                        "high",
+                        "xhigh",
+                        "max"
                       ]
                     }
                   },
@@ -999,6 +1016,7 @@
               ]
             },
             "settledAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             },
@@ -1011,6 +1029,7 @@
               "type": "string"
             },
             "updatedAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             }
@@ -1030,12 +1049,23 @@
         },
         {
           "additionalProperties": true,
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "problem"
+                ]
+              }
+            ]
+          },
           "properties": {
             "acceptedAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             },
             "commandId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             },
@@ -1044,6 +1074,7 @@
               "type": "string"
             },
             "gatewayId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             },
@@ -1057,35 +1088,14 @@
                   "additionalProperties": true,
                   "properties": {
                     "level": {
-                      "anyOf": [
-                        {
-                          "const": "off",
-                          "type": "string"
-                        },
-                        {
-                          "const": "minimal",
-                          "type": "string"
-                        },
-                        {
-                          "const": "low",
-                          "type": "string"
-                        },
-                        {
-                          "const": "medium",
-                          "type": "string"
-                        },
-                        {
-                          "const": "high",
-                          "type": "string"
-                        },
-                        {
-                          "const": "xhigh",
-                          "type": "string"
-                        },
-                        {
-                          "const": "max",
-                          "type": "string"
-                        }
+                      "enum": [
+                        "off",
+                        "minimal",
+                        "low",
+                        "medium",
+                        "high",
+                        "xhigh",
+                        "max"
                       ]
                     }
                   },
@@ -1100,6 +1110,7 @@
               ]
             },
             "settledAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             },
@@ -1112,6 +1123,7 @@
               "type": "string"
             },
             "updatedAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             }
@@ -1131,12 +1143,23 @@
         },
         {
           "additionalProperties": true,
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "problem"
+                ]
+              }
+            ]
+          },
           "properties": {
             "acceptedAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             },
             "commandId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             },
@@ -1145,6 +1168,7 @@
               "type": "string"
             },
             "gatewayId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             },
@@ -1285,6 +1309,7 @@
               "type": "object"
             },
             "settledAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             },
@@ -1297,6 +1322,7 @@
               "type": "string"
             },
             "updatedAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             }
@@ -1316,12 +1342,23 @@
         },
         {
           "additionalProperties": true,
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "problem"
+                ]
+              }
+            ]
+          },
           "properties": {
             "acceptedAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             },
             "commandId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             },
@@ -1330,6 +1367,7 @@
               "type": "string"
             },
             "gatewayId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             },
@@ -1361,6 +1399,7 @@
               "type": "object"
             },
             "settledAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             },
@@ -1373,6 +1412,7 @@
               "type": "string"
             },
             "updatedAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             }
@@ -1392,12 +1432,23 @@
         },
         {
           "additionalProperties": true,
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "problem"
+                ]
+              }
+            ]
+          },
           "properties": {
             "acceptedAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             },
             "commandId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             },
@@ -1406,6 +1457,7 @@
               "type": "string"
             },
             "gatewayId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             },
@@ -1414,53 +1466,118 @@
               "type": "string"
             },
             "result": {
-              "additionalProperties": true,
-              "properties": {
-                "artifactId": {
-                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
-                  "type": "string"
+              "anyOf": [
+                {
+                  "additionalProperties": true,
+                  "properties": {
+                    "artifactId": {
+                      "format": "uuid",
+                      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                      "type": "string"
+                    },
+                    "byteCount": {
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "conversationId": {
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "format": "date-time",
+                      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+                      "type": "string"
+                    },
+                    "downloadUrl": {
+                      "pattern": "^/v1/artifacts/[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                      "type": "string"
+                    },
+                    "fileName": {
+                      "minLength": 1,
+                      "pattern": "^(?!\\.\\.?$)[^/\\\\\\u0000]+$",
+                      "type": "string"
+                    },
+                    "gatewayId": {
+                      "format": "uuid",
+                      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                      "type": "string"
+                    },
+                    "mediaType": {
+                      "minLength": 1,
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "artifactId",
+                    "conversationId",
+                    "fileName",
+                    "mediaType",
+                    "byteCount",
+                    "createdAt",
+                    "downloadUrl",
+                    "gatewayId"
+                  ],
+                  "type": "object"
                 },
-                "byteCount": {
-                  "minimum": 0,
-                  "type": "integer"
-                },
-                "conversationId": {
-                  "minLength": 1,
-                  "type": "string"
-                },
-                "createdAt": {
-                  "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
-                  "type": "string"
-                },
-                "downloadUrl": {
-                  "pattern": "^/v1/artifacts/[0-9a-f-]+$",
-                  "type": "string"
-                },
-                "fileName": {
-                  "pattern": "^[^/\\\\]+$",
-                  "type": "string"
-                },
-                "gatewayId": {
-                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
-                  "type": "string"
-                },
-                "mediaType": {
-                  "minLength": 1,
-                  "type": "string"
+                {
+                  "additionalProperties": true,
+                  "not": {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "gatewayId"
+                        ]
+                      }
+                    ]
+                  },
+                  "properties": {
+                    "artifactId": {
+                      "format": "uuid",
+                      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                      "type": "string"
+                    },
+                    "byteCount": {
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "conversationId": {
+                      "minLength": 1,
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "format": "date-time",
+                      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+                      "type": "string"
+                    },
+                    "downloadUrl": {
+                      "pattern": "^/v1/artifacts/[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+                      "type": "string"
+                    },
+                    "fileName": {
+                      "minLength": 1,
+                      "pattern": "^(?!\\.\\.?$)[^/\\\\\\u0000]+$",
+                      "type": "string"
+                    },
+                    "mediaType": {
+                      "minLength": 1,
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "artifactId",
+                    "conversationId",
+                    "fileName",
+                    "mediaType",
+                    "byteCount",
+                    "createdAt",
+                    "downloadUrl"
+                  ],
+                  "type": "object"
                 }
-              },
-              "required": [
-                "artifactId",
-                "conversationId",
-                "fileName",
-                "mediaType",
-                "byteCount",
-                "createdAt",
-                "downloadUrl"
-              ],
-              "type": "object"
+              ]
             },
             "settledAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             },
@@ -1473,6 +1590,7 @@
               "type": "string"
             },
             "updatedAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             }
@@ -1492,12 +1610,23 @@
         },
         {
           "additionalProperties": true,
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "problem"
+                ]
+              }
+            ]
+          },
           "properties": {
             "acceptedAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             },
             "commandId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             },
@@ -1506,6 +1635,7 @@
               "type": "string"
             },
             "gatewayId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             },
@@ -1517,6 +1647,15 @@
               "anyOf": [
                 {
                   "additionalProperties": true,
+                  "not": {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "target"
+                        ]
+                      }
+                    ]
+                  },
                   "properties": {
                     "cancelled": {
                       "const": true,
@@ -1545,6 +1684,7 @@
                               "type": "string"
                             },
                             "gatewayId": {
+                              "format": "uuid",
                               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
                               "type": "string"
                             }
@@ -1557,6 +1697,15 @@
                         },
                         {
                           "additionalProperties": true,
+                          "not": {
+                            "anyOf": [
+                              {
+                                "required": [
+                                  "gatewayId"
+                                ]
+                              }
+                            ]
+                          },
                           "properties": {
                             "conversationId": {
                               "minLength": 1,
@@ -1580,6 +1729,7 @@
               ]
             },
             "settledAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             },
@@ -1592,6 +1742,7 @@
               "type": "string"
             },
             "updatedAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             }
@@ -1611,12 +1762,23 @@
         },
         {
           "additionalProperties": true,
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "problem"
+                ]
+              }
+            ]
+          },
           "properties": {
             "acceptedAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             },
             "commandId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             },
@@ -1625,6 +1787,7 @@
               "type": "string"
             },
             "gatewayId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             },
@@ -1636,6 +1799,15 @@
               "anyOf": [
                 {
                   "additionalProperties": true,
+                  "not": {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "target"
+                        ]
+                      }
+                    ]
+                  },
                   "properties": {
                     "cancelled": {
                       "const": true,
@@ -1667,6 +1839,7 @@
                               "type": "string"
                             },
                             "gatewayId": {
+                              "format": "uuid",
                               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
                               "type": "string"
                             }
@@ -1679,6 +1852,15 @@
                         },
                         {
                           "additionalProperties": true,
+                          "not": {
+                            "anyOf": [
+                              {
+                                "required": [
+                                  "gatewayId"
+                                ]
+                              }
+                            ]
+                          },
                           "properties": {
                             "conversationId": {
                               "minLength": 1,
@@ -1705,6 +1887,7 @@
               ]
             },
             "settledAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             },
@@ -1717,6 +1900,7 @@
               "type": "string"
             },
             "updatedAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             }
@@ -1736,12 +1920,23 @@
         },
         {
           "additionalProperties": true,
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "problem"
+                ]
+              }
+            ]
+          },
           "properties": {
             "acceptedAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             },
             "commandId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             },
@@ -1750,6 +1945,7 @@
               "type": "string"
             },
             "gatewayId": {
+              "format": "uuid",
               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
               "type": "string"
             },
@@ -1761,6 +1957,15 @@
               "anyOf": [
                 {
                   "additionalProperties": true,
+                  "not": {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "target"
+                        ]
+                      }
+                    ]
+                  },
                   "properties": {
                     "cancelled": {
                       "const": true,
@@ -1789,6 +1994,7 @@
                               "type": "string"
                             },
                             "gatewayId": {
+                              "format": "uuid",
                               "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
                               "type": "string"
                             }
@@ -1801,6 +2007,15 @@
                         },
                         {
                           "additionalProperties": true,
+                          "not": {
+                            "anyOf": [
+                              {
+                                "required": [
+                                  "gatewayId"
+                                ]
+                              }
+                            ]
+                          },
                           "properties": {
                             "conversationId": {
                               "minLength": 1,
@@ -1824,6 +2039,7 @@
               ]
             },
             "settledAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             },
@@ -1836,6 +2052,7 @@
               "type": "string"
             },
             "updatedAt": {
+              "format": "date-time",
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
               "type": "string"
             }

@@ -1,0 +1,26 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/ThinkingContent.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "redacted": {
+      "type": "boolean"
+    },
+    "thinking": {
+      "type": "string"
+    },
+    "thinkingSignature": {
+      "type": "string"
+    },
+    "type": {
+      "const": "thinking",
+      "type": "string"
+    }
+  },
+  "required": [
+    "type",
+    "thinking"
+  ],
+  "title": "ThinkingContent",
+  "type": "object"
+}

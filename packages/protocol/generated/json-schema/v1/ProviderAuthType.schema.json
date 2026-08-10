@@ -1,0 +1,9 @@
+{
+  "$id": "https://bitch.invalid/schema/v1/ProviderAuthType.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "enum": [
+    "api_key",
+    "oauth"
+  ],
+  "title": "ProviderAuthType"
+}

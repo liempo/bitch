@@ -13,15 +13,9 @@
           },
           "input": {
             "items": {
-              "anyOf": [
-                {
-                  "const": "text",
-                  "type": "string"
-                },
-                {
-                  "const": "image",
-                  "type": "string"
-                }
+              "enum": [
+                "text",
+                "image"
               ]
             },
             "type": "array",
