@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "artifacts": [
+    {
+      "id": "paseo-silero-vad-onnx",
+      "name": "Paseo bundled silero_vad.onnx",
+      "upstreamPath": "packages/server/src/server/speech/providers/local/sherpa/assets/silero_vad.onnx",
+      "status": "excluded",
+      "reason": "The pinned Paseo tree has no adjacent source or license notice that verifies this binary's exact origin and redistribution terms.",
+      "requiredBeforeImport": [
+        "exact upstream origin",
+        "verified SHA-256 checksum",
+        "applicable license text",
+        "required attribution and distribution notice"
+      ]
+    }
+  ]
+}

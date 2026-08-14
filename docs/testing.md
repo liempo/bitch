@@ -296,6 +296,28 @@ Release tests run the packed npm artifact on macOS 26.5.2 arm64 with Docker Desk
 
 Build checks verify Node.js 24.19.0, Pi 0.83.0, Pi TUI 0.83.0, the npm lockfile, and the pinned container base digest. A version mismatch blocks release.
 
+## Paseo source-import gate
+
+Run the offline gate before any pull request copies or adapts Paseo source:
+
+```bash
+npm run check:provenance
+```
+
+Set `PASEO_SOURCE` to a clean local checkout of the pinned Paseo commit. Then verify the author snapshot and upstream evidence:
+
+```bash
+test "$(git -C "$PASEO_SOURCE" rev-parse HEAD)" = 163e7d1cc421cdfe4de67b971ff6cea4b51eb0ed
+test -z "$(git -C "$PASEO_SOURCE" status --short)"
+cmp LICENSE "$PASEO_SOURCE/LICENSE"
+npm run provenance:authors -- --upstream "$PASEO_SOURCE" --check
+node scripts/provenance/validate-paseo-import.mjs --upstream "$PASEO_SOURCE"
+```
+
+A source-import pull request must add one inventory entry for each copied or adapted file. It must update the dated modification statement in `NOTICE.md` when the first Paseo package source enters BITCH.
+
+The gate rejects missing paths, duplicate destinations, wrong pins, wrong blobs, wrong hashes, missing notices, and an imported excluded artifact. Keep `silero_vad.onnx` excluded until its exact origin and redistribution terms are verified.
+
 ## Pull-request gate
 
 Every pull request runs:

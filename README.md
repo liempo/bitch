@@ -10,6 +10,12 @@ The repository is in planning and pre-alpha status. It has no product code or in
 
 The commands below show the approved interface contract. They do not work yet.
 
+## Source relationship
+
+BITCH is an independent repository. It plans to copy selected source from [Paseo](https://github.com/getpaseo/paseo) package version 0.3.1 at commit [`163e7d1`](https://github.com/getpaseo/paseo/tree/163e7d1cc421cdfe4de67b971ff6cea4b51eb0ed).
+
+No Paseo package source has been imported. The first import must pass the `AGPL-3.0-only`, attribution, author-snapshot, third-party notice, and file-level provenance gate. See [`docs/architecture/licensing.md`](docs/architecture/licensing.md) and [`NOTICE.md`](NOTICE.md).
+
 ## Planned first release
 
 The first release supports one self-hosted user through the CLI and TUI. The native macOS app is deferred to the next product stage.

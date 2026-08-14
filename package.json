@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "description": "Barely Intelligent Task & Context Handler",
+  "license": "AGPL-3.0-only",
   "type": "module",
   "engines": {
     "node": "24.19.0"
@@ -12,6 +13,9 @@
     "packages/*"
   ],
   "scripts": {
+    "check:provenance": "node --test test/provenance/validate-paseo-import.test.mjs && node scripts/provenance/validate-paseo-import.mjs",
+    "test:provenance": "node --test test/provenance/validate-paseo-import.test.mjs",
+    "provenance:authors": "node scripts/provenance/generate-paseo-authors.mjs",
     "prepare": "husky"
   },
   "devDependencies": {

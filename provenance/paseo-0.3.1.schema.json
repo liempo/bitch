@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/liempo/bitch/raw/main/provenance/paseo-0.3.1.schema.json",
+  "title": "BITCH Paseo 0.3.1 source inventory",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "schemaVersion", "source", "selectedPaths", "destinationRoots", "files", "exclusions"],
+  "properties": {
+    "$schema": { "const": "./paseo-0.3.1.schema.json" },
+    "schemaVersion": { "const": 1 },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["project", "repository", "packageVersion", "commit", "licenseExpression", "licenseSha256"],
+      "properties": {
+        "project": { "const": "Paseo" },
+        "repository": { "const": "https://github.com/getpaseo/paseo.git" },
+        "packageVersion": { "const": "0.3.1" },
+        "commit": { "const": "163e7d1cc421cdfe4de67b971ff6cea4b51eb0ed" },
+        "licenseExpression": { "const": "AGPL-3.0-only" },
+        "licenseSha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "selectedPaths": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/repositoryPath" }
+    },
+    "destinationRoots": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/repositoryPath" }
+    },
+    "files": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/fileEntry" }
+    },
+    "exclusions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/exclusion" }
+    }
+  },
+  "$defs": {
+    "repositoryPath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\u0000).+$"
+    },
+    "gitBlob": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "fileEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["destination", "upstreamPath", "upstreamCommit", "status", "upstreamBlob", "sha256", "licenseExpression", "notice"],
+      "properties": {
+        "destination": { "$ref": "#/$defs/repositoryPath" },
+        "upstreamPath": { "$ref": "#/$defs/repositoryPath" },
+        "upstreamCommit": { "const": "163e7d1cc421cdfe4de67b971ff6cea4b51eb0ed" },
+        "status": { "enum": ["copied", "renamed", "adapted"] },
+        "upstreamBlob": { "$ref": "#/$defs/gitBlob" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "licenseExpression": { "const": "AGPL-3.0-only" },
+        "notice": { "type": ["string", "null"] }
+      }
+    },
+    "exclusion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["upstreamPath", "upstreamBlob", "upstreamSha256", "reason", "thirdPartyNoticeId"],
+      "properties": {
+        "upstreamPath": { "$ref": "#/$defs/repositoryPath" },
+        "upstreamBlob": { "$ref": "#/$defs/gitBlob" },
+        "upstreamSha256": { "$ref": "#/$defs/sha256" },
+        "reason": { "type": "string", "minLength": 1 },
+        "thirdPartyNoticeId": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

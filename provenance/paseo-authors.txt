@@ -1,0 +1,116 @@
+# Paseo Selected-Path Authors
+
+This deterministic snapshot records author identities from the selected Paseo path histories through the pinned commit.
+It does not claim that each identity owns every selected file.
+
+Repository: https://github.com/getpaseo/paseo.git
+Commit: 163e7d1cc421cdfe4de67b971ff6cea4b51eb0ed
+
+Selected paths:
+- packages/cli
+- packages/client
+- packages/highlight
+- packages/protocol
+- packages/relay
+- packages/server
+
+Authors:
+- 1254087415 <53247943+1254087415@users.noreply.github.com>
+- Aaron Florey <azza@jcaks.net>
+- Aditya Borakati <41518783+aborakati@users.noreply.github.com>
+- Alberto De Agostini <albertodeagostini.dev@gmail.com>
+- Aoxiong Yin <i@yinaoxiong.cn>
+- Benjamin Kitt <ben@thepuddle.com>
+- Bolun Zhang <zhaggbl@mail.ustc.edu.cn>
+- BrianAguilarWasco <146237330+brianaguilarwasco@users.noreply.github.com>
+- Byeonghoon Yoo <bh322yoo@gmail.com>
+- Byeonghoon Yoo <bhyoo@bhyoo.com>
+- Captain <1304725924@qq.com>
+- Chris Banes <chrisbanes@users.noreply.github.com>
+- Christoph Heer <christoph@thelabmill.de>
+- Christoph Leiter <christoph@leiter.io>
+- Chuan <chuan.bai@gmail.com>
+- Claude <41422239+claudesortwell@users.noreply.github.com>
+- Damon <17677912+dmeledon@users.noreply.github.com>
+- Daniel Salmerón Amselem <daniel.amselem@gmail.com>
+- Davy <95214375+thedavidweng@users.noreply.github.com>
+- Derek Perez <derek@perez.earth>
+- Dmitry Sinev <astartsky@pm.me>
+- Edi Hasaj <34984294+edihasaj@users.noreply.github.com>
+- Edvard Chen <pigeon73101@gmail.com>
+- Ethan Greenfeld <39423472+ebg1223@users.noreply.github.com>
+- Fabian Fischer <nodomain@users.noreply.github.com>
+- Hanjun(Tony) <54878785+wilgon456@users.noreply.github.com>
+- Hu Sheng <tommylikehu@gmail.com>
+- Hunter <82844928+unbrokenhunter@users.noreply.github.com>
+- Illia Panasenko <hottdogg2008@gmail.com>
+- Illia Panasenko <ilyap@wix.com>
+- Ivan Malison <ivanmalison@gmail.com>
+- Jakub Skałecki <jakub.skalecki@gmail.com>
+- Jason@HND <mildreins@gmail.com>
+- Josep Lluis Giralt D'Lacoste ( Pep ) <6720169+gilacost@users.noreply.github.com>
+- Josh Bendavid <josh.bendavid@cern.ch>
+- João Sousa Andrade <659718+joaosa@users.noreply.github.com>
+- Lakshmi Narasimhan <badri.dilbert@gmail.com>
+- Li Mu Zhi <muzhi1991@gmail.com>
+- Link <atomlink.ye@gmail.com>
+- Martin Hanzík <martin@hanzik.com>
+- Mathias Kurz <46938675+krumpyzoid@users.noreply.github.com>
+- Matt Cowger <mcowger@users.noreply.github.com>
+- Matt Van Horn <mvanhorn@users.noreply.github.com>
+- Matteo Pietro Dazzi <matteopietro.dazzi@gmail.com>
+- Michael Wu <michaelmwu@gmail.com>
+- Mingyang Sun <sunmy.huhu@gmail.com>
+- Mohamed Boudra <boudra.moha@gmail.com>
+- Nicholas Maglowsch Salgueiro <nickmaglowsch3@gmail.com>
+- Octopus <liyuan851277048@icloud.com>
+- Ryan Swift <ryan@majorleaguehacking.com>
+- Samatar <axmedsamatar.dev@gmail.com>
+- Samuel K <skevetter@pm.me>
+- Shintaro Sakata <56592600+shin-sakata@users.noreply.github.com>
+- Sihyeon Jeon <login0193@naver.com>
+- Slava Goltser <slavikg@gmail.com>
+- Somasundaram Ayyappan <1802828+somus@users.noreply.github.com>
+- Thanh Minh <112760114+tmih06@users.noreply.github.com>
+- Thomas Aull <post@thomasaull.de>
+- Tianyi Cui <53024+tianyicui@users.noreply.github.com>
+- True Byte <bytetrue@outlook.com>
+- Victor Araújo <victor@victor-software-house.com>
+- Xh74d82hl <117384393+vincenzorocchi@users.noreply.github.com>
+- Xisheng Parker Zhao <53422244+park0er@users.noreply.github.com>
+- Yurui Zhou <github@yuruiz.com>
+- Zexin Yuan <gh@yzx9.xyz>
+- Zexin Yuan <git@yzx9.xyz>
+- Zi Makki <zimakki@gmail.com>
+- Zitao Xiong <caoer115@gmail.com>
+- accx <ycw981209@gmail.com>
+- adradr <adrian.lenard@me.com>
+- agamotto <robsan@gmail.com>
+- c4605 <bolasblack@gmail.com>
+- chyendongnhanh338 <chyendongnhanh338@gmail.com>
+- dev693-ai <clemens@wabox.de>
+- dixonl90 <dixonl90@users.noreply.github.com>
+- dundunHa <lixinpengde@gmail.com>
+- ezra <ezra.ora.c@gmail.com>
+- hissin <i@hissin.net>
+- itMrBoy <58385353+itmrboy@users.noreply.github.com>
+- jms830 <jms830@users.noreply.github.com>
+- mehmet turac <mehmetturac@gmail.com>
+- nikuscs <nikuscs@gmail.com>
+- nllptrx <48022579+nllptrx@users.noreply.github.com>
+- paseo-bot[bot] <266920839+paseo-bot[bot]@users.noreply.github.com>
+- pi3123 <subhashve4@gmail.com>
+- psyche <123316733+githubbzxs@users.noreply.github.com>
+- qer <wbxl2000@outlook.com>
+- rafavncxs <99549268+half144@users.noreply.github.com>
+- rex <swordwater@gmail.com>
+- thatdaveguy1 <92842682+thatdaveguy1@users.noreply.github.com>
+- therainisme <therainisme@qq.com>
+- xuzhe <312223105@qq.com>
+- xy-plus <40733434+xy-plus@users.noreply.github.com>
+- yeshan333 <yeshan1329441308@gmail.com>
+- yz <43207690+yzim@users.noreply.github.com>
+- Éverton Toffanetto <evertondgn@hotmail.com>
+- 吴天一 <120073078+faithleysath@users.noreply.github.com>
+- 维她命@ <908280968@qq.com>
+- 范东辉 <aibaiiqpl@gmail.com>
