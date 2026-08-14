@@ -1,32 +1,28 @@
-# Phase 6: First Release
+# Phase 6: Personal MVP Gate
 
 ## Outcome
 
-Produce a supported, recoverable, and verifiable CLI and TUI release for Directory mode and Gateway mode.
+Produce a recoverable personal CLI and TUI MVP for macOS on Apple silicon with local and remote daemon support.
 
 ## Dependencies
 
-Use the approved operational, security, compatibility, and release gates in [`../docs/operations.md`](../docs/operations.md) and [`../docs/testing.md`](../docs/testing.md).
+Complete Phases 1 through 5 and every workflow in [`../docs/product/acceptance.md`](../docs/product/acceptance.md). Use [`../docs/testing.md`](../docs/testing.md) and [`../docs/operations.md`](../docs/operations.md).
 
-Complete Phases 1 through 5 and the first-release workflows in [`../docs/product/acceptance.md`](../docs/product/acceptance.md). Do not include the deferred macOS app or Apple `container` driver.
+## Phase boundaries
 
-## Pending work
+This phase validates and documents the personal MVP. It does not publish a public package, add broad platform support, define current-to-previous release compatibility, or deliver graphical clients.
 
-- [ ] Create and test the remote Gateway-mode Docker Compose deployment.
-- [ ] Document `/data` ownership, permissions, backup, and restore procedures.
-- [ ] Document `BITCH_HOME`, gateway registry, and local gateway backup procedures.
-- [ ] Implement and document supported upgrade and rollback paths.
-- [ ] Apply bind-address, Tailnet, origin, and secret-exposure rules.
-- [ ] Define and verify operator-visible startup, storage, registry, identity, and recovery failures.
-- [ ] Pin and publish the supported platform and dependency version matrix.
-- [ ] Add behavioral compatibility checks for Pi and the TUI.
-- [ ] Verify performance and concurrency limits across multiple gateways.
-- [ ] Implement packaging, artifact signing, and license-notice checks.
-- [ ] Run all pull-request gates for Directory mode and Gateway mode.
-- [ ] Verify local Docker gateway creation, persistence, replacement, and registry-only deletion.
-- [ ] Verify that unavailable gateways never cause fallback.
-- [ ] Verify the final first-release acceptance workflows and exit criteria.
+## Release outcomes
+
+- A clean supported macOS arm64 checkout installs the pinned Node.js, Pi, and npm dependency set.
+- Copied package tests and BITCH public-boundary suites pass without automatic retry.
+- Real Pi, built CLI, real PTY, TUI, direct-route, and encrypted-relay workflows pass.
+- Restart, interrupted-turn handling, backup, restore, localhost removal, remote-only use, and localhost recovery meet documented behavior.
+- Public surfaces exclude non-Pi runtimes.
+- License, provenance, modification notice, interactive notice, package license, and Corresponding Source requirements pass.
+- Installation, lifecycle, security, pairing, backup, restore, and failure recovery procedures match the built system.
+- No known critical daemon-authority, authentication, process-ownership, recovery, or data-loss defect remains.
 
 ## Exit condition
 
-A user can install BITCH, use Directory mode, manage multiple local and remote gateways, and recover supported deployments from the published documentation.
+One user can use the built CLI and TUI on macOS arm64 to control Pi Conversations and Terminals on selected local or remote daemons. Paseo-native acceptance workflows pass, and deferred BITCH improvements remain outside the MVP.
