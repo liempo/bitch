@@ -2,343 +2,396 @@
 
 ## Status
 
-Approved minimal first-release testing strategy. Implementation is pending.
+Approved MVP testing specification. Implementation is pending.
 
 ## Principle
 
-Tests verify observable behavior through public interfaces. A test must not pass only because source text, an import, a class, a method, or an internal symbol exists.
-
-Valid observations include:
+Use the pinned Paseo test corpus as the primary behavioral baseline. Run copied Paseo tests against copied local packages.
 
-- an HTTP response.
-- an SSE event.
-- a Pi JSONL entry.
-- a filesystem change.
-- built CLI stdout, stderr, or exit status.
-- process and container behavior.
+Do not rewrite a Paseo test as a BITCH test only to change names or file layout. Add BITCH tests only for approved differences, missing public proof, and BITCH-owned behavior.
 
-Compilation, linting, and generated-file freshness are build checks. They do not count as behavioral tests.
+Type checks, lint checks, and generated-file checks are build checks. They are not behavioral tests.
 
-## Test placement
+## Paseo baseline
 
-Use four test layers.
+The behavioral reference is Paseo source with package version 0.3.1 at commit [`163e7d1`](https://github.com/getpaseo/paseo/tree/163e7d1cc421cdfe4de67b971ff6cea4b51eb0ed). Use the exact commit, not the earlier `v0.3.1` tag.
 
-### BITCH-owned behavior
+Copy each retained package's applicable tests with its production source. Also copy the test fixtures, helpers, Vitest configuration, and package test scripts that those tests need.
 
-Use Vitest for BITCH-owned rules. Call public package interfaces and use real temporary files when storage behavior matters.
+Keep a copied test unchanged when BITCH retains its behavior. Adapt only imports, package or executable names, paths, environment setup, and expectations affected by an approved BITCH difference or Pi 0.83.0 compatibility.
 
-Examples include:
+Run copied tests against local copied workspaces. A test must not resolve a published Paseo package when that package exists in BITCH.
 
-- retained daemon messages, pagination, snapshots, Terminal frames, and errors in [`architecture/protocol.md`](architecture/protocol.md).
-- protocol validation and error mapping.
-- command receipts, RFC 8785 hashing, create retries, cross-conversation ID conflicts, and conversation-lock conflicts.
-- concurrent Directory-mode acceptance with the same command ID.
-- gateway registry writes, selection, and preservation of compatible additive fields.
-- master gateway behavior.
-- stable gateway identity validation.
-- local lifecycle locking.
-- path containment.
-- catalog writes, additive-field preservation, and recovery.
-- Trash state changes and projected-reason precedence.
-- gateway-global viewed and completion state.
-
-Recovery tests must cover:
-
-- a valid older Pi session migration with a recovery copy.
-- an incomplete final JSONL line.
-- ambiguous interior JSONL damage.
-- restoration from a valid catalog backup.
-- two invalid catalog files.
-- restart at each durable Trash operation stage.
-- permanent-deletion staging.
-- restart at each new-conversation creation-receipt stage.
-- accepted and running receipts after restart.
-- graceful SIGTERM draining and forced-stop recovery.
-- registry corruption without gateway data loss.
-- competing starts for one local gateway data root.
-- failure during a runtime-configuration change.
-- a concurrent registry mutation during local creation.
-- a settled historical operation label without an operation record.
-- proven reconciliation after host or Docker restart.
-- ambiguous labels, mounts, identities, operation records, and multiple candidate containers.
+Keep applicable Paseo unit tests even when they call package-internal surfaces. They remain baseline regression tests. Add a public-boundary test only when BITCH changes the behavior or the copied test does not prove a required public outcome.
 
-Do not add unit tests for thin wrappers or internal wiring. Do not unit-test behavior owned by Pi.
+Classify each upstream test as copied unchanged, copied with an adaptation, excluded, or replaced. Record the upstream path, classification, reason, retained or excluded behavior, and replacement test or issue when applicable.
 
-### Agent Server integration
+An exclusion requires an excluded product feature, an external credential or paid provider, a hosted service, an unsupported platform, or an artifact excluded by the approved licensing and provenance policy. Do not exclude a test only because it is slow, flaky, or internal.
 
-Start the real Fastify Agent Server. Send requests through HTTP and receive events through SSE.
+## Copied Paseo suites
 
-Use:
+Preserve the pinned package test entry points:
 
-- the real pinned Pi SDK.
-- real `AgentSessionRuntime` and `AgentSession` objects.
-- real temporary files.
-- a scripted local model-provider HTTP endpoint.
+| Package | Pinned test entry point |
+| --- | --- |
+| `protocol` | `npm run test --workspace=@getpaseo/protocol` |
+| `relay` | `npm run test --workspace=@getpaseo/relay` |
+| `highlight` | `npm run test --workspace=@getpaseo/highlight` |
+| `client` | `npm run test --workspace=@getpaseo/client` |
+| `server` | `npm run test --workspace=@getpaseo/server` |
+| `server` deterministic daemon E2E | `npm run test:e2e --workspace=@getpaseo/server` |
+| `cli` unit and local E2E | `npm run test --workspace=@getpaseo/cli` |
 
-The model provider is the only fake in the core integration path. It returns deterministic streams, tool calls, and failures without paid external calls.
+The root `npm test` command must run the default test script for every retained workspace. Approved package rebranding can change workspace selectors, but it must not change test selection or behavior.
 
-Each Pi command mapping in [`architecture/pi-capabilities.md`](architecture/pi-capabilities.md) needs an integration test through the protocol and exact built CLI path.
+Keep Paseo's test suffix meanings. Default `*.test.ts` tests are deterministic. `*.e2e.test.ts` tests use a real daemon. `*.real.e2e.test.ts` tests need a real external provider. `*.local.e2e.test.ts` tests need a local-only resource.
 
-CLI tests cover:
+## Test layers
 
-- required conversation IDs and cross-gateway rejection.
-- operation-specific settlement waiting and explicit command-ID retries.
-- Gateway-mode detach and Directory-mode detach rejection.
-- JSONL events and terminal results.
-- SIGINT before and after acceptance.
-- abort timeout and repeated SIGINT.
-- continued Gateway-mode work after network loss.
-- direct-bash truncation, live chunks, and server temp-path omission.
-- session statistics without an absolute server session path.
-- Directory-mode owner-lease expiry after client death.
-- no implicit last, title, or index selection.
+Use copied Paseo tests at each applicable layer:
 
-Machine-output tests require typed success and problem results on stdout. Human-readable failures use stderr.
+1. copied package unit tests for protocol, relay, highlight, client, server, and CLI behavior.
+2. copied deterministic daemon and CLI end-to-end tests.
+3. BITCH public-boundary tests for intentional product differences and missing retained coverage.
+4. PTY-driven tests for the BITCH-owned TUI.
+5. direct and encrypted-relay remote tests not already covered by copied suites.
 
-API tests cover:
+## Coverage rule
 
-- pagination revisions and stale cursors.
-- subscriber-before-snapshot ordering.
-- parallel tool event order.
-- durable entry, session-name, and thinking-level change events.
-- stream replacement, sequence gaps, and unknown additive event types.
-- durable-message deduplication.
+The following sections define required outcomes. They do not require duplicate BITCH tests when an applicable copied Paseo test already proves the outcome.
 
-These tests verify BITCH delegation and event mapping. They do not test Pi internals.
+For each outcome:
 
-Image tests cover PNG, JPEG, WebP, GIF, invalid bytes, conversion, resizing, JSONL restoration, and rejection of general binary attachments.
+1. Find the applicable test in the pinned Paseo source.
+2. Copy and run that test against the local workspace.
+3. Adapt it only when an approved BITCH boundary requires the change.
+4. Add a new public-boundary test only when no applicable copied test proves the outcome.
 
-Title tests cover first-message derivation, manual Pi naming, name clearing, image-only fallback, reload, and absence of a title-specific model request.
+## Deterministic Pi integration
 
-Gateway-mode integration tests verify the stable gateway ID. Conversation receipts, events, artifacts, and workspace resources include their gateway scope. Directory-mode integration tests verify the fixed `cwd` and absence of workspace management.
+Do not mock Pi's SDK `AgentSession` or `AgentSessionRuntime` as proof of daemon behavior. The MVP does not embed them.
 
-### Built CLI end to end
+Use the real pinned Pi RPC process for integration behavior. Configure Pi with a scripted local model provider so model output, tool calls, retries, compaction, dialogs, and failures remain deterministic.
 
-Tests execute the built CLI as a subprocess. They do not import CLI implementation modules.
+A small fake Pi process is acceptable only for protocol error cases that the real scripted Pi process cannot produce deterministically. It does not replace the real Pi integration suite.
 
-The core gateway workflow must:
+## Source-import checks
 
-1. Start a real Gateway-mode Agent Server container.
-2. Register it through the built `bitch gateway` command.
-3. Select it through `--gateway`.
-4. Send one prompt with `--jsonl` through the scripted model provider.
-5. Receive streamed events.
-6. Verify Pi JSONL persistence.
-7. Replace the container while preserving `/data`.
-8. Verify that the gateway ID does not change.
-9. Reconnect to the gateway.
-10. Reopen the conversation.
+Before pruning copied code, verify:
 
-The Directory-mode workflow must:
+- the copied package set builds.
+- each retained workspace's copied default test entry point passes.
+- applicable copied deterministic server and CLI end-to-end tests pass.
+- every adapted, excluded, or replaced upstream test has the required classification record.
+- the root license, package metadata, dated modification notices, selected-path author snapshot, source inventory, interactive legal notices, and remote Corresponding Source offer follow [`architecture/licensing.md`](architecture/licensing.md).
+- package identities do not accidentally publish under Paseo names.
 
-1. Run the built CLI with a prompt and without `--gateway`.
-2. Verify that the CLI starts one uniquely named and labeled temporary Docker container.
-3. Verify that it binds the dynamic host port only to `127.0.0.1`.
-4. Verify that it uses the identity-mounted current directory as the fixed `cwd`.
-5. Verify that it mounts the shared configuration, sessions, receipts, Trash, and recovery roots.
-6. Verify that the scripted provider handles the prompt.
-7. Verify the typed output.
-8. Verify Pi JSONL persistence.
-9. After CLI exit, verify that the CLI stopped the temporary container.
-10. Verify that the CLI removes that container.
-11. Before another invocation, place a stopped stale container.
-12. Verify that the next invocation removes the stale container.
-13. Place a running container from another invocation.
-14. Verify that the CLI leaves the running container unchanged.
-15. Kill a separate owning CLI without graceful cleanup.
-16. Verify that lease expiry stops its temporary Agent Server.
-17. Verify that a later invocation removes the stopped container.
-
-Non-interactive extension tests run the built CLI in print, JSON, and JSONL modes. They verify that Gateway mode preserves a pending dialog for a TUI. Directory mode cancels it during container shutdown. No mode reads stdin.
-
-Provider authentication tests cover status, login, polling, prompt responses, cancellation, logout, and mode isolation through HTTP and the TUI. Fixtures cover every pinned prompt and notification variant.
-
-Tests also cover one active operation per provider, cross-process Directory-mode exclusion, and server-restart cancellation. Local and remote tests cover browser callbacks, device codes, and manual codes.
-
-Responses, CLI output, and logs never expose credential values.
-
-`SOUL.md` tests cover byte-for-byte source copying, default fallback, destination preservation, atomic writes, and absence of later synchronization. HTTP fixtures cover the binary media type, digest ETag, creation precondition, and conflict response.
-
-Multiple-client tests cover shared events, simultaneous commands, global completion-viewed state, explicit mark-viewed, read-only query preservation, foreground versus background streams, disconnect completion, and reconciliation without duplication.
-
-Remote registration tests cover endpoint normalization, credential rejection, live status verification, same-identity replacement, identity mismatch, and gateway-scoped resource misuse.
-
-Workspace clone tests cover all supported URL forms and gateway-preconfigured private credentials. They verify non-interactive failure and strict host checking. They reject secret-bearing and local URLs. They also verify safe diagnostics and staged cleanup.
-
-Workspace reconciliation tests cover missing-state isolation, unrelated availability, read-only sessions, and missing default behavior. They reject symbolic links. They verify exact-path restoration with stable identity and occupied-path refusal. External rename must not transfer identity.
-
-Destructive-action tests cover CLI and TUI Trash behavior, exact-ID permanent confirmation, and canceled TUI sheets. Missing and mismatched confirmations must send no HTTP request. Tests also cover active-resource refusal and default-workspace protection. Conversation deletion tests also cover transactional JSONL, receipt, and export removal. Downloaded copies remain unchanged. Workspace deletion tests retain exports with read-only conversations.
-
-Gateway-selection tests must cover:
-
-- master gateway selection.
-- named gateway selection.
-- no master gateway.
-- an unknown alias.
-- an unavailable gateway.
-- no automatic fallback.
-- isolation between two gateways.
-- non-interactive operation without stdin prompts.
-
-### TUI compatibility
-
-TUI tests verify observable compatibility with the pinned Pi TUI and its RPC extension boundary.
-
-They use PTY-driven behavior tests and focused normalized screen snapshots at fixed terminal sizes. Snapshots remove timestamps, generated IDs, and environment-specific paths. Tests do not use one full-session ANSI recording as the only proof of behavior.
-
-They cover:
-
-- Gateway home startup without viewed-state changes.
-- Directory blank-draft startup without empty-session creation.
-- exact `--conversation` startup and invalid-scope refusal.
-- Pi layout and editor behavior.
-- pinned Pi `edit` diff data and local rendering without arbitrary-output inference.
-- supported built-in commands, keybindings, and each pinned `/settings` field.
-- absence of unsupported package, update, import, share, and llama.cpp commands.
-- configured extension commands.
-- selected-conversation resource reload through the CLI and `/reload`, including busy-state refusal.
-- extension dialogs and fire-and-forget UI.
-- background-dialog focus isolation, gateway activity events, source-labeled notifications, and foreground-only editor text.
-- `custom()` returning `undefined` in RPC mode.
-- no-op, default-return, and fallback behavior for terminal-only methods and renderers.
-- server-side extension discovery, provenance, project-trust interaction, one-run overrides, and reload.
-- trusted Gateway-mode project settings, extensions, and configured package behavior.
-- selected mode, gateway alias, and connection-state presentation.
-- the boundary for terminal-only extension methods.
-- absence of first-release gateway management and switching inside the TUI.
-
-Tests must not inspect vendored source text or internal symbols as proof of behavior.
-
-### Deferred Gateway Hub tests
-
-When `/gateway` enters product scope, PTY-driven tests must verify:
-
-- local command precedence over server extension commands with the same name.
-- use before connection, after initial failure, and while disconnected.
-- CLI-equivalent registry, status, master, lifecycle, deletion, and `SOUL.md` effects.
-- one active target and no implicit master change or fallback.
-- gateway switching without aborting gateway work.
-- Directory-mode **Stay** and **Abort and switch** behavior.
-- target preparation failure preserving the current view and connection.
-- discarding events from an old connection generation.
-- pending dialog restoration after switching back.
-- active-registration deletion disconnecting only the client.
-- local pinned Pi TUI components without terminal objects crossing RPC.
-
-Tests exercise the TUI and real shared client control plane. They do not call private hub or registry methods as proof of behavior.
-
-### Deferred native registry tests
-
-When Phase 7 starts, the Swift registry store must run the TypeScript registry fixture corpus. The corpus covers schemas, lock contention, atomic writes, migration, and corruption.
-
-Cross-language tests race public Swift app actions with the built CLI. They verify one shared revision history.
-
-## Container runtime tests
-
-The first release tests Docker for Directory mode and local gateways.
-
-Local gateway tests verify:
-
-- omitted and explicit `docker` backend selection.
-- unavailable `apple` selection fails before any durable or runtime side effect.
-- creation returns a ready registered gateway and leaves it running.
-- start, stop, and restart behavior.
-- stop and restart refuse active work unless `--force` is present.
-- forced lifecycle operations abort work, wait up to 10 seconds, preserve durable state, and never replay interrupted commands.
-- registry deletion removes the local endpoint registration without stopping the container or changing gateway data.
-- BITCH does not track or rediscover the unregistered local gateway.
-- a retained local endpoint can return only through normal externally managed gateway registration.
-- persistence after all clients disconnect.
-- on-demand startup.
-- no automatic login startup.
-- independent data roots for multiple local gateways.
-- one active container for one gateway data root.
-- identity preservation across container replacement.
-- host UID and GID use for bind-mounted data.
-- local and gateway permission failures without automatic recursive ownership changes.
-- absence of the Docker socket inside Agent Server containers.
-
-Remote deployment tests build the packaged Compose context, start it as a numeric non-root UID and GID, and use a mode `0700` bind-mounted data root. They verify readiness, stable identity, restart persistence, and failure on incompatible ownership.
-
-Remote network tests verify that Compose publishes the port only on the configured Tailscale IP. Requests through that interface succeed according to Tailnet ACLs.
-
-The LAN and wildcard interfaces do not expose the port. Requests with an `Origin` header fail with `browser_origin_not_allowed`. Responses contain no CORS allow headers.
-
-Backup tests verify the SHA-256 tree manifest and restore a complete stopped-gateway copy. They verify its gateway ID, backend record, sessions, workspaces, configuration, credentials, and Trash. They reject cross-backend restoration.
-
-Conversation export tests verify that credential files and `/data/secrets` are absent. They also verify that prompts, messages, and tool output receive no arbitrary redaction.
-
-Apple `container` tests are deferred until that runtime driver enters the product scope. The future driver must pass the local-runtime conformance suite. Apple creation must use a new identity and data root. It must not open or change an existing Docker gateway.
-
-## Upgrade compatibility
-
-Compatibility tests run the current and immediately previous BITCH releases in both client-server directions. They verify protocol negotiation, required capabilities, gateway identity, Pi JSONL restoration, and supported extension behavior.
-
-Upgrade tests create a complete backup, apply each recognized schema migration, and verify readiness and durable state. Rollback tests use the previous image when schemas remain compatible and require full backup restoration otherwise.
-
-Pi or TUI version changes run the complete capability matrix and observable TUI compatibility suite.
-
-## Supported-scale verification
-
-Release tests register eight independent gateways. Each gateway runs two conversations concurrently, and two clients share one conversation. Tests verify isolation, event consistency, command ordering, and durable reconciliation.
-
-The first release has no latency assertion. Tests still use bounded operation timeouts to detect hangs. A timeout is a correctness failure, not a performance service-level objective.
-
-## Release artifact verification
-
-Release checks install the packed npm artifact in a clean environment. They build the Agent Server image from its included context and run the Directory-mode and Gateway-mode workflows.
-
-Generated checks verify npm provenance configuration, source-archive checksums, the SBOM, and third-party license notices. The release must not reference a prebuilt OCI image.
-
-## Platform matrix verification
-
-Release tests run the packed npm artifact on macOS 26.5.2 arm64 with Docker Desktop 4.62.0. Remote tests run the Compose deployment on Ubuntu Server 24.04 LTS amd64 with Docker Engine 29.2.1 and Compose 5.0.2.
-
-Build checks verify Node.js 24.19.0, Pi 0.83.0, Pi TUI 0.83.0, the npm lockfile, and the pinned container base digest. A version mismatch blocks release.
-
-## Paseo source-import gate
-
-Run the offline gate before any pull request copies or adapts Paseo source:
+Run the offline gate for every source-import pull request:
 
 ```bash
 npm run check:provenance
 ```
 
-Set `PASEO_SOURCE` to a clean local checkout of the pinned Paseo commit. Then verify the author snapshot and upstream evidence:
+Set `PASEO_SOURCE` to a clean local checkout at the approved commit. Then run:
 
 ```bash
-test "$(git -C "$PASEO_SOURCE" rev-parse HEAD)" = 163e7d1cc421cdfe4de67b971ff6cea4b51eb0ed
-test -z "$(git -C "$PASEO_SOURCE" status --short)"
-cmp LICENSE "$PASEO_SOURCE/LICENSE"
 npm run provenance:authors -- --upstream "$PASEO_SOURCE" --check
 node scripts/provenance/validate-paseo-import.mjs --upstream "$PASEO_SOURCE"
 ```
 
-A source-import pull request must add one inventory entry for each copied or adapted file. It must update the dated modification statement in `NOTICE.md` when the first Paseo package source enters BITCH.
+The first package-source import must replace the pre-import statement in `NOTICE.md` with the actual first modification date.
 
-The gate rejects missing paths, duplicate destinations, wrong pins, wrong blobs, wrong hashes, missing notices, and an imported excluded artifact. Keep `silero_vad.onnx` excluded until its exact origin and redistribution terms are verified.
+## Pi-only adaptation checks
+
+Before accepting the Phase 2 public Pi boundary, verify:
+
+- the public provider catalog contains only Pi.
+- the copied agent-launch Terminal profile surface is not publicly available.
+- a non-Pi creation request fails before a non-Pi process starts.
+- applicable copied tests still pass after the public-boundary changes.
+
+## Protocol tests
+
+Test the copied WebSocket boundary for:
+
+- hello and server information, with the TUI using copied client type `cli`.
+- stable daemon identity.
+- capability negotiation.
+- request and response correlation.
+- application ping and pong liveness and the copied 45-second lease.
+- 64 MiB outbound backpressure disconnect.
+- unknown additive fields.
+- unknown Pi RPC events failing or being ignored within one Conversation instead of crashing the daemon.
+- direct and relay routes to one daemon ID.
+- authentication failures without secret disclosure.
+
+Test binary terminal codecs with raw bytes, not source snapshots.
+
+## Conversation integration
+
+Start the real daemon and connect through the public client.
+
+Cover:
+
+- strict LF-delimited Pi JSONL framing without generic Unicode line splitting.
+- create and run a Pi Conversation.
+- Pi 0.83 cumulative-message updates without duplicate assistant text.
+- Pi retry settlement: `agent_end` with `willRetry: true` stays running, and only `agent_settled` ends an agent turn.
+- a handled local extension command that starts no agent run completes without waiting for `agent_settled`.
+- successful compaction completion, plus failed and aborted compaction without a false `completed` item or a stuck loading item.
+- normalized user, assistant, reasoning, tool, compaction, and error items.
+- canonical submitted-message identity.
+- copied normalized tool-output bounds on live and fetched paths.
+- multiple concurrent Conversations.
+- multiple clients on one Conversation.
+- disconnect while work continues.
+- stop only after Pi cancellation acknowledgement.
+- Pi process exit during a turn.
+- daemon restart, new timeline epoch, Pi history reconstruction, and later Pi resume.
+- model and thinking changes.
+- manual and automatic compaction.
+- rewind through the injected Pi integration extension.
+- image prompts for vision and text-only models, including private temporary-file permissions.
+- extension, prompt-template, and skill commands.
+- no `--mcp-config` launch flag and no Paseo Agent MCP endpoint.
+- `select`, `confirm`, `input`, and `editor` question mapping.
+- unsupported extension UI fallback.
+
+## Timeline synchronization
+
+Test both live and authoritative paths.
+
+Cover:
+
+- initial latest-tail load.
+- backward pagination.
+- multi-page forward gap recovery.
+- same-tail no-op.
+- adjacent and overlapping page reconciliation.
+- projected item source ranges.
+- live assistant prefix followed by projected full text.
+- epoch change.
+- rewind.
+- true middle-gap replacement.
+- reconnect without duplicate rows.
+- cache paint followed by authoritative bootstrap.
+- local submitted row acknowledgement before and after RPC settlement.
+
+A test must prove that one row never appears in both canonical and live lanes after reconciliation.
+
+## Pi session import
+
+Use real temporary Pi JSONL sessions.
+
+Cover:
+
+- default Pi agent directory discovery.
+- explicit Pi directory override.
+- `cwd` filtering.
+- default 20-result limit and large candidate lists.
+- bounded Pi JSONL head and tail scanning.
+- first and last prompt previews.
+- session name where available.
+- model and thinking restoration.
+- explicit import.
+- no Conversation creation during listing.
+- resume with the exact native Pi session path.
+
+## Project and Workspace tests
+
+Use real temporary directories and Git repositories.
+
+Cover:
+
+- exact lexical Project identity.
+- opaque Project and Workspace IDs.
+- local Workspace creation.
+- explicit Workspace creation always minting a fresh ID.
+- managed-worktree creation.
+- multiple Workspaces with one `cwd`.
+- deterministic oldest exact-path selection and archived-match restore.
+- bare run creating a fresh Workspace.
+- explicit context reusing a Workspace.
+- local archive preserving files.
+- final-reference managed-worktree removal.
+- recovery from persisted placement metadata.
+- no path derivation from Workspace ID.
+- no cross-daemon identity or authority merging, including when `projectKey` matches.
+
+## Terminal integration
+
+Use real PTYs and the public binary stream.
+
+Cover:
+
+- named Terminal creation.
+- output and input frames.
+- screen and bounded scrollback snapshot.
+- revision-based replay after snapshot.
+- no duplicate or missing boundary output.
+- 256 KiB output threshold and 4 MiB queued-byte snapshot fallback.
+- detach without kill.
+- multiple observers.
+- multiple writers.
+- terminal capture.
+- title change.
+- explicit kill.
+- Workspace archive teardown.
+- daemon shutdown teardown.
+- absence after daemon restart.
+
+Test size ownership:
+
+1. client A claims size.
+2. client B sends an update without a claim.
+3. the daemon ignores B's update.
+4. client B claims the same size.
+5. ownership transfers.
+6. B's later update applies.
+
+Also verify that passive attach and rendering do not steal size ownership.
+
+## CLI end to end
+
+Execute the built CLI as a subprocess. Do not import CLI implementation modules.
+
+Cover:
+
+- explicit `bitch onboard` first-run setup.
+- detached and foreground daemon start.
+- status, stop, and restart.
+- missing-daemon guidance.
+- daemon registry add, select, list, and remove.
+- localhost removal and re-enablement without stopping an independently CLI-started daemon.
+- run, list, attach, inspect, send, wait, stop, archive, reload or auto-unarchive, import, update, and delete for Pi Conversations.
+- Workspace create, open, list, rename, archive, and recover.
+- Terminal create, list, capture, send-keys, and kill.
+- human and copied machine-output modes.
+- no ANSI or secrets in machine output.
+- explicit remote host targeting.
+- no fallback after target failure.
+
+## TUI tests
+
+Drive the built TUI through a PTY at fixed terminal sizes.
+
+Cover:
+
+- daemon and Workspace selection.
+- tabs.
+- user-created splits and the copied four-level depth limit.
+- Conversation and Terminal panels side by side.
+- panel focus and layout persistence across client restart.
+- Terminal panel close as detach.
+- root Conversation tab close as confirmed global archive.
+- connection loss and reconnect.
+- timeline catch-up.
+- pending Pi question presentation.
+- model and thinking controls retained from Paseo.
+- edit and diff presentation.
+- terminal snapshot restore.
+- terminal size claims on focus or direct interaction.
+- use of the pinned Pi TUI component package without a raw Pi TUI process.
+- no loading of extension modules in the client.
+
+Normalize generated IDs, timestamps, and temporary paths in screen snapshots. Do not use a full ANSI recording as the only behavioral proof.
+
+## Remote direct tests
+
+Run a daemon on a separate test endpoint.
+
+Cover:
+
+- registration by stable daemon ID.
+- password success and failure.
+- trusted VPN or TLS route configuration in the test environment.
+- route loss without daemon deselection.
+- no action on localhost after remote failure.
+- two daemons with isolated Projects, Workspaces, Conversations, and Terminals.
+
+## Relay tests
+
+Use the copied relay package and an isolated relay test server.
+
+Cover:
+
+- relay disabled by default.
+- explicit enablement.
+- pairing offer generation and parsing.
+- daemon public-key verification.
+- authenticated encrypted text frames.
+- authenticated encrypted binary Terminal frames.
+- tamper rejection.
+- reconnect to the same daemon ID.
+- relay inability to observe application plaintext in its public events and logs.
+
+A live hosted-relay test can be optional. Local cryptographic and protocol tests are required.
+
+## Recovery tests
+
+Cover:
+
+- stale PID file for a non-running process.
+- live PID lock that must not be reclaimed.
+- desktop-managed unreachable lock with fresh and older-than-five-minute heartbeats.
+- competing daemon starts for one home.
+- invalid config startup failure without data replacement.
+- invalid Project or Workspace registry logging, empty-view behavior, and operator mutation stop.
+- invalid Conversation record skip behavior.
+- Pi process crash.
+- graceful shutdown ordering and the copied 10-second ceiling.
+- daemon crash.
+- interrupted turn not replayed.
+- durable Conversation reload and normalized timeline reconstruction from Pi JSONL.
+- Project and Workspace reload.
+- runtime-only Terminal loss.
+- localhost disable, independently started daemon survival, and later recovery.
+- backup and restore of daemon home plus Pi state.
+
+## Security tests
+
+Cover:
+
+- loopback default binding.
+- bcrypt password hashing, restart activation, and authentication.
+- direct-route password precedence without credential output.
+- no password plaintext in configuration or logs.
+- authorization and WebSocket-protocol credentials redacted from logs.
+- no false automatic-log-rotation claim.
+- Host-header rejection according to copied Paseo rules.
+- relay secret-key file permissions.
+- no Pi credential values in protocol output.
+- non-Pi agent runtime exclusion.
+- remote failure without fallback execution.
 
 ## Pull-request gate
 
-Every pull request runs:
+Run each available suite that covers the changed behavior. Do not use an empty or unavailable future suite as a passing check.
 
-1. TypeScript compilation and linting.
-2. Generated protocol freshness checks.
-3. Vitest tests for BITCH-owned behavior.
-4. Real Agent Server integration tests.
-5. The built-CLI Gateway-mode Docker workflow.
-6. The built-CLI Directory-mode Docker workflow.
+After the owning implementation phase adds a suite, an applicable code-changing pull request runs:
 
-The target duration is 15 minutes or less.
+1. formatting, lint, and TypeScript build checks.
+2. the copied Paseo default suites for protocol, relay, highlight, and client.
+3. the copied Paseo server default suite and applicable deterministic daemon end-to-end tests.
+4. real Pi scripted-provider integration tests for the Pi 0.83.0 difference.
+5. the copied Paseo CLI unit and local end-to-end suite.
+6. built CLI remote-daemon tests not covered by the copied suite.
+7. copied and added Terminal PTY integration tests.
+8. focused PTY-driven tests for the BITCH-owned TUI.
+9. license, test-classification, and source-provenance checks.
+
+A documentation-only or pre-import pull request runs its available documentation, configuration, and provenance checks. The Phase 6 release gate runs every implemented entry.
 
 ## Test rules
 
-- Test public behavior, not source structure.
-- Use the real Pi SDK in integration tests.
-- Fake only external systems that must be deterministic or unavailable.
-- Execute the built CLI as a subprocess for end-to-end behavior.
-- Do not mock `AgentSession` or `AgentSessionRuntime`.
-- Add a behavioral regression test for each fixed defect.
-- Do not use a private test-only CLI protocol.
+- Start with the applicable pinned Paseo test.
+- Do not replace copied coverage with a parallel BITCH test.
+- Preserve copied test logic unless an approved difference changes its expected behavior.
+- Test new BITCH behavior through a public boundary.
+- Execute the built CLI as a subprocess for added end-to-end tests.
+- Use real Pi RPC integration for behavioral proof.
+- Use real PTYs for Terminal behavior.
+- Fake only external systems that require determinism or isolation.
+- Add a regression test for each fixed defect.
+- Do not automatically retry failures to hide flakiness.
 - Do not treat code coverage as proof of correctness.
-- Do not retry a failing test automatically to hide flakiness.
