@@ -1,408 +1,194 @@
-# CLI Contract
+# CLI and TUI Architecture
 
 ## Status
 
-Approved first-release CLI contract. Implementation is pending.
+Approved MVP technical specification. Implementation is pending.
 
-## Command boundary
+## CLI source
 
-The built `bitch` executable is the public CLI boundary. Tests execute it as a subprocess.
+The CLI copies and adapts Paseo's Commander-based CLI from the pinned source commit.
 
-Gateway management commands never read stdin. They write human-readable success output to stdout by default. `--json` writes one JSON result to stdout. `--jsonl` is valid only for streaming agent commands and is invalid for gateway management.
+BITCH retains the command families required for the Pi-only MVP. It disables or removes commands for excluded agent runtimes and deferred higher-level features.
 
-Directory mode accepts the mutually exclusive global options `--approve` (`-a`) and `--no-approve` (`-na`). They apply Pi project trust for one invocation and do not write `trust.json`. Gateway mode rejects them as usage errors.
+## Global daemon target
 
-Human-readable diagnostics use stderr. Machine-readable results use stdout and do not contain ANSI control codes. This rule includes typed problem results.
+A CLI invocation targets one selected daemon.
 
-## Interactive startup
+An explicit host or daemon option can override the saved selection for that invocation. Without an override, the invocation uses the client registry's selected daemon. When the registry is initialized for the first time, the registered built-in localhost daemon is selected by default.
 
-```text
-bitch [--gateway [ALIAS]] [--conversation CONVERSATION_ID]
-```
+Ambient Workspace or Conversation context can select a resource only inside that target daemon. It cannot change the daemon target implicitly.
 
-Without a print option or command group, this form starts the TUI. Gateway mode without `--conversation` opens the selected gateway home and does not mark a conversation viewed. Directory mode without it opens a client-only blank draft for the invocation cwd.
+The retained explicit override is `--host <target>`. New registry commands use daemon IDs from the client registry. Selection never falls back after a target has been chosen.
 
-`--conversation` opens only the exact ID in the selected mode. It has no title, recency, or priority fallback. A missing, trashed, cross-mode, cross-gateway, or damaged conversation reports its stable resource or recovery error without opening another one.
+A route can be direct TCP, local IPC, or an encrypted relay offer. The stable daemon ID must match the selected registry entry.
 
-## Conversation execution model
+## First-run behavior
 
-The reference CLI exposes a typed command for every supported operation in [`pi-capabilities.md`](pi-capabilities.md). It has no public raw-RPC or arbitrary-JSON command escape hatch.
+The explicit `bitch onboard` flow handles first use when no usable local setup exists. Onboarding:
 
-Conversation mutations accept `--command-id UUID`, `--json`, and `--jsonl`. Gateway-mode conversation mutations also accept `--detach`. Omission of `--command-id` creates a UUID v4.
+- initializes daemon configuration.
+- starts the local daemon when absent.
+- waits for readiness.
+- asks before enabling relay unless a non-interactive option supplies the decision.
+- prints direct and pairing guidance.
 
-Normal execution waits for a terminal command receipt. `--detach` returns after durable acceptance. `--jsonl` keeps the command attached, emits ordered SSE envelopes, and finishes with one typed result. `--detach` cannot be combined with `--jsonl` and fails in Directory mode with `detach_requires_gateway`.
+Ordinary commands do not start a missing daemon implicitly.
 
-A Gateway-mode command that reaches **Needs input** returns `interaction_required` without aborting server work. Directory mode follows its approved cancellation and shutdown behavior.
+## Daemon commands
 
-### Interrupt behavior
-
-For an attached mutation, the first SIGINT marks abort requested. If durable acceptance is still in flight, the CLI waits for that acceptance result and then sends the typed abort command to the known conversation. It does not treat closing the HTTP request as proof that acceptance failed.
-
-After the abort request, the CLI waits up to 10 seconds for the original operation to settle and for durable flushes. It then exits 130. If the wait expires, it reports `abort_settlement_timeout` and exits 130. The server retains the accepted abort request. It does not interpret client exit as a second command.
-
-A second SIGINT closes the client immediately. The CLI makes no claim that an abort request which was not yet accepted succeeded.
-
-When possible, JSONL writes one final `interrupted` envelope to stdout before exit. `--json` writes one typed interruption problem to stdout. Human-readable interruption diagnostics use stderr. Network loss, pipe closure, client crash, and Gateway-mode terminal closure are disconnections, not abort commands. `--detach` exits normally after acceptance and has no attached interrupt phase.
-
-## Conversation targeting
-
-A non-interactive command that operates on an existing conversation requires its Pi conversation ID as a positional argument. The CLI has no implicit current conversation, last-conversation file, title lookup, list-index selector, or `--last` shortcut.
-
-Gateway selection and conversation selection remain separate. `--gateway` selects one Agent Server, and `CONVERSATION_ID` selects a resource on that server. A conversation ID from another gateway fails with `gateway_scope_mismatch`.
-
-New-conversation commands do not take a conversation ID. Machine output returns the resulting structured gateway and conversation reference.
-
-## Conversation command tree
-
-These metavariables apply:
+The MVP provides Paseo-equivalent daemon commands for:
 
 ```text
-TARGET   := [--gateway [ALIAS]]
-MUTATION := [--command-id UUID] [--detach] [--json | --jsonl]
-QUERY    := [--json]
-IMAGE    := [--image FILE]...
+bitch daemon start
+bitch daemon start --foreground
+bitch daemon stop
+bitch daemon restart
+bitch daemon status
+bitch daemon pair
+bitch daemon set-password
 ```
 
-`--json` and `--jsonl` are mutually exclusive. `--detach` and `--jsonl` are mutually exclusive. An image flag is repeatable.
+The local lifecycle implementation uses the daemon home and PID evidence. Stop prefers the daemon lifecycle RPC before owner-process signals.
 
-### Prompt and run control
+## Daemon registry commands
 
-```text
-bitch TARGET -p MESSAGE [--workspace WORKSPACE_ID]
-    [--provider PROVIDER --model MODEL_ID] [--thinking LEVEL]
-    [--streaming-behavior steer|follow-up] IMAGE MUTATION
+BITCH adds the smallest CLI surface needed to expose the approved multi-daemon client registry:
 
-bitch TARGET conversation create MESSAGE [--workspace WORKSPACE_ID]
-    [--provider PROVIDER --model MODEL_ID] [--thinking LEVEL]
-    [--streaming-behavior steer|follow-up] IMAGE MUTATION
+- list saved daemons.
+- add a direct or pairing route.
+- select one daemon.
+- show the selected daemon.
+- remove a route or daemon connection.
+- enable or disable the managed localhost daemon.
 
-bitch TARGET conversation prompt CONVERSATION_ID MESSAGE
-    [--streaming-behavior steer|follow-up] IMAGE MUTATION
-bitch TARGET conversation steer CONVERSATION_ID MESSAGE IMAGE MUTATION
-bitch TARGET conversation follow-up CONVERSATION_ID MESSAGE IMAGE MUTATION
-bitch TARGET conversation abort CONVERSATION_ID MUTATION
-bitch TARGET conversation new CONVERSATION_ID
-    [--parent PARENT_CONVERSATION_ID] MUTATION
-```
+These commands mutate client connection state only. They do not move Projects, Workspaces, Conversations, or Terminals.
 
-`-p` and `conversation create` are equivalent. `--workspace` is valid only in Gateway mode and fixes the workspace at first-prompt acceptance. `--provider` and `--model` must occur together. `LEVEL` is `off`, `minimal`, `low`, `medium`, `high`, `xhigh`, or `max`.
+Removing localhost disables built-in management. The CLI and TUI do not stop an independently started daemon. The deferred graphical client stops localhost only when it owns that managed process. Removing a remote route never stops its daemon.
 
-The client reads each `FILE`, validates supported image bytes and MIME type, and sends `ImageContent`. A file path never becomes a server attachment path.
+## Conversation commands
 
-### State, messages, and commands
+Use **Conversation** in BITCH user-facing text even when copied internal code uses `agent`.
 
-```text
-bitch TARGET conversation state CONVERSATION_ID QUERY
-bitch TARGET conversation messages CONVERSATION_ID
-    [--cursor CURSOR] [--limit 1..200] QUERY
-bitch TARGET conversation commands CONVERSATION_ID QUERY
-bitch TARGET conversation reload CONVERSATION_ID MUTATION
-bitch TARGET conversation stats CONVERSATION_ID QUERY
-bitch TARGET conversation last-assistant CONVERSATION_ID QUERY
-```
-
-### Models and thinking
-
-```text
-bitch TARGET conversation model list QUERY
-bitch TARGET conversation model set CONVERSATION_ID PROVIDER MODEL_ID MUTATION
-bitch TARGET conversation model cycle CONVERSATION_ID MUTATION
-
-bitch TARGET conversation thinking list CONVERSATION_ID QUERY
-bitch TARGET conversation thinking set CONVERSATION_ID LEVEL MUTATION
-bitch TARGET conversation thinking cycle CONVERSATION_ID MUTATION
-```
+Retain Paseo-equivalent operations for:
 
-Model list is server-scoped and therefore takes no conversation ID. Thinking-level availability is model-specific and requires an existing conversation.
+- list.
+- run or create.
+- attach to live output.
+- inspect.
+- send a queued or immediate message according to lifecycle state.
+- wait for settlement.
+- stop.
+- import a Pi session.
+- archive.
+- reload or auto-unarchive through open, fetch, resume, or prompt paths.
+- delete.
+- update title, labels, and thinking settings.
+- select the initial model on create or run.
+- invoke available Pi commands.
 
-### Queues, compaction, and retries
+A command can accept a full ID or an unambiguous retained Paseo reference where its copied behavior does so. BITCH does not preserve the former requirement that every command use only a full Conversation ID.
 
-```text
-bitch TARGET conversation queue steering CONVERSATION_ID all|one-at-a-time MUTATION
-bitch TARGET conversation queue follow-up CONVERSATION_ID all|one-at-a-time MUTATION
+## Workspace commands
 
-bitch TARGET conversation compact CONVERSATION_ID
-    [--instructions TEXT] MUTATION
-bitch TARGET conversation compact auto CONVERSATION_ID on|off MUTATION
-
-bitch TARGET conversation retry auto CONVERSATION_ID on|off MUTATION
-bitch TARGET conversation retry abort CONVERSATION_ID MUTATION
-```
-
-### Direct bash
+Retain Paseo-equivalent operations for:
 
-```text
-bitch TARGET conversation bash run CONVERSATION_ID COMMAND
-    [--exclude-from-context] MUTATION
-bitch TARGET conversation bash abort CONVERSATION_ID MUTATION
-```
-
-`COMMAND` is one shell argument and usually requires shell quoting. The CLI does not read command text or process input from stdin and does not allocate a PTY.
+- open a directory.
+- create a local Workspace.
+- create a managed-worktree Workspace.
+- list.
+- rename.
+- archive.
+- recover.
 
-### Session tree and artifacts
+Workspace IDs are opaque. An explicit path goes through the daemon's deterministic path resolver and provisioning service.
 
-```text
-bitch TARGET conversation export CONVERSATION_ID
-    [--output CLIENT_FILE] [--overwrite] MUTATION
-bitch TARGET conversation switch CONVERSATION_ID TARGET_CONVERSATION_ID MUTATION
-bitch TARGET conversation fork CONVERSATION_ID ENTRY_ID MUTATION
-bitch TARGET conversation clone CONVERSATION_ID MUTATION
-bitch TARGET conversation fork-messages CONVERSATION_ID QUERY
-bitch TARGET conversation entries CONVERSATION_ID [--since ENTRY_ID] QUERY
-bitch TARGET conversation tree CONVERSATION_ID QUERY
-bitch TARGET conversation name CONVERSATION_ID NAME MUTATION
-```
+## Terminal commands
 
-`switch` accepts only a target conversation in the selected gateway. Session file paths are never public arguments.
+Retain Paseo-equivalent operations for:
 
-Export creates a server artifact. Without `--detach`, the CLI downloads it to `CLIENT_FILE` or a safe default file in the client cwd. It refuses to replace an existing file unless `--overwrite` is present. `--output` and `--overwrite` are invalid with `--detach`.
+- create.
+- list.
+- capture screen or scrollback text.
+- send keys.
+- kill.
 
-### Result behavior
+Interactive terminal attachment is part of the TUI panel. Non-interactive send-keys writes directly and does not require a writer lease.
 
-Waiting human output prints the user-facing result after operation settlement. A prompt that starts generation prints the final assistant text.
+## Permission commands
 
-A prompt accepted through `streamingBehavior`, steering, or follow-up settles after Pi accepts the queued message. Monitor the conversation stream to observe the later turn. `--json` prints one typed result that includes the conversation reference, terminal receipt, and command-specific result. `--jsonl` prints ordered event envelopes followed by one terminal result envelope.
+Retain the Paseo permit workflow needed to list, allow, or deny pending question permissions.
 
-Detached human output prints the command ID, conversation reference, and accepted state. Detached JSON output prints the complete accepted receipt. Query commands return their resource directly and never create receipts.
+A Pi extension question remains pending in the daemon until a valid client response, Pi cancellation, process exit, or daemon shutdown resolves it.
 
-## Conversation and workspace lifecycle commands
+## Provider commands
 
-These resource operations complete after their HTTP and durable filesystem transaction settles. They accept `--json` but not `--detach` or `--jsonl`.
+Public provider discovery contains only Pi.
 
-```text
-bitch TARGET conversation list [--workspace WORKSPACE_ID]
-    [--cursor CURSOR] [--limit 1..200] [--json]
-bitch TARGET conversation show CONVERSATION_ID [--json]
-bitch --gateway [ALIAS] conversation mark-viewed CONVERSATION_ID [--json]
-bitch TARGET conversation trash CONVERSATION_ID [--json]
-bitch TARGET conversation restore CONVERSATION_ID [--json]
-bitch TARGET conversation delete CONVERSATION_ID
-    --confirm CONVERSATION_ID [--json]
+Model listing can expose Pi's model-provider catalog. Do not call Pi model providers separate BITCH agent runtimes.
 
-bitch TARGET trash conversations list
-    [--cursor CURSOR] [--limit 1..200] [--json]
+## Output
 
-bitch --gateway [ALIAS] workspace create empty DIRECTORY_NAME
-    [--display-name NAME] [--json]
-bitch --gateway [ALIAS] workspace create git DIRECTORY_NAME
-    [--display-name NAME] [--json]
-bitch --gateway [ALIAS] workspace create clone DIRECTORY_NAME REPOSITORY_URL
-    [--display-name NAME] [--json]
-bitch --gateway [ALIAS] workspace list
-    [--cursor CURSOR] [--limit 1..200] [--json]
-bitch --gateway [ALIAS] workspace show WORKSPACE_ID [--json]
-bitch --gateway [ALIAS] workspace rename WORKSPACE_ID NAME [--json]
-bitch --gateway [ALIAS] workspace trash WORKSPACE_ID [--json]
-bitch --gateway [ALIAS] workspace restore WORKSPACE_ID [--json]
-bitch --gateway [ALIAS] workspace delete WORKSPACE_ID
-    --confirm WORKSPACE_ID [--json]
+Copy Paseo's supported human and machine output formats for retained commands.
 
-bitch --gateway [ALIAS] trash workspaces list
-    [--cursor CURSOR] [--limit 1..200] [--json]
+The MVP does not require the former exact JSON and JSONL schemas. Phase 1 records the copied command outputs before implementation changes them.
 
-bitch --gateway [ALIAS] artifact download ARTIFACT_ID
-    [--output CLIENT_FILE] [--overwrite] [--json]
-bitch --gateway [ALIAS] artifact delete ARTIFACT_ID
-    --confirm ARTIFACT_ID [--json]
-```
+Machine output must remain non-interactive and must not include ANSI control sequences or credentials.
 
-Workspace and persistent artifact commands require Gateway mode. The conversation-list `--workspace` filter also requires Gateway mode. Directory mode supports conversation and Session Trash commands only.
+## Exit and interruption
 
-Artifact download refuses to replace a client file unless `--overwrite` is present. Artifact deletion uses the same exact-ID safeguard as permanent conversation and workspace deletion.
+A connection failure exits without changing the selected daemon or starting work elsewhere.
 
-The explicit `trash` verb is sufficient for non-interactive confirmation. Permanent `delete` requires `--confirm`, whose value must exactly equal the positional resource ID. A missing value returns `confirmation_required`. A different value returns `confirmation_mismatch`. Both fail with exit code 2 before any HTTP request.
+`Ctrl-C` while attached detaches unless the command explicitly defines stop behavior. A detach does not abort daemon-owned work.
 
-The built TUI confirms a Trash action in one dialog. Its permanent-delete sheet identifies the resource and describes destroyed and retained data before it enables **Delete permanently**. For a conversation, the warning includes Pi JSONL, command receipts, and server-owned exports. It states that client-downloaded copies are outside BITCH control.
+An explicit stop command requests Pi cancellation. Conversation lifecycle changes only after Pi acknowledges the request or emits terminal turn state.
 
-## Gateway command tree
+## TUI process
 
-```text
-bitch gateway create ALIAS [--backend docker|apple] [--port auto|PORT] [--json]
-bitch gateway register ALIAS URL [--replace] [--json]
-bitch gateway list [--json]
-bitch gateway show ALIAS [--json]
-bitch gateway status ALIAS [--json]
-bitch gateway rename OLD_ALIAS NEW_ALIAS [--json]
-bitch gateway delete ALIAS [--json]
+The TUI uses the built BITCH client package and one selected daemon connection.
 
-bitch gateway master show [--json]
-bitch gateway master set ALIAS [--json]
-bitch gateway master clear [--json]
+It implements:
 
-bitch gateway local list [--json]
-bitch gateway local start ALIAS [--json]
-bitch gateway local stop ALIAS [--force] [--json]
-bitch gateway local restart ALIAS [--force] [--json]
-bitch gateway local configure ALIAS --port auto|PORT [--force] [--json]
+- a Project and Workspace navigator.
+- Workspace tabs.
+- user-created horizontal or vertical splits up to the copied four-level depth limit.
+- Conversation panels.
+- interactive Terminal panels.
+- normalized timeline rendering.
+- Pi question permission dialogs.
+- connection and reconnect state.
 
-bitch gateway soul seed DESTINATION [--from SOURCE] [--json]
-```
+The TUI uses `@earendil-works/pi-tui` 0.83.0 from the pinned Pi distribution. It does not run Pi's `InteractiveMode` and does not attach to a raw Pi TUI.
 
-`PORT` is an integer from 1 through 65535. `auto` lets the selected local backend assign an available host port on `127.0.0.1`.
+## TUI panel ownership
 
-## Command behavior
+Panel layout is persistent client state keyed by daemon ID and Workspace ID. It stores panel trees and split sizes, not resource snapshots. Moving or closing a Terminal panel does not change daemon lifecycle. Closing a root Conversation tab invokes Paseo's archive gesture and its running-turn confirmation. Closing a future child-Conversation tab is layout-only.
 
-### `gateway create`
+Daemon resources remain authoritative. Another client can keep a Terminal open after one client closes its panel. A root Conversation archive is global and appears on every client.
 
-Creates and registers a local gateway. `--backend` selects its immutable container backend. The default backend is `docker`, and the default port policy is `auto`.
+## TUI terminal path
 
-The first release implements only `docker`. It recognizes `--backend apple` but fails with `gateway_backend_unavailable` before any image, data, container, identity, or registry side effect. When Apple `container` support ships, `--backend apple` creates a separate gateway with a new gateway ID and data root. It never converts an existing Docker gateway.
+A Terminal panel:
 
-The command:
+1. subscribes and receives a stream slot.
+2. restores the current snapshot and scrollback.
+3. starts live binary output.
+4. sends user input through binary frames.
+5. claims PTY size on focus or direct interaction.
+6. sends later geometry changes as owner updates.
 
-1. When necessary, build the pinned image.
-2. Create the data root.
-3. Start the container.
-4. Wait for readiness.
-5. Record the gateway ID and backend.
-6. Leave the gateway running.
+Unsubscribing detaches the panel without killing the Terminal.
 
-The first registered gateway becomes master.
+## Deferred commands
 
-### `gateway register`
+Do not include these Paseo commands in the MVP unless a retained dependency requires an internal path:
 
-Registers one reachable externally managed endpoint. The URL must satisfy the endpoint rules in [`../product/clients.md`](../product/clients.md).
+- non-Pi provider selection.
+- scripts and services.
+- schedules and heartbeats.
+- Hub.
+- speech and voice.
+- browser automation.
+- Agent MCP orchestration or injection.
+- subagent management.
 
-`--replace` requires an existing externally managed alias. It changes only the endpoint and succeeds only when the new endpoint reports the stored gateway ID. It rejects a managed local alias.
-
-### `gateway list` and `gateway local list`
-
-`gateway list` reads the registry and lists all entries. `gateway local list` lists only registered BITCH-managed local entries. In the first release, all such entries use Docker.
-
-Neither command contacts an endpoint or Docker. Both sort results by ascending ASCII alias.
-
-### `gateway show`
-
-Reads one registry entry without contacting its endpoint or Docker. A local result includes its runtime configuration and BITCH-owned data-root path.
-
-### `gateway status`
-
-Contacts one registered endpoint and returns its live `/v1/status` result. For a managed local gateway that is stopped, the command reports `stopped` without starting it.
-
-### `gateway rename`
-
-Changes only the alias. It preserves gateway identity, endpoint, runtime configuration, data, and master status. The old alias becomes unknown immediately.
-
-### `gateway delete`
-
-Removes only the registry entry. It requires no confirmation option. It does not contact the endpoint or change any container or gateway data.
-
-### `gateway master`
-
-`show` reports the selected master or that no master exists. `set` requires an existing alias. `clear` sets the master reference to `null`.
-
-### `gateway local`
-
-`start`, `stop`, `restart`, and `configure` accept only a registered BITCH-managed local gateway and dispatch to its recorded backend. The backend and data root cannot be configured after creation.
-
-Normal stop, restart, or live reconfiguration fails when the gateway has active work. `--force` uses the forced lifecycle behavior in [`../operations.md`](../operations.md).
-
-A port configuration change replaces the container while preserving its data root and gateway ID. The registry commits the new port policy only after readiness and identity verification succeed.
-
-### `gateway soul seed`
-
-Seeds a missing destination `SOUL.md`. `--from` selects another registered gateway. Without `--from`, or when the source is unavailable, the command installs the packaged default.
-
-## JSON result types
-
-Every success result has a stable `type` discriminator.
-
-| Command | Result `type` |
-|---|---|
-| `create` | `gateway.created` |
-| `register` | `gateway.registered` |
-| `register --replace` | `gateway.registration.replaced` |
-| `list` | `gateway.list` |
-| `show` | `gateway.show` |
-| `status` | `gateway.status` |
-| `rename` | `gateway.renamed` |
-| `delete` | `gateway.registration.deleted` |
-| `master show` | `gateway.master` |
-| `master set` | `gateway.master.set` |
-| `master clear` | `gateway.master.cleared` |
-| `local list` | `gateway.local.list` |
-| `local start` | `gateway.local.started` |
-| `local stop` | `gateway.local.stopped` |
-| `local restart` | `gateway.local.restarted` |
-| `local configure` | `gateway.local.configured` |
-| `soul seed` | `gateway.soul.seeded` |
-
-A gateway summary has this shape:
-
-```json
-{
-  "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
-  "alias": "work",
-  "kind": "local",
-  "backend": "docker",
-  "endpoint": "http://localhost:49152",
-  "master": true
-}
-```
-
-`kind` is `local` or `remote`. A local summary has `backend` set to `docker` or `apple`. A remote summary omits this field. List results contain a `gateways` array of summaries. Show results add the local `runtime` object when applicable. A status result has `state: "running" | "stopped"`.
-
-A running result includes the canonical `status` object from [`protocol.md`](protocol.md). A stopped managed-local result omits that object.
-
-Mutation results contain the affected gateway ID and alias. Rename also contains `oldAlias` and `newAlias`. Master results contain nullable `gatewayId` and `alias` fields.
-
-Deletion reports only the removed registry identity:
-
-```json
-{
-  "type": "gateway.registration.deleted",
-  "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
-  "alias": "work"
-}
-```
-
-`gateway.soul.seeded` contains the destination reference and `source`, which is a gateway reference or `default`.
-
-## Human-readable results
-
-List commands print a table with alias, kind, local backend, master status, and endpoint. `show` prints registry fields as labeled values. `status` prints connection state followed by the non-sensitive status fields.
-
-Mutation commands print one sentence. Registry deletion prints:
-
-```text
-Deleted gateway registration "ALIAS".
-```
-
-Human output does not print credentials, authorization values, prompts, messages, tool data, or secret paths.
-
-## Errors
-
-With `--json`, failures write this object to stdout:
-
-```json
-{
-  "type": "error",
-  "code": "gateway_not_found",
-  "message": "Gateway alias \"work\" was not found. Run `bitch gateway list` to see registered aliases.",
-  "retryable": false
-}
-```
-
-With `--jsonl`, a failure writes the equivalent terminal problem envelope to stdout. Human-readable failures write a message to stderr.
-
-The message states what failed and gives the next safe action when one is available. It does not blame the user.
-
-The object can add typed gateway, conversation, workspace, artifact, command, request, or dialog identifiers. It never adds stack traces or secrets.
-
-## Process exit codes
-
-| Exit code | Meaning | Example stable codes |
-|---:|---|---|
-| `0` | Success | none |
-| `2` | Usage or validation failure | `gateway_alias_invalid`, `gateway_endpoint_invalid`, `repository_url_invalid`, `attachment_type_unsupported`, `confirmation_required`, `confirmation_mismatch` |
-| `3` | Selection or resource not found | `master_gateway_missing`, `gateway_not_found`, `resource_not_found`, `workspace_missing`, `default_workspace_missing` |
-| `4` | Conflict or busy state | `gateway_alias_conflict`, `gateway_identity_mismatch`, `gateway_active_work`, `conversation_busy`, `conversation_locked`, `workspace_directory_conflict`, `local_lifecycle_busy`, `soul_already_exists` |
-| `5` | Selected service unavailable | `gateway_unavailable`, `directory_start_failed`, `readiness_timeout`, `local_port_unavailable` |
-| `6` | Unsupported or incompatible behavior | `protocol_incompatible`, `capability_missing`, `gateway_not_locally_managed`, `gateway_backend_unavailable`, `detach_requires_gateway` |
-| `7` | Storage or recovery required | `registry_recovery_required`, `catalog_recovery_required`, `session_recovery_required`, `gateway_identity_recovery_required`, `local_gateway_recovery_required`, `operation_recovery_required`, `registry_schema_unsupported`, `schema_version_unsupported` |
-| `8` | Permission or security boundary failure | `local_data_permission_denied`, `gateway_data_permission_denied`, `browser_origin_not_allowed` |
-| `9` | User interaction required | `interaction_required` |
-| `10` | Accepted operation failed | `command_failed`, `local_lifecycle_failed`, `workspace_clone_failed` |
-| `130` | Interrupted by SIGINT | `interrupted`, `abort_settlement_timeout` |
-
-An unavailable, missing, incompatible, or damaged selected gateway never causes fallback.
+Also defer BITCH-specific commands for full Pi RPC parity, `SOUL.md`, Docker gateways, Trash, and durable receipts.
