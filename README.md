@@ -69,6 +69,20 @@ docs(readme): explain local setup
 
 Allowed types are `fix`, `feat`, `chore`, `docs`, and `ci`. See [`commitlint.config.cjs`](commitlint.config.cjs).
 
+## Delivery workflow
+
+Use the [BITCH GitHub Project](https://github.com/users/liempo/projects/5) as the execution queue. Claim only a leaf issue with `Queue = Ready`, `Status = Todo`, and no open native blocker. Change it to `Status = In Progress` before implementation.
+
+Keep the planning levels separate:
+
+- [`docs/plan/`](docs/plan/) defines program and phase outcomes.
+- One GitHub delivery issue defines one pull-request-sized slice.
+- [`docs/plans/`](docs/plans/) contains the executable plan for that slice.
+
+Code work requires an implementation-ready `ce-unified-plan/v1` plan unless the narrow mechanical skip applies. [Project-local Pi settings](.pi/settings.json) pin Compound Engineering and its companion packages. Start a new trusted Pi session after this package configuration changes. Use `ce-plan`, `ce-work`, `ce-code-review`, and `ce-commit` for the normal delivery path.
+
+One owner controls the working tree, reviews the actual diff, reruns final verification, and creates the canonical local commit. Use one linked pull request per delivery issue. See [`AGENTS.md`](AGENTS.md) for the normative workflow and [`.github/EXECUTABLE_PLAN_TEMPLATE.md`](.github/EXECUTABLE_PLAN_TEMPLATE.md) for the fallback plan template.
+
 ## Documentation
 
 Start with [`docs/README.md`](docs/README.md).
@@ -79,5 +93,5 @@ Start with [`docs/README.md`](docs/README.md).
 - [`docs/architecture/pi-capabilities.md`](docs/architecture/pi-capabilities.md) defines the Paseo-exposed Pi boundary.
 - [`docs/testing.md`](docs/testing.md) defines behavioral test requirements.
 - [`docs/glossary.md`](docs/glossary.md) defines required terms.
-- [`plan/README.md`](plan/README.md) defines the program and phase sequence.
+- [`docs/plan/README.md`](docs/plan/README.md) defines the program and phase sequence.
 - [`AGENTS.md`](AGENTS.md) defines the repository workflow.

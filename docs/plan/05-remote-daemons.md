@@ -6,7 +6,7 @@ Use one daemon protocol for multiple registered local and remote daemons through
 
 ## Dependencies
 
-Complete Phase 4. Use [`../docs/architecture/protocol.md`](../docs/architecture/protocol.md), [`../docs/product/clients.md`](../docs/product/clients.md), [`../docs/operations.md`](../docs/operations.md), and [`../docs/testing.md`](../docs/testing.md).
+Complete Phase 4. Use [`../architecture/protocol.md`](../architecture/protocol.md), [`../product/clients.md`](../product/clients.md), [`../operations.md`](../operations.md), and [`../testing.md`](../testing.md).
 
 ## Phase boundaries
 

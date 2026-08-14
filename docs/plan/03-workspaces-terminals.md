@@ -6,7 +6,7 @@ Deliver Paseo-native Project, Workspace, managed-worktree, and interactive Termi
 
 ## Dependencies
 
-Complete Phase 2. Use [`../docs/product/workspaces.md`](../docs/product/workspaces.md), [`../docs/architecture/storage.md`](../docs/architecture/storage.md), [`../docs/architecture/protocol.md`](../docs/architecture/protocol.md), and [`../docs/testing.md`](../docs/testing.md).
+Complete Phase 2. Use [`../product/workspaces.md`](../product/workspaces.md), [`../architecture/storage.md`](../architecture/storage.md), [`../architecture/protocol.md`](../architecture/protocol.md), and [`../testing.md`](../testing.md).
 
 ## Phase boundaries
 

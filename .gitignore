@@ -1,2 +1,14 @@
 node_modules/
+coverage/
+dist/
+build/
+*.tsbuildinfo
 .DS_Store
+.env
+.env.*
+!.env.example
+.cache/
+.context/
+.compound-engineering/config.local.yaml
+.pi/git/
+.pi/npm/

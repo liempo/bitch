@@ -8,7 +8,7 @@ Import a coherent and attributed Paseo daemon stack that builds in the BITCH rep
 
 Use Paseo source with package version 0.3.1 at upstream commit [`163e7d1`](https://github.com/getpaseo/paseo/tree/163e7d1cc421cdfe4de67b971ff6cea4b51eb0ed). This commit is 30 commits after the `v0.3.1` tag. The exact commit is authoritative.
 
-Use the source boundary in [`../docs/architecture/overview.md`](../docs/architecture/overview.md) and the policy in [`../docs/architecture/licensing.md`](../docs/architecture/licensing.md). The license, notice, author snapshot, and source inventory gate must exist before source import.
+Use the source boundary in [`../architecture/overview.md`](../architecture/overview.md) and the policy in [`../architecture/licensing.md`](../architecture/licensing.md). The license, notice, author snapshot, and source inventory gate must exist before source import.
 
 ## Phase boundaries
 

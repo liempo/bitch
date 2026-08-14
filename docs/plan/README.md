@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This directory defines the delivery sequence, phase boundaries, dependencies, and public outcomes for BITCH. Approved product and architecture decisions are under [`docs/`](../docs/).
+This directory defines the delivery sequence, phase boundaries, dependencies, and public outcomes for BITCH. Approved product and architecture decisions are in the parent [`docs/`](../) directory.
 
 The repository has no product code yet. Start with Phase 1.
 
@@ -13,10 +13,11 @@ A phase plan does not authorize implementation. It does not contain issue-sized 
 Use these artifacts for delivery:
 
 1. The [BITCH GitHub Project](https://github.com/users/liempo/projects/5) selects the next delivery issue and owns status.
-2. A delivery issue defines one pull-request-sized slice and its acceptance contract.
-3. Git, commits, and merged pull requests record progress and completion.
+2. The delivery issue defines one pull-request-sized slice and its acceptance contract.
+3. The unified plan under [`../plans/`](../plans/) defines executable units and verification for that issue.
+4. Git, commits, and merged pull requests record progress and completion.
 
-Follow [`../AGENTS.md`](../AGENTS.md) for the complete repository workflow.
+Follow [`../../AGENTS.md`](../../AGENTS.md) for the complete queue, plan, review, and delivery workflow.
 
 ## Phase maintenance
 
@@ -43,7 +44,7 @@ Do not retain completed items or create a completed-task archive.
 
 7. [`07-macos-client.md`](07-macos-client.md): adapt Paseo's shared Expo app and Electron desktop shell after the CLI and TUI MVP.
 
-Work can overlap only when phase dependencies permit it. Each delivery still uses one ready leaf issue and one focused pull request.
+Work can overlap only when phase dependencies permit it. Each delivery still uses one ready leaf issue and one focused pull request. Non-mechanical work also uses one executable plan.
 
 ## MVP rule
 

@@ -6,7 +6,7 @@ Make the built CLI and TUI complete clients for approved local-daemon, Pi Conver
 
 ## Dependencies
 
-Complete Phase 3. Use [`../docs/architecture/cli.md`](../docs/architecture/cli.md), [`../docs/product/clients.md`](../docs/product/clients.md), and [`../docs/testing.md`](../docs/testing.md).
+Complete Phase 3. Use [`../architecture/cli.md`](../architecture/cli.md), [`../product/clients.md`](../product/clients.md), and [`../testing.md`](../testing.md).
 
 ## Phase boundaries
 

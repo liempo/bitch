@@ -1,0 +1,173 @@
+name: Delivery slice
+description: Define one independently verifiable change for one focused pull request.
+title: ""
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for an executable leaf issue. The [repository workflow](https://github.com/liempo/bitch/blob/main/AGENTS.md) is authoritative.
+
+        Keep dependency-gated work in `Queue = Backlog`. Code work requires an implementation-ready executable plan unless every mechanical-skip condition applies.
+
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: State one bounded outcome and why it is needed.
+      placeholder: A contributor can...
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope and exact files
+      description: List included behavior, exact repository-relative files, and the public completion boundary.
+      placeholder: |
+        Scope:
+        - ...
+
+        Files:
+        - path/to/file
+
+        Public completion boundary:
+        - ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: exclusions
+    attributes:
+      label: Exclusions
+      description: List explicit non-goals and adjacent work that belongs elsewhere.
+      placeholder: |
+        - ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies and native blockers
+      description: Link each dependency and native blocking issue. Write `None` only when no blocker exists.
+      placeholder: |
+        Blocked by:
+        - #123
+
+        Other dependencies:
+        - ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: plan
+    attributes:
+      label: Executable plan or mechanical-skip proof
+      description: Give the `docs/plans/` path and current metadata, or prove every mechanical-skip condition. Requirements-only work stays in Backlog.
+      placeholder: |
+        Plan: docs/plans/YYYY-MM-DD-NNN-type-name-plan.md
+        artifact_contract: ce-unified-plan/v1
+        artifact_readiness: requirements-only | implementation-ready
+        execution: code
+
+        Or mechanical skip:
+        - Atomic and one commit: ...
+        - No behavioral effect: ...
+        - No technical decision or scope boundary: ...
+        - No traceability need: ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: decisions
+    attributes:
+      label: Governing requirements, decisions, and risks
+      description: Link authoritative requirements and decisions. List open questions, risks, or gaps that can stop work.
+      placeholder: |
+        Requirements:
+        - ...
+
+        Decisions:
+        - ...
+
+        Blocking questions:
+        - None
+
+        Risks or gaps:
+        - ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: scenarios
+    attributes:
+      label: Acceptance scenarios
+      description: Include each applicable scenario class. Test both allowed and denied behavior when authorization applies.
+      placeholder: |
+        Success:
+        - Given..., when..., then...
+
+        Edge:
+        - ...
+
+        Failure:
+        - ...
+
+        Integration:
+        - ...
+
+        Authorization allowed and denied:
+        - Not applicable because...
+    validations:
+      required: true
+
+  - type: textarea
+    id: verification
+    attributes:
+      label: Verification contract
+      description: List exact focused and final commands or manual checks with expected results.
+      placeholder: |
+        Focused:
+        - `command` -> expected result
+
+        Final:
+        - `command` -> expected result
+    validations:
+      required: true
+
+  - type: textarea
+    id: rollback
+    attributes:
+      label: Rollback
+      description: State how to reverse the change and identify irreversible effects.
+      placeholder: Revert... No irreversible effect.
+    validations:
+      required: true
+
+  - type: textarea
+    id: done
+    attributes:
+      label: Definition of done
+      description: State the acceptance, documentation, review, verification, and delivery conditions.
+      placeholder: |
+        - Acceptance scenarios pass.
+        - Authoritative documentation matches implementation.
+        - The owner reviews the diff and reruns final verification.
+        - One linked pull request meets this issue.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: readiness
+    attributes:
+      label: Delivery contract attestation
+      options:
+        - label: This issue is a leaf at `Size = XS` or `Size = S` and fits one focused pull request.
+          required: true
+        - label: I will keep this issue in `Queue = Backlog` until all native blockers are closed.
+          required: true
+        - label: I will not move this issue to `Queue = Ready` until its executable plan or skip proof and current decisions agree.
+          required: true
+        - label: Verification will use no production service, production data, or secret.
+          required: true
