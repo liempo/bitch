@@ -1,80 +1,82 @@
-# Native macOS Client
+# macOS Desktop Client
 
 ## Status
 
-Approved gateway registry and navigation contract for the deferred native client. Implementation is pending. [`deferred-acceptance.md`](deferred-acceptance.md) defines approved registry acceptance.
+Approved deferred product specification. Implementation is pending after the CLI and TUI MVP.
 
-## Product boundary
+## Product direction
 
-The native app is a Gateway-mode client. It does not provide Directory mode and does not read gateway conversations or workspaces from local files.
+The macOS client follows Paseo's graphical product behavior at the pinned baseline.
 
-The app uses the same BITCH HTTP and SSE protocol as the CLI and TUI. It does not import the Pi SDK or depend on a running `bitch` CLI process.
+Use a shared Expo and React Native app, export it for React Native Web, and run that export inside an Electron desktop shell. This replaces the former SwiftUI direction.
 
-## Shared gateway registry
+The shared app foundation should also remain usable by a later iOS client.
 
-The CLI, TUI, and native app use one canonical registry under `BITCH_HOME`. The app does not copy, import, synchronize, or maintain an app-specific gateway registry.
+## Daemon behavior
 
-A registration, alias, endpoint replacement, local backend record, deletion, or master change made by one client is visible to the others. All clients use the same validation, stable gateway identity, atomic mutation, locking, and recovery rules.
+The desktop shell can bundle and manage one local daemon and CLI.
 
-The app can store its last selected gateway ID in app preferences. It does not copy aliases, endpoints, runtime configuration, master state, or gateway resources into those preferences.
+It starts only the daemon that it owns. By default, quitting the desktop app stops that managed daemon so reopening the app performs a complete daemon restart. Phase 7 retains Paseo's setting that lets the desktop-owned daemon remain running after app quit.
 
-## First launch
+A daemon started independently through the CLI is not stopped when the desktop app quits.
 
-When the registry is empty, the app shows gateway setup instead of an empty conversation view. Setup offers the approved local creation and external endpoint registration workflows.
+The app uses the same daemon protocol for local and remote connections.
 
-A successful first registration:
+## Host registry
 
-- verifies or creates the gateway through the normal client control plane.
-- writes the canonical registry.
-- makes the first gateway master.
-- selects it in the app.
-- records its gateway ID as the app's last selection.
+The app supports multiple saved daemon connections.
 
-Canceling setup leaves the registry empty and keeps the setup screen available.
+It registers localhost by default and lets the user remove or re-enable it. Removing localhost stops the daemon only when the desktop shell owns that process. It preserves daemon and filesystem data and leaves an independently started daemon running.
 
-When the registry already contains entries, startup selects in this order:
+One active route targets one daemon ID. An unavailable selected daemon remains selected and disconnected. The app does not fall back to another daemon.
 
-1. The app's last selected gateway ID, if that ID remains registered.
-2. The master gateway, if it remains registered.
-3. No gateway. Show the gateway picker.
+## Workspace canvas
 
-An unavailable selected gateway remains selected and displays its connection failure. The app does not fall back to the master, another gateway, or Directory mode.
+The app copies Paseo's Workspace canvas:
 
-## One-active-gateway navigation
+- Project and Workspace navigation.
+- tabs.
+- user-created splits.
+- Pi Conversation panels.
+- interactive Terminal panels.
+- retained file and diff surfaces when approved for the desktop stage.
 
-The app presents one active gateway at a time. A gateway switcher is always available from the primary window and shows registered aliases, kind, local backend, master state, and connection state.
+Pi remains the only agent runtime. Remove other agent choices from creation, configuration, and presentation.
 
-Selecting another gateway verifies its identity and compatibility before replacing the active connection. A failed selection preserves the prior gateway and view. A successful selection:
+## Conversation behavior
 
-- closes only the old client connection.
-- does not abort persistent gateway work.
-- installs the selected gateway's conversation list.
-- stores the selected gateway ID as the app's last selection.
+The app renders the daemon's normalized timeline and lifecycle state. It uses authoritative tail and pagination reads to repair live delivery.
 
-Selection does not set or clear the master gateway. Master management is a separate explicit action.
+It presents the Pi controls and question permissions that the Paseo-derived Pi adapter exposes. It does not load Pi extension code or attempt to render terminal-only Pi components.
 
-The app never merges conversation lists, workspace lists, completion-viewed state, search results, or actions across gateways. Resource navigation always keeps the gateway ID with the conversation or workspace ID.
+## Terminal behavior
 
-## Registry changes from another client
+The app uses the copied binary Terminal protocol and client runtime.
 
-The app observes canonical registry revisions while it runs.
+It restores screen and scrollback for live Terminals, sends binary input, and follows Paseo's size claim and update behavior.
 
-- An alias change updates the visible label without changing active resource identity.
-- A master change updates its badge but does not switch the active gateway.
-- A compatible endpoint replacement reconnects the active gateway and reconciles its view.
-- Deletion of the active registration closes its connection and shows the gateway picker.
-- Addition or deletion of another registration updates the picker only.
+## Desktop security boundary
 
-Registry deletion retains its approved behavior. It does not contact the gateway, stop work, stop a local container, or change gateway data.
+The Electron renderer remains sandboxed and does not receive unrestricted Node.js access.
 
-## Multiple windows
+A narrow preload bridge exposes approved desktop functions, including managed-daemon lifecycle, native file selection, app links, and window behavior.
 
-All app windows share one active gateway selection. Switching in one window switches every window after target verification. The app does not use one gateway per window.
+The desktop shell validates every renderer request. Browser guest content does not receive the BITCH preload API.
 
-Each window can show a different conversation from that active gateway. Closing a window does not abort gateway work.
+## Packaging
 
-## Failure behavior
+The deferred stage must define and test:
 
-Registry corruption shows registry recovery guidance and does not create an empty replacement or discover gateways from containers. A permission failure shows the selected `BITCH_HOME` path and does not create an app-owned fallback registry.
+- universal or architecture-specific macOS packaging.
+- code signing.
+- notarization.
+- entitlements.
+- daemon and CLI bundling.
+- update behavior.
+- source and license notices.
 
-A connection failure keeps local registry management available. No failure changes master or last selection automatically.
+## Deferred beyond desktop MVP
+
+Do not add BITCH-specific graphical features before the copied Paseo desktop workflows work.
+
+A later revision can change layout, navigation, lifecycle, or platform presentation after behavioral tests protect the baseline.
