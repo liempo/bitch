@@ -34,9 +34,8 @@ Read only the documents needed for the current task:
 
 - [`architecture/overview.md`](architecture/overview.md): copied package boundary, component responsibilities, and version policy.
 - [`architecture/protocol.md`](architecture/protocol.md): WebSocket messages, timeline synchronization, binary Terminal frames, and relay transport.
-- [`architecture/cli.md`](architecture/cli.md): interactive startup, conversation, workspace, gateway, output, and exit-code contracts.
+- [`architecture/cli.md`](architecture/cli.md): retained CLI commands and the BITCH TUI Workspace canvas.
 - [`architecture/pi-capabilities.md`](architecture/pi-capabilities.md): pinned Pi command, CLI, TUI, persistence, and reconnection mapping.
-- [`architecture/tui-gateway.md`](architecture/tui-gateway.md): deferred interactive Gateway Hub and in-place connection switching.
 - [`architecture/macos-client.md`](architecture/macos-client.md): deferred native registry sharing and connection coordination.
 - [`architecture/storage.md`](architecture/storage.md): Pi JSONL, managed metadata, identifiers, locks, and paths.
 - [`architecture/local-runtime.md`](architecture/local-runtime.md): Docker driver, local lifecycle, locks, and recovery.

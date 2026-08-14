@@ -29,7 +29,7 @@ Do not mark completed tasks with `[x]`. Git history records completion.
 
 7. [`07-macos-client.md`](07-macos-client.md): implement the native macOS client only after the CLI and TUI release and explicit activation of that product stage.
 
-Interactive TUI gateway management remains deferred and has no first-release phase. See [`../docs/architecture/tui-gateway.md`](../docs/architecture/tui-gateway.md) and [`../docs/product/deferred-acceptance.md`](../docs/product/deferred-acceptance.md).
+The TUI Workspace canvas is part of the CLI and TUI MVP. See [`../docs/architecture/cli.md`](../docs/architecture/cli.md).
 
 Work can overlap only when phase dependencies permit it. Keep each change as a vertical slice through protocol, server, CLI, tests, and documentation.
 
