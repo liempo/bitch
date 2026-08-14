@@ -89,19 +89,23 @@ When no document fits an implemented component, create a focused document under 
 
 ## Architecture rules
 
-- Keep the Agent Server a thin Pi RPC host.
-- Delegate agent behavior to the pinned Pi SDK.
-- Do not create a BITCH conversation engine or duplicate Pi live state.
-- Keep Pi SDK types inside `packages/pi-runtime`.
-- Keep clients behind the BITCH HTTP and SSE protocol.
-- Keep Pi JSONL as the conversation source of truth.
-- Add BITCH-owned state only for behavior that Pi does not provide.
+- Copy observable behavior from the pinned Paseo source before adding BITCH-specific behavior.
+- Keep the daemon as the host authority for Pi RPC subprocesses, PTYs, Projects, Workspaces, Conversations, and normalized timelines.
+- Delegate agent behavior to the pinned Pi executable through process-backed RPC. Do not embed the Pi SDK.
+- Do not create a second BITCH conversation engine or duplicate Pi live state outside the Paseo-derived adapter and normalized timeline.
+- Keep Pi RPC types inside the daemon's Pi provider adapter.
+- Keep clients behind the BITCH WebSocket daemon protocol.
+- Keep the loaded normalized timeline authoritative for BITCH client synchronization and rendering.
+- Keep Pi JSONL durable and native to Pi for discovery, import, resume, and post-restart history reconstruction.
+- Add BITCH-owned state only for an approved difference from Paseo.
+- Never merge, redirect, replicate, or fall back across daemon IDs.
 
 ## Testing rules
 
-- Test observable behavior through public interfaces.
+- Preserve applicable pinned Paseo tests, including package-internal regression tests.
+- Prove new or changed BITCH behavior through public interfaces.
 - Do not inspect source text, imports, private methods, or internal symbols as proof of behavior.
-- Do not mock `AgentSession` or `AgentSessionRuntime` in integration tests.
-- Use the scripted local model provider for deterministic integration tests.
+- Use a real pinned Pi RPC process with the scripted local model provider for deterministic integration tests.
 - Execute the built CLI as a subprocess for end-to-end tests.
+- Use real PTYs for Terminal integration tests.
 - Treat type checks, lint checks, and generated-file checks as build checks, not behavioral tests.

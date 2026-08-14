@@ -1,55 +1,48 @@
-# Open Planning Gaps
+# Deferred Planning Gaps
 
 ## Purpose
 
-This file groups unresolved questions into decision packets. One primary question should cover all related gap IDs in a packet.
+This file contains questions that do not block the CLI and TUI MVP. The GitHub Project owns any later delivery status.
 
-Remove a gap after its answer is documented under `docs/` and reflected in the applicable phase.
+Do not resolve these packets until Phase 7 starts. When a question is resolved, update the authoritative document and Phase 7 boundary, then remove the resolved question.
 
-## Interview method
+## D01: Desktop window and layout details
 
-Use this sequence when resolving a packet:
+**Question scope:** Select which pinned Paseo multi-window, geometry, menu, deep-link, and panel-layout details BITCH keeps unchanged.
 
-1. Inspect the approved BITCH documents and the pinned Pi behavior.
-2. Ask one decision question that is not only yes or no.
-3. Present practical options with concise benefits and costs.
-4. Recommend one option.
-5. Explain the recommendation.
-6. State which related gap IDs the answer can resolve.
-7. Use the answer to draft all related contracts and workflows in the packet.
-8. Only when the answer leaves a required product choice unresolved, ask one follow-up.
+- What are the first-window and later-window geometry persistence rules?
+- How do new windows and deep links behave?
+- What does panel close do for root and future nested resources?
 
-Do not split a packet into questions about command spelling, schema fields, error codes, or other technical details. Draft those details from the approved product answer and the recommended design.
+## D02: Desktop Pi-control presentation
 
-Do not ask the user to restate standard Pi behavior. Research the pinned Pi documentation and source instead. Ask only about an intentional BITCH difference or a product policy that the approved documents do not define.
+**Question scope:** Place every retained Pi control and permission state in the graphical Conversation panel.
 
-## Deferred decision packets
+- Where do model, thinking, stop, compaction, rewind, and command controls appear?
+- How does the client present pending, failed, interrupted, closed, and archived states?
+- How does it present unsupported terminal-only extension UI?
 
-Do not resolve these macOS packets while the CLI and TUI release is the priority. Revisit them only when the native product stage is explicitly opened.
+## D03: Desktop Workspace recovery
 
-### D04: macOS conversation and Pi-control presentation
+**Question scope:** Define graphical archive, recovery, and destructive-action presentation without adding BITCH-specific lifecycle semantics.
 
-**Question scope:** Choose one conversation-screen model for controls, streaming state, failures, reconnection, and extension interaction.
+- What warnings apply to local Workspace archive?
+- How does the client present managed-worktree archive and recovery?
+- What confirmation applies to Conversation unarchive and deletion?
 
-- [ ] **C04** Map deferred macOS controls in the Pi capability matrix.
-- [ ] **M02** Define the conversation-screen layout.
-- [ ] **M03** Place advanced Pi controls.
-- [ ] **M04** Define running and queued presentation.
-- [ ] **M05** Define viewed and completed-result presentation.
-- [ ] **M06** Define failure presentation.
-- [ ] **M07** Define server-restart presentation.
-- [ ] **M08** Define reconnection presentation.
-- [ ] **M09** Define pending extension-dialog presentation.
+## D04: Desktop verification and distribution
 
-### D05: macOS workspace and destructive-action flows
+**Question scope:** Select supported macOS package variants and release gates.
 
-**Question scope:** Choose the native workspace, Trash, restoration, and permanent-deletion interaction model.
+- Which architecture and minimum macOS version are supported?
+- What are the signing, notarization, update, and rollback gates?
+- How does packaging verify daemon and CLI compatibility?
+- Where do the source offer and `AGPL-3.0-only` notices appear?
 
-- [ ] **M10** Define workspace creation and Trash flows.
-- [ ] **M11** Define permanent-deletion warnings.
+## D05: Shared iOS foundation
 
-### D06: macOS verification
+**Question scope:** Decide how much mobile infrastructure Phase 7 includes before an iOS product stage starts.
 
-**Question scope:** Define the native client test layers and release gates after its behavior is approved.
-
-- [ ] **V09** Define deferred macOS client tests when Phase 7 starts.
+- What is the shared app platform-adapter boundary?
+- Do audio dependencies enter Phase 7 or remain deferred?
+- Which compact Workspace and Terminal views must remain reusable on iOS?
