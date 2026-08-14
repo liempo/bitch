@@ -8,7 +8,7 @@ Make the CLI and TUI the first complete clients for the approved Pi capability b
 
 Complete the Phase 2 core Gateway-mode vertical slice.
 
-Use the approved capability matrix in [`../docs/architecture/pi-capabilities.md`](../docs/architecture/pi-capabilities.md) and API contract in [`../docs/architecture/api.md`](../docs/architecture/api.md).
+Use the approved capability matrix in [`../docs/architecture/pi-capabilities.md`](../docs/architecture/pi-capabilities.md) and daemon contract in [`../docs/architecture/protocol.md`](../docs/architecture/protocol.md).
 
 ## Pending work
 

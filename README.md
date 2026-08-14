@@ -84,7 +84,7 @@ Start with [`docs/README.md`](docs/README.md).
 - [`docs/architecture/overview.md`](docs/architecture/overview.md) defines the fixed technical design.
 - [`docs/architecture/cli.md`](docs/architecture/cli.md) defines the complete CLI contract.
 - [`docs/architecture/pi-capabilities.md`](docs/architecture/pi-capabilities.md) defines pinned Pi compatibility.
-- [`docs/architecture/api.md`](docs/architecture/api.md) defines the HTTP and SSE API.
+- [`docs/architecture/protocol.md`](docs/architecture/protocol.md) defines the Paseo-derived daemon protocol.
 - [`docs/architecture/tui-gateway.md`](docs/architecture/tui-gateway.md) defines the deferred interactive Gateway Hub.
 - [`docs/product/macos.md`](docs/product/macos.md) defines approved native-client behavior.
 - [`docs/product/deferred-acceptance.md`](docs/product/deferred-acceptance.md) defines deferred feature acceptance.

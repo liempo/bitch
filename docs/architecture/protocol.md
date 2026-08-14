@@ -1,249 +1,166 @@
-# Agent Server Protocol
+# Daemon Protocol
 
 ## Status
 
-Approved first-release protocol architecture. [`api.md`](api.md) defines the exact resources, schemas, pagination, events, and ordering.
+Approved MVP technical specification. Implementation is pending.
 
-## Transport
+## Protocol source
 
-[`api.md`](api.md) is the normative `/v1` interface contract.
+BITCH copies and adapts Paseo's WebSocket protocol at the pinned source commit.
 
-Clients use HTTP for commands, metadata, settings, and durable state. They use Server-Sent Events (SSE) for live Pi events.
+The copied `packages/protocol` package is the wire-schema authority. BITCH does not maintain the former HTTP, OpenAPI, SSE, or Problem Details protocol.
 
-The API uses `/v1`. Additive fields and event types can be added within version 1. Breaking contract changes require a new major path.
+## Connection
 
-## Gateway connection context
+One physical WebSocket connects a client route to one daemon.
 
-One HTTP and SSE connection targets one Agent Server. The API does not use a gateway path prefix.
+The client sends a hello envelope with:
 
-In Gateway mode, `/v1/status` reports the stable server-owned `gatewayId`. Clients record this ID when they register an endpoint.
+- client ID.
+- a copied client type (`mobile`, `browser`, `cli`, or `mcp`).
+- protocol version.
+- app version when available.
+- advertised capabilities.
 
-Conversation and workspace IDs are unique only within their gateway. A client qualifies stored cross-gateway references with `gatewayId`. Requests sent to one gateway contain only that gateway's resource ID.
+The BITCH TUI identifies as `cli` in the MVP. Adding a wire-level `tui` type is deferred because it is not required for behavior or authorization.
 
-Machine-readable CLI output and saved client state use structured gateway references:
+The daemon sends server information through a status session message. It includes the stable daemon ID, hostname, version, features, and supported capabilities.
 
-```json
-{
-  "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
-  "conversationId": "pi-session-id"
-}
+A connection targets one daemon. Resource messages do not need a daemon path prefix.
+
+## Message classes
+
+The connection carries:
+
+- top-level hello, ping, pong, and session envelopes.
+- JSON session requests, responses, snapshots, and events.
+- binary terminal frames.
+- binary file-transfer frames only where a retained MVP workflow requires them.
+
+Request and response pairs use `requestId`. A transport response ID correlates one request. It is not a durable retry receipt.
+
+## Conversation synchronization
+
+Live Conversation events provide immediacy. They do not replace authoritative reads.
+
+The daemon commits normalized timeline rows to its runtime timeline with an epoch and sequence positions. Clients fetch projected pages through the copied timeline request. The runtime rows are not durable across daemon restart.
+
+Opening or resuming a Conversation fetches one latest tail page. Older history uses backward pagination.
+
+When a client detects a gap, it fetches forward pages until `hasNewer` is false. A page includes the sequence coverage needed to advance the cursor across projected rows.
+
+A same-epoch response with the same tail is a display no-op. An epoch change, rewind, or true middle gap causes atomic canonical replacement.
+
+Clients must reconcile live rows with fetched source ranges. They must not append a projected full message to an already-rendered live prefix.
+
+## Client replicas
+
+A client cache is a display replica only.
+
+The durable copied cache stores only a truncated display tail and focused Conversation identity. It does not persist cursors, epochs, source ranges, older-history availability, or authority status. The first daemon tail response establishes the current epoch and canonical tail.
+
+Client disconnect destroys connection liveness, not daemon resources.
+
+## Conversation mutations
+
+The daemon serializes provider foreground work according to its Conversation lifecycle. Pi rejects or queues unsupported overlap through the retained Paseo path.
+
+Accepted prompts can carry a client message ID. The daemon records the canonical submitted user row according to Paseo's copied behavior.
+
+BITCH does not add the former command hash, durable receipt, or at-most-once command transaction to the MVP.
+
+## Permissions
+
+Pi RPC dialog requests map into daemon permission requests.
+
+The retained Pi adapter supports question mappings for:
+
+- `select`.
+- `confirm`.
+- `input`.
+- `editor`.
+
+A permission response addresses the daemon request ID. Once resolved, the daemon broadcasts the resulting state.
+
+Unsupported Pi terminal UI does not enter the wire protocol.
+
+## Terminal binary frames
+
+Terminal streaming uses the copied Paseo binary frame format:
+
+```text
+byte 0: opcode
+byte 1: terminal stream slot
+remaining bytes: opcode payload
 ```
 
-A workspace reference replaces `conversationId` with `workspaceId`. A gateway artifact reference uses `gatewayId` and `artifactId`.
+The retained opcodes are:
 
-Logs use separate gateway, conversation, workspace, and artifact ID fields as applicable.
+- output (`0x01`).
+- input (`0x02`).
+- resize (`0x03`).
+- snapshot (`0x04`).
+- restore (`0x05`).
 
-CLI arguments select a gateway with `--gateway` and pass the conversation or workspace ID separately. They do not accept alias-qualified or URI-like composite identifiers. The client verifies the selected gateway ID before it sends the resource ID.
+A Terminal subscription returns a connection-local slot. The client sends input and resize frames through that slot. Output and snapshot frames use the same slot.
 
-Directory mode does not report a durable gateway ID.
+## Terminal restore
 
-## Canonical schemas
+The daemon keeps a headless terminal state for each live PTY.
 
-The internal package `@bitch/protocol` owns canonical TypeBox schemas for:
+On subscription, the daemon sends a current snapshot and then replays output newer than that snapshot revision. Revision filtering prevents duplicate output.
 
-- HTTP requests and responses.
-- command envelopes.
-- SSE events.
-- errors.
+The client can request bounded scrollback and visible-state restore according to the copied protocol.
 
-TypeScript types are inferred from these schemas. The protocol build generates JSON Schema and OpenAPI 3.1 artifacts.
+Terminals do not survive daemon shutdown. Restore applies only while the daemon runtime still owns the PTY.
 
-The repository stores generated artifacts. CI regenerates them and fails when the committed output is stale. This check is a build check, not a behavioral test.
+## Terminal size ownership
 
-When Phase 7 starts, the macOS app will use Apple Swift OpenAPI Generator for HTTP payload models. A small Swift transport will decode SSE event models.
+A resize includes `claim` or `update` intent when the negotiated protocol supports it.
 
-Raw Pi SDK values and objects never cross the protocol boundary.
+- A claim assigns size ownership to that client session.
+- An update applies only for the current owner.
+- A later claim transfers ownership.
+- A claim can transfer ownership even when rows and columns are unchanged.
 
-## Resource and command API
+Input is not subject to this size lease. Multiple attached clients can write.
 
-Durable data uses resource-oriented `/v1` endpoints. This includes conversations, messages, workspaces, and settings.
+## Liveness and backpressure
 
-Pi operations use one typed command endpoint:
+Clients use Paseo's application-level JSON ping and pong behavior. An application socket lease expires after 45 seconds without renewal and is checked every 10 seconds.
 
-```http
-POST /v1/conversations/{conversationId}/commands
-```
+The daemon applies the copied 64 MiB physical-socket outbound high-water mark. A socket that exceeds the limit is terminated without stopping other clients or daemon resources.
 
-Each command contains:
+Normalized tool output uses Paseo's copied content bounds before it enters live or authoritative timeline paths.
 
-- a client-generated `commandId` UUID.
-- a discriminating `type`.
-- a type-specific `payload`.
+Terminal streaming preserves Paseo's coalescing and snapshot catch-up behavior. Output frames are bounded at 256 KiB. A keeping-up direct client continues to receive output. After more than 256 KiB of produced output, a direct client with more than 4 MiB queued can receive a fresh snapshot. A transport with no backpressure signal uses snapshot fallback after that produced-output threshold.
 
-The TypeBox command schema is a discriminated union. The API does not accept untyped RPC parameters.
+## Direct security
 
-A dedicated resource resolves a server-owned pending dialog. The first valid response settles the dialog atomically.
+Loopback is the default listen boundary.
 
-A later response returns HTTP 409 and `dialog_already_resolved`. It also returns `retryable: false` and the conversation and dialog IDs. Invalid responses do not settle the dialog.
+A direct network route can require Paseo password authentication. The password controls access but does not encrypt traffic.
 
-## Pi delegation
+Direct remote use must use a trusted VPN, private TLS, or another operator-secured route. Host-header checks protect browser-facing endpoints from DNS rebinding according to the copied daemon behavior.
 
-The Pi command adapter mirrors the pinned Pi RPC command dispatcher. It must preserve Pi names and behavior where the stable BITCH protocol does not require a transport difference.
+## Relay security
 
-A thin per-conversation gate orders simultaneous client requests before delegation. A data-store command-ID gate serializes reuse checks. Directory mode uses a cross-process lock for that gate.
+Relay use is opt-in.
 
-Neither gate adds agent policy.
+The daemon owns a persistent Curve25519 keypair. Pairing gives the client the daemon public key through a QR code or pairing link.
 
-For a prompt, the gate writes its durable receipt before it invokes Pi. A normal success response waits for Pi's preflight result.
+The copied relay derives a shared key with Curve25519 and encrypts frames with XSalsa20-Poly1305. The relay routes authenticated ciphertext and is not trusted with application plaintext.
 
-A preflight interaction can return `interaction_required` while the receipt remains accepted or running. An accepted prompt continues asynchronously. Steering, follow-up, abort, and dialog responses remain available while Pi runs.
+Text and binary application frame kinds remain compatible with the negotiated relay capability.
 
-## Command retry protection
+## Compatibility
 
-The Agent Server records a durable receipt before it invokes Pi. The receipt includes:
+Retain Paseo's capability negotiation and boundary normalization during the initial import.
 
-- command ID.
-- conversation ID.
-- command type.
-- the lowercase SHA-256 digest of the RFC 8785 canonical validated payload.
+When BITCH changes the copied protocol:
 
-A command ID is unique among retained receipts in one Agent Server data store. A retry must match its conversation, command type, and validated payload hash.
+- prefer additive optional fields.
+- gate a new value or behavior with advertised capabilities when an older peer cannot ignore it.
+- normalize compatibility at protocol boundaries.
 
-A matching retry returns the existing receipt. Any other reuse returns `command_id_conflict`.
-
-Receipt states are:
-
-- `accepted`.
-- `running`.
-- `completed`.
-- `failed`.
-- `interrupted`.
-
-At startup, the server marks receipts left in `accepted` or `running` as `interrupted`. It does not execute them again. The client reconciles through durable conversation state.
-
-This design provides at-most-once command acceptance while its receipt exists. It does not claim exactly-once tool side effects.
-
-Permanent conversation deletion removes its receipts and ends their retry lookup. A client must not reuse an old command ID for new work.
-
-## Error format
-
-HTTP errors use RFC 9457 Problem Details with these BITCH fields:
-
-- stable `code`.
-- `requestId`.
-- `retryable`.
-- relevant typed resource identifiers.
-- validation issues when applicable.
-
-The server maps Pi and Fastify errors into this format. `detail` states what failed and gives the next safe action when one exists.
-
-Errors do not blame the user. They do not expose Pi objects, stack traces, credentials, or internal paths.
-
-An SSE request that fails before stream setup returns the same HTTP problem schema. After setup, a transport failure closes the stream. The client then reconciles.
-
-The first release rejects an HTTP request that contains an `Origin` header. It returns HTTP 403 with code `browser_origin_not_allowed` and `retryable: false`. The server sends no CORS allow headers.
-
-## SSE connection
-
-Each connection starts with a `conversation.snapshot` event. The server registers the subscriber before it creates the snapshot. It queues new events until the snapshot is sent.
-
-Each event envelope contains:
-
-- `streamId`.
-- `sequence`.
-- `conversationId`.
-- `gatewayId` in Gateway mode.
-- `emittedAt`.
-- `type`.
-- typed `data`.
-
-Sequence numbers increase within one stream. Runtime replacement or server restart creates a new stream ID.
-
-The snapshot contains durable state references, current run status, accumulated active response, pending dialogs, and stateful extension UI values.
-
-The server sends SSE heartbeats. Clients reconnect after recoverable connection failures and check server state after network recovery or foreground activation.
-
-## Reconciliation
-
-The server does not persist or replay the transient live event stream. It also keeps no transient replay buffer.
-
-A stream-ID change or sequence gap makes the client reload durable state over HTTP. The new SSE connection supplies a new snapshot.
-
-Pi JSONL remains the source for completed messages and final tool results.
-
-## Status endpoints
-
-`GET /v1/status` returns this canonical shape:
-
-```json
-{
-  "serverVersion": "BITCH_SEMVER",
-  "protocolVersion": { "major": 1, "minor": 0 },
-  "piVersion": "0.83.0",
-  "mode": "gateway",
-  "gatewayId": "550e8400-e29b-41d4-a716-446655440000",
-  "capabilities": [
-    "attachment.image.v1",
-    "config.soul.v1",
-    "conversation.commands.v1",
-    "conversation.events.v1",
-    "conversation.multi-client.v1",
-    "conversation.reconciliation.v1",
-    "conversation.reload.v1",
-    "extension.rpc-ui.v1",
-    "gateway.events.v1",
-    "gateway.global-view-state.v1",
-    "gateway.identity.v1",
-    "gateway.trash.v1",
-    "gateway.workspaces.v1",
-    "pi.rpc.v1",
-    "provider.auth.v1",
-    "session.branching.v1",
-    "session.export-html.v1",
-    "settings.v1",
-    "shell.rpc.v1"
-  ]
-}
-```
-
-`serverVersion` and `piVersion` are exact package versions. `mode` is `directory` or `gateway`.
-
-Gateway mode requires `gatewayId`. Directory mode omits it. The capability list contains unique strings in ascending ASCII order.
-
-Version 1 defines these capability identifiers:
-
-- `attachment.image.v1`.
-- `conversation.commands.v1`.
-- `conversation.events.v1`.
-- `conversation.multi-client.v1`.
-- `conversation.reconciliation.v1`.
-- `conversation.reload.v1`.
-- `extension.rpc-ui.v1`.
-- `pi.rpc.v1`.
-- `provider.auth.v1`.
-- `session.branching.v1`.
-- `session.export-html.v1`.
-- `settings.v1`.
-- `shell.rpc.v1`.
-
-Directory mode also reports:
-
-- `directory.fixed-cwd.v1`.
-- `directory.project-trust.v1`.
-
-Gateway mode also reports:
-
-- `config.soul.v1`.
-- `gateway.events.v1`.
-- `gateway.global-view-state.v1`.
-- `gateway.identity.v1`.
-- `gateway.trash.v1`.
-- `gateway.workspaces.v1`.
-
-An additive version 1 release can add capability identifiers. Clients ignore unknown identifiers and require each identifier needed by their requested workflow.
-
-A client must not silently replace a recorded gateway identity when an endpoint reports another ID. It reports `gateway_identity_mismatch` with the recorded and reported gateway IDs and does not change the registry.
-
-A client rejects a gateway-scoped reference when its gateway ID differs from the connected gateway. It reports `gateway_scope_mismatch` with both gateway IDs. It does not send the resource request.
-
-The correct gateway returns `resource_not_found` for an unknown unscoped resource ID. The response does not disclose another gateway.
-
-These identity and scope errors are not retryable until the user changes the endpoint, selection, or resource reference.
-
-Clients require the same protocol major version and each capability needed for the requested workflow. They reject these conditions:
-
-- the wrong server mode.
-- an incompatible protocol major version.
-- a missing required capability.
-
-Clients accept compatible minor versions and unknown additive capabilities. They do not require exact BITCH or Pi version equality.
+BITCH does not promise public protocol stability for the personal MVP. Behavioral tests still pin the copied baseline so later pruning does not silently change it.
