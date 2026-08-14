@@ -2,432 +2,310 @@
 
 ## Purpose
 
-This glossary defines the terms used in BITCH product, architecture, and planning documents. Use these terms consistently in code, documentation, and interface text.
+Use these terms consistently in product, architecture, plan, code, and interface text.
 
 ## Product terms
 
 ### BITCH
 
-**Barely Intelligent Task & Context Handler.** Always write the product name as `BITCH`.
+**Barely Intelligent Task & Context Handler.** Write the product name as `BITCH`.
 
-### BITCH Agent Server
+### MVP
 
-The service that owns Pi runtimes, sessions, persistence, and live agent work. Use **Agent Server** after the first reference.
+The first personal usable BITCH delivery. It copies the pinned Paseo daemon baseline, supports only Pi, and includes CLI and TUI clients.
 
-The executable can use the code-style name `bitch-agent-server`.
+### Paseo-native
 
-### Agent Server endpoint
+Observable behavior copied from Paseo source with package version 0.3.1 at the pinned commit. The pinned commit is later than the `v0.3.1` tag.
 
-The URL and port used to connect to one Agent Server.
+A Paseo-native behavior can use BITCH names and Pi-only provider filtering without becoming a BITCH-specific improvement.
 
-```text
-http://agent-host:PORT
-```
+### BITCH-specific improvement
 
-An endpoint is a connection location. It is not a gateway identity.
+Behavior that the pinned Paseo baseline does not provide or that changes its observable contract.
 
-### CLI
+Defer these improvements until the MVP works unless an approved document explicitly includes one.
 
-The `bitch` command-line client. It is the first complete Agent Server client and the reference client for API behavior.
+## Host terms
 
-Plain `bitch` uses Directory mode. `bitch --gateway` uses the master gateway. `bitch --gateway NAME` uses a named gateway.
+### daemon
 
-### TUI
+The host-native BITCH server process. It owns Pi RPC subprocesses, PTYs, Projects, Workspaces, Conversations, timelines, and host filesystem access.
 
-The interactive terminal interface opened by the CLI. BITCH vendors the required integration from the pinned Pi TUI. It preserves the approved Pi-compatible behavior and layout with BITCH branding.
+Use **daemon**, not **Gateway**, **Agent Server**, or **backend**, for this component.
 
-The first-release TUI uses the mode and gateway selected at startup. It does not manage the gateway registry or switch gateways.
+### local daemon
 
-### macOS app
+The daemon on the client's own machine. A client registers it on `localhost` by default and can manage its lifecycle.
 
-The deferred native graphical BITCH client. It is not part of the first release.
+### remote daemon
 
-It shares the canonical gateway registry and presents one active gateway across its windows.
+A daemon on another machine. The client reaches it through a direct or encrypted relay route.
 
-## Operating modes
+### daemon ID
 
-### Directory mode
+The stable server-owned identity for one daemon home. It survives route and process changes.
 
-The default BITCH mode. It starts a temporary Agent Server with one fixed current working directory (`cwd`) and no workspace management.
+### daemon route
 
-The CLI identity-mounts the current host directory into a temporary Docker container. The container stops when its client exits.
+One direct, IPC, or relay connection path to a daemon.
 
-Directory-mode invocations share per-user Pi configuration and session storage. They do not share this storage with gateways.
+A route is not daemon identity. Multiple routes can refer to one daemon ID.
 
-### Directory ownership lease
+### daemon registry
 
-The temporary Agent Server lease renewed by its owning CLI. Lease expiry stops Directory-mode work after client death.
+The client-owned set of saved daemon identities, routes, labels, and current selection.
 
-### Gateway mode
+It contains no authoritative Conversation or Workspace state.
 
-The mode used when the CLI receives `--gateway`.
+### selected daemon
 
-Gateway mode connects to one persistent local or remote gateway. A gateway owns managed workspaces, conversations, configuration, credentials, Trash, `SOUL.md`, and runtime state.
+The one daemon targeted by a client action or active client view.
+
+If it is unavailable, it remains selected. BITCH does not select a different daemon automatically.
+
+### managed localhost daemon
+
+The local daemon whose lifecycle a client installation manages.
+
+Removing localhost disables that management. It stops the daemon only when that client owns the managed process. It preserves durable data and leaves an independently started daemon running.
+
+## Resource terms
+
+### Project
+
+A stable daemon record for one exact lexically normalized root directory.
+
+A Project contains Workspaces.
+
+### Workspace
+
+The primary work container. It belongs to one Project, has one concrete `cwd`, and contains Conversations, Terminals, and client panels.
+
+### local Workspace
+
+A Workspace that uses an existing directory without creating isolation.
+
+### managed-worktree Workspace
+
+A Workspace backed by a Git worktree that BITCH owns and can remove after its final active reference is archived.
+
+### Workspace ID
+
+An opaque daemon-local identifier. Never parse it as a path.
 
 ### current working directory (`cwd`)
 
-The directory in which Pi reads files and runs tools for a session.
+The daemon-host directory in which Pi or a Terminal runs.
 
-In Directory mode, `cwd` is the identity-mounted client directory. In Gateway mode, it is the selected gateway workspace path.
+A remote Workspace `cwd` is a path on the remote daemon host, not on the client.
 
-### identity mount
+### panel
 
-A container bind mount that uses the same absolute path on the host and inside the container.
+A client view inside a Workspace canvas. Conversation and Terminal panels can appear as tabs or split panes.
 
-```text
-Host:      /Users/alice/project
-Container: /Users/alice/project
-```
+### Workspace canvas
 
-Identity mounts keep paths in tool output, diagnostics, and Pi sessions consistent.
+The tab-and-split client presentation for one Workspace.
 
-## Gateway terms
-
-### gateway
-
-A persistent Agent Server with managed workspaces and an independent `/data` root.
-
-A gateway can be local or remote. Gateways do not synchronize, delegate, move, or redirect work automatically.
-
-### local gateway
-
-A gateway whose container lifecycle BITCH manages on the client host.
-
-The first release uses Docker. A local gateway starts on demand when selected and continues after all clients disconnect.
-
-BITCH can manage multiple local gateways. Each one has a separate data root and runtime configuration.
-
-### remote gateway
-
-A gateway managed outside the local BITCH installation and reached through a registered endpoint.
-
-BITCH does not manage the remote host, container runtime, or deployment lifecycle.
-
-### gateway ID
-
-A stable server-owned identifier for one gateway.
-
-The ID survives endpoint, alias, port, and container changes. It scopes conversation and workspace IDs.
-
-### gateway alias
-
-A user-facing name stored in the client gateway registry.
-
-An alias selects a gateway with `bitch --gateway NAME`. Changing an alias does not change the gateway ID.
-
-### master gateway
-
-The gateway selected when the user runs `bitch --gateway` without a name.
-
-Master is a client-side registry role stored by gateway ID. It is not a reserved alias and gives one gateway no authority over another.
-
-The first registered gateway becomes master. The registry can later have no master.
-
-### gateway registry
-
-The client-owned store of registered gateways, aliases, endpoints, local lifecycle references, runtime configurations, and the master gateway reference.
-
-The CLI, TUI, and deferred macOS app share one canonical registry under `BITCH_HOME`. The registry does not store conversation content or workspace metadata.
-
-### gateway reference
-
-A client-side composite identity for a gateway-owned resource.
-
-```text
-(gatewayId, conversationId)
-(gatewayId, workspaceId)
-```
-
-The Agent Server API does not add a gateway path prefix because one connection already targets one gateway.
-
-### `--gateway`
-
-The CLI option that selects Gateway mode.
-
-Without a value, it selects the master gateway. With a value, it selects the named gateway.
-
-A missing or unavailable selection returns an error. BITCH does not fall back automatically.
-
-### `bitch gateway`
-
-The non-interactive CLI command group for gateway registration, configuration, lifecycle, and deletion.
-
-Commands in this group do not prompt on stdin. It is the only first-release gateway management interface.
-
-### gateway home
-
-The first-release TUI screen that lists one selected gateway's conversations by workspace. Opening the gateway home does not mark a conversation viewed.
-
-Do not call this screen the Gateway Hub.
-
-### `/gateway`
-
-The approved deferred interactive Gateway Hub command. It is not part of the first release.
-
-It remains client-side, uses pinned Pi TUI components, manages gateways, and can replace the active connection. It does not run as an Agent Server extension.
-
-### container runtime
-
-The system that starts a local BITCH container.
-
-Docker is the only first-release runtime. Apple `container` support is deferred.
-
-### backend
-
-The user-facing container-runtime choice for local gateway creation. The values are `docker` and `apple`.
-
-One gateway keeps its creation-time backend. Apple creation makes a new gateway instead of converting a Docker gateway.
-
-### runtime driver
-
-The BITCH adapter for one container backend. It handles image, container, mount, port, and lifecycle operations.
-
-### runtime configuration
-
-The client-owned settings that record and configure a local gateway's runtime driver.
-
-The driver and data root are immutable after creation. Do not call a gateway registration a runtime profile.
-
-## Client architecture
-
-### AgentClient
-
-The client interface consumed by the CLI and TUI. It represents Agent Server operations without exposing HTTP or SSE details.
-
-### AgentServerClient
-
-The HTTP and SSE implementation of `AgentClient`.
-
-The CLI and TUI use `AgentServerClient`. They do not create or import Pi `AgentSession` objects directly.
-
-### AgentServerConnection
-
-An active connection to one Agent Server endpoint.
+Paseo provides this behavior in its graphical app. BITCH implements it in the TUI.
 
 ## Conversation terms
 
-### conversation
+### Conversation
 
-The user-facing term for an exchange with Pi. Each conversation uses one Pi session.
+A BITCH-managed Pi chat resource. It has one BITCH identity, one Workspace, one live normalized timeline when loaded, and one native Pi persistence handle.
 
-### session
+Use **Conversation** in BITCH user-facing text.
 
-The durable Pi record behind a conversation. Pi stores session content as JSONL.
+### Pi session
 
-Use **conversation** in user-facing interface text. Use **session** for Pi storage, protocol, and runtime concepts.
+The native Pi JSONL conversation used for Pi history, import, and resume.
 
-### conversation ID
+A Pi session ID is not necessarily the BITCH Conversation ID.
 
-The `id` in the Pi JSONL session header.
+### Pi RPC subprocess
 
-The ID is unique within its gateway or Directory-mode data store. A cross-gateway client reference also includes the gateway ID.
+The `pi --mode rpc` process owned by a live Conversation.
 
-### Pi JSONL
+Daemon shutdown ends the subprocess. A later operation can resume the Pi session in a new subprocess.
 
-Pi's durable session format. It is the source of truth for completed messages, tool calls, and final tool results.
+### normalized timeline
 
-Pi JSONL does not contain every transient streaming or progress event.
+The daemon-owned, Paseo-derived sequence of projected Conversation items used by BITCH clients.
 
-### command receipt
+It is authoritative for client synchronization, pagination, and rendering while the Conversation is loaded. The pinned baseline reconstructs it from Pi history after daemon restart.
 
-The durable BITCH record for one accepted conversation command. It records command identity, payload hash, state, result, and failure information.
+### timeline row
 
-A receipt prevents duplicate command acceptance. It does not guarantee exactly-once tool side effects.
+One runtime daemon source event with epoch and sequence coverage. Timeline rows are runtime-only in the MVP.
 
-### lifecycle operation record
+Projection can merge rows into one display item without losing source coverage.
 
-The durable client record for one managed local gateway mutation. Its operation ID is a UUID v4 and is not a conversation command ID.
+### live timeline
 
-### foreground view
+Immediate WebSocket delivery of new timeline events.
 
-A Gateway-mode TUI view that visibly shows one conversation. Its foreground SSE subscription marks that conversation viewed.
+Live delivery is not a substitute for authoritative timeline reads.
 
-Read-only requests and background subscriptions do not create a foreground view.
+### native Pi handle
 
-### Completed since last viewed
+Provider-private data used to resume a Pi session. For Pi, this includes the JSONL session path.
 
-The Gateway-mode state for a successful completion that no foreground client viewed. An explicit foreground view or `mark-viewed` command clears it globally.
+### Conversation archive
 
-### live session
+Paseo's soft-delete lifecycle. It hides the Conversation and closes its live Pi process while preserving durable records and history.
 
-A session with an in-memory Pi `AgentSession` owned by the Agent Server.
+### question permission
 
-### released session
+The normalized daemon request created from a Pi extension `select`, `confirm`, `input`, or `editor` dialog.
 
-A session whose in-memory `AgentSession` was released after five idle minutes. The Agent Server can restore it from Pi JSONL.
+## Terminal terms
 
-### read-only session
+### Terminal
 
-A session that can display history but cannot accept prompts or run tools. Sessions with missing or permanently deleted workspaces are read-only.
+A daemon-owned interactive PTY in one Workspace.
 
-## Workspace terms
+A Terminal is not Pi's `!` command, the model's `bash` tool, or a Pi TUI process.
 
-### workspace
+### Terminal snapshot
 
-A directory managed by one gateway. A workspace can contain one project, multiple projects, or ordinary files.
+A daemon-produced screen and bounded scrollback state used when a client subscribes or catches up.
 
-Do not call the fixed `cwd` in Directory mode a workspace.
+### terminal stream slot
 
-### default workspace
+A connection-local byte used to identify one subscribed Terminal in binary frames.
 
-The gateway workspace at `/data/workspaces/default`. A new gateway conversation uses it when the user does not select another workspace.
+### terminal size claimant
 
-The default workspace cannot move to Trash.
+The client session that currently owns PTY resize updates for one Terminal.
 
-### workspace display name
+A claim transfers ownership. A non-owner update is ignored. This ownership does not restrict input.
 
-The user-visible workspace name. Changing it does not rename or move the workspace directory.
+### terminal writer lease
 
-### workspace ID
+A proposed single-writer restriction. The MVP does not use one because Paseo permits multiple writers.
 
-A stable BITCH identifier that binds sessions to a workspace inside one gateway. It does not change when the workspace moves or its display name changes.
-
-### workspace tombstone
-
-The minimal metadata retained after permanent workspace deletion. It preserves the workspace name and session association for read-only session history.
-
-### project-local resources
-
-Pi resources discovered from a working directory:
-
-- `.pi/extensions/`.
-- `.pi/skills/`.
-- `.pi/prompts/`.
-- `.pi/settings.json`.
-- `.agents/skills/`.
-- `AGENTS.md` files.
-
-Directory mode copies Pi's project-trust behavior and supports `/trust`. Gateway mode treats every workspace as trusted and does not show `/trust`.
-
-## Storage terms
-
-### `/data`
-
-The persistent data root used by one gateway.
-
-```text
-/data/
-├── config/
-├── sessions/
-├── workspaces/
-├── trash/
-├── artifacts/
-├── state/
-└── secrets/
-```
-
-Each gateway has an independent `/data` root. Temporary process state, locks, and sockets use `/run/bitch`.
-
-### `BITCH_HOME`
-
-The per-user host root for BITCH client state, Directory-mode state, and local gateway data.
-
-The environment variable `BITCH_HOME` overrides the default root.
-
-### Workspace Trash
-
-The Gateway-mode area under `/data/trash/workspaces`. A trashed workspace hides its bound sessions from normal views.
-
-### Session Trash
-
-The area under `/data/trash/sessions` and the corresponding interface view.
-
-Session Trash includes:
-
-- individually trashed sessions.
-- sessions inherited from a trashed workspace.
-- read-only sessions retained after permanent workspace deletion.
-
-### Trash timestamp
-
-The nullable `trashedAt` catalog and protocol field for a workspace or session. A null value means the item is active.
-
-A session appears in Session Trash when its own Trash timestamp is set or its workspace is trashed.
-
-## Pi integration terms
+## Pi terms
 
 ### Pi
 
-The agent runtime used internally by BITCH. BITCH does not reimplement Pi's model, tool, extension, skill, compaction, retry, or session logic.
+The only supported BITCH agent runtime.
 
-### AgentSession
-
-Pi's in-memory SDK object for one live session. Only the Agent Server owns `AgentSession` objects.
-
-### runtime adapter
-
-The thin BITCH-owned layer around Pi's SDK. It maps BITCH commands and events to pinned Pi RPC behavior without reimplementing agent logic.
+Pi can use multiple model providers. A Pi model provider is not a separate BITCH agent runtime.
 
 ### Pi extension
 
-A trusted TypeScript module loaded by Pi's `DefaultResourceLoader` on the Agent Server.
+Trusted code loaded by the Pi subprocess through standard Pi discovery.
 
-Extensions can add tools, hooks, commands, and supported UI interactions. Terminal-only extension behavior cannot be assumed to cross an RPC client boundary.
+Clients do not load Pi extensions.
 
-### Pi TUI component
+### Pi integration extension
 
-A component from the pinned `@earendil-works/pi-tui` package. BITCH uses these components for TUI behavior instead of creating a separate component system.
+The small Paseo-derived extension injected into Pi for stable entry capture, submitted-message identity, and tree navigation.
 
-### Pi RPC extension UI boundary
+### transferable Pi UI
 
-The extension UI behavior supported by the pinned Pi RPC mode. Dialogs and supported fire-and-forget requests cross the protocol. Terminal component factories and renderer functions do not.
+Pi extension interaction that the Paseo adapter can map into daemon protocol data.
 
-### export artifact
+The MVP transfers question dialogs. Terminal components and render functions are not transferable.
 
-A server-owned HTML export associated with one conversation. Gateway mode keeps export artifacts until explicit deletion or permanent conversation deletion.
+### terminal-only Pi UI
 
-A client-downloaded copy is outside BITCH control.
+Pi extension components, custom renderers, editors, overlays, shortcuts, themes, headers, footers, and raw terminal input that require Pi's native TUI.
 
-### `SOUL.md`
+This behavior is deferred.
 
-The identity document owned independently by Directory mode and each gateway.
+## Protocol terms
 
-The user can seed a missing gateway file once from another registered gateway or the BITCH default. BITCH does not merge or automatically synchronize `SOUL.md`.
+### daemon protocol
 
-## Communication terms
+The Paseo-derived WebSocket protocol used by every BITCH client.
 
-### HTTP
+### direct route
 
-The protocol used for Agent Server commands, queries, metadata, and durable state.
+A client connection directly to a daemon TCP or IPC listener.
 
-### Server-Sent Events (`SSE`)
+### relay route
 
-The server-to-client stream used for live agent events. Commands and dialog responses use HTTP rather than SSE.
+A connection through the Paseo-derived relay using authenticated end-to-end encryption.
 
-### gateway activity stream
+### pairing offer
 
-The Gateway-mode SSE stream that carries conversation and workspace summaries for one selected gateway. It does not carry conversation content.
+A QR code or link that carries the daemon identity, relay endpoint, and daemon public key needed to create a trusted relay route.
 
-### Tailnet
+Treat it as a credential.
 
-The private Tailscale network that provides the first-release remote access boundary. The first release does not use API tokens or application-level authentication.
+### client replica
+
+A non-authoritative client display cache for daemon snapshots and timeline items.
+
+### request ID
+
+A protocol correlation value for one request and response. It is not a durable command receipt.
+
+## Storage terms
+
+### `BITCH_HOME`
+
+The planned branded daemon data root selected by the environment variable of the same name.
+
+The initial Paseo source import can retain `PASEO_HOME` and `~/.paseo` until a tested migration introduces `BITCH_HOME`. Client registry and display cache files remain client-owned state outside daemon authority.
+
+### Pi agent directory
+
+Pi's standard configuration and session root, normally `~/.pi/agent`.
+
+### runtime-only
+
+State that ends with the daemon process. PTYs, terminal scrollback, and normalized timeline rows are runtime-only in the MVP.
+
+### authoritative
+
+The source a component must use to repair or decide state.
+
+The loaded daemon timeline is authoritative for BITCH clients. Pi JSONL is the durable authority for Pi and for native discovery, import, resume, and post-restart timeline reconstruction.
+
+## Deferred client terms
+
+### graphical app
+
+The deferred shared Expo and React Native application inspired by Paseo's app package.
+
+### desktop shell
+
+The deferred Electron wrapper around the graphical app. It can bundle and manage a local daemon and CLI.
+
+### macOS desktop app
+
+The deferred BITCH graphical client for macOS. It uses the approved shared Expo, React Native Web, and Electron architecture. Do not call it a native SwiftUI app.
 
 ## Terms to avoid
 
-### single mode
+### Directory mode
 
-Use **Directory mode**.
+Removed. Use a local daemon and local Workspace.
 
-### managed mode
+### Gateway mode
 
-Use **Gateway mode**.
+Removed. Use a selected daemon.
 
-### `--server`
+### gateway
 
-The first release does not provide this option. Use a registered gateway and `--gateway`.
+Removed as a product object. Use **daemon**.
 
-### backend for a client connection
+### master gateway
 
-Do not use **backend** for the client connection layer. Use `AgentClient`, `AgentServerClient`, or **Agent Server** as appropriate.
+Removed. Use **selected daemon** or an explicit saved daemon.
 
-### profile
+### Agent Server
 
-Do not use **profile** for a gateway registration or endpoint. Use **gateway alias**, **gateway registry entry**, or **runtime configuration**.
+Do not use for the revised runtime. Use **daemon**.
 
-### instance
+### agent provider
 
-Avoid **instance** when referring to a gateway or endpoint. Use **local gateway**, **remote gateway**, or **Agent Server connection**.
+Avoid this phrase when it can confuse agent runtimes with Pi model providers. Say **Pi runtime** or **Pi model provider**.
 
-### Local mode
+### fallback daemon
 
-Avoid this unqualified term. Use **Directory mode**, **local gateway**, or **deferred macOS app** as appropriate.
+BITCH has no fallback execution. A route can reconnect to the same daemon ID, but work never moves to another daemon automatically.
