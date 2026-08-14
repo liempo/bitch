@@ -6,7 +6,7 @@ This directory contains the approved product and technical specification for BIT
 
 The repository is in planning and pre-alpha status. The MVP copies Paseo's daemon behavior, limits agent execution to Pi, and delivers CLI and TUI clients. Graphical clients are deferred.
 
-A documented requirement is not proof that code implements it. See [`../plan/README.md`](../plan/README.md) for the program and phase sequence.
+A documented requirement is not proof that code implements it. See [`plan/README.md`](plan/README.md) for the program and phase sequence.
 
 ## Normative references
 
@@ -25,9 +25,21 @@ Before a change:
 3. Read [`architecture/overview.md`](architecture/overview.md).
 4. Read the applicable architecture or operations document.
 5. Read [`testing.md`](testing.md) for behavior changes.
-6. Read the active phase under [`../plan/`](../plan/).
+6. Read the active phase under [`plan/`](plan/).
 7. Read the selected delivery issue and its GitHub Project item.
-8. Use [`glossary.md`](glossary.md) for required terms.
+8. Read the issue's executable plan under [`plans/`](plans/) when the plan gate applies.
+9. Use [`glossary.md`](glossary.md) for required terms.
+
+## Artifact authority
+
+- Documents under [`product/`](product/) own product requirements and user-visible rules.
+- Documents under [`architecture/`](architecture/) and [`operations.md`](operations.md) own technical and operational contracts.
+- [`plan/`](plan/) owns program and phase sequence, boundaries, dependencies, and outcomes.
+- A GitHub delivery issue owns one queued slice, acceptance criteria, dependencies, rollback, and pull-request boundary. Use the [`delivery.yml`](../.github/ISSUE_TEMPLATE/delivery.yml) issue form.
+- [`plans/`](plans/) contains one executable plan for each non-mechanical delivery issue.
+- The [BITCH GitHub Project](https://github.com/users/liempo/projects/5), Git, commits, and pull requests own execution state. Use the [pull-request template](../.github/PULL_REQUEST_TEMPLATE.md) for delivery evidence.
+
+[`../AGENTS.md`](../AGENTS.md) defines the normative delivery workflow. [`.github/EXECUTABLE_PLAN_TEMPLATE.md`](../.github/EXECUTABLE_PLAN_TEMPLATE.md) is the manual fallback when `ce-plan` is unavailable.
 
 ## Product specification
 
@@ -55,6 +67,8 @@ Before a change:
 
 ## Planning documents
 
-The [`../plan/`](../plan/) directory contains program and phase plans. These plans define sequence and pending outcomes. They do not authorize implementation or record progress.
+The [`plan/`](plan/) directory contains program and phase plans. These plans do not authorize implementation or record progress.
 
-Follow [`../AGENTS.md`](../AGENTS.md) for the repository delivery workflow.
+The [`plans/`](plans/) directory contains Compound Engineering unified plans for individual delivery issues. A requirements-only plan does not authorize code work.
+
+Follow [`../AGENTS.md`](../AGENTS.md) for queue, plan, execution, review, and completion gates.

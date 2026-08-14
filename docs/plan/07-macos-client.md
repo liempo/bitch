@@ -16,7 +16,7 @@ Do not create the former SwiftUI project. Keep the shared app suitable for a lat
 
 ## Dependencies
 
-Complete Phase 6. Use [`../docs/product/macos.md`](../docs/product/macos.md), [`../docs/architecture/macos-client.md`](../docs/architecture/macos-client.md), and [`../docs/product/deferred-acceptance.md`](../docs/product/deferred-acceptance.md). Resolve only applicable deferred questions in [`gaps.md`](gaps.md).
+Complete Phase 6. Use [`../product/macos.md`](../product/macos.md), [`../architecture/macos-client.md`](../architecture/macos-client.md), and [`../product/deferred-acceptance.md`](../product/deferred-acceptance.md). Resolve only applicable deferred questions in [`gaps.md`](gaps.md).
 
 ## Phase boundaries
 

@@ -6,7 +6,7 @@ Produce a recoverable personal CLI and TUI MVP for macOS on Apple silicon with l
 
 ## Dependencies
 
-Complete Phases 1 through 5 and every workflow in [`../docs/product/acceptance.md`](../docs/product/acceptance.md). Use [`../docs/testing.md`](../docs/testing.md) and [`../docs/operations.md`](../docs/operations.md).
+Complete Phases 1 through 5 and every workflow in [`../product/acceptance.md`](../product/acceptance.md). Use [`../testing.md`](../testing.md) and [`../operations.md`](../operations.md).
 
 ## Phase boundaries
 

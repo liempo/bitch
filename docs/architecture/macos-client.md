@@ -84,7 +84,7 @@ The shared host runtime manages saved daemon connections and per-host replicas. 
 
 BITCH retains Paseo's multi-window foundation. Each window shows the full daemon and Project navigation. A pending-open request targets one window without transferring Project ownership.
 
-Exact window geometry, menu, and deep-link presentation remain Phase 7 questions in [`../../plan/gaps.md`](../../plan/gaps.md).
+Exact window geometry, menu, and deep-link presentation remain Phase 7 questions in [`../plan/gaps.md`](../plan/gaps.md).
 
 ## Build and release
 

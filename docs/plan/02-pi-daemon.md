@@ -6,7 +6,7 @@ Run one durable Pi Conversation through the copied daemon and built BITCH CLI wh
 
 ## Dependencies
 
-Complete Phase 1. Use [`../docs/architecture/pi-capabilities.md`](../docs/architecture/pi-capabilities.md), [`../docs/product/conversations.md`](../docs/product/conversations.md), and [`../docs/testing.md`](../docs/testing.md).
+Complete Phase 1. Use [`../architecture/pi-capabilities.md`](../architecture/pi-capabilities.md), [`../product/conversations.md`](../product/conversations.md), and [`../testing.md`](../testing.md).
 
 ## Phase boundaries
 
