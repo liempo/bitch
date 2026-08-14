@@ -2,146 +2,155 @@
 
 ## Status
 
-Approved first-release product specification. Implementation is pending.
+Approved MVP product specification. Implementation is pending.
 
 ## Goal
 
-BITCH provides command-line and terminal clients for one self-hosted user. The user can work through temporary directory-bound Agent Servers and multiple persistent gateways.
+BITCH gives one self-hosted user a terminal interface for Pi conversations and interactive shell terminals on local or remote machines.
 
-The first release supports these primary workflows:
+BITCH follows the observable behavior of Paseo source with package version 0.3.1 at upstream commit [`163e7d1`](https://github.com/getpaseo/paseo/tree/163e7d1cc421cdfe4de67b971ff6cea4b51eb0ed). The exact commit is authoritative. BITCH removes user-visible support for non-Pi agent runtimes. BITCH-specific improvements are deferred until the Paseo-native MVP works.
 
-1. Run BITCH against the current directory without gateway configuration.
-2. Connect the CLI or TUI to a selected local or remote gateway.
-3. Disconnect while gateway work continues.
-4. Reconnect and restore the current or completed conversation state.
+## MVP workflows
 
-The first release does not include the native macOS app.
+The MVP supports these workflows:
 
-## Operating modes
+1. Start or resume Pi work in a Workspace on an explicitly selected local or remote daemon.
+2. Disconnect a client without stopping daemon-owned Pi work or terminals.
+3. Reconnect and repair client state from daemon snapshots and authoritative timeline reads.
+4. Open or reattach an interactive terminal beside a Pi conversation.
+5. Select another registered daemon without moving, merging, or redirecting work.
 
-**Directory mode** is the default. It starts a temporary Agent Server for one fixed current working directory (`cwd`). It has no workspace registry and stops when the client exits.
+The MVP does not include the graphical desktop, mobile, or browser clients.
 
-**Gateway mode** requires `--gateway`. It connects to a persistent Agent Server with managed workspaces and conversations.
+## Daemon model
 
-A gateway can be local or remote. BITCH can register multiple gateways, but each client invocation targets only one gateway.
+The BITCH daemon replaces the former Directory mode and Gateway mode.
 
-## Included behavior
+Each client installation registers a removable local daemon on `localhost` by default. A client can also register multiple remote daemons. One client action targets one explicitly selected daemon.
 
-The first release includes:
+Removing localhost disables built-in management. It stops that daemon only when a managed graphical client owns the local process. It does not stop an independently CLI-started daemon.
 
-- the BITCH Agent Server.
-- a reference CLI with human-readable, JSON, and JSONL output.
-- an interactive TUI based on the pinned Pi TUI.
-- Directory mode through Docker.
-- a non-interactive CLI command group for gateway management.
-- multiple registered local and remote gateways.
-- persistent local gateways managed through Docker.
-- externally managed remote gateways.
-- stable gateway identities and gateway-scoped client resource references.
-- separate persistent conversations.
-- a shared default gateway workspace and an optional workspace picker.
-- concurrent work in different conversations.
-- behavior equivalent to every command type in the pinned Pi RPC protocol, as mapped in [`../architecture/pi-capabilities.md`](../architecture/pi-capabilities.md).
-- server-configured model and thinking-level selection.
-- streaming assistant and tool activity.
-- extension dialogs and fire-and-forget UI supported by the pinned Pi RPC protocol.
-- Pi-compatible extension tools, hooks, and commands.
-- Pi-compatible image attachments in both modes.
-- reconnection to active gateway conversations.
-- restoration from Pi JSONL sessions.
-- inline diffs for the pinned Pi `edit` tool.
-- text input.
+A daemon owns its host resources:
 
-The TUI uses the pinned Pi extension and TUI systems. BITCH does not define a second general extension framework.
+- Pi RPC subprocesses.
+- interactive PTYs.
+- Projects and Workspaces.
+- live normalized conversation timelines.
+- daemon metadata and runtime state.
+- access to the host filesystem.
 
-## Pi capability boundary
+A client observes and controls daemon-owned resources. A client does not own live work.
 
-BITCH supports Pi-compatible direct `!` shell commands and RPC bash behavior in both modes. A separate interactive PTY terminal is outside the first release.
+If the selected daemon is unavailable, it stays selected and appears disconnected. BITCH does not run the action on the local daemon or another remote daemon.
 
-The TUI supports Pi-compatible `/login` and `/logout` and Pi's multiple-provider authentication model. Directory mode and each gateway persist their own provider credentials.
+## Pi boundary
 
-Image attachments are included. General non-image file attachments are not included.
+Pi is the only supported agent runtime. Each live conversation uses one daemon-managed `pi --mode rpc` subprocess.
 
-Pi documentation and source for the pinned version define standard Pi behavior. BITCH adds behavior only when the client-server design or this specification requires a difference.
+The user installs and authenticates Pi separately. The Pi process uses standard Pi configuration and resource discovery, including:
 
-## Gateway isolation
+- credentials and model providers.
+- settings.
+- extensions.
+- skills.
+- prompt templates.
+- themes and project resources where the selected client can present them.
+- Pi JSONL sessions.
 
-Each gateway owns separate conversations, workspaces, credentials, Trash, `SOUL.md`, and runtime state.
+The daemon maps Pi events into Paseo's normalized timeline and permission model. Pi JSONL remains the durable Pi source for discovery, import, resume, and post-restart history hydration. While loaded, the normalized timeline is authoritative for BITCH client synchronization and rendering.
 
-BITCH does not synchronize, delegate, or move work automatically between gateways. An unavailable gateway reports an error. BITCH does not select another gateway or Directory mode as a fallback.
+Terminal-only Pi extension components do not cross the daemon protocol. This limitation includes custom terminal renderers, editors, overlays, and raw terminal input handlers.
 
-Local gateway workspaces remain inside the gateway data root. A local gateway does not mount the client's current directory automatically.
+## Workspace model
 
-A local gateway keeps the backend selected by `gateway create --backend docker|apple`. Omission defaults to Docker. Future Apple `container` support requires the user to create a separate gateway. BITCH does not convert an existing Docker gateway or move its state automatically.
+A Project represents one exact selected root on one daemon.
 
-## Non-goals
+A Workspace belongs to one Project and supplies one concrete `cwd`. A Workspace can contain multiple Pi conversations, interactive terminals, and client panels.
 
-The first release does not include:
+A local Workspace uses an existing directory. A managed-worktree Workspace uses a daemon-created Git worktree. Multiple Workspaces can use the same `cwd` without sharing Workspace-owned state.
 
-- the native macOS app.
-- Apple `container` support.
-- interactive gateway management or switching inside the TUI.
-- automatic gateway failover.
-- merged conversation feeds from multiple gateways.
-- cross-gateway actions.
-- cross-gateway delegation.
-- conversation or workspace synchronization between gateways.
-- a Jobs page or Pi-dispatch.
-- a Changes pane for accumulated workspace changes.
-- worktree management.
-- a separate interactive PTY terminal.
-- general non-image file attachments.
-- provider credential management outside Pi's standard flows.
-- client-side Git or GitHub credential management.
-- Pi package-management CLI commands or self-update.
-- Pi `/import`, `/share`, or `/llama` application commands.
-- custom multi-agent orchestration.
-- a `pi-subagents` dashboard.
-- Vikunja or a task-board interface.
-- public internet exposure.
-- horizontal scaling.
-- multi-user support.
-- conversation archiving.
-- API tokens or client credential management.
+## Client model
+
+The MVP includes:
+
+- a non-interactive CLI adapted from Paseo.
+- an interactive TUI with Workspace tabs and user-created splits.
+- one daemon protocol for local and remote connections.
+- direct remote connections.
+- Paseo's encrypted relay and pairing behavior.
+
+The TUI copies Paseo's Workspace canvas behavior in a terminal interface. This TUI implementation is BITCH-owned because Paseo implements the canvas in its graphical app.
+
+## Included Paseo-native behavior
+
+The MVP includes the Paseo behavior needed for:
+
+- daemon lifecycle, identity, status, and recovery.
+- multiple saved local and remote daemon connections.
+- explicit daemon selection without fallback.
+- concurrent Pi conversations.
+- conversation lifecycle, attention, history, archive, unarchive, and deletion.
+- authoritative timeline pagination and live catch-up.
+- Pi session discovery, explicit import, and resume.
+- Pi model and thinking controls exposed by Paseo.
+- Paseo's message queue, stop, rewind, compaction, and auto-compaction controls.
+- Pi extension commands and the Paseo question and permission bridge.
+- image prompts.
+- normalized tool calls, including edit and diff data.
+- local and managed-worktree Workspaces.
+- Workspace archive and recovery.
+- named interactive terminals.
+- terminal screen and scrollback restoration while the daemon remains active.
+- multiple terminal observers and writers.
+- Paseo terminal-size claim and update behavior.
+- host-native local daemon operation.
+- direct and relay-based remote daemon access.
+
+## Deferred improvements
+
+Defer behavior that is not part of the retained Paseo baseline or is not necessary for the CLI and TUI MVP:
+
+- direct Pi steering and follow-up controls beyond Paseo's queue behavior.
+- additional Pi retry controls.
+- full Pi tree, fork, clone, naming, and export parity.
+- additional transferable Pi extension UI operations.
+- terminal-only Pi extension UI.
+- BITCH-specific Conversation Trash and permanent-deletion workflows.
+- generic managed folders and BITCH-specific Workspace Trash.
+- JSONL CLI output not provided by the retained Paseo CLI.
+- durable command retry receipts beyond Paseo's protocol behavior.
+- provider login managed by BITCH.
+- `SOUL.md` management.
+- Docker-based Workspace isolation.
+- browsers, voice, schedules, services, BITCH or Paseo Agent MCP orchestration, and subagents.
+- the shared graphical app and Electron desktop shell.
+- mobile and browser clients.
+- public packaging and broad platform compatibility.
+
+Other agent runtimes are excluded from the BITCH product. The MVP disables the copied agent-launch Terminal profile UI because it advertises other runtimes and is not needed by the CLI or TUI workflows. Ordinary shell Terminals remain available. A later Pi-only profile catalog is a deferred improvement. Dormant copied source can remain temporarily until tested Pi-only pruning is safe.
+
+## MVP delivery target
+
+The MVP is a personal usable prototype for macOS on Apple silicon.
+
+The daemon runs directly on the host. The same daemon protocol supports the managed local daemon and registered remote daemons. Remote daemon support is part of the MVP.
+
+Source import and adaptation must follow the approved conservative license and provenance policy in [`../architecture/licensing.md`](../architecture/licensing.md).
 
 ## Success criteria
 
-The first release succeeds when:
+The MVP succeeds when:
 
-1. Plain `bitch` uses Directory mode for the current directory.
-2. `bitch --gateway` uses the registered master gateway.
-3. `bitch --gateway NAME` uses the named gateway.
-4. Missing or unavailable gateway selection fails without fallback.
-5. Multiple local and remote gateways remain independent.
-6. A local gateway continues after all CLI and TUI clients disconnect.
-7. Reconnection restores durable history and active response state without duplication.
-8. The clients expose behavior equivalent to every supported Pi RPC command type.
-9. Configured Pi extensions retain their supported tools, hooks, commands, and UI behavior.
-10. Multiple clients can observe and control one shared gateway conversation.
-11. Different conversations can run concurrently.
-12. Idle sessions release after five minutes and restore from Pi JSONL.
-13. Image attachments work in Directory mode and Gateway mode.
-14. Inline edit diffs render in the conversation timeline.
-15. Deferred features remain outside the release.
-
-The first release supports a tested single-user envelope of eight registered gateways, two concurrently running conversations per gateway, and two clients per conversation. BITCH does not enforce these values as quotas, but behavior above them is outside the supported envelope.
-
-The first release has no protocol-overhead latency target. [`acceptance.md`](acceptance.md) defines the approved first-release workflows.
-
-## Deferred roadmap
-
-Review these items after the first release:
-
-- the native macOS app.
-- Apple `container` runtime support.
-- an interactive TUI `/gateway` command.
-- a dedicated Changes pane.
-- shared local and remote memory.
-- cross-runtime delegation.
-- `pi-subagents` integration.
-- Pi-dispatch and a Jobs page.
-- worktrees and other workspace-isolation options.
-- general non-image file attachments.
-- provider, skill, and extension management outside Pi's standard flows.
-- native notifications.
-- conversation archiving.
+1. A user can start the local daemon through onboarding or an explicit daemon command.
+2. A user can register and select multiple local or remote daemons.
+3. An unavailable selected daemon does not cause fallback execution.
+4. Pi work and terminals continue after every client disconnects.
+5. Reconnection restores daemon state without duplicate timeline items or terminal output.
+6. A Workspace can contain multiple Pi conversations and terminals.
+7. Multiple clients can observe and control one Pi conversation.
+8. Multiple clients can write to one terminal, and size claims follow Paseo behavior.
+9. Daemon shutdown ends live Pi RPC subprocesses and PTYs without replaying interrupted turns.
+10. Pi sessions can resume through their persisted native handles and rebuild client history from Pi JSONL.
+11. Direct and encrypted-relay remote connections pass behavioral tests.
+12. No non-Pi agent runtime is available through the public product.
+13. Deferred BITCH-specific improvements do not delay the Paseo-native baseline.
