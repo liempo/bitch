@@ -29,7 +29,7 @@ Use Vitest for BITCH-owned rules. Call public package interfaces and use real te
 
 Examples include:
 
-- every HTTP request, response, command, pagination, SSE, snapshot, and error schema in [`architecture/api.md`](architecture/api.md).
+- retained daemon messages, pagination, snapshots, Terminal frames, and errors in [`architecture/protocol.md`](architecture/protocol.md).
 - protocol validation and error mapping.
 - command receipts, RFC 8785 hashing, create retries, cross-conversation ID conflicts, and conversation-lock conflicts.
 - concurrent Directory-mode acceptance with the same command ID.

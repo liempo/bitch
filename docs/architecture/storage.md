@@ -177,7 +177,7 @@ Permanent workspace deletion removes its `WorkspaceRecord` and creates one tombs
 
 ### Conversation projection
 
-The public `Conversation` schema in [`api.md`](api.md) combines one gateway session record, its workspace or tombstone, the Pi session header and name, and live runtime state. It is not stored as a second record.
+The public Conversation projection follows [`protocol.md`](protocol.md). It combines the retained record, Workspace state, provider history, and live runtime state without storing a second record.
 
 The projected Trash fields use this precedence:
 
@@ -400,7 +400,7 @@ A version 1 receipt contains:
 - the command-specific `result` for a successful command when that command returns data.
 - the public `ProblemDetails` value with a stable code for a failed or interrupted command.
 
-These fields match the public `CommandReceipt` in [`api.md`](api.md). The file also contains `schemaVersion: 1`. Receipt and creation-receipt files use mode `0600`.
+These fields match the former public command-receipt contract. The file also contains `schemaVersion: 1`. Receipt and creation-receipt files use mode `0600`.
 
 The Agent Server writes and flushes `accepted` atomically before it invokes Pi. Each later state transition uses atomic replacement and flushes the containing directory. A retry with the same command ID and payload returns the receipt. Reuse with another payload returns `command_id_conflict`.
 

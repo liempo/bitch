@@ -2,205 +2,190 @@
 
 ## Status
 
-Approved first-release technical specification and deferred client-control boundaries. Implementation is pending.
+Approved MVP technical specification. Implementation is pending.
+
+## Design source
+
+BITCH copies and adapts the daemon stack from Paseo source with package version 0.3.1 at upstream commit [`163e7d1`](https://github.com/getpaseo/paseo/tree/163e7d1cc421cdfe4de67b971ff6cea4b51eb0ed). This exact commit, not the earlier `v0.3.1` tag, is authoritative.
+
+BITCH remains an independent repository. [`licensing.md`](licensing.md) defines the approved conservative `AGPL-3.0-only` treatment, required attribution, and source-inventory gate for the pinned Paseo material.
 
 ## System boundary
 
 ```text
 BITCH CLI and TUI
-├── client gateway registry
-├── local Docker lifecycle adapter
-└── AgentServerClient
-            │
-            ├── Directory mode: temporary directory-bound Agent Server
-            │
-            └── Gateway mode: selected persistent Agent Server
-                         │
-                         ├── Fastify transport
-                         ├── live-runtime registry
-                         ├── thin Pi command and event adapters
-                         │       └── AgentSessionRuntime and AgentSession
-                         ├── gateway workspace metadata
-                         └── Pi JSONL sessions
+├── daemon registry and selected-daemon state
+├── Paseo-derived daemon client
+└── TUI Workspace canvas
+             │
+             │ WebSocket JSON and binary frames
+             ▼
+selected BITCH daemon
+├── WebSocket server and client sessions
+├── Project and Workspace registries
+├── Conversation manager and live normalized timelines
+├── Pi-only provider adapter
+│   └── one `pi --mode rpc` subprocess per live Conversation
+├── Terminal manager
+│   └── node-pty workers and headless terminal snapshots
+├── direct network listener
+└── optional encrypted relay transport
 ```
 
-Clients depend on the BITCH protocol. Pi SDK types do not cross the protocol boundary.
+The daemon runs on the host that owns the source files and Pi installation.
 
-## Mode boundary
+BITCH client text uses **Conversation** where Paseo source and protocol identifiers use `agent`. Internal `agent` names can remain during source adaptation when renaming them would break copied compatibility.
 
-Directory mode starts a temporary Agent Server with one fixed `cwd`. It has no workspace registry. The client owns the container lifecycle.
+## Removed architecture
 
-Gateway mode connects to one persistent Agent Server. A gateway can run in a BITCH-managed local Docker container or at an externally managed remote endpoint.
+The MVP does not implement the former:
 
-The client can register multiple gateways. Each client invocation connects to one gateway at a time.
+- Directory mode.
+- Gateway mode.
+- temporary Docker Agent Server.
+- HTTP and SSE BITCH protocol.
+- master gateway.
+- local Docker gateway inventory.
+- BITCH Pi SDK host.
+- Pi JSONL-only client timeline.
 
-## Client control plane
+The Paseo-derived daemon replaces those components.
 
-The client side owns:
+## Daemon responsibilities
 
-- registered gateway aliases and endpoints.
-- the master gateway reference.
-- local gateway runtime configuration.
-- local container discovery and lifecycle for registered local gateways.
-- gateway selection for each invocation.
+The daemon owns:
 
-The client keeps no inventory of unregistered gateways. It does not discover an unregistered local gateway from container labels or data roots.
+- stable daemon identity.
+- client WebSocket sessions.
+- Pi process lifecycle.
+- Pi session import and resume handles.
+- normalized Conversation lifecycle and live timeline rows.
+- authoritative timeline pagination for loaded Conversations.
+- pending question permissions.
+- Project and Workspace records.
+- managed Git worktrees.
+- PTYs, terminal snapshots, and terminal activity.
+- daemon configuration.
+- direct and relay transports.
+- host filesystem access.
 
-The deferred native app shares this canonical registry directly and coordinates one process-wide active gateway. It does not use an app-specific registry or a CLI broker. [`macos-client.md`](macos-client.md) defines that boundary.
+Clients do not duplicate daemon live state.
 
-The host client owns container-runtime access. Agent Server containers do not receive the Docker socket.
+## Pi provider boundary
 
-The master gateway is a client-side selection role. It creates no server hierarchy.
+Pi is the only registered public agent runtime.
 
-The client control plane does not copy conversation state. It uses stable gateway IDs to qualify conversation and workspace references. [`local-runtime.md`](local-runtime.md) defines its managed Docker boundary.
+The retained adapter starts an installed Pi binary in RPC mode. It maps Pi runtime events, tools, models, thinking levels, commands, questions, session handles, import records, and history into Paseo's provider and timeline contracts.
 
-## Thin Pi host
+The adapter can keep Paseo's internal provider-neutral interfaces when they reduce source adaptation. No other agent provider can appear in public discovery, configuration, creation, or resume paths.
 
-The Agent Server is a thin Pi RPC host in one Node.js process. It does not implement a separate conversation engine or agent state machine.
+The user installs and authenticates Pi independently. BITCH does not proxy model calls or own Pi credentials.
 
-Pi public runtime state remains authoritative. A live handle retains only transport state that Pi does not expose for snapshots. This state includes transferable tool progress and extension UI state.
+## Conversation authority
 
-The design follows the pinned Pi RPC mode:
+The daemon owns the durable BITCH Conversation record and the live normalized timeline for each loaded Conversation. A timeline row has daemon-owned ordering information.
 
-```text
-Pi RPC mode: stdin command → RPC dispatcher → AgentSessionRuntime → session event → stdout
-BITCH:       HTTP command  → thin adapter   → AgentSessionRuntime → session event → SSE
-```
+Pi owns the durable native session. Pi JSONL supplies provider-native history and the resume handle.
 
-A live-runtime registry keeps one small handle for each live conversation. A handle owns:
+The loaded daemon timeline is authoritative for BITCH clients. After daemon restart, the adapter resumes Pi and rehydrates a new normalized timeline from Pi history. Pi JSONL is authoritative inside Pi and for discovery, import, resume, and that rehydration.
 
-- one `AgentSessionRuntime`.
-- its event subscription.
-- connected event sinks.
-- one BITCH session lock.
+This split follows the pinned Paseo implementation. BITCH does not create a third Conversation store or persist normalized rows separately in the MVP.
 
-The registry creates, finds, releases, and disposes handles. It does not decide Pi behavior.
+## Client protocol
 
-## Pi ownership
+All clients use the copied Paseo WebSocket protocol.
 
-The command adapter follows the pinned Pi RPC dispatcher. It delegates directly to `AgentSession` or `AgentSessionRuntime`.
+The connection starts with a hello message. The daemon replies with server information, stable daemon identity, version, features, and capabilities.
 
-Pi owns:
+JSON session messages carry commands, responses, snapshots, lifecycle updates, and timeline events. Request and response pairs use request IDs.
 
-- model calls.
-- tools.
-- prompts and message queues.
-- steering and follow-up behavior.
-- retries and compaction.
-- tool concurrency.
-- branching and session replacement.
-- settings and model runtime.
-- extension execution and persistence.
-- JSONL conversation content.
-- runtime lifecycle rules.
+Binary frames carry terminal input, output, resize, and snapshots. Clients use the copied protocol codecs.
 
-BITCH reads live state from Pi. It does not copy Pi state into a second conversation model. Transient transport state resets when the live handle is disposed.
+The MVP does not preserve the former REST, OpenAPI, Problem Details, command-receipt, or SSE contracts.
 
-BITCH uses Pi's `DefaultResourceLoader`, `ModelRuntime`, `SettingsManager`, and `SessionManager` directly when they meet the requirement.
+## Local and remote routes
 
-## BITCH additions
+Local and remote use the same daemon protocol.
 
-The Agent Server adds only behavior required by the client-server product:
+A daemon can accept:
 
-- HTTP and SSE transport.
-- stable protocol types.
-- a stable gateway ID in Gateway mode.
-- multiple-client event delivery and transient snapshot transport state.
-- session locks.
-- command retry protection.
-- five-minute idle disposal.
-- gateway workspace metadata and lifecycle.
-- gateway-global viewed and completion state.
-- health and operational logging.
+- loopback TCP.
+- a Unix socket for supported local clients.
+- a direct private network route.
+- an outbound Paseo relay route with end-to-end encryption.
 
-The client adds behavior that does not belong to one Agent Server:
+A client registry can store multiple routes for one stable daemon ID. The client explicitly selects one daemon. Route failure does not select a different daemon.
 
-- gateway registration and selection.
-- master gateway selection.
-- local container lifecycle management.
-- non-interactive gateway commands.
-- the deferred interactive Gateway Hub.
+## Workspace boundary
 
-Gateway workspace behavior stays beside the Pi host. It does not enter the Pi command path.
+A Project owns exact-root identity. A Workspace owns a concrete `cwd` and stable Project membership.
 
-The first release does not use `pi --mode rpc` subprocesses, runtime workers, or separate internal services.
+Workspace identity is opaque. Filesystem operations never derive a path from a Workspace ID.
 
-## Gateway identity
+Local and managed-worktree placement follows Paseo's registry and provisioning services. Multiple Workspaces can share a `cwd`.
 
-Each gateway owns one stable ID. The ID survives endpoint, alias, port, and container replacement.
+## Terminal boundary
 
-Conversation and workspace IDs are scoped to their gateway. Clients use composite references:
+Terminals are runtime-only daemon resources. Each Terminal belongs to one Workspace.
 
-```text
-(gatewayId, conversationId)
-(gatewayId, workspaceId)
-```
+The Terminal manager uses `node-pty` and a worker process. A headless terminal model creates screen and scrollback snapshots for reconnect.
 
-The HTTP API does not add a gateway path prefix. One connection already targets one gateway.
+The protocol permits multiple observers and writers. Size ownership uses a daemon-owned claimant per Terminal. BITCH does not add a terminal writer lease.
 
-Directory-mode Agent Servers are not registered gateways. They do not receive a durable gateway identity.
+## Source-copy boundary
 
-## Extension runtime
+The initial source import includes the coherent Paseo packages needed for the daemon MVP:
 
-Each live conversation creates its own Pi extension runtime through `DefaultResourceLoader`. The Agent Server binds it to the conversation with `ctx.mode === "rpc"`.
+- `packages/protocol`.
+- `packages/relay`.
+- `packages/highlight`.
+- `packages/client`.
+- `packages/server`.
+- `packages/cli`.
+- root `package.json` and `package-lock.json` adapted to the retained workspaces.
+- root TypeScript, test, format, lint, patch, and generation files required by those packages.
+- shared scripts or fixtures that imported package tests execute.
 
-Conversation-specific handlers, tools, closure state, lifecycle events, `cwd`, and `SessionManager` remain separate. Releasing a conversation disposes its extension runtime. Restoring the conversation creates a new runtime from Pi JSONL.
+The import records every copied root path in the source inventory. It does not copy unrelated graphical packages only because a root script refers to them. Adapt that root script to the retained workspace set.
 
-Extensions run in the Agent Server process with full container permissions. Process-global state and external resources can be shared. Extensions are trusted server code.
+Keep these package boundaries during the first import. Rename package identities and BITCH branding in tested follow-up changes.
 
-The TUI uses pinned Pi TUI components and extension contracts for supported client presentation. BITCH does not create an unrelated general extension system.
+Defer these packages:
 
-Gateway selection occurs before the first-release TUI starts. The first release does not host a client-side gateway management extension runtime.
+- `packages/app`.
+- `packages/desktop`.
+- `packages/website`.
+- `packages/expo-two-way-audio`.
+- other packages not required by the imported package dependency graph.
 
-The approved deferred `/gateway` feature remains client-owned and uses local pinned Pi TUI components. It replaces the active `AgentServerClient`. It does not run as an extension or transport terminal components. [`tui-gateway.md`](tui-gateway.md) defines this boundary.
+The TUI is BITCH-owned. It uses the copied client and protocol packages but implements a terminal Workspace canvas.
 
-BITCH copies the pinned Pi RPC extension UI boundary. Dialogs and supported fire-and-forget UI requests cross the protocol. Terminal component factories and renderer functions stay server-side and use Pi RPC no-op, default-return, or client fallback behavior.
+## Pruning rule
 
-## Technical stack
+Import a coherent, runnable baseline before aggressive pruning.
 
-The Agent Server and CLI use:
+Disable every non-Pi agent runtime at the public boundary first. Remove non-Pi defaults from provider discovery, agent creation, help, and configuration presentation. Disable the copied agent-launch Terminal profile surface for the MVP. Remove provider implementation code only after Pi-only behavioral tests cover the retained daemon workflows.
 
-- Node.js 24.
-- strict TypeScript.
-- ESM modules.
-- npm workspaces.
-- a committed npm lockfile.
-- Fastify for HTTP and SSE.
-- TypeBox for protocol schemas.
-- Vitest for TypeScript tests.
-- Docker for first-release local containers.
+Disable Paseo-native higher-level features that are outside the MVP, including browsers, voice, schedules, services, Hub, Agent MCP injection, and multi-agent orchestration, at public boundaries. Defer their product delivery. Do not rewrite shared daemon foundations only to erase dormant code before the Pi MVP works.
 
-The deferred native macOS project remains in the monorepo but does not join npm workspaces.
+## Package dependency rules
 
-## Repository structure
+- `protocol` does not depend on the daemon.
+- `client` depends on protocol and relay, not server internals.
+- `server` can depend on protocol, relay, client, and highlight as in the pinned source.
+- `cli` uses the client protocol and imports only the server exports needed for local daemon lifecycle.
+- the TUI uses the BITCH client boundary and does not import server or Pi runtime types.
+- Pi RPC types remain inside the server's Pi adapter.
 
-```text
-apps/
-├── agent-server/
-├── cli/
-└── macos/                 # deferred product stage
+## Version policy
 
-packages/
-├── protocol/
-├── agent-client/
-├── pi-runtime/
-├── metadata-store/
-├── workspace/
-└── tui/
-```
+BITCH pins:
 
-`packages/pi-runtime` is a thin anti-corruption boundary. Pi SDK types must not leave it.
+- Paseo source commit `163e7d1cc421cdfe4de67b971ff6cea4b51eb0ed` for the initial baseline.
+- `@earendil-works/pi-coding-agent` 0.83.0 as the external Pi executable and `@earendil-works/pi-tui` 0.83.0 for the TUI component boundary.
+- Node.js 24.19.0 for BITCH development and the tested MVP unless the copied baseline proves an incompatibility that requires an explicit contract update.
+- all npm dependencies through the committed lockfile.
 
-`packages/protocol` contains transport data only. It must not import Pi.
+Paseo launches the external Pi executable and does not declare Pi as an npm dependency. Phase 1 must verify that the copied adapter works with `@earendil-works/pi-coding-agent` 0.83.0 before source adaptation proceeds.
 
-`packages/metadata-store` and `packages/workspace` contain Gateway-mode behavior that Pi does not provide.
-
-## Pi version policy
-
-Each BITCH release pins `@earendil-works/pi-coding-agent`, the Pi TUI, Node.js, npm dependencies, and its Agent Server image. Pi documentation and source for the pinned version are normative for standard behavior.
-
-The supported client-server compatibility window contains the current and immediately previous BITCH release within one protocol major version. Pi and TUI versions change only through a BITCH release with behavioral compatibility checks.
-
-Do not fork or copy Pi internals by default. The vendored TUI integration is the exception because it replaces direct runtime access with `AgentServerClient`.
-
-[`pi-capabilities.md`](pi-capabilities.md) identifies each supported command and intentional difference from Pi.
+A later Paseo or Pi sync is an explicit BITCH change. It must preserve Pi-only product behavior and pass the public behavioral suite.

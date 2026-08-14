@@ -6,7 +6,7 @@ Provide the complete gateway workspace, metadata, and Trash lifecycle without ch
 
 ## Dependencies
 
-Use the approved schemas and recovery rules in [`../docs/architecture/storage.md`](../docs/architecture/storage.md), [`../docs/architecture/api.md`](../docs/architecture/api.md), and [`../docs/operations.md`](../docs/operations.md).
+Use the approved state and recovery rules in [`../docs/architecture/storage.md`](../docs/architecture/storage.md), [`../docs/architecture/protocol.md`](../docs/architecture/protocol.md), and [`../docs/operations.md`](../docs/operations.md).
 
 Complete the Gateway-mode core and Phase 4 local lifecycle before adding full workspace lifecycle behavior.
 

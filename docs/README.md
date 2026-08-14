@@ -32,9 +32,8 @@ Read only the documents needed for the current task:
 
 ## Technical specification
 
-- [`architecture/overview.md`](architecture/overview.md): thin Pi host, dependency boundaries, stack, and repository structure.
-- [`architecture/protocol.md`](architecture/protocol.md): transport architecture, errors, receipts, and reconciliation.
-- [`architecture/api.md`](architecture/api.md): exact HTTP resources, schemas, pagination, SSE events, and ordering.
+- [`architecture/overview.md`](architecture/overview.md): copied package boundary, component responsibilities, and version policy.
+- [`architecture/protocol.md`](architecture/protocol.md): WebSocket messages, timeline synchronization, binary Terminal frames, and relay transport.
 - [`architecture/cli.md`](architecture/cli.md): interactive startup, conversation, workspace, gateway, output, and exit-code contracts.
 - [`architecture/pi-capabilities.md`](architecture/pi-capabilities.md): pinned Pi command, CLI, TUI, persistence, and reconnection mapping.
 - [`architecture/tui-gateway.md`](architecture/tui-gateway.md): deferred interactive Gateway Hub and in-place connection switching.
