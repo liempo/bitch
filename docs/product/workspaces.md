@@ -1,127 +1,125 @@
-# Workspace Behavior
+# Project and Workspace Behavior
 
 ## Status
 
-Approved first-release product specification. Implementation is pending.
+Approved MVP product specification. Implementation is pending.
 
-## Mode boundary
+## Resource hierarchy
 
-Directory mode has one fixed `cwd` and no workspace management.
+BITCH follows Paseo's hierarchy:
 
-Gateway mode owns directories under `/data/workspaces`. It supports workspace discovery, creation, rename, Git initialization, repository cloning, Trash, restoration, and permanent deletion.
+```text
+Daemon
+└── Project
+    └── Workspace
+        ├── Pi Conversations
+        ├── interactive Terminals
+        └── client panels
+```
 
-Each gateway has an independent workspace namespace. A client identifies a workspace with its gateway ID and workspace ID.
+The Workspace is the primary work container. A Conversation and a Terminal are peer resources with independent lifecycles.
 
-A gateway path always refers to that gateway's filesystem. It never refers to the client filesystem.
+## Project identity
 
-A local gateway does not mount the client's current directory automatically. Directory mode is the explicit path for work on the current host directory.
+A Project represents one exact root selected on one daemon.
 
-## Discovery and default workspace
+The daemon normalizes the root lexically with the platform path resolver. It does not use `realpath` as Project identity.
 
-Gateway mode discovers each immediate real directory under `/data/workspaces`. This includes directories added through the mounted volume, container administration, or agent tools.
+A new Project gets an opaque daemon-local ID. Project membership remains stable. Later Git discovery can change metadata, but it does not change the Project ID, root, or Workspace foreign keys.
 
-`/data/workspaces/default` is the shared default workspace inside one gateway. A new gateway conversation uses it unless the user selects another workspace. The default workspace cannot move to Trash.
+Project identity belongs to one daemon. Clients do not merge Projects across daemons. A copied persisted `projectKey` can group equivalent roots for presentation in a later multi-host client, but it never changes ownership or identity.
 
-## Workspace actions
+## Workspace identity
 
-The first release can:
+A Workspace belongs to exactly one Project and has one concrete `cwd`.
 
-- open an existing workspace.
-- create an empty folder.
-- create a folder and initialize a Git repository.
-- clone a Git repository.
-- change a workspace display name.
-- move a workspace to Trash.
-- restore a workspace.
-- delete a trashed workspace permanently.
+The Workspace ID is opaque. Clients must not parse it as a path. Filesystem operations use `cwd` or another explicit directory field.
 
-New workspaces remain under `/data/workspaces` in their gateway.
+Multiple Workspaces can use the same `cwd`. They keep these items separate:
 
-If an operator or tool removes a workspace directory outside BITCH, the gateway marks only that workspace **Workspace missing**. It keeps unrelated workspaces available, makes the missing workspace's conversations read-only, and rejects new work there. It never recreates an empty replacement automatically.
+- Conversations.
+- Terminals.
+- panel layout.
+- names.
+- lifecycle state.
+- other Workspace-owned client state.
 
-A valid real directory restored at the recorded immediate path restores that workspace on the next reconciliation scan. It keeps the existing workspace ID.
+Directory-derived state can be shared when Paseo keys it by daemon and `cwd`.
 
-A symbolic link is not a valid restoration. BITCH does not infer an external rename. The old workspace remains missing. BITCH discovers the new directory as a new workspace.
+## Isolation kinds
 
-The gateway image includes `git` and `gh`. BITCH does not manage GitHub authentication or call the GitHub API. The operator configures authentication inside each gateway.
+The MVP supports Paseo's two user-facing isolation choices:
 
-Repository clone supports HTTPS and SSH URLs. Private access uses credentials already configured inside the selected gateway, such as an SSH key, SSH agent, or Git credential helper. Clone requests never contain a token, password, private key, or credential payload.
+- **Local** uses an existing directory.
+- **Worktree** creates or opens a managed Git worktree.
 
-BITCH disables interactive Git and SSH prompts. The operator must configure credentials, host trust, and any key unlocking before cloning. A failed authentication or unknown host fails the workspace operation without leaving a visible partial workspace.
+A local Workspace does not create filesystem isolation. A managed-worktree Workspace uses a separate checkout and branch.
 
-Changing a display name does not rename or move the directory. Existing Pi sessions store the workspace path.
+A Workspace can exist before it contains a Conversation. The user can open Terminals or other retained Workspace surfaces first.
 
-## Stable identity
+## Directory opening
 
-Each workspace has a stable UUID within its gateway. A rename, Trash operation, or restoration does not change it.
+Directory opening follows Paseo's complete deterministic exact-path selection behavior.
 
-Each gateway session is associated with one workspace ID. BITCH retains a minimal workspace tombstone after permanent workspace deletion. Preserved sessions keep their association and display name.
+- If active exact-path Workspaces exist, opening the path selects one deterministically.
+- Multiple active matches do not cause creation only because there is more than one match.
+- If the selected exact-path Workspace is archived and its Project can be used, opening restores it according to Paseo's path flow.
+- If no reusable exact-path Workspace exists, the daemon creates the needed local Project and Workspace.
 
-## Trash rules
+Explicit Workspace creation always mints a new Workspace. A bare Conversation run without explicit or ambient Workspace context creates a new local Workspace for the current directory. This remains true when another Workspace already uses that directory.
 
-A workspace or session has a nullable Trash timestamp. A null value means active.
+An explicit Workspace selection, an agent-scoped invocation, or a Workspace Terminal context reuses its existing Workspace.
 
-A session appears in Session Trash when its own Trash timestamp is set or its workspace is trashed.
+## Archive behavior
 
-Moving a workspace to Trash:
+Archive is the Paseo-native lifecycle action for Projects, Workspaces, and Conversations.
 
-1. Moves its directory under `/data/trash/workspaces`.
-2. Sets only the workspace Trash timestamp.
-3. Leaves its session files and session timestamps unchanged.
+Archiving a local Workspace:
 
-Restoring the workspace clears its Trash timestamp. Sessions without their own Trash timestamp become active again.
+- archives its BITCH-owned records and resources.
+- preserves the existing directory and files.
+- never recursively deletes an ordinary directory that BITCH does not own.
 
-Restoration requires the original active path to be unused. A conflict returns `workspace_directory_conflict` and leaves the trashed workspace unchanged.
+Archiving a managed-worktree Workspace:
 
-An individually trashed session remains in Session Trash after its workspace is restored.
+- archives its owned resources.
+- removes the backing BITCH-managed worktree only after its final active Workspace reference is archived.
+- retains placement metadata needed for recovery.
 
-Moving one session to Trash moves its JSONL file under `/data/trash/sessions` and sets the session Trash timestamp.
+Workspace archive ends its live Terminals and archives its Conversations through Paseo's retained lifecycle path.
 
-The user must stop an active session before moving it to Trash. The user must stop all active sessions before moving their workspace to Trash.
+## Recovery
 
-## Destructive-action safeguards
+A local Workspace can recover when its referenced directory remains available.
 
-Moving an item to Trash is recoverable. The explicit non-interactive `trash` command is sufficient confirmation and does not require another flag. The TUI shows one confirmation dialog before it submits a Trash action.
+A managed worktree can recover from its persisted main-repository root, backing worktree root, relative `cwd`, and base-branch metadata.
 
-Permanent deletion is not recoverable through BITCH. A non-interactive CLI command requires `--confirm RESOURCE_ID`, and that value must equal the resource ID being deleted. The CLI never asks on stdin. The TUI shows a separate destructive sheet that identifies the item and explains exactly which data is destroyed or retained.
+Recovery uses the Workspace record as placement authority. It does not infer ownership from an arbitrary directory after that directory is missing.
 
-A missing or different CLI confirmation fails before the HTTP request. API `DELETE` remains an explicit low-level operation and does not add a presentation-confirmation field.
-
-Restore operations need no confirmation. Active-resource safeguards and the protected default workspace apply before every destructive action.
-
-## Session Trash presentation
-
-Normal conversation views hide trashed sessions. Session Trash includes:
-
-- individually trashed sessions.
-- sessions inherited from a trashed workspace.
-- sessions retained after permanent workspace deletion.
-
-An inherited session shows **Workspace trashed**. The user cannot restore it separately while its workspace remains trashed.
-
-Permanently deleting a workspace removes its files. Its sessions remain in Session Trash with **Workspace missing**. These sessions are read-only and cannot be restored. Their server-owned exports remain associated with them. The user can delete each session permanently, which also deletes that session's exports.
-
-Trashed items have no automatic retention deadline in the first release. They remain until the user removes them.
+BITCH-specific Workspace Trash, tombstones, retention periods, and permanent file deletion are deferred.
 
 ## Concurrent work
 
-Different conversations can modify the same workspace concurrently. BITCH does not lock workspaces or manage worktrees.
+A Workspace can own multiple concurrent Pi Conversations and multiple Terminals.
 
-## Trust and project resources
+Different Conversations and Terminals can modify the same directory concurrently. The MVP copies Paseo behavior and does not add a Workspace write lock.
 
-Directory mode copies Pi's project-trust behavior and supports `/trust`.
+## Trust and host access
 
-Gateway mode treats each workspace as trusted and does not show `/trust`. Project settings can load extensions and install configured packages. These processes receive container permissions.
+The daemon runs on the machine that owns the Workspace directory. Pi, Pi extensions, and terminal processes receive the daemon user's host permissions.
 
-Container mounts and filesystem permissions form the security boundary.
+Remote clients do not send client filesystem paths as local resources. Every Workspace path refers to the selected daemon's host filesystem.
 
-BITCH keeps Pi project-local resource discovery:
+Project-local Pi trust and resource behavior follows the installed Pi process and Paseo's launch path. BITCH does not declare every remote Workspace trusted through a separate BITCH policy.
 
-- `.pi/extensions/`.
-- `.pi/skills/`.
-- `.pi/prompts/`.
-- `.pi/settings.json`.
-- `.agents/skills/`.
-- `AGENTS.md` files.
+## Deferred behavior
 
-BITCH does not replace these paths with branded paths.
+Defer these non-baseline additions until after the MVP:
+
+- generic BITCH-managed folders.
+- a separate Folder resource.
+- rootless Projects.
+- BITCH-owned Git clone management beyond retained Paseo workflows.
+- Workspace Trash and permanent directory deletion.
+- Docker-based isolation.
+- cross-daemon Workspace synchronization or movement.
