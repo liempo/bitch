@@ -1,0 +1,38 @@
+{
+  "$schema": "./paseo-0.3.1.schema.json",
+  "schemaVersion": 1,
+  "source": {
+    "project": "Paseo",
+    "repository": "https://github.com/getpaseo/paseo.git",
+    "packageVersion": "0.3.1",
+    "commit": "163e7d1cc421cdfe4de67b971ff6cea4b51eb0ed",
+    "licenseExpression": "AGPL-3.0-only",
+    "licenseSha256": "2d29a730f15470509f7a36e63a024c2f121958471474dfcd6b272c99586fc337"
+  },
+  "selectedPaths": [
+    "packages/cli",
+    "packages/client",
+    "packages/highlight",
+    "packages/protocol",
+    "packages/relay",
+    "packages/server"
+  ],
+  "destinationRoots": [
+    "packages/cli",
+    "packages/client",
+    "packages/highlight",
+    "packages/protocol",
+    "packages/relay",
+    "packages/server"
+  ],
+  "files": [],
+  "exclusions": [
+    {
+      "upstreamPath": "packages/server/src/server/speech/providers/local/sherpa/assets/silero_vad.onnx",
+      "upstreamBlob": "d1b57f7bb9e6fca4f05ed0272a4d6c0f1dec3f74",
+      "upstreamSha256": "9e2449e1087496d8d4caba907f23e0bd3f78d91fa552479bb9c23ac09cbb1fd6",
+      "reason": "Excluded until its exact origin, license text, and required notice are verified.",
+      "thirdPartyNoticeId": "paseo-silero-vad-onnx"
+    }
+  ]
+}
